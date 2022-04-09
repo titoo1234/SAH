@@ -123,7 +123,7 @@ namespace poskus2
         {
 
         }
-        //asd
+        //asdad
         private void button1_Click(object sender, EventArgs e)
         {
             Button gumb= (Button)sender;
