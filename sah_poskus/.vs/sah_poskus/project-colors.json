@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "738bd38e-d088-4638-a822-814516f17085": {
+      "ProjectGuid": "738bd38e-d088-4638-a822-814516f17085",
+      "DisplayName": "sah_poskus",
+      "ColorIndex": 0
+    },
+    "7bed5488-49d5-4915-9446-c57fb2f8b518": {
+      "ProjectGuid": "7bed5488-49d5-4915-9446-c57fb2f8b518",
+      "DisplayName": "poskus2",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}
