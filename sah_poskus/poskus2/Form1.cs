@@ -36,39 +36,42 @@ namespace poskus2
                     if (vrstica == 1)//beli kmetje
                     {
                         gumb.Tag = "BP";
-                        gumb.Text = "BP";
+                        gumb.Image = new Bitmap(Properties.Resources.Black_Pawn, gumb.Size);
                     }
                     else if (vrstica == 6)//beli kmetje
                     {
+                        
+                        Bitmap s = new Bitmap(Properties.Resources.White_Pawn, gumb.Size);
+                        
                         gumb.Tag = "WP";
-                        gumb.Text = "WP";
+                        gumb.Image = s;
                     }
                     else if (vrstica == 0)//beli kmetje
                     {
                         if (stolpec == 0 || stolpec == 7)
                         {
                             gumb.Tag = "BR";
-                            gumb.Text= "BR";
+                            gumb.Image = new Bitmap(Properties.Resources.Black_Rook, gumb.Size);
                         }
                         else if (stolpec == 1 || stolpec == 6)
                         {
                             gumb.Tag = "BN";
-                            gumb.Text = "BN";
+                            gumb.Image = new Bitmap(Properties.Resources.Black_Knight, gumb.Size);
                         }
                         else if (stolpec == 2 || stolpec == 5)
                         {
                             gumb.Tag = "BB";
-                            gumb.Text = "BB";
+                            gumb.Image = new Bitmap(Properties.Resources.Black_Bishop, gumb.Size);
                         }
                         else if (stolpec == 3)
                         {
                             gumb.Tag = "BQ";
-                            gumb.Text = "BQ";
+                            gumb.Image = new Bitmap(Properties.Resources.Black_Queen, gumb.Size);
                         }
                         else
                         {
                             gumb.Tag = "BK";
-                            gumb.Text = "BK";
+                            gumb.Image = new Bitmap(Properties.Resources.Black_King, gumb.Size);
                         }
                     }
                     else if (vrstica == 7)//beli kmetje
@@ -76,27 +79,27 @@ namespace poskus2
                         if (stolpec == 0 || stolpec == 7)
                         {
                             gumb.Tag = "WR";
-                            gumb.Text = "WR";
+                            gumb.Image = new Bitmap(Properties.Resources.White_Rook, gumb.Size);
                         }
                         else if (stolpec == 1 || stolpec == 6)
                         {
                             gumb.Tag = "WN";
-                            gumb.Text = "WN";
+                            gumb.Image = new Bitmap(Properties.Resources.White_Knight, gumb.Size);
                         }
                         else if (stolpec == 2 || stolpec == 5)
                         {
                             gumb.Tag = "WB";
-                            gumb.Text = "WB";
+                            gumb.Image = new Bitmap(Properties.Resources.White_Bishop, gumb.Size);
                         }
                         else if (stolpec == 3)
                         {
                             gumb.Tag = "WQ";
-                            gumb.Text = "WQ";
+                            gumb.Image = new Bitmap(Properties.Resources.White_Queen, gumb.Size);
                         }
                         else
                         {
                             gumb.Tag = "WK";
-                            gumb.Text = "WK";
+                            gumb.Image = new Bitmap(Properties.Resources.White_King, gumb.Size);
                         }
                     }
                     else
