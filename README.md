@@ -1,2 +1,2 @@
 # SAH
-Projekt pri PROG3, igra šah
+Projekt pri PROG3, igra šah.
