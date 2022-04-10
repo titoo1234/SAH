@@ -15,7 +15,9 @@ namespace poskus2
         public Celica(int x, int y)
         {
             this.X = x;
-            this.Y = y; 
+            this.Y = y;
+            
+
         }
 
         public int X 

@@ -124,6 +124,52 @@ namespace poskus2
            
         }
 
+        public List<Celica> MoznePoteze(Celica celica)
+        {
+            List<Celica> mozni = new List<Celica>();
+            int x = celica.X;
+            int y = celica.Y;
+            if(celica.Tag == "BP")
+            //TODO Če smo v prvi vrstici....
+            {
+                mozni.Add(this.Celice[x,y + 1]);
+            }
+            else if (celica.Tag == "WP")
+            {
+                //Poglejmo, če je zgornja celica prazna
+                if(this.Celice[x, y - 1].Tag == "")
+                {
+                    mozni.Add(this.Celice[x, y - 1]);
+                }
+                //Zgoraj levo, ali je "nasprotnik"
+                //if (this.Celice[x-1, y - 1].Tag[0] == "B")
+                //{
+
+                //}
+
+
+
+
+
+            }
+            else if (celica.Tag == "BR")
+            {
+
+
+                mozni.Add(this.Celice[x, y + 1]);
+            }
+
+
+
+
+            return mozni;
+        }
+
+
+
+
+
+
         
 
 
