@@ -28,7 +28,7 @@ namespace poskus2
                 {
                     
                     //this.Height
-                    Button gumb = new Button();
+                    Celica gumb = new Celica(vrstica,stolpec);
                     gumb.Size = new Size(velikost, velikost);
                     
                     gumb.Location = new Point(50 + stolpec * velikost, 50 + vrstica * velikost);
@@ -132,6 +132,8 @@ namespace poskus2
             Button gumb= (Button)sender;
             string vrstica = (string)gumb.Tag;
             MessageBox.Show(vrstica);
+
+
         }
     }
 }

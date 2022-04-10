@@ -11,12 +11,23 @@ using System.Windows.Forms;
 
 namespace poskus2
 {
-    //public class Funkcije
-    //{
+    
+    public class Funkcije
+    {
 
-    //    public Bitmap Spremeni_sliko(var slika,Button gumb)
-    //    {
-    //        return new Bitmap(slika, gumb.Size);
-    //    }
-    //}
+        public Button[] MozniGumbi(Button gumb, Button[,] gumbi)
+        {
+            //Najdi kje se nahaja
+
+
+            List<Button> list = new List<Button>();
+            if (gumb.Tag == "WP")
+            {
+                list.Add(gumb);
+            }
+           
+            return new Button[] { gumb };
+        }
+        
+    }
 }
