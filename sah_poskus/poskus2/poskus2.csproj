@@ -49,6 +49,8 @@
     <Compile Include="Celica.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Figura.cs" />
+    <Compile Include="Kmet.cs" />
     <Compile Include="Sahovnica.cs" />
     <Compile Include="Funkcije.cs" />
     <Compile Include="Form1.cs">

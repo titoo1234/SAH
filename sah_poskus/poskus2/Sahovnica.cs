@@ -10,8 +10,10 @@ namespace poskus2
     public class Sahovnica
     {
         private Celica[,] celice;
+        private List<Kmet> kmeti;
         public Sahovnica(int velikost,Form podlaga)
         {
+            kmeti = new List<Kmet>();   
             celice = new Celica[8, 8];
             for (int vrstica = 0; vrstica < 8; vrstica++)
             {
@@ -27,12 +29,17 @@ namespace poskus2
                     //gumb.Text = "" + vrstica + '/' + stolpec;
                     if (vrstica == 1)//beli kmetje
                     {
+                        Kmet kmet = new Kmet("B", vrstica, stolpec);
+                        kmeti.Add(kmet);
+                        gumb.Figura = "BP";
                         gumb.Tag = "BP";
                         gumb.Image = new Bitmap(Properties.Resources.Black_Pawn, gumb.Size);
                     }
                     else if (vrstica == 6)//beli kmetje
                     {
-
+                        Kmet kmet = new Kmet("W", vrstica, stolpec);
+                        kmeti.Add(kmet);
+                        gumb.Figura = "WP";
                         Bitmap s = new Bitmap(Properties.Resources.White_Pawn, gumb.Size);
 
                         gumb.Tag = "WP";
@@ -100,8 +107,9 @@ namespace poskus2
                     }
 
 
+                    
 
-                    //gumb.Click += button1_Click;
+                    gumb.Click += button1_Click;
 
                     gumb.UseVisualStyleBackColor = true;
 
@@ -110,10 +118,13 @@ namespace poskus2
                 }
             }
             this.celice = celice;
+            this.Kmeti = kmeti;
 
 
 
         }
+
+        public List<Kmet> Kmeti { get; set; }
 
         public Celica[,] Celice
         {
@@ -124,54 +135,31 @@ namespace poskus2
            
         }
 
-        public List<Celica> MoznePoteze(Celica celica)
+        private void button1_Click(object sender, EventArgs e)
         {
-            List<Celica> mozni = new List<Celica>();
-            int x = celica.X;
-            int y = celica.Y;
-            if(celica.Tag == "BP")
-            //TODO Če smo v prvi vrstici....
+            Celica gumb = (Celica)sender;
+            string vrstica = (string)gumb.Tag;
+            MessageBox.Show(vrstica);
+            int x = gumb.X;
+            int y = gumb.Y;
+            Kmet kmet;
+            foreach (Kmet kmet1 in Kmeti)
             {
-                mozni.Add(this.Celice[x,y + 1]);
-            }
-            else if (celica.Tag == "WP")
-            {
-                //Poglejmo, če je zgornja celica prazna
-                if(this.Celice[x, y - 1].Tag == "")
+                if (kmet1.X == x && kmet1.Y == y)
                 {
-                    mozni.Add(this.Celice[x, y - 1]);
+                    MessageBox.Show(x+" "+y);
+                    kmet = kmet1;
+                    List<Celica> mozne_celice = kmet1.MoznePoteze(this);
+                    foreach (Celica celica in mozne_celice)
+                    {
+                        celica.BackColor = Color.Red;
+                    }
                 }
-                //Zgoraj levo, ali je "nasprotnik"
-                //if (this.Celice[x-1, y - 1].Tag[0] == "B")
-                //{
-
-                //}
-
-
-
-
-
             }
-            else if (celica.Tag == "BR")
-            {
+            
 
 
-                mozni.Add(this.Celice[x, y + 1]);
-            }
-
-
-
-
-            return mozni;
         }
-
-
-
-
-
-
-        
-
 
 
     }

@@ -20,3 +20,14 @@ C:\Users\Uporabnik\Desktop\SAH\sah_poskus\poskus2\obj\Debug\poskus2.csproj.Gener
 C:\Users\Uporabnik\Desktop\SAH\sah_poskus\poskus2\obj\Debug\poskus2.csproj.CoreCompileInputs.cache
 C:\Users\Uporabnik\Desktop\SAH\sah_poskus\poskus2\obj\Debug\poskus2.exe
 C:\Users\Uporabnik\Desktop\SAH\sah_poskus\poskus2\obj\Debug\poskus2.pdb
+C:\Users\damij\Source\Repos\titoo1234\SAH\sah_poskus\poskus2\bin\Debug\poskus2.exe.config
+C:\Users\damij\Source\Repos\titoo1234\SAH\sah_poskus\poskus2\bin\Debug\poskus2.exe
+C:\Users\damij\Source\Repos\titoo1234\SAH\sah_poskus\poskus2\bin\Debug\poskus2.pdb
+C:\Users\damij\Source\Repos\titoo1234\SAH\sah_poskus\poskus2\obj\Debug\poskus2.csproj.AssemblyReference.cache
+C:\Users\damij\Source\Repos\titoo1234\SAH\sah_poskus\poskus2\obj\Debug\poskus2.csproj.SuggestedBindingRedirects.cache
+C:\Users\damij\Source\Repos\titoo1234\SAH\sah_poskus\poskus2\obj\Debug\poskus2.Form1.resources
+C:\Users\damij\Source\Repos\titoo1234\SAH\sah_poskus\poskus2\obj\Debug\poskus2.Properties.Resources.resources
+C:\Users\damij\Source\Repos\titoo1234\SAH\sah_poskus\poskus2\obj\Debug\poskus2.csproj.GenerateResource.cache
+C:\Users\damij\Source\Repos\titoo1234\SAH\sah_poskus\poskus2\obj\Debug\poskus2.csproj.CoreCompileInputs.cache
+C:\Users\damij\Source\Repos\titoo1234\SAH\sah_poskus\poskus2\obj\Debug\poskus2.exe
+C:\Users\damij\Source\Repos\titoo1234\SAH\sah_poskus\poskus2\obj\Debug\poskus2.pdb
