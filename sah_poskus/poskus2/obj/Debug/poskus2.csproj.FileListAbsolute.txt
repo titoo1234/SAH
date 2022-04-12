@@ -31,3 +31,13 @@ C:\Users\damij\Source\Repos\titoo1234\SAH\sah_poskus\poskus2\obj\Debug\poskus2.c
 C:\Users\damij\Source\Repos\titoo1234\SAH\sah_poskus\poskus2\obj\Debug\poskus2.csproj.CoreCompileInputs.cache
 C:\Users\damij\Source\Repos\titoo1234\SAH\sah_poskus\poskus2\obj\Debug\poskus2.exe
 C:\Users\damij\Source\Repos\titoo1234\SAH\sah_poskus\poskus2\obj\Debug\poskus2.pdb
+C:\Users\Lenovo\Desktop\1faks\prakticna 3letnik\prog3\Šah projekt\SAH\sah_poskus\poskus2\bin\Debug\poskus2.exe.config
+C:\Users\Lenovo\Desktop\1faks\prakticna 3letnik\prog3\Šah projekt\SAH\sah_poskus\poskus2\bin\Debug\poskus2.exe
+C:\Users\Lenovo\Desktop\1faks\prakticna 3letnik\prog3\Šah projekt\SAH\sah_poskus\poskus2\bin\Debug\poskus2.pdb
+C:\Users\Lenovo\Desktop\1faks\prakticna 3letnik\prog3\Šah projekt\SAH\sah_poskus\poskus2\obj\Debug\poskus2.csproj.AssemblyReference.cache
+C:\Users\Lenovo\Desktop\1faks\prakticna 3letnik\prog3\Šah projekt\SAH\sah_poskus\poskus2\obj\Debug\poskus2.Form1.resources
+C:\Users\Lenovo\Desktop\1faks\prakticna 3letnik\prog3\Šah projekt\SAH\sah_poskus\poskus2\obj\Debug\poskus2.Properties.Resources.resources
+C:\Users\Lenovo\Desktop\1faks\prakticna 3letnik\prog3\Šah projekt\SAH\sah_poskus\poskus2\obj\Debug\poskus2.csproj.GenerateResource.cache
+C:\Users\Lenovo\Desktop\1faks\prakticna 3letnik\prog3\Šah projekt\SAH\sah_poskus\poskus2\obj\Debug\poskus2.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\Desktop\1faks\prakticna 3letnik\prog3\Šah projekt\SAH\sah_poskus\poskus2\obj\Debug\poskus2.exe
+C:\Users\Lenovo\Desktop\1faks\prakticna 3letnik\prog3\Šah projekt\SAH\sah_poskus\poskus2\obj\Debug\poskus2.pdb
