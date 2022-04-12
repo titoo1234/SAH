@@ -10,10 +10,10 @@ namespace poskus2
     public class Sahovnica
     {
         private Celica[,] celice;
-        private List<Kmet> kmeti;
+        //private List<Kmet> kmeti;
         public Sahovnica(int velikost,Form podlaga)
         {
-            kmeti = new List<Kmet>();   
+            //kmeti = new List<Kmet>();   
             celice = new Celica[8, 8];
             for (int vrstica = 0; vrstica < 8; vrstica++)
             {
@@ -29,81 +29,103 @@ namespace poskus2
                     //gumb.Text = "" + vrstica + '/' + stolpec;
                     if (vrstica == 1)//beli kmetje
                     {
-                        Kmet kmet = new Kmet("B", vrstica, stolpec);
-                        kmeti.Add(kmet);
-                        gumb.Figura = "BP";
+                        Figura fig = new Figura("BP", vrstica, stolpec, gumb.Size);
+                        //kmeti.Add(kmet);
+                        gumb.Figura = fig;
                         gumb.Tag = "BP";
-                        gumb.Image = new Bitmap(Properties.Resources.Black_Pawn, gumb.Size);
+                        gumb.Image = fig.Slika;
+                        
                     }
                     else if (vrstica == 6)//beli kmetje
                     {
-                        Kmet kmet = new Kmet("W", vrstica, stolpec);
-                        kmeti.Add(kmet);
-                        gumb.Figura = "WP";
-                        Bitmap s = new Bitmap(Properties.Resources.White_Pawn, gumb.Size);
+                        Figura fig = new Figura("WP", vrstica, stolpec, gumb.Size);
+                        //kmeti.Add(kmet);
+                        gumb.Figura = fig;
 
                         gumb.Tag = "WP";
-                        gumb.Image = s;
+                        gumb.Image = fig.Slika;
                     }
                     else if (vrstica == 0)//beli kmetje
                     {
                         if (stolpec == 0 || stolpec == 7)
                         {
+                            Figura fig = new Figura("BR", vrstica, stolpec, gumb.Size);
                             gumb.Tag = "BR";
-                            gumb.Image = new Bitmap(Properties.Resources.Black_Rook, gumb.Size);
+                            gumb.Image = fig.Slika;
+                            gumb.Figura = fig;
                         }
                         else if (stolpec == 1 || stolpec == 6)
                         {
+                            Figura fig = new Figura("BN", vrstica, stolpec, gumb.Size);
                             gumb.Tag = "BN";
-                            gumb.Image = new Bitmap(Properties.Resources.Black_Knight, gumb.Size);
+                            gumb.Image = fig.Slika;
+                            gumb.Figura = fig;
                         }
                         else if (stolpec == 2 || stolpec == 5)
                         {
+                            Figura fig = new Figura("BB", vrstica, stolpec, gumb.Size);
                             gumb.Tag = "BB";
-                            gumb.Image = new Bitmap(Properties.Resources.Black_Bishop, gumb.Size);
+                            gumb.Image = fig.Slika;
+                            gumb.Figura = fig;
                         }
                         else if (stolpec == 3)
                         {
+                            Figura fig = new Figura("BQ", vrstica, stolpec, gumb.Size);
                             gumb.Tag = "BQ";
-                            gumb.Image = new Bitmap(Properties.Resources.Black_Queen, gumb.Size);
+                            gumb.Image = fig.Slika;
+                            gumb.Figura = fig;
                         }
                         else
                         {
+                            Figura fig = new Figura("BK", vrstica, stolpec, gumb.Size);
                             gumb.Tag = "BK";
-                            gumb.Image = new Bitmap(Properties.Resources.Black_King, gumb.Size);
+                            gumb.Image = fig.Slika;
+                            gumb.Figura = fig;
                         }
                     }
                     else if (vrstica == 7)//beli kmetje
                     {
                         if (stolpec == 0 || stolpec == 7)
                         {
+                            Figura fig = new Figura("WR", vrstica, stolpec, gumb.Size);
                             gumb.Tag = "WR";
-                            gumb.Image = new Bitmap(Properties.Resources.White_Rook, gumb.Size);
+                            gumb.Image = fig.Slika;
+                            gumb.Figura = fig;
                         }
                         else if (stolpec == 1 || stolpec == 6)
                         {
+                            Figura fig = new Figura("WN", vrstica, stolpec, gumb.Size);
                             gumb.Tag = "WN";
-                            gumb.Image = new Bitmap(Properties.Resources.White_Knight, gumb.Size);
+                            gumb.Image = fig.Slika;
+                            gumb.Figura = fig;
                         }
                         else if (stolpec == 2 || stolpec == 5)
                         {
+                            Figura fig = new Figura("WB", vrstica, stolpec, gumb.Size);
                             gumb.Tag = "WB";
-                            gumb.Image = new Bitmap(Properties.Resources.White_Bishop, gumb.Size);
+                            gumb.Image = fig.Slika;
+                            gumb.Figura = fig;
                         }
                         else if (stolpec == 3)
                         {
+                            Figura fig = new Figura("WQ", vrstica, stolpec, gumb.Size);
                             gumb.Tag = "WQ";
-                            gumb.Image = new Bitmap(Properties.Resources.White_Queen, gumb.Size);
+                            gumb.Image = fig.Slika;
+                            gumb.Figura = fig;
                         }
                         else
                         {
+                            Figura fig = new Figura("WK", vrstica, stolpec, gumb.Size);
                             gumb.Tag = "WK";
-                            gumb.Image = new Bitmap(Properties.Resources.White_King, gumb.Size);
+                            gumb.Image = fig.Slika;
+                            gumb.Figura = fig;
                         }
                     }
-                    else
+                    else //PRAZNO POLJE
                     {
+                        Figura fig = new Figura("", vrstica, stolpec, gumb.Size);
                         gumb.Tag = "";
+                        gumb.Figura = fig;
                     }
 
 
@@ -118,13 +140,13 @@ namespace poskus2
                 }
             }
             this.celice = celice;
-            this.Kmeti = kmeti;
+
 
 
 
         }
 
-        public List<Kmet> Kmeti { get; set; }
+
 
         public Celica[,] Celice
         {
@@ -134,30 +156,66 @@ namespace poskus2
             }
            
         }
+        Figura zadnja_figura;
+        Celica zadnja_celica;
+        List<Celica> mozne = new List<Celica>();
 
         private void button1_Click(object sender, EventArgs e)
         {
             Celica gumb = (Celica)sender;
-            string vrstica = (string)gumb.Tag;
-            MessageBox.Show(vrstica);
-            int x = gumb.X;
-            int y = gumb.Y;
-            Kmet kmet;
-            foreach (Kmet kmet1 in Kmeti)
+            //string vrstica = (string)gumb.Tag;
+            //MessageBox.Show(vrstica);
+            if (!gumb.Mozen)
             {
-                if (kmet1.X == x && kmet1.Y == y)
+                for (int i = 0; i < mozne.Count; i++)
                 {
-                    MessageBox.Show(x+" "+y);
-                    kmet = kmet1;
-                    List<Celica> mozne_celice = kmet1.MoznePoteze(this);
-                    foreach (Celica celica in mozne_celice)
-                    {
-                        celica.BackColor = Color.Red;
-                    }
-                }
-            }
-            
+                    Celica ce = mozne[i];
+                    Figura fig = ce.Figura;
+                    ce.BackColor = Color.Transparent;
+                    ce.Image = fig.Slika;
+                    ce.Mozen = false;
 
+                }
+                zadnja_celica = gumb;
+                zadnja_figura = gumb.Figura;
+                int x = gumb.X;
+                int y = gumb.Y;
+                Figura figura = gumb.Figura;
+                mozne = figura.MoznePoteze(this);
+                for (int i = 0; i < mozne.Count; i++)
+                {
+                    Celica ce = mozne[i];
+                    ce.BackColor = Color.Red;
+                    ce.Mozen = true;
+                    
+                }
+                
+
+            }
+            else
+            {
+                Figura nova = new Figura("", zadnja_celica.X, zadnja_celica.Y, zadnja_celica.Size);
+                zadnja_celica.Figura = nova;
+
+                zadnja_celica.Image = nova.Slika;
+
+                zadnja_figura.X = gumb.X;
+                zadnja_figura.Y = gumb.Y;
+                gumb.Figura = zadnja_figura;
+                gumb.Image = zadnja_figura.Slika;
+                //SPREMENI NAZAJ BARVO
+                for (int i = 0; i < mozne.Count; i++)
+                {
+                    Celica ce = mozne[i];
+                    Figura fig = ce.Figura;
+                    ce.BackColor = Color.Transparent;
+                    ce.Image = fig.Slika;
+                    ce.Mozen = false;
+                }
+                //SPRAZNI MOZNE FIGURE
+                mozne.Clear();
+
+            }
 
         }
 

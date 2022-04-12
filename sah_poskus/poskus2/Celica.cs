@@ -12,15 +12,19 @@ namespace poskus2
     {
         private int x;
         private int y;
-        private string figura;
+        private bool mozen;
+
+        private Figura figura;
         public Celica(int x, int y)
         {
             this.X = x;
             this.Y = y;
-            this.Figura = "";
+            this.Figura = null;
+            this.Mozen= false;
         }
 
-        public string Figura { get; set; }
+        public bool Mozen { get; set; }
+        public Figura Figura { get; set; }
 
         public int X
         {
