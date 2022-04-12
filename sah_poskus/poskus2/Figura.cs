@@ -98,8 +98,7 @@ namespace poskus2
         public List<Celica> MoznePoteze(Sahovnica sahovnica)
         {
             List<Celica> mozne = new List<Celica>();
-
-
+            
             // BEL KMET
             if (this.Ime == "WP")
             {
@@ -122,6 +121,76 @@ namespace poskus2
                                 trenutna_celica.Mozen = true;
                             }
                         }
+                    }
+                }
+                if (this.X - 1 >= 0 && this.Y - 1 >= 0)
+                {
+                    Celica trenutna_celica = sahovnica.Celice[this.X - 1, this.Y - 1];
+                    Figura trenutna_figura = trenutna_celica.Figura;
+                    
+                    if (this.Nasprotnik(trenutna_figura) && trenutna_figura.Ime != "")
+                    {
+                        mozne.Add(trenutna_celica);
+                        trenutna_celica.Mozen = true;
+                    }
+                }
+                if (this.X - 1 >= 0 && this.Y + 1 <= 7)
+                {
+                    Celica trenutna_celica = sahovnica.Celice[this.X - 1, this.Y + 1];
+                    Figura trenutna_figura = trenutna_celica.Figura;
+
+                    if (this.Nasprotnik(trenutna_figura) && trenutna_figura.Ime != "")
+                    {
+                        mozne.Add(trenutna_celica);
+                        trenutna_celica.Mozen = true;
+                    }
+                }
+            }
+
+            //ČRNI KMET
+            if (this.Ime == "BP")
+            {
+
+                if (this.X + 1 <= 7)
+                {
+                    Celica trenutna_celica = sahovnica.Celice[this.X + 1, this.Y];
+                    Figura trenutna_figura = trenutna_celica.Figura;
+                    if (trenutna_figura.Ime == "") // prazna celica
+                    {
+                        mozne.Add(trenutna_celica);
+                        trenutna_celica.Mozen = true;
+                        if (this.X + 2 <= 7 && !this.Premaknjen)
+                        {
+                            trenutna_celica = sahovnica.Celice[this.X + 2, this.Y];
+                            trenutna_figura = trenutna_celica.Figura;
+                            if (trenutna_figura.Ime == "")
+                            {
+                                mozne.Add(trenutna_celica);
+                                trenutna_celica.Mozen = true;
+                            }
+                        }
+                    }
+                }
+                if (this.X +  1 <= 7 && this.Y - 1 >= 0)
+                {
+                    Celica trenutna_celica = sahovnica.Celice[this.X + 1, this.Y - 1];
+                    Figura trenutna_figura = trenutna_celica.Figura;
+
+                    if (this.Nasprotnik(trenutna_figura) && trenutna_figura.Ime != "")
+                    {
+                        mozne.Add(trenutna_celica);
+                        trenutna_celica.Mozen = true;
+                    }
+                }
+                if (this.X + 1 <= 7 && this.Y + 1 <= 7)
+                {
+                    Celica trenutna_celica = sahovnica.Celice[this.X + 1, this.Y + 1];
+                    Figura trenutna_figura = trenutna_celica.Figura;
+
+                    if (this.Nasprotnik(trenutna_figura) && trenutna_figura.Ime != "")
+                    {
+                        mozne.Add(trenutna_celica);
+                        trenutna_celica.Mozen = true;
                     }
                 }
             }

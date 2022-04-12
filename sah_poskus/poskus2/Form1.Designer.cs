@@ -35,7 +35,7 @@
             // 
             this.button1.Image = global::poskus2.Properties.Resources.White_Bishop;
             this.button1.Location = new System.Drawing.Point(457, 18);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(37, 39);
             this.button1.TabIndex = 0;
@@ -49,9 +49,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(502, 462);
             this.Controls.Add(this.button1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "ŠAH ;-)";
             this.ResumeLayout(false);
 
         }
