@@ -585,6 +585,21 @@ namespace poskus2
             if (this.Ime == "WK" || this.Ime == "BK")
             {
 
+                if (this.MoznaDesnaRosada(sahovnica))
+                {
+                    Celica trenutna_celica = sahovnica.Celice[this.X, this.Y +2];
+                    Figura trenutna_figura = trenutna_celica.Figura;
+                    mozne.Add(trenutna_celica);
+                    trenutna_celica.Mozen = true;
+                }
+                if (this.MoznaLevaRosada(sahovnica))
+                {
+                    Celica trenutna_celica = sahovnica.Celice[this.X, this.Y - 2];
+                    Figura trenutna_figura = trenutna_celica.Figura;
+                    mozne.Add(trenutna_celica);
+                    trenutna_celica.Mozen = true;
+                }
+
                 int i = 1;
                 if (this.X - i >= 0)
                 {
@@ -613,6 +628,9 @@ namespace poskus2
                 {
                     Celica trenutna_celica = sahovnica.Celice[this.X + i, this.Y];
                     Figura trenutna_figura = trenutna_celica.Figura;
+
+
+
                     if (trenutna_figura.Ime == "") // prazna celica
                     {
                         mozne.Add(trenutna_celica);
@@ -968,6 +986,39 @@ namespace poskus2
             }
             return true;
         }
+
+        public bool MoznaLevaRosada(Sahovnica sahovnica)
+        {
+
+            Celica celica_trdnjava = sahovnica.Celice[this.X , 0];
+            Figura trdnjava_figura = celica_trdnjava.Figura;
+            if (!this.Premaknjen && !trdnjava_figura.Premaknjen && (trdnjava_figura.Ime == "WR" || trdnjava_figura.Ime == "BR"))
+            {
+                //preverimo če so umesne prazne
+                if (sahovnica.Celice[this.X, 1].Figura.Ime == "" && sahovnica.Celice[this.X, 2].Figura.Ime == "" && sahovnica.Celice[this.X, 3].Figura.Ime == "")
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        public bool MoznaDesnaRosada(Sahovnica sahovnica)
+        {
+
+            Celica celica_trdnjava = sahovnica.Celice[this.X, 7];
+            Figura trdnjava_figura = celica_trdnjava.Figura;
+            if (!this.Premaknjen && !trdnjava_figura.Premaknjen && (trdnjava_figura.Ime == "WR" || trdnjava_figura.Ime == "BR"))
+            {
+                //preverimo če so umesne prazne
+                if (sahovnica.Celice[this.X, 6].Figura.Ime == "" && sahovnica.Celice[this.X, 5].Figura.Ime == "")
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
 
 
     }
