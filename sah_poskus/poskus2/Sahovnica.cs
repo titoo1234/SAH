@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using System.Drawing;
 namespace poskus2
 {
-    public class Sahovnica
+    public class Sahovnica: ICloneable
     {
         private Celica[,] celice;
         //private List<Kmet> kmeti;
@@ -165,7 +165,8 @@ namespace poskus2
             Celica gumb = (Celica)sender;
             //string vrstica = (string)gumb.Tag;
             //MessageBox.Show(vrstica);
-            if (!gumb.Mozen)
+            if (!gumb.Mozen) //KLIKNALI SMO NA GUMB, KJER NI MOŽNA POTEZA
+                             //ZATO POGLEDAMO KATERE SO MOŽNE POTEZE
             {
                 for (int i = 0; i < mozne.Count; i++)
                 {
@@ -182,6 +183,17 @@ namespace poskus2
                 int y = gumb.Y;
                 Figura figura = gumb.Figura;
                 mozne = figura.MoznePoteze(this);
+                //PreveriMoznePoteze(mozne) -> preveri vse mozne 
+
+
+
+                //if (gumb.Figura.Ime != "")
+                //{
+                //    mozne = Figura.PreveriMoznePoteze(this, mozne, gumb);
+                //}
+                
+
+
                 for (int i = 0; i < mozne.Count; i++)
                 {
                     Celica ce = mozne[i];
@@ -192,18 +204,24 @@ namespace poskus2
                 
 
             }
-            else
+            else//KLIKNEŠ NA CELICO, KAMOR  JE MOŽNO PRESTAVITI FIGURO
             {
                 Figura nova = new Figura("", zadnja_celica.X, zadnja_celica.Y, zadnja_celica.Size);
+                
+                if (zadnja_figura.Ime == "BK" || zadnja_figura.Ime == "WK")
+                {
+                    Figura.Rosada(this, zadnja_figura, gumb);
+                }
                 zadnja_celica.Figura = nova;
-
                 zadnja_celica.Image = nova.Slika;
-
                 zadnja_figura.X = gumb.X;
                 zadnja_figura.Y = gumb.Y;
                 zadnja_figura.Premaknjen = true;
                 gumb.Figura = zadnja_figura;
                 gumb.Image = zadnja_figura.Slika;
+
+
+
                 //SPREMENI NAZAJ BARVO
                 for (int i = 0; i < mozne.Count; i++)
                 {
@@ -220,6 +238,9 @@ namespace poskus2
 
         }
 
-
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
     }
 }
