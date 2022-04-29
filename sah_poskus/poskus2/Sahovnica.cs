@@ -9,11 +9,16 @@ namespace poskus2
 {
     public class Sahovnica
     {
+        
+
         private Celica[,] celice;
+        private string trenutni_igralec;
+
         //private List<Kmet> kmeti;
         public Sahovnica(int velikost,Form podlaga)
         {
-            //kmeti = new List<Kmet>();   
+
+            this.Trenutni_igralec = "W";
             celice = new Celica[8, 8];
             for (int vrstica = 0; vrstica < 8; vrstica++)
             {
@@ -141,10 +146,9 @@ namespace poskus2
             }
             this.celice = celice;
 
-
-
-
         }
+
+        public string Trenutni_igralec { get;  set; }
 
         public Celica[,] Celice
         {
@@ -183,9 +187,13 @@ namespace poskus2
                 int x = gumb.X;
                 int y = gumb.Y;
                 Figura figura = gumb.Figura;
-                mozne = figura.MoznePoteze(this);
-
-                mozne = Figura.PreveriMoznePoteze(this, mozne, gumb);
+                //PREVERIMO ČE SMO KLIKNALI NA "PRAVO" FIGURO 
+                if (figura.Barva == Trenutni_igralec)
+                {
+                    mozne = figura.MoznePoteze(this);
+                    mozne = Figura.PreveriMoznePoteze(this, mozne, gumb);
+                }
+                
                 //if (Figura.Mat(this, mozne))
                 //{
                 //    MessageBox.Show("MAT");
@@ -232,6 +240,14 @@ namespace poskus2
                 }
                 //SPRAZNI MOZNE FIGURE
                 mozne.Clear();
+                if(Trenutni_igralec == "W")
+                {
+                    Trenutni_igralec = "B";
+                }
+                else
+                {
+                    Trenutni_igralec = "W";
+                }
 
             }
 
