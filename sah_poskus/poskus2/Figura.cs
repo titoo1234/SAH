@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Windows.Forms;
 namespace poskus2
 {
     public class Figura
@@ -110,7 +111,7 @@ namespace poskus2
                     if (trenutna_figura.Ime == "") // prazna celica
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        //trenutna_celica.Mozen = true;
                         if (this.X - 2 >= 0 && !this.Premaknjen)
                         {
                             trenutna_celica = sahovnica.Celice[this.X - 2, this.Y];
@@ -118,7 +119,7 @@ namespace poskus2
                             if (trenutna_figura.Ime == "")
                             {
                                 mozne.Add(trenutna_celica);
-                                trenutna_celica.Mozen = true;
+                                //trenutna_celica.Mozen = true;
                             }
                         }
                     }
@@ -131,7 +132,7 @@ namespace poskus2
                     if (this.Nasprotnik(trenutna_figura) && trenutna_figura.Ime != "")
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        ////trenutna_celica.Mozen = true;
                     }
                 }
                 if (this.X - 1 >= 0 && this.Y + 1 <= 7)
@@ -142,8 +143,9 @@ namespace poskus2
                     if (this.Nasprotnik(trenutna_figura) && trenutna_figura.Ime != "")
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        ////trenutna_celica.Mozen = true;
                     }
+                    //trenutna_celica.Mozen = true
                 }
             }
 
@@ -158,7 +160,7 @@ namespace poskus2
                     if (trenutna_figura.Ime == "") // prazna celica
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        //trenutna_celica.Mozen = true;
                         if (this.X + 2 <= 7 && !this.Premaknjen)
                         {
                             trenutna_celica = sahovnica.Celice[this.X + 2, this.Y];
@@ -166,7 +168,7 @@ namespace poskus2
                             if (trenutna_figura.Ime == "")
                             {
                                 mozne.Add(trenutna_celica);
-                                trenutna_celica.Mozen = true;
+                                //trenutna_celica.Mozen = true;
                             }
                         }
                     }
@@ -179,7 +181,7 @@ namespace poskus2
                     if (this.Nasprotnik(trenutna_figura) && trenutna_figura.Ime != "")
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        //trenutna_celica.Mozen = true;
                     }
                 }
                 if (this.X + 1 <= 7 && this.Y + 1 <= 7)
@@ -190,7 +192,7 @@ namespace poskus2
                     if (this.Nasprotnik(trenutna_figura) && trenutna_figura.Ime != "")
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        //trenutna_celica.Mozen = true;
                     }
                 }
             }
@@ -206,7 +208,7 @@ namespace poskus2
                     if (trenutna_figura.Ime == "") // prazna celica
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        //trenutna_celica.Mozen = true;
                     }
 
                     else
@@ -214,7 +216,7 @@ namespace poskus2
                         if (this.Nasprotnik(trenutna_figura))
                         {
                             mozne.Add(trenutna_celica);
-                            trenutna_celica.Mozen = true;
+                            //trenutna_celica.Mozen = true;
 
                         }
                         break;
@@ -229,7 +231,7 @@ namespace poskus2
                     if (trenutna_figura.Ime == "") // prazna celica
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        //trenutna_celica.Mozen = true;
                     }
 
                     else
@@ -237,7 +239,7 @@ namespace poskus2
                         if (this.Nasprotnik(trenutna_figura))
                         {
                             mozne.Add(trenutna_celica);
-                            trenutna_celica.Mozen = true;
+                            //trenutna_celica.Mozen = true;
 
                         }
                         break;
@@ -252,7 +254,7 @@ namespace poskus2
                     if (trenutna_figura.Ime == "") // prazna celica
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        //trenutna_celica.Mozen = true;
                     }
 
                     else
@@ -260,7 +262,7 @@ namespace poskus2
                         if (this.Nasprotnik(trenutna_figura))
                         {
                             mozne.Add(trenutna_celica);
-                            trenutna_celica.Mozen = true;
+                            //trenutna_celica.Mozen = true;
 
                         }
                         break;
@@ -275,7 +277,7 @@ namespace poskus2
                     if (trenutna_figura.Ime == "") // prazna celica
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        //trenutna_celica.Mozen = true;
                     }
 
                     else
@@ -283,7 +285,7 @@ namespace poskus2
                         if (this.Nasprotnik(trenutna_figura))
                         {
                             mozne.Add(trenutna_celica);
-                            trenutna_celica.Mozen = true;
+                            //trenutna_celica.Mozen = true;
 
                         }
                         break;
@@ -298,7 +300,7 @@ namespace poskus2
                     if (trenutna_figura.Ime == "") // prazna celica
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        //trenutna_celica.Mozen = true;
                     }
 
                     else
@@ -306,7 +308,7 @@ namespace poskus2
                         if (this.Nasprotnik(trenutna_figura))
                         {
                             mozne.Add(trenutna_celica);
-                            trenutna_celica.Mozen = true;
+                            //trenutna_celica.Mozen = true;
 
                         }
                         break;
@@ -321,7 +323,7 @@ namespace poskus2
                     if (trenutna_figura.Ime == "") // prazna celica
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        //trenutna_celica.Mozen = true;
                     }
 
                     else
@@ -329,7 +331,7 @@ namespace poskus2
                         if (this.Nasprotnik(trenutna_figura))
                         {
                             mozne.Add(trenutna_celica);
-                            trenutna_celica.Mozen = true;
+                            //trenutna_celica.Mozen = true;
 
                         }
                         break;
@@ -344,7 +346,7 @@ namespace poskus2
                     if (trenutna_figura.Ime == "") // prazna celica
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        //trenutna_celica.Mozen = true;
                     }
 
                     else
@@ -352,7 +354,7 @@ namespace poskus2
                         if (this.Nasprotnik(trenutna_figura))
                         {
                             mozne.Add(trenutna_celica);
-                            trenutna_celica.Mozen = true;
+                            //trenutna_celica.Mozen = true;
 
                         }
                         break;
@@ -367,7 +369,7 @@ namespace poskus2
                     if (trenutna_figura.Ime == "") // prazna celica
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        //trenutna_celica.Mozen = true;
                     }
 
                     else
@@ -375,7 +377,7 @@ namespace poskus2
                         if (this.Nasprotnik(trenutna_figura))
                         {
                             mozne.Add(trenutna_celica);
-                            trenutna_celica.Mozen = true;
+                            //trenutna_celica.Mozen = true;
 
                         }
                         break;
@@ -398,7 +400,7 @@ namespace poskus2
                     if (trenutna_figura.Ime == "") // prazna celica
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        //trenutna_celica.Mozen = true;
                     }
 
                     else
@@ -406,7 +408,7 @@ namespace poskus2
                         if (this.Nasprotnik(trenutna_figura))
                         {
                             mozne.Add(trenutna_celica);
-                            trenutna_celica.Mozen = true;
+                            //trenutna_celica.Mozen = true;
 
                         }
                         break;
@@ -421,7 +423,7 @@ namespace poskus2
                     if (trenutna_figura.Ime == "") // prazna celica
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        //trenutna_celica.Mozen = true;
                     }
 
                     else
@@ -429,7 +431,7 @@ namespace poskus2
                         if (this.Nasprotnik(trenutna_figura))
                         {
                             mozne.Add(trenutna_celica);
-                            trenutna_celica.Mozen = true;
+                            //trenutna_celica.Mozen = true;
 
                         }
                         break;
@@ -444,7 +446,7 @@ namespace poskus2
                     if (trenutna_figura.Ime == "") // prazna celica
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        //trenutna_celica.Mozen = true;
                     }
 
                     else
@@ -452,7 +454,7 @@ namespace poskus2
                         if (this.Nasprotnik(trenutna_figura))
                         {
                             mozne.Add(trenutna_celica);
-                            trenutna_celica.Mozen = true;
+                            //trenutna_celica.Mozen = true;
 
                         }
                         break;
@@ -467,7 +469,7 @@ namespace poskus2
                     if (trenutna_figura.Ime == "") // prazna celica
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        //trenutna_celica.Mozen = true;
                     }
 
                     else
@@ -475,7 +477,7 @@ namespace poskus2
                         if (this.Nasprotnik(trenutna_figura))
                         {
                             mozne.Add(trenutna_celica);
-                            trenutna_celica.Mozen = true;
+                            //trenutna_celica.Mozen = true;
 
                         }
                         break;
@@ -495,7 +497,7 @@ namespace poskus2
                     if (trenutna_figura.Ime == "") // prazna celica
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        //trenutna_celica.Mozen = true;
                     }
 
                     else
@@ -503,7 +505,7 @@ namespace poskus2
                         if (this.Nasprotnik(trenutna_figura))
                         {
                             mozne.Add(trenutna_celica);
-                            trenutna_celica.Mozen = true;
+                            //trenutna_celica.Mozen = true;
 
                         }
                         break;
@@ -518,7 +520,7 @@ namespace poskus2
                     if (trenutna_figura.Ime == "") // prazna celica
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        //trenutna_celica.Mozen = true;
                     }
 
                     else
@@ -526,7 +528,7 @@ namespace poskus2
                         if (this.Nasprotnik(trenutna_figura))
                         {
                             mozne.Add(trenutna_celica);
-                            trenutna_celica.Mozen = true;
+                            //trenutna_celica.Mozen = true;
 
                         }
                         break;
@@ -541,7 +543,7 @@ namespace poskus2
                     if (trenutna_figura.Ime == "") // prazna celica
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        //trenutna_celica.Mozen = true;
                     }
 
                     else
@@ -549,7 +551,7 @@ namespace poskus2
                         if (this.Nasprotnik(trenutna_figura))
                         {
                             mozne.Add(trenutna_celica);
-                            trenutna_celica.Mozen = true;
+                            //trenutna_celica.Mozen = true;
 
                         }
                         break;
@@ -564,7 +566,7 @@ namespace poskus2
                     if (trenutna_figura.Ime == "") // prazna celica
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        //trenutna_celica.Mozen = true;
                     }
 
                     else
@@ -572,7 +574,7 @@ namespace poskus2
                         if (this.Nasprotnik(trenutna_figura))
                         {
                             mozne.Add(trenutna_celica);
-                            trenutna_celica.Mozen = true;
+                            //trenutna_celica.Mozen = true;
 
                         }
                         break;
@@ -590,14 +592,14 @@ namespace poskus2
                     Celica trenutna_celica = sahovnica.Celice[this.X, this.Y + 2];
                     Figura trenutna_figura = trenutna_celica.Figura;
                     mozne.Add(trenutna_celica);
-                    trenutna_celica.Mozen = true;
+                    //trenutna_celica.Mozen = true;
                 }
                 if (this.MoznaLevaRosada(sahovnica))
                 {
                     Celica trenutna_celica = sahovnica.Celice[this.X, this.Y - 2];
                     Figura trenutna_figura = trenutna_celica.Figura;
                     mozne.Add(trenutna_celica);
-                    trenutna_celica.Mozen = true;
+                    //trenutna_celica.Mozen = true;
                 }
 
                 int i = 1;
@@ -608,7 +610,7 @@ namespace poskus2
                     if (trenutna_figura.Ime == "") // prazna celica
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        //trenutna_celica.Mozen = true;
                     }
 
                     else
@@ -616,7 +618,7 @@ namespace poskus2
                         if (this.Nasprotnik(trenutna_figura))
                         {
                             mozne.Add(trenutna_celica);
-                            trenutna_celica.Mozen = true;
+                            //trenutna_celica.Mozen = true;
 
                         }
 
@@ -634,7 +636,7 @@ namespace poskus2
                     if (trenutna_figura.Ime == "") // prazna celica
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        //trenutna_celica.Mozen = true;
                     }
 
                     else
@@ -642,7 +644,7 @@ namespace poskus2
                         if (this.Nasprotnik(trenutna_figura))
                         {
                             mozne.Add(trenutna_celica);
-                            trenutna_celica.Mozen = true;
+                            //trenutna_celica.Mozen = true;
 
                         }
 
@@ -657,7 +659,7 @@ namespace poskus2
                     if (trenutna_figura.Ime == "") // prazna celica
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        //trenutna_celica.Mozen = true;
                     }
 
                     else
@@ -665,7 +667,7 @@ namespace poskus2
                         if (this.Nasprotnik(trenutna_figura))
                         {
                             mozne.Add(trenutna_celica);
-                            trenutna_celica.Mozen = true;
+                            //trenutna_celica.Mozen = true;
 
                         }
 
@@ -680,7 +682,7 @@ namespace poskus2
                     if (trenutna_figura.Ime == "") // prazna celica
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        //trenutna_celica.Mozen = true;
                     }
 
                     else
@@ -688,7 +690,7 @@ namespace poskus2
                         if (this.Nasprotnik(trenutna_figura))
                         {
                             mozne.Add(trenutna_celica);
-                            trenutna_celica.Mozen = true;
+                            //trenutna_celica.Mozen = true;
 
                         }
 
@@ -703,7 +705,7 @@ namespace poskus2
                     if (trenutna_figura.Ime == "") // prazna celica
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        //trenutna_celica.Mozen = true;
                     }
 
                     else
@@ -711,7 +713,7 @@ namespace poskus2
                         if (this.Nasprotnik(trenutna_figura))
                         {
                             mozne.Add(trenutna_celica);
-                            trenutna_celica.Mozen = true;
+                            //trenutna_celica.Mozen = true;
 
                         }
 
@@ -726,7 +728,7 @@ namespace poskus2
                     if (trenutna_figura.Ime == "") // prazna celica
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        //trenutna_celica.Mozen = true;
                     }
 
                     else
@@ -734,7 +736,7 @@ namespace poskus2
                         if (this.Nasprotnik(trenutna_figura))
                         {
                             mozne.Add(trenutna_celica);
-                            trenutna_celica.Mozen = true;
+                            //trenutna_celica.Mozen = true;
 
                         }
 
@@ -749,7 +751,7 @@ namespace poskus2
                     if (trenutna_figura.Ime == "") // prazna celica
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        //trenutna_celica.Mozen = true;
                     }
 
                     else
@@ -757,7 +759,7 @@ namespace poskus2
                         if (this.Nasprotnik(trenutna_figura))
                         {
                             mozne.Add(trenutna_celica);
-                            trenutna_celica.Mozen = true;
+                            //trenutna_celica.Mozen = true;
 
                         }
 
@@ -772,7 +774,7 @@ namespace poskus2
                     if (trenutna_figura.Ime == "") // prazna celica
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        //trenutna_celica.Mozen = true;
                     }
 
                     else
@@ -780,7 +782,7 @@ namespace poskus2
                         if (this.Nasprotnik(trenutna_figura))
                         {
                             mozne.Add(trenutna_celica);
-                            trenutna_celica.Mozen = true;
+                            //trenutna_celica.Mozen = true;
 
                         }
 
@@ -802,7 +804,7 @@ namespace poskus2
                     if (trenutna_figura.Ime == "") // prazna celica
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        //trenutna_celica.Mozen = true;
                     }
 
                     else
@@ -810,7 +812,7 @@ namespace poskus2
                         if (this.Nasprotnik(trenutna_figura))
                         {
                             mozne.Add(trenutna_celica);
-                            trenutna_celica.Mozen = true;
+                            //trenutna_celica.Mozen = true;
 
                         }
 
@@ -824,7 +826,7 @@ namespace poskus2
                     if (trenutna_figura.Ime == "") // prazna celica
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        //trenutna_celica.Mozen = true;
                     }
 
                     else
@@ -832,7 +834,7 @@ namespace poskus2
                         if (this.Nasprotnik(trenutna_figura))
                         {
                             mozne.Add(trenutna_celica);
-                            trenutna_celica.Mozen = true;
+                            //trenutna_celica.Mozen = true;
 
                         }
 
@@ -846,7 +848,7 @@ namespace poskus2
                     if (trenutna_figura.Ime == "") // prazna celica
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        //trenutna_celica.Mozen = true;
                     }
 
                     else
@@ -854,7 +856,7 @@ namespace poskus2
                         if (this.Nasprotnik(trenutna_figura))
                         {
                             mozne.Add(trenutna_celica);
-                            trenutna_celica.Mozen = true;
+                            //trenutna_celica.Mozen = true;
 
                         }
 
@@ -868,7 +870,7 @@ namespace poskus2
                     if (trenutna_figura.Ime == "") // prazna celica
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        //trenutna_celica.Mozen = true;
                     }
 
                     else
@@ -876,7 +878,7 @@ namespace poskus2
                         if (this.Nasprotnik(trenutna_figura))
                         {
                             mozne.Add(trenutna_celica);
-                            trenutna_celica.Mozen = true;
+                            //trenutna_celica.Mozen = true;
 
                         }
 
@@ -892,7 +894,7 @@ namespace poskus2
                     if (trenutna_figura.Ime == "") // prazna celica
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        //trenutna_celica.Mozen = true;
                     }
 
                     else
@@ -900,7 +902,7 @@ namespace poskus2
                         if (this.Nasprotnik(trenutna_figura))
                         {
                             mozne.Add(trenutna_celica);
-                            trenutna_celica.Mozen = true;
+                            //trenutna_celica.Mozen = true;
 
                         }
 
@@ -914,7 +916,7 @@ namespace poskus2
                     if (trenutna_figura.Ime == "") // prazna celica
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        //trenutna_celica.Mozen = true;
                     }
 
                     else
@@ -922,7 +924,7 @@ namespace poskus2
                         if (this.Nasprotnik(trenutna_figura))
                         {
                             mozne.Add(trenutna_celica);
-                            trenutna_celica.Mozen = true;
+                            //trenutna_celica.Mozen = true;
 
                         }
 
@@ -936,7 +938,7 @@ namespace poskus2
                     if (trenutna_figura.Ime == "") // prazna celica
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        //trenutna_celica.Mozen = true;
                     }
 
                     else
@@ -944,7 +946,7 @@ namespace poskus2
                         if (this.Nasprotnik(trenutna_figura))
                         {
                             mozne.Add(trenutna_celica);
-                            trenutna_celica.Mozen = true;
+                            //trenutna_celica.Mozen = true;
 
                         }
 
@@ -958,7 +960,7 @@ namespace poskus2
                     if (trenutna_figura.Ime == "") // prazna celica
                     {
                         mozne.Add(trenutna_celica);
-                        trenutna_celica.Mozen = true;
+                        //trenutna_celica.Mozen = true;
                     }
 
                     else
@@ -966,7 +968,7 @@ namespace poskus2
                         if (this.Nasprotnik(trenutna_figura))
                         {
                             mozne.Add(trenutna_celica);
-                            trenutna_celica.Mozen = true;
+                            //trenutna_celica.Mozen = true;
 
                         }
 
@@ -1095,7 +1097,6 @@ namespace poskus2
             return false;
         }
 
-
         public static List<Celica> PreveriMoznePoteze(Sahovnica sahovnica, List<Celica> mozne_poteze, Celica gumb)
         {
             List<Celica> ustrezne = new List<Celica>();
@@ -1103,23 +1104,32 @@ namespace poskus2
             //PREVERIMO ALI JE STORJENA NAPAKA (ŠAH NA SVOJEGA KRALJA)
             foreach(Celica mozna in mozne_poteze)
             {
-
+   
+                string barva = gumb.Figura.Barva;
                 Figura shrani1 = sahovnica.Celice[mozna.X, mozna.Y].Figura;
                 Figura sh1 = new Figura(shrani1.Ime, shrani1.X, shrani1.Y, gumb.Size);
+                sh1.premaknjen = shrani1.Premaknjen;
                 Figura shrani2 = sahovnica.Celice[gumb.X, gumb.Y].Figura;
                 Figura sh2 = new Figura(shrani2.Ime, shrani2.X, shrani2.Y, gumb.Size);
+                sh2.premaknjen = shrani2.Premaknjen;
+                //PRESTAVIMO FIGURO
                 sahovnica.Celice[mozna.X, mozna.Y].Figura = gumb.Figura;
-                gumb.Figura.X = mozna.X;
-                gumb.Figura.Y = mozna.Y;
+
+                //sahovnica.Celice[mozna.X, mozna.Y].Figura.X = mozna.X;
+                //sahovnica.Celice[mozna.X, mozna.Y].Figura.Y = mozna.Y;
+                //NA STAREM MESTU SEDAJ NI FIGURE
                 sahovnica.Celice[gumb.X, gumb.Y].Figura = new Figura("", gumb.X, gumb.Y, gumb.Size);
                 //PREVERIMO ALI JE PO TEM KORAKU ŠAH
-                string barva = gumb.Figura.Barva;
-                Console.WriteLine(barva + "K");
+
+
                 if (!JeSah(sahovnica, barva + "K"))
                 {
+
                     ustrezne.Add(mozna);
                 }
-                sahovnica.Celice[mozna.X, mozna.Y].Figura = sh1;
+
+
+            sahovnica.Celice[mozna.X, mozna.Y].Figura = sh1;
                 sahovnica.Celice[gumb.X, gumb.Y].Figura = sh2;
                 //NASTAVIMO NAZAJ VSE TAK KOT JE BILO PRED NAVIDEZNIM PREMIKOM
 
@@ -1128,6 +1138,15 @@ namespace poskus2
      
 
             return ustrezne;
+        }
+    
+        public static bool Mat(Sahovnica sahovnica, List<Celica> mozne)
+        {
+            if (mozne.Count == 0)
+            {
+                return true;
+            }
+            return false;
         }
     }
 

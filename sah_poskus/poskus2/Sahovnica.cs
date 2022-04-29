@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using System.Drawing;
 namespace poskus2
 {
-    public class Sahovnica: ICloneable
+    public class Sahovnica
     {
         private Celica[,] celice;
         //private List<Kmet> kmeti;
@@ -146,8 +146,6 @@ namespace poskus2
 
         }
 
-
-
         public Celica[,] Celice
         {
             get
@@ -160,6 +158,7 @@ namespace poskus2
         Celica zadnja_celica;
         List<Celica> mozne = new List<Celica>();
 
+
         private void button1_Click(object sender, EventArgs e)
         {
             Celica gumb = (Celica)sender;
@@ -168,7 +167,8 @@ namespace poskus2
             if (!gumb.Mozen) //KLIKNALI SMO NA GUMB, KJER NI MOŽNA POTEZA
                              //ZATO POGLEDAMO KATERE SO MOŽNE POTEZE
             {
-                for (int i = 0; i < mozne.Count; i++)
+                
+                for (int i = 0; i < mozne.Count; i++)//STARE MOŽNE POTEZE POBARVAMO NAZAJ NA NAVADNO BARVO
                 {
                     Celica ce = mozne[i];
                     Figura fig = ce.Figura;
@@ -177,26 +177,24 @@ namespace poskus2
                     ce.Mozen = false;
 
                 }
+                mozne.Clear();
                 zadnja_celica = gumb;
                 zadnja_figura = gumb.Figura;
                 int x = gumb.X;
                 int y = gumb.Y;
                 Figura figura = gumb.Figura;
                 mozne = figura.MoznePoteze(this);
-                //PreveriMoznePoteze(mozne) -> preveri vse mozne 
 
-
-
-                //if (gumb.Figura.Ime != "")
+                mozne = Figura.PreveriMoznePoteze(this, mozne, gumb);
+                //if (Figura.Mat(this, mozne))
                 //{
-                //    mozne = Figura.PreveriMoznePoteze(this, mozne, gumb);
+                //    MessageBox.Show("MAT");
                 //}
-                
-
 
                 for (int i = 0; i < mozne.Count; i++)
                 {
                     Celica ce = mozne[i];
+                    //MessageBox.Show(ce.X.ToString() + ce.Y.ToString());
                     ce.BackColor = Color.Red;
                     ce.Mozen = true;
                     
@@ -206,8 +204,9 @@ namespace poskus2
             }
             else//KLIKNEŠ NA CELICO, KAMOR  JE MOŽNO PRESTAVITI FIGURO
             {
+
                 Figura nova = new Figura("", zadnja_celica.X, zadnja_celica.Y, zadnja_celica.Size);
-                
+                //MessageBox.Show("tle sem");
                 if (zadnja_figura.Ime == "BK" || zadnja_figura.Ime == "WK")
                 {
                     Figura.Rosada(this, zadnja_figura, gumb);
@@ -238,9 +237,5 @@ namespace poskus2
 
         }
 
-        public object Clone()
-        {
-            return this.MemberwiseClone();
-        }
     }
 }
