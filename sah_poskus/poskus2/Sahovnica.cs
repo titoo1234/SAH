@@ -9,15 +9,25 @@ namespace poskus2
 {
     public class Sahovnica
     {
-        
 
+        private Figura zadnja_figura;
+        private Celica zadnja_celica;
+        private Celica zadnja_prestavljena_celica;
         private Celica[,] celice;
         private string trenutni_igralec;
+        public RezervaFigure rezerva_beli;
+        public RezervaFigure rezerva_crni;
+
 
         //private List<Kmet> kmeti;
         public Sahovnica(int velikost,Form podlaga)
         {
+            this.rezerva_beli = null;
+            this.rezerva_crni = null;
 
+            this.Zadnja_celica = null;
+            this.Zadnja_figura = null;
+            this.Zadnja_prestavljena_celica = null;
             this.Trenutni_igralec = "W";
             celice = new Celica[8, 8];
             for (int vrstica = 0; vrstica < 8; vrstica++)
@@ -158,8 +168,11 @@ namespace poskus2
             }
            
         }
-        Figura zadnja_figura;
-        Celica zadnja_celica;
+
+        public Celica Zadnja_celica { get;  set; }
+        public Figura Zadnja_figura { get;  set; }
+        public Celica Zadnja_prestavljena_celica { get;  set; }
+
         List<Celica> mozne = new List<Celica>();
 
 
@@ -182,8 +195,8 @@ namespace poskus2
 
                 }
                 mozne.Clear();
-                zadnja_celica = gumb;
-                zadnja_figura = gumb.Figura;
+                this.Zadnja_celica = gumb;
+                this.Zadnja_figura = gumb.Figura;
                 int x = gumb.X;
                 int y = gumb.Y;
                 Figura figura = gumb.Figura;
@@ -207,27 +220,26 @@ namespace poskus2
                     ce.Mozen = true;
                     
                 }
-                
 
             }
             else//KLIKNEŠ NA CELICO, KAMOR  JE MOŽNO PRESTAVITI FIGURO
             {
-
-                Figura nova = new Figura("", zadnja_celica.X, zadnja_celica.Y, zadnja_celica.Size);
+                this.Zadnja_prestavljena_celica = gumb;
+                Figura nova = new Figura("", this.Zadnja_celica.X, this.Zadnja_celica.Y, this.Zadnja_celica.Size);
                 //MessageBox.Show("tle sem");
-                if (zadnja_figura.Ime == "BK" || zadnja_figura.Ime == "WK")
+                if (this.Zadnja_figura.Ime == "BK" || this.Zadnja_figura.Ime == "WK")
                 {
-                    Figura.Rosada(this, zadnja_figura, gumb);
+                    Figura.Rosada(this, this.Zadnja_figura, gumb);
                 }
-                zadnja_celica.Figura = nova;
-                zadnja_celica.Image = nova.Slika;
-                zadnja_figura.X = gumb.X;
-                zadnja_figura.Y = gumb.Y;
-                zadnja_figura.Premaknjen = true;
+                this.Zadnja_celica.Figura = nova;
+                this.Zadnja_celica.Image = nova.Slika;
+                this.Zadnja_figura.X = gumb.X;
+                this.Zadnja_figura.Y = gumb.Y;
+                this.Zadnja_figura.Premaknjen = true;
 
                 
-                gumb.Figura = zadnja_figura;
-                gumb.Image = zadnja_figura.Slika;
+                gumb.Figura = this.Zadnja_figura;
+                gumb.Image = this.Zadnja_figura.Slika;
 
 
 
@@ -249,6 +261,19 @@ namespace poskus2
                 else
                 {
                     Trenutni_igralec = "W";
+                }
+
+                //PREVERIMO ALI JE PRIŠEL KMET DO ZADNJEGA POLJA
+                //V TEM PRIMERU PRIKAŽEMO "REZERVO" IN IZBEREMO  POLJUBNO FIGURO
+
+                //TODO POTREBNO NAREDITI DA !!MORE!! KLIKNATI NA GUMB
+                if (gumb.Figura.Ime == "WP" && gumb.X == 0)
+                {
+                    rezerva_beli.Prikaži();
+                }
+                if (gumb.Figura.Ime == "BP" && gumb.X == 7)
+                {
+                    rezerva_crni.Prikaži();
                 }
 
             }

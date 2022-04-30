@@ -28,7 +28,7 @@ namespace poskus2
                 {
                     
                     //lokacija bo odvisna od tega ali je barva bela ali črna...
-                    gumb.Location = new Point(50 + i * velikost, 10);
+                    gumb.Location = new Point(50 + i * velikost, 50 + 8 * velikost);
                     if (i == 0)
                     {
                         Figura fig = new Figura("BQ", lokacija_figure, lokacija_figure, gumb.Size);
@@ -64,7 +64,7 @@ namespace poskus2
                 }
                 else
                 {
-                    gumb.Location = new Point(50 + i * velikost, 50 + 8 * velikost);
+                    gumb.Location =  new Point(50 + i * velikost, 10);
                     if (i == 0)
                     {
                         Figura fig = new Figura("WQ", lokacija_figure, lokacija_figure, gumb.Size);
@@ -135,9 +135,16 @@ namespace poskus2
             //figuro (kmeta) z figuro ki jo izberemo
             Celica gumb = (Celica)sender;
             Figura fig = gumb.Figura;
-            fig.X = sahovnica.
-   
-            //zadnja_celica.Figura = fig;
+            
+            fig.X = sahovnica.Zadnja_prestavljena_celica.Figura.X;
+            fig.Y = sahovnica.Zadnja_prestavljena_celica.Figura.Y;
+
+            sahovnica.Zadnja_prestavljena_celica.Figura = fig;
+            sahovnica.Zadnja_prestavljena_celica.Image = fig.Slika;
+            this.Skrij();
+           
+
+            //this.Skrij();
 
 
         }
