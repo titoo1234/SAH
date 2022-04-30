@@ -1148,6 +1148,11 @@ namespace poskus2
             }
             return false;
         }
+
+        public static void ZamenjajKmeta()
+        {
+
+        }
     }
 
 }

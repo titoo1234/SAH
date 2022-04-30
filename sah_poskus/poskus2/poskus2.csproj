@@ -51,6 +51,7 @@
     </Compile>
     <Compile Include="Figura.cs" />
     <Compile Include="Kmet.cs" />
+    <Compile Include="RezervaFigure.cs" />
     <Compile Include="Sahovnica.cs" />
     <Compile Include="Funkcije.cs" />
     <Compile Include="Form1.cs">

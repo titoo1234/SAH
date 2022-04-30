@@ -224,6 +224,8 @@ namespace poskus2
                 zadnja_figura.X = gumb.X;
                 zadnja_figura.Y = gumb.Y;
                 zadnja_figura.Premaknjen = true;
+
+                
                 gumb.Figura = zadnja_figura;
                 gumb.Image = zadnja_figura.Slika;
 

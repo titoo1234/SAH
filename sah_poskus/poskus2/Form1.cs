@@ -22,7 +22,11 @@ namespace poskus2
        
             InitializeComponent();
             Sahovnica sahovnica = new Sahovnica(velikost, this);
-            
+            RezervaFigure rezerva_beli = new RezervaFigure(velikost, this, "W", sahovnica);
+            RezervaFigure rezerva_crni = new RezervaFigure(velikost, this, "B", sahovnica);
+
+            rezerva_beli.Prikaži();
+
 
 
 
