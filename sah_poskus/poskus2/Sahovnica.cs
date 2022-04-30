@@ -254,14 +254,8 @@ namespace poskus2
                 }
                 //SPRAZNI MOZNE FIGURE
                 mozne.Clear();
-                if(Trenutni_igralec == "W")
-                {
-                    Trenutni_igralec = "B";
-                }
-                else
-                {
-                    Trenutni_igralec = "W";
-                }
+
+
 
                 //PREVERIMO ALI JE PRIŠEL KMET DO ZADNJEGA POLJA
                 //V TEM PRIMERU PRIKAŽEMO "REZERVO" IN IZBEREMO  POLJUBNO FIGURO
@@ -275,6 +269,28 @@ namespace poskus2
                 {
                     rezerva_crni.Prikaži();
                 }
+
+
+
+                
+                if (Trenutni_igralec == "W")
+                {
+                    Trenutni_igralec = "B";
+                    if (Figura.Mat(this, "B"))
+                    {
+                        MessageBox.Show("MAT");
+                    }
+                }
+                else
+                {
+                    Trenutni_igralec = "W";
+                    if (Figura.Mat(this, "W"))
+                    {
+                        MessageBox.Show("MAT");
+                    }
+                }
+
+                
 
             }
 

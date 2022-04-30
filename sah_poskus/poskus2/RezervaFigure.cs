@@ -142,7 +142,23 @@ namespace poskus2
             sahovnica.Zadnja_prestavljena_celica.Figura = fig;
             sahovnica.Zadnja_prestavljena_celica.Image = fig.Slika;
             this.Skrij();
-           
+            if (sahovnica.Trenutni_igralec == "W")
+            {
+ 
+                if (Figura.Mat(sahovnica, "W"))
+                {
+                    MessageBox.Show("MAT");
+                }
+            }
+            else
+            {
+               
+                if (Figura.Mat(sahovnica, "B"))
+                {
+                    MessageBox.Show("MAT");
+                }
+            }
+
 
             //this.Skrij();
 

@@ -1140,13 +1140,28 @@ namespace poskus2
             return ustrezne;
         }
     
-        public static bool Mat(Sahovnica sahovnica, List<Celica> mozne)
-        {
-            if (mozne.Count == 0)
+        public static bool Mat(Sahovnica sahovnica, string barva)
+        {   
+
+            List<Celica> mozne = new List<Celica>();
+            for (int i = 0; i< 8; i++)
             {
-                return true;
+                for (int j = 0; j < 8; j++)
+                {
+                    Celica celica = sahovnica.Celice[i, j];
+                    if(celica.Figura.Barva == barva)
+                    {
+                        List<Celica> moznePoteze = celica.Figura.MoznePoteze(sahovnica);
+                        List<Celica> preveri = PreveriMoznePoteze(sahovnica, moznePoteze, celica);
+                        if (preveri.Count > 0)
+                        {
+                            return false;
+                        }
+                    }  
+                    
+                }
             }
-            return false;
+            return true;
         }
 
 
