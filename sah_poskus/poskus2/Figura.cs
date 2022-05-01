@@ -114,6 +114,7 @@ namespace poskus2
                         //trenutna_celica.Mozen = true;
                         if (this.X - 2 >= 0 && !this.Premaknjen)
                         {
+                            
                             trenutna_celica = sahovnica.Celice[this.X - 2, this.Y];
                             trenutna_figura = trenutna_celica.Figura;
                             if (trenutna_figura.Ime == "")
@@ -1108,10 +1109,10 @@ namespace poskus2
                 string barva = gumb.Figura.Barva;
                 Figura shrani1 = sahovnica.Celice[mozna.X, mozna.Y].Figura;
                 Figura sh1 = new Figura(shrani1.Ime, shrani1.X, shrani1.Y, gumb.Size);
-                sh1.premaknjen = shrani1.Premaknjen;
+                sh1.Premaknjen = shrani1.Premaknjen;
                 Figura shrani2 = sahovnica.Celice[gumb.X, gumb.Y].Figura;
                 Figura sh2 = new Figura(shrani2.Ime, shrani2.X, shrani2.Y, gumb.Size);
-                sh2.premaknjen = shrani2.Premaknjen;
+                sh2.Premaknjen = shrani2.Premaknjen;
                 //PRESTAVIMO FIGURO
                 sahovnica.Celice[mozna.X, mozna.Y].Figura = gumb.Figura;
 

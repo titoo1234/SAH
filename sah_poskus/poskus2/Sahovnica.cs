@@ -206,11 +206,7 @@ namespace poskus2
                     mozne = figura.MoznePoteze(this);
                     mozne = Figura.PreveriMoznePoteze(this, mozne, gumb);
                 }
-                
-                //if (Figura.Mat(this, mozne))
-                //{
-                //    MessageBox.Show("MAT");
-                //}
+
 
                 for (int i = 0; i < mozne.Count; i++)
                 {
@@ -224,6 +220,8 @@ namespace poskus2
             }
             else//KLIKNEŠ NA CELICO, KAMOR  JE MOŽNO PRESTAVITI FIGURO
             {
+               
+
                 this.Zadnja_prestavljena_celica = gumb;
                 Figura nova = new Figura("", this.Zadnja_celica.X, this.Zadnja_celica.Y, this.Zadnja_celica.Size);
                 //MessageBox.Show("tle sem");
@@ -239,6 +237,7 @@ namespace poskus2
 
                 
                 gumb.Figura = this.Zadnja_figura;
+                //gumb.Figura.Premaknjen = true;
                 gumb.Image = this.Zadnja_figura.Slika;
 
 
