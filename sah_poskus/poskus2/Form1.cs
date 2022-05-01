@@ -15,15 +15,18 @@ namespace poskus2
     {
         public Button[,] gumbi = new Button[8, 8];
         public int velikost = 40;
+        Sahovnica sahovnica;
+        RezervaFigure rezerva_beli;
+        RezervaFigure rezerva_crni;
         public Form1()
         {
             
             
        
             InitializeComponent();
-            Sahovnica sahovnica = new Sahovnica(velikost, this);
-            RezervaFigure rezerva_beli = new RezervaFigure(velikost, this, "W", sahovnica);
-            RezervaFigure rezerva_crni = new RezervaFigure(velikost, this, "B", sahovnica);
+            sahovnica = new Sahovnica(velikost, this);
+            rezerva_beli = new RezervaFigure(velikost, this, "W", sahovnica);
+            rezerva_crni = new RezervaFigure(velikost, this, "B", sahovnica);
             sahovnica.rezerva_beli = rezerva_beli;
             sahovnica.rezerva_crni = rezerva_crni;
             //rezerva_beli.Prikaži();
@@ -43,9 +46,7 @@ namespace poskus2
         {
             Button gumb= (Button)sender;
             string vrstica = (string)gumb.Tag;
-            MessageBox.Show(vrstica);
-
-
+            MessageBox.Show("ŠE NE GRE :)");
         }
     }
 }

@@ -160,9 +160,6 @@ namespace poskus2
             }
 
 
-            //this.Skrij();
-
-
         }
 
 

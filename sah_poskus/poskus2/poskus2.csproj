@@ -50,6 +50,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Figura.cs" />
+    <Compile Include="Igralec.cs" />
     <Compile Include="Kmet.cs" />
     <Compile Include="RezervaFigure.cs" />
     <Compile Include="Sahovnica.cs" />

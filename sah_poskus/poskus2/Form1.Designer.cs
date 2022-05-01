@@ -28,28 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.Zacetek_gumb = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // Zacetek_gumb
             // 
-            this.button1.Image = global::poskus2.Properties.Resources.White_Bishop;
-            this.button1.Location = new System.Drawing.Point(457, 18);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(37, 39);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.Zacetek_gumb.Location = new System.Drawing.Point(560, 205);
+            this.Zacetek_gumb.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Zacetek_gumb.Name = "Zacetek_gumb";
+            this.Zacetek_gumb.Size = new System.Drawing.Size(97, 47);
+            this.Zacetek_gumb.TabIndex = 0;
+            this.Zacetek_gumb.Text = "ZAČETEK";
+            this.Zacetek_gumb.UseVisualStyleBackColor = true;
+            this.Zacetek_gumb.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(502, 462);
-            this.Controls.Add(this.button1);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.ClientSize = new System.Drawing.Size(669, 569);
+            this.Controls.Add(this.Zacetek_gumb);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "ŠAH ;-)";
             this.ResumeLayout(false);
@@ -58,7 +57,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button Zacetek_gumb;
     }
 }
 

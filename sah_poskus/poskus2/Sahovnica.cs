@@ -181,7 +181,11 @@ namespace poskus2
             Celica gumb = (Celica)sender;
             //string vrstica = (string)gumb.Tag;
             //MessageBox.Show(vrstica);
-            if (!gumb.Mozen) //KLIKNALI SMO NA GUMB, KJER NI MOŽNA POTEZA
+            //TODO PREVERI ALI SMO ŽE KLIKNALI NA ZAMENJAVO: OZ LAŽJE, PREVERI ALI JE REZERVA PRIKAZANA
+            
+            
+            if (!gumb.Mozen) 
+                            //KLIKNALI SMO NA GUMB, KJER NI MOŽNA POTEZA
                              //ZATO POGLEDAMO KATERE SO MOŽNE POTEZE
             {
                 
