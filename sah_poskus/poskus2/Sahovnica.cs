@@ -17,13 +17,17 @@ namespace poskus2
         private string trenutni_igralec;
         public RezervaFigure rezerva_beli;
         public RezervaFigure rezerva_crni;
+        public Game podlaga;
+
 
 
         //private List<Kmet> kmeti;
-        public Sahovnica(int velikost,Form podlaga)
+        public Sahovnica(int velikost, Game podlaga)
         {
             this.rezerva_beli = null;
             this.rezerva_crni = null;
+            this.podlaga = podlaga;
+
 
             this.Zadnja_celica = null;
             this.Zadnja_figura = null;
@@ -149,7 +153,8 @@ namespace poskus2
                     gumb.Click += button1_Click;
 
                     gumb.UseVisualStyleBackColor = true;
-
+                    
+                    
                     podlaga.Controls.Add(gumb);
                     celice[vrstica, stolpec] = gumb;
                 }
@@ -293,7 +298,14 @@ namespace poskus2
                     }
                 }
 
-                
+                //POŠLI NASPROTNIKU
+                byte[] num = { 1 };
+                this.podlaga.socket.Send(num);
+                //socket.Send(num);
+                //button1.Text = PlayerChar.ToString();
+                //this.podlaga.MessageReceiver.RunWorkerAsync();
+
+
 
             }
 

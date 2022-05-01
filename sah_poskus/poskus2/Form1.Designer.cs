@@ -1,6 +1,6 @@
 ﻿namespace poskus2
 {
-    partial class Form1
+    partial class Game
     {
         /// <summary>
         /// Required designer variable.
@@ -42,15 +42,16 @@
             this.Zacetek_gumb.UseVisualStyleBackColor = true;
             this.Zacetek_gumb.Click += new System.EventHandler(this.button1_Click);
             // 
-            // Form1
+            // Game
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(669, 569);
             this.Controls.Add(this.Zacetek_gumb);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "Form1";
+            this.Name = "Game";
             this.Text = "ŠAH ;-)";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Game_FormClosing);
             this.ResumeLayout(false);
 
         }

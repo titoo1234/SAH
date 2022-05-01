@@ -14,7 +14,6 @@ C:\Users\Uporabnik\Desktop\SAH\sah_poskus\poskus2\bin\Debug\poskus2.exe
 C:\Users\Uporabnik\Desktop\SAH\sah_poskus\poskus2\bin\Debug\poskus2.pdb
 C:\Users\Uporabnik\Desktop\SAH\sah_poskus\poskus2\obj\Debug\poskus2.csproj.AssemblyReference.cache
 C:\Users\Uporabnik\Desktop\SAH\sah_poskus\poskus2\obj\Debug\poskus2.csproj.SuggestedBindingRedirects.cache
-C:\Users\Uporabnik\Desktop\SAH\sah_poskus\poskus2\obj\Debug\poskus2.Form1.resources
 C:\Users\Uporabnik\Desktop\SAH\sah_poskus\poskus2\obj\Debug\poskus2.Properties.Resources.resources
 C:\Users\Uporabnik\Desktop\SAH\sah_poskus\poskus2\obj\Debug\poskus2.csproj.GenerateResource.cache
 C:\Users\Uporabnik\Desktop\SAH\sah_poskus\poskus2\obj\Debug\poskus2.csproj.CoreCompileInputs.cache
@@ -41,3 +40,5 @@ C:\Users\Lenovo\Desktop\1faks\prakticna 3letnik\prog3\Šah projekt\SAH\sah_posku
 C:\Users\Lenovo\Desktop\1faks\prakticna 3letnik\prog3\Šah projekt\SAH\sah_poskus\poskus2\obj\Debug\poskus2.csproj.CoreCompileInputs.cache
 C:\Users\Lenovo\Desktop\1faks\prakticna 3letnik\prog3\Šah projekt\SAH\sah_poskus\poskus2\obj\Debug\poskus2.exe
 C:\Users\Lenovo\Desktop\1faks\prakticna 3letnik\prog3\Šah projekt\SAH\sah_poskus\poskus2\obj\Debug\poskus2.pdb
+C:\Users\Uporabnik\Desktop\SAH\sah_poskus\poskus2\obj\Debug\poskus2.Game.resources
+C:\Users\Uporabnik\Desktop\SAH\sah_poskus\poskus2\obj\Debug\poskus2.Zacetek.resources
