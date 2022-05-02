@@ -38,7 +38,7 @@
             this.Zacetek_gumb.Name = "Zacetek_gumb";
             this.Zacetek_gumb.Size = new System.Drawing.Size(97, 47);
             this.Zacetek_gumb.TabIndex = 0;
-            this.Zacetek_gumb.Text = "ZAČETEK";
+            this.Zacetek_gumb.Text = "ZAETEK";
             this.Zacetek_gumb.UseVisualStyleBackColor = true;
             this.Zacetek_gumb.Click += new System.EventHandler(this.button1_Click);
             // 
