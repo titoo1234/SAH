@@ -24,11 +24,13 @@ namespace poskus2
         private TcpListener server = null;
         private TcpClient client;
         public bool solo;
+        public bool racunalnik;
 
-        public Game(bool solo,bool isHost, string ip = null)
+        public Game(bool solo,bool racunalnik ,bool isHost, string ip = null)
         {
             
             this.solo = solo;
+            this.racunalnik = racunalnik;
        
             InitializeComponent();
             sahovnica = new Sahovnica(velikost, this);

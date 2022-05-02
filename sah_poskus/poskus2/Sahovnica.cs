@@ -18,6 +18,7 @@ namespace poskus2
         public RezervaFigure rezerva_beli;
         public RezervaFigure rezerva_crni;
         public Game podlaga;
+        public Random random = new Random();
 
 
 
@@ -189,6 +190,8 @@ namespace poskus2
             //TODO PREVERI ALI SMO ŽE KLIKNALI NA ZAMENJAVO: OZ LAŽJE, PREVERI ALI JE REZERVA PRIKAZANA
             
             
+            
+            
             if (!gumb.Mozen) 
                             //KLIKNALI SMO NA GUMB, KJER NI MOŽNA POTEZA
                              //ZATO POGLEDAMO KATERE SO MOŽNE POTEZE
@@ -272,11 +275,18 @@ namespace poskus2
                 if (gumb.Figura.Ime == "WP" && gumb.X == 0)
                 {
                     rezerva_beli.Prikaži();
+                    return;
                 }
                 if (gumb.Figura.Ime == "BP" && gumb.X == 7)
                 {
                     rezerva_crni.Prikaži();
+                    return;
                 }
+
+
+                //POČAKAJ DA SE PRITISNE REZERVA
+
+
 
 
 
@@ -306,11 +316,57 @@ namespace poskus2
                     byte[] num = { 1 };
                     this.podlaga.socket.Send(num);
                 }
-                
+
                 //socket.Send(num);
                 //button1.Text = PlayerChar.ToString();
                 //this.podlaga.MessageReceiver.RunWorkerAsync();
 
+
+                //ČE IGRAMO PROTI RAČUNALNIKU NAREDI POTEZO
+                if (this.podlaga.racunalnik)
+                {
+                    //RAČUNALNIK NAREDI POTEZO
+
+                    List<(Celica, Celica)>  vse_poteze = Figura.VseMoznePoteze(this,Trenutni_igralec);
+
+                    int index = random.Next(vse_poteze.Count);
+
+                    Celica celica1 = vse_poteze[index].Item1;
+                    Celica celica2 = vse_poteze[index].Item2;
+
+
+                    nova = new Figura("", this.Zadnja_celica.X, this.Zadnja_celica.Y, this.Zadnja_celica.Size);
+                    celica2.Figura = celica1.Figura;
+                    celica2.Figura.X = celica2.X;
+                    celica2.Figura.Y = celica2.Y;
+                    celica2.Figura.Premaknjen = true;
+                    celica2.Image = celica2.Figura.Slika;
+                    celica1.Figura = nova;
+                    celica1.Image = nova.Slika;
+
+
+                    //PREVERI MAT IN ZAMENJI IGRALCA
+                    if (Trenutni_igralec == "W")
+                    {
+                        Trenutni_igralec = "B";
+                        if (Figura.Mat(this, "B"))
+                        {
+                            MessageBox.Show("MAT");
+                            this.podlaga.Close();
+                        }
+                    }
+                    else
+                    {
+                        Trenutni_igralec = "W";
+                        if (Figura.Mat(this, "W"))
+                        {
+                            MessageBox.Show("MAT");
+                            this.podlaga.Close();
+                        }
+                    }
+
+
+                }
 
 
             }

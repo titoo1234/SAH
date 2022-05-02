@@ -983,6 +983,36 @@ namespace poskus2
             return mozne;
         }
 
+        public static List<(Celica,Celica)> VseMoznePoteze(Sahovnica sahovnica,string barva)
+        {
+            List<(Celica,Celica)> mozne = new List<(Celica, Celica)>();
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    Celica celica = sahovnica.Celice[i, j];
+                    Figura figura = celica.Figura;
+                    if (figura.Barva == barva)
+                    {
+                        List<Celica> mozne_od_figure = figura.MoznePoteze(sahovnica);
+                        mozne_od_figure = PreveriMoznePoteze(sahovnica, mozne_od_figure, celica);
+                        foreach (Celica celica1 in mozne_od_figure)
+                        {
+                            mozne.Add((celica, celica1));
+                        }
+                    }
+                    
+
+
+                }
+            }
+
+            return mozne;
+
+
+
+        }
+
         public bool Nasprotnik(Figura druga)
         {
             if (this.Barva == druga.Barva)

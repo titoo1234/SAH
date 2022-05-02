@@ -118,6 +118,7 @@ namespace poskus2
             for (int i = 0;i< 4; i++)
             {
                 this.Tabela_celic[i].Show();
+                
             }
         }
 
@@ -160,7 +161,75 @@ namespace poskus2
             }
 
 
-        }
+
+
+            if (sahovnica.podlaga.racunalnik)
+            {
+                //RAČUNALNIK NAREDI POTEZO
+                if (sahovnica.Trenutni_igralec == "W")
+                {
+                    sahovnica.Trenutni_igralec = "B";
+                    if (Figura.Mat(sahovnica, "B"))
+                    {
+                        MessageBox.Show("MAT");
+                        sahovnica.podlaga.Close();
+                    }
+                }
+                else
+                {
+                    sahovnica.Trenutni_igralec = "W";
+                    if (Figura.Mat(sahovnica, "W"))
+                    {
+                        MessageBox.Show("MAT");
+                        sahovnica.podlaga.Close();
+                    }
+                }
+
+                List<(Celica, Celica)> vse_poteze = Figura.VseMoznePoteze(sahovnica, sahovnica.Trenutni_igralec);
+
+                int index = sahovnica.random.Next(vse_poteze.Count);
+
+                Celica celica1 = vse_poteze[index].Item1;
+                Celica celica2 = vse_poteze[index].Item2;
+
+
+                Figura nova = new Figura("", sahovnica.Zadnja_celica.X, sahovnica.Zadnja_celica.Y, sahovnica.Zadnja_celica.Size);
+                celica2.Figura = celica1.Figura;
+                celica2.Figura.X = celica2.X;
+                celica2.Figura.Y = celica2.Y;
+                celica2.Figura.Premaknjen = true;
+                celica2.Image = celica2.Figura.Slika;
+                celica1.Figura = nova;
+                celica1.Image = nova.Slika;
+
+
+                //PREVERI MAT IN ZAMENJI IGRALCA
+                if (sahovnica.Trenutni_igralec == "W")
+                {
+                    sahovnica.Trenutni_igralec = "B";
+                    if (Figura.Mat(sahovnica, "B"))
+                    {
+                        MessageBox.Show("MAT");
+                        sahovnica.podlaga.Close();
+                    }
+                }
+                else
+                {
+                    sahovnica.Trenutni_igralec = "W";
+                    if (Figura.Mat(sahovnica, "W"))
+                    {
+                        MessageBox.Show("MAT");
+                        sahovnica.podlaga.Close();
+                    }
+                }
+            }
+
+
+
+
+
+
+            }
 
 
 
