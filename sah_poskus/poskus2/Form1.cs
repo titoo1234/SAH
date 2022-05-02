@@ -23,11 +23,12 @@ namespace poskus2
         public BackgroundWorker MessageReceiver = new BackgroundWorker();
         private TcpListener server = null;
         private TcpClient client;
+        public bool solo;
 
-        public Game(bool isHost, string ip = null)
+        public Game(bool solo,bool isHost, string ip = null)
         {
             
-            
+            this.solo = solo;
        
             InitializeComponent();
             sahovnica = new Sahovnica(velikost, this);
@@ -35,37 +36,43 @@ namespace poskus2
             rezerva_crni = new RezervaFigure(velikost, this, "B", sahovnica);
             sahovnica.rezerva_beli = rezerva_beli;
             sahovnica.rezerva_crni = rezerva_crni;
-            MessageReceiver.DoWork += MessageReceiver_DoWork;
-            CheckForIllegalCrossThreadCalls = false;
 
-            if (isHost)
+
+            if (!solo)
             {
-                //Igralec1.barva = "W"
-                //Igralec2.barva = "B"
-                
-                server = new TcpListener(System.Net.IPAddress.Any, 5732);
-                
-                server.Stop();
-                server.Start();
-                socket = server.AcceptSocket();
-              
-            }
-            else
-            {
-                //Igralec2.barva = "W"
-                //Igralec1.barva = "B"
-                try
+                MessageReceiver.DoWork += MessageReceiver_DoWork;
+                CheckForIllegalCrossThreadCalls = false;
+
+                if (isHost)
                 {
-                    client = new TcpClient(ip, 5732);
-                    socket = client.Client;
-                    MessageReceiver.RunWorkerAsync();
+                    //Igralec1.barva = "W"
+                    //Igralec2.barva = "B"
+
+                    server = new TcpListener(System.Net.IPAddress.Any, 5732);
+
+                    server.Stop();
+                    server.Start();
+                    socket = server.AcceptSocket();
+
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show(ex.Message);
-                    Close();
+                    //Igralec2.barva = "W"
+                    //Igralec1.barva = "B"
+                    try
+                    {
+                        client = new TcpClient(ip, 5732);
+                        socket = client.Client;
+                        MessageReceiver.RunWorkerAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                        Close();
+                    }
                 }
             }
+           
 
         }
 
@@ -99,10 +106,14 @@ namespace poskus2
 
         private void Game_FormClosing(object sender, FormClosingEventArgs e)
         {
-            MessageReceiver.WorkerSupportsCancellation = true;
-            MessageReceiver.CancelAsync();
-            if (server != null)
-                server.Stop();
+            if (!solo)
+            {
+                MessageReceiver.WorkerSupportsCancellation = true;
+                MessageReceiver.CancelAsync();
+                if (server != null)
+                    server.Stop();
+            }
+            
         }
 
        

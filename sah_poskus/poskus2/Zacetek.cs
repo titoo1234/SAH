@@ -19,7 +19,7 @@ namespace poskus2
 
         private void HostGumb_Click(object sender, EventArgs e)
         {
-            Game newGame = new Game(true);
+            Game newGame = new Game(false,true);
             Visible = false;
             if (!newGame.IsDisposed)
                 newGame.ShowDialog();
@@ -28,7 +28,16 @@ namespace poskus2
 
         private void IpGumb_Click(object sender, EventArgs e)
         {
-            Game newGame = new Game(false, IpText.Text);
+            Game newGame = new Game(false,false, IpText.Text);
+            Visible = false;
+            if (!newGame.IsDisposed)
+                newGame.ShowDialog();
+            Visible = true;
+        }
+
+        private void SoloGumb_Click(object sender, EventArgs e)
+        {
+            Game newGame = new Game(true, false);
             Visible = false;
             if (!newGame.IsDisposed)
                 newGame.ShowDialog();

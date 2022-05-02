@@ -287,6 +287,7 @@ namespace poskus2
                     if (Figura.Mat(this, "B"))
                     {
                         MessageBox.Show("MAT");
+                        this.podlaga.Close();
                     }
                 }
                 else
@@ -295,12 +296,17 @@ namespace poskus2
                     if (Figura.Mat(this, "W"))
                     {
                         MessageBox.Show("MAT");
+                        this.podlaga.Close();
                     }
                 }
 
                 //POŠLI NASPROTNIKU
-                byte[] num = { 1 };
-                this.podlaga.socket.Send(num);
+                if (!podlaga.solo)
+                {
+                    byte[] num = { 1 };
+                    this.podlaga.socket.Send(num);
+                }
+                
                 //socket.Send(num);
                 //button1.Text = PlayerChar.ToString();
                 //this.podlaga.MessageReceiver.RunWorkerAsync();
