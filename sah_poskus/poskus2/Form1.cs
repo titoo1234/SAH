@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net.Sockets;
+using System.Net;
 
 
 namespace poskus2
@@ -70,10 +71,13 @@ namespace poskus2
                     this.Text = "Šah ;-) Host";
                     //Igralec1.barva = "W"
                     //Igralec2.barva = "B"
-
-                    server = new TcpListener(System.Net.IPAddress.Any, 5732);
-
                     
+                    server = new TcpListener(System.Net.IPAddress.Any, 5732);
+                    //MessageBox.Show(System.Net.IPAddress.Any.ToString());
+                  
+                    
+                        //System.Net.IPAddress.Any
+
                     server.Start();
                     socket = server.AcceptSocket();
 
@@ -100,7 +104,18 @@ namespace poskus2
 
         }
 
-
+        public static IPAddress GetLocalIPAddress()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip;
+                }
+            }
+            throw new Exception("No network adapters with an IPv4 address in the system!");
+        }
         private void MessageReceiver_DoWork(object sender, DoWorkEventArgs e)
         {
             //FREEZEBOARD
