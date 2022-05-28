@@ -71,12 +71,13 @@ namespace poskus2
                     this.Text = "Šah ;-) Host";
                     //Igralec1.barva = "W"
                     //Igralec2.barva = "B"
-                    
+
                     server = new TcpListener(System.Net.IPAddress.Any, 5732);
+                    //server = new TcpListener(5732);
                     //MessageBox.Show(System.Net.IPAddress.Any.ToString());
-                  
-                    
-                        //System.Net.IPAddress.Any
+
+
+                    //System.Net.IPAddress.Any
 
                     server.Start();
                     socket = server.AcceptSocket();
@@ -89,7 +90,7 @@ namespace poskus2
                     
                     try
                     {
-                        client = new TcpClient(ip, 5732);
+                        client = new TcpClient(ip,5732);
                         socket = client.Client;
                         MessageReceiver.RunWorkerAsync();
                     }

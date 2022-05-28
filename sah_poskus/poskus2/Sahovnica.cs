@@ -170,6 +170,7 @@ namespace poskus2
                         //this.Height
                         Celica gumb = new Celica(vrstica, stolpec);
                         gumb.Size = new Size(velikost, velikost);
+                        
 
                         gumb.Location = new Point(50 + stolpec * velikost, 50 + vrstica * velikost);
                         //gumb.Text = "" + vrstica + '/' + stolpec;
@@ -274,13 +275,11 @@ namespace poskus2
                             gumb.Figura = fig;
                         }
 
-
-
-
                         gumb.Click += button1_Click;
 
                         gumb.UseVisualStyleBackColor = true;
-
+                        //gumb.SpremeniBarvo(Color.Transparent, Color.Green);
+                        
 
                         podlaga.Controls.Add(gumb);
                         celice[vrstica, stolpec] = gumb;
@@ -317,20 +316,14 @@ namespace poskus2
             //TODO PREVERI ALI SMO ŽE KLIKNALI NA ZAMENJAVO: OZ LAŽJE, PREVERI ALI JE REZERVA PRIKAZANA
 
             if (!gumb.Mozen) 
-                            //KLIKNALI SMO NA GUMB, KJER NI MOŽNA POTEZA
-                             //ZATO POGLEDAMO KATERE SO MOŽNE POTEZE
+            //KLIKNALI SMO NA GUMB, KJER NI MOŽNA POTEZA
+            //ZATO NAJPREJ IZBIRŠEMO STARE MOŽNE POTEZE
+            //ZATO POGLEDAMO KATERE SO MOŽNE POTEZE
             {
-                
-                for (int i = 0; i < mozne.Count; i++)//STARE MOŽNE POTEZE POBARVAMO NAZAJ NA NAVADNO BARVO
-                {
-                    Celica ce = mozne[i];
-                    Figura fig = ce.Figura;
-                    ce.BackColor = Color.Transparent;
-                    ce.Image = fig.Slika;
-                    ce.Mozen = false;
-
-                }
+                Celica.PobarvajCeliceNazaj(mozne);
                 mozne.Clear();
+                // TO CELICO SI SHRANIMO ZA KASNEJE, KO BOMO KLIKANLI NA MOŽNO CELICO,
+                // DA BOMO VEDELI, KATERO FIGURO SMO PRESTAVILI NA TO MESTO 
                 this.Zadnja_celica = gumb;
                 this.Zadnja_figura = gumb.Figura;
                 int x = gumb.X;
@@ -342,17 +335,7 @@ namespace poskus2
                     mozne = figura.MoznePoteze(this);
                     mozne = Figura.PreveriMoznePoteze(this, mozne, gumb);
                 }
-
-
-                for (int i = 0; i < mozne.Count; i++)
-                {
-                    Celica ce = mozne[i];
-                    //MessageBox.Show(ce.X.ToString() + ce.Y.ToString());
-                    ce.BackColor = Color.Red;
-                    ce.Mozen = true;
-                    
-                }
-
+                Celica.PobarvajMozneCelice(mozne);
             }
 
             else//KLIKNEŠ NA CELICO, KAMOR  JE MOŽNO PRESTAVITI FIGURO
@@ -360,40 +343,19 @@ namespace poskus2
 
                 if (this.podlaga.solo)//IGRAMO SAMI SOLO ALI PROTI RAČUNALNIKU
                 {
+                    //ZADNJO FIGURO PRESTAVIMO, TO POMENI DA NA ZADNJO CELICO NASTAVIMO FIGURO, KI JE PRAZNA
                     this.Zadnja_prestavljena_celica = gumb;
                     Figura nova = new Figura("", this.Zadnja_celica.X, this.Zadnja_celica.Y, this.Zadnja_celica.Size);
-                    //MessageBox.Show("tle sem");
                     if (this.Zadnja_figura.Ime == "BK" || this.Zadnja_figura.Ime == "WK")
                     {
                         Figura.Rosada(this, this.Zadnja_figura, gumb);
                     }
-                    this.Zadnja_celica.Figura = nova;
-                    this.Zadnja_celica.Image = nova.Slika;
-                    this.Zadnja_figura.X = gumb.X;
-                    this.Zadnja_figura.Y = gumb.Y;
-                    this.Zadnja_figura.Premaknjen = true;
 
-
-                    gumb.Figura = this.Zadnja_figura;
-                    //gumb.Figura.Premaknjen = true;
-                    gumb.Image = this.Zadnja_figura.Slika;
-
-
-
-                    //SPREMENI NAZAJ BARVO
-                    for (int i = 0; i < mozne.Count; i++)
-                    {
-                        Celica ce = mozne[i];
-                        Figura fig = ce.Figura;
-                        ce.BackColor = Color.Transparent;
-                        ce.Image = fig.Slika;
-                        ce.Mozen = false;
-                    }
+                    Celica.Premik(this.Zadnja_celica, gumb,this.Zadnja_figura, nova);
+                    //SPREMENI NAZAJ BARVO 
+                    Celica.PobarvajCeliceNazaj(mozne);
                     //SPRAZNI MOZNE FIGURE
                     mozne.Clear();
-
-
-
                     //PREVERIMO ALI JE PRIŠEL KMET DO ZADNJEGA POLJA
                     //V TEM PRIMERU PRIKAŽEMO "REZERVO" IN IZBEREMO  POLJUBNO FIGURO
 
@@ -401,16 +363,18 @@ namespace poskus2
                     if (gumb.Figura.Ime == "WP" && gumb.X == 0)
                     {
                         rezerva_beli.Prikaži();
+                        Zamrzni(this);
                         return;
                     }
                     if (gumb.Figura.Ime == "BP" && gumb.X == 7)
                     {
                         rezerva_crni.Prikaži();
+                        Zamrzni(this);
                         return;
                     }
 
 
-                    //POČAKAJ DA SE PRITISNE REZERVA
+                    
 
                     if (Trenutni_igralec == "W")
                     {
@@ -446,9 +410,8 @@ namespace poskus2
 
                         Celica celica1 = vse_poteze[index].Item1;
                         Celica celica2 = vse_poteze[index].Item2;
-
-
                         nova = new Figura("", this.Zadnja_celica.X, this.Zadnja_celica.Y, this.Zadnja_celica.Size);
+
                         celica2.Figura = celica1.Figura;
                         celica2.Figura.X = celica2.X;
                         celica2.Figura.Y = celica2.Y;
@@ -456,6 +419,7 @@ namespace poskus2
                         celica2.Image = celica2.Figura.Slika;
                         celica1.Figura = nova;
                         celica1.Image = nova.Slika;
+
 
 
                         //PREVERI MAT IN ZAMENJI IGRALCA
@@ -500,93 +464,61 @@ namespace poskus2
                     {
                         Figura.Rosada(this, this.Zadnja_figura, gumb);
                     }
-                    this.Zadnja_celica.Figura = nova;
-                    this.Zadnja_celica.Image = nova.Slika;
-                    this.Zadnja_figura.X = gumb.X;
-                    this.Zadnja_figura.Y = gumb.Y;
-                    this.Zadnja_figura.Premaknjen = true;
-
-
-                    gumb.Figura = this.Zadnja_figura;
-                    //gumb.Figura.Premaknjen = true;
-                    gumb.Image = this.Zadnja_figura.Slika;
-
-
-
+                    Celica.Premik(this.Zadnja_celica, gumb, this.Zadnja_figura, nova);
                     //SPREMENI NAZAJ BARVO
-                    for (int i = 0; i < mozne.Count; i++)
-                    {
-                        Celica ce = mozne[i];
-                        Figura fig = ce.Figura;
-                        ce.BackColor = Color.Transparent;
-                        ce.Image = fig.Slika;
-                        ce.Mozen = false;
-                    }
-                    //SPRAZNI MOZNE FIGURE
+                    Celica.PobarvajCeliceNazaj(mozne);
                     mozne.Clear();
-
-
-
                     //PREVERIMO ALI JE PRIŠEL KMET DO ZADNJEGA POLJA
                     //V TEM PRIMERU PRIKAŽEMO "REZERVO" IN IZBEREMO  POLJUBNO FIGURO
-
                     //TODO POTREBNO NAREDITI DA !!MORE!! KLIKNATI NA GUMB
                     if (gumb.Figura.Ime == "WP" && gumb.X == 0)
                     {
+                        Zamrzni(this);
                         rezerva_beli.Prikaži();
+
                         return;
                     }
-                    if (gumb.Figura.Ime == "BP" && gumb.X == 7)
+                    else if (gumb.Figura.Ime == "BP" && gumb.X == 7)
                     {
+                        Zamrzni(this);
                         rezerva_crni.Prikaži();
+
                         return;
-                    }
-
-
-                    //POČAKAJ DA SE PRITISNE REZERVA
-
-                    if (Trenutni_igralec == "W")
-                    {
-                        //Trenutni_igralec = "B";
-                        if (Figura.Mat(this, "B"))
-                        {
-                            MessageBox.Show("MAT");
-                            //MORAMO ŠE POSLATI ZADNJO POTEZO
-                            byte[] num1 = { (byte)posljiX1, (byte)posljiY1, (byte)posljiX2, (byte)posljiY2 };
-                            this.podlaga.socket.Send(num1);
-
-                            this.podlaga.MessageReceiver.RunWorkerAsync();
-
-
-                            this.podlaga.Close();
-                            return;
-                        }
                     }
                     else
                     {
-                        //Trenutni_igralec = "W";
-                        if (Figura.Mat(this, "W"))
+                        if (Trenutni_igralec == "W")
                         {
-                            MessageBox.Show("MAT");
-                            byte[] num2 = { (byte)posljiX1, (byte)posljiY1, (byte)posljiX2, (byte)posljiY2 };
-                            this.podlaga.socket.Send(num2);
-
-                            this.podlaga.MessageReceiver.RunWorkerAsync();
-                            this.podlaga.Close();
-                            return;
+                            if (Figura.Mat(this, "B"))
+                            {
+                                MessageBox.Show("MAT");
+                                //MORAMO ŠE POSLATI ZADNJO POTEZO
+                                byte[] num1 = { (byte)posljiX1, (byte)posljiY1, (byte)posljiX2, (byte)posljiY2 };
+                                this.podlaga.socket.Send(num1);
+                                this.podlaga.MessageReceiver.RunWorkerAsync();
+                                this.podlaga.Close();
+                                return;
+                            }
                         }
+                        else
+                        {
+                            if (Figura.Mat(this, "W"))
+                            {
+                                MessageBox.Show("MAT");
+                                byte[] num2 = { (byte)posljiX1, (byte)posljiY1, (byte)posljiX2, (byte)posljiY2 };
+                                this.podlaga.socket.Send(num2);
+                                this.podlaga.MessageReceiver.RunWorkerAsync();
+                                this.podlaga.Close();
+                                return;
+                            }
+                        }
+
+                        //POŠLI NASPROTNIKU
+                        byte[] num = { (byte)posljiX1, (byte)posljiY1, (byte)posljiX2, (byte)posljiY2 };
+                        this.podlaga.socket.Send(num);
+                        this.podlaga.MessageReceiver.RunWorkerAsync();
                     }
-
-                    //POŠLI NASPROTNIKU
-                    //[1,2,3,4]
-                    byte[] num = { (byte)posljiX1, (byte)posljiY1, (byte)posljiX2, (byte)posljiY2 };
-                    this.podlaga.socket.Send(num);
-
-                    this.podlaga.MessageReceiver.RunWorkerAsync();
                     
-
-                    //sem_na_vrsti = false
-
                     
                 }
 
@@ -595,30 +527,31 @@ namespace poskus2
         }
 
 
-        public void Zamrzni()
+        public static void Zamrzni(Sahovnica sahovnica)
         {
             for(int i = 0; i < 8; i++)
             {
                 for(int j = 0; j < 8; j++)
                 {
-                    Celica celica = this.Celice[i, j];
+                    Celica celica = sahovnica.Celice[i, j];
                     celica.Enabled = false;
                 }
 
             }
         }
-        public void Odmrzni()
+        public static void Odmrzni(Sahovnica sahovnica)
         {
             for (int i = 0; i < 8; i++)
             {
                 for (int j = 0; j < 8; j++)
                 {
-                    Celica celica = this.Celice[i, j];
+                    Celica celica = sahovnica.Celice[i, j];
                     celica.Enabled = true;
                 }
 
             }
         }
+
 
     }
 }

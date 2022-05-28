@@ -1152,7 +1152,12 @@ namespace poskus2
             }
             return false;
         }
-
+        /// <summary>
+        /// NAREDIMO ROŠADO, PRESTAVIMO KRALJA IN TRDNJAVO NA USTREZNO MESTO
+        /// </summary>
+        /// <param name="sahovnica"></param>
+        /// <param name="kralj"></param>
+        /// <param name="gumb"></param>
         public static void Rosada(Sahovnica sahovnica, Figura kralj, Celica gumb)
         {
 
@@ -1197,11 +1202,6 @@ namespace poskus2
                 celica_trdnjava.Image = nova.Slika;
 
             }
-
-
-
-
-
         }
     
         public static bool JeSah(Sahovnica sahovnica, string kralj)
