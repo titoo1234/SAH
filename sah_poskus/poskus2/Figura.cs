@@ -16,14 +16,18 @@ namespace poskus2
         private bool premaknjen;
         private int x;
         private int y;
+        private int vrednost;
         public Figura(string ime, int x, int y, Size velikost)
         {
             this.Y = y;
             this.X = x;
             this.Ime = ime;
+            this.Vrednost = 0;
+
             if (this.Ime == "")
             {
                 this.Barva = "";
+
             }
             else
             {
@@ -34,52 +38,64 @@ namespace poskus2
             if (ime == "BP")
             {
                 this.Slika = new Bitmap(Properties.Resources.Black_Pawn, velikost);
+                this.Vrednost = 1;
             }
             else if (ime == "WP")
             {
                 this.Slika = new Bitmap(Properties.Resources.White_Pawn, velikost);
+                this.Vrednost = 1;
             }
             else if (ime == "BR")
             {
                 this.Slika = new Bitmap(Properties.Resources.Black_Rook, velikost);
+                this.Vrednost = 5;
             }
             else if (ime == "BN")
             {
                 this.Slika = new Bitmap(Properties.Resources.Black_Knight, velikost);
+                this.Vrednost = 3;
             }
             else if (ime == "BB")
             {
                 this.Slika = new Bitmap(Properties.Resources.Black_Bishop, velikost);
+                this.Vrednost = 3;
             }
             else if (ime == "BQ")
             {
                 this.Slika = new Bitmap(Properties.Resources.Black_Queen, velikost);
+                this.Vrednost = 9;
             }
             else if (ime == "BK")
             {
                 this.Slika = new Bitmap(Properties.Resources.Black_King, velikost);
+                this.Vrednost = 200;
             }
 
             //BELE FIGURE
             else if (ime == "WR")
             {
                 this.Slika = new Bitmap(Properties.Resources.White_Rook, velikost);
+                this.Vrednost = 5;
             }
             else if (ime == "WN")
             {
                 this.Slika = new Bitmap(Properties.Resources.White_Knight, velikost);
+                this.Vrednost = 3;
             }
             else if (ime == "WB")
             {
                 this.Slika = new Bitmap(Properties.Resources.White_Bishop, velikost);
+                this.Vrednost = 3;
             }
             else if (ime == "WQ")
             {
                 this.Slika = new Bitmap(Properties.Resources.White_Queen, velikost);
+                this.Vrednost = 9;
             }
             else if (ime == "WK")
             {
                 this.Slika = new Bitmap(Properties.Resources.White_King, velikost);
+                this.Vrednost = 200;
             }
             else//PRAZNA FIGURA OZ NI FIGURE
             {
@@ -91,6 +107,7 @@ namespace poskus2
         public int X { get; set; }
         public int Y { get; set; }
         public string Ime { get; set; }
+        public int Vrednost { get;  set; }
         public string Barva { get; set; }
         public Bitmap Slika { get; set; }
         public bool Premaknjen { get; set; }

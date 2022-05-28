@@ -26,12 +26,15 @@ namespace poskus2
         private TcpClient client;
         public bool solo;
         public bool racunalnik;
+        
+        
 
         public Game(bool solo,bool racunalnik ,bool isHost, string ip = null)
         {
             
             this.solo = solo;
             this.racunalnik = racunalnik;
+            
        
             InitializeComponent();
             
@@ -175,6 +178,9 @@ namespace poskus2
             
         }
 
-       
+        public void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -14,17 +14,28 @@ namespace poskus2
         private Celica zadnja_celica;
         private Celica zadnja_prestavljena_celica;
         private Celica[,] celice;
-        private string trenutni_igralec;
-
+        private Igralec trenutni_igralec;
         private string zacetekBarva;
-
         public RezervaFigure rezerva_beli;
         public RezervaFigure rezerva_crni;
         public Game podlaga;
         public Random random = new Random();
         private bool naVrsti;
+        public Igralec igralec1;
+        public Igralec igralec2;
         public Sahovnica(int velikost, Game podlaga,bool naVrsti,string barva)
         {
+            igralec1 = new Igralec(barva);
+            if (barva == "W")
+            {
+                igralec2 = new Igralec("B");
+            }
+            else
+            {
+                igralec2 = new Igralec("W");
+            }
+            
+
             this.NaVrsti = naVrsti;
             this.ZacetekBarva = barva;
             this.rezerva_beli = null;
@@ -33,12 +44,12 @@ namespace poskus2
             this.Zadnja_celica = null;
             this.Zadnja_figura = null;
             this.Zadnja_prestavljena_celica = null;
-            this.Trenutni_igralec =  barva;
+            this.Trenutni_igralec =  igralec1;
             celice = new Celica[8, 8];
             for (int vrstica = 0; vrstica < 8; vrstica++)
             {
                 //velikost = (int)(this.Height / 16);
-                if (Trenutni_igralec == "W")
+                if (Trenutni_igralec.Barva == "W")
                 {
                     for (int stolpec = 0; stolpec < 8; stolpec++)
                     {
@@ -288,11 +299,12 @@ namespace poskus2
                 
             }
             this.celice = celice;
+            
 
         }
         public bool NaVrsti { get; set; }
         public string ZacetekBarva { get;  set; }
-        public string Trenutni_igralec { get;  set; }
+        public Igralec Trenutni_igralec { get;  set; }
 
         public Celica[,] Celice
         {
@@ -330,7 +342,7 @@ namespace poskus2
                 int y = gumb.Y;
                 Figura figura = gumb.Figura;
                 //PREVERIMO ČE SMO KLIKNALI NA "PRAVO" FIGURO 
-                if (figura.Barva == Trenutni_igralec)
+                if (figura.Barva == Trenutni_igralec.Barva)
                 {
                     mozne = figura.MoznePoteze(this);
                     mozne = Figura.PreveriMoznePoteze(this, mozne, gumb);
@@ -351,7 +363,22 @@ namespace poskus2
                         Figura.Rosada(this, this.Zadnja_figura, gumb);
                     }
 
+                    if (this.Trenutni_igralec == igralec1)
+                    {
+                        igralec2.SpremeniStanje(gumb,false);
+                        this.podlaga.label2.Text = igralec2.Vsota.ToString();
+                    }
+                    else
+                    {
+                        igralec1.SpremeniStanje(gumb,false);
+                        this.podlaga.label1.Text = igralec1.Vsota.ToString();
+                    }
+                    
+                    
                     Celica.Premik(this.Zadnja_celica, gumb,this.Zadnja_figura, nova);
+                    
+
+
                     //SPREMENI NAZAJ BARVO 
                     Celica.PobarvajCeliceNazaj(mozne);
                     //SPRAZNI MOZNE FIGURE
@@ -376,10 +403,11 @@ namespace poskus2
 
                     
 
-                    if (Trenutni_igralec == "W")
+                    if (Trenutni_igralec == igralec1)
                     {
-                        Trenutni_igralec = "B";
-                        if (Figura.Mat(this, "B"))
+                        
+                        Trenutni_igralec = igralec2;
+                        if (Figura.Mat(this, igralec2.Barva))
                         {
                             MessageBox.Show("MAT");
                             this.podlaga.Close();
@@ -388,8 +416,8 @@ namespace poskus2
                     }
                     else
                     {
-                        Trenutni_igralec = "W";
-                        if (Figura.Mat(this, "W"))
+                        Trenutni_igralec = igralec1;
+                        if (Figura.Mat(this, igralec1.Barva))
                         {
                             MessageBox.Show("MAT");
                             this.podlaga.Close();
@@ -404,7 +432,7 @@ namespace poskus2
                     {
                         //RAČUNALNIK NAREDI POTEZO
 
-                        List<(Celica, Celica)> vse_poteze = Figura.VseMoznePoteze(this, Trenutni_igralec);
+                        List<(Celica, Celica)> vse_poteze = Figura.VseMoznePoteze(this, Trenutni_igralec.Barva);
 
                         int index = random.Next(vse_poteze.Count);
 
@@ -423,10 +451,10 @@ namespace poskus2
 
 
                         //PREVERI MAT IN ZAMENJI IGRALCA
-                        if (Trenutni_igralec == "W")
+                        if (Trenutni_igralec == igralec1)
                         {
-                            Trenutni_igralec = "B";
-                            if (Figura.Mat(this, "B"))
+                            Trenutni_igralec = igralec2;
+                            if (Figura.Mat(this, igralec2.Barva))
                             {
                                 MessageBox.Show("MAT");
                                 this.podlaga.Close();
@@ -434,8 +462,8 @@ namespace poskus2
                         }
                         else
                         {
-                            Trenutni_igralec = "W";
-                            if (Figura.Mat(this, "W"))
+                            Trenutni_igralec = igralec1;
+                            if (Figura.Mat(this, igralec1.Barva))
                             {
                                 MessageBox.Show("MAT");
                                 this.podlaga.Close();
@@ -487,9 +515,9 @@ namespace poskus2
                     }
                     else
                     {
-                        if (Trenutni_igralec == "W")
+                        if (Trenutni_igralec == igralec1)
                         {
-                            if (Figura.Mat(this, "B"))
+                            if (Figura.Mat(this, igralec2.Barva))
                             {
                                 MessageBox.Show("MAT");
                                 //MORAMO ŠE POSLATI ZADNJO POTEZO

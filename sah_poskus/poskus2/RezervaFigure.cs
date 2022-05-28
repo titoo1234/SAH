@@ -142,38 +142,40 @@ namespace poskus2
             
             fig.X = sahovnica.Zadnja_prestavljena_celica.Figura.X;
             fig.Y = sahovnica.Zadnja_prestavljena_celica.Figura.Y;
-            
 
+            sahovnica.Trenutni_igralec.SpremeniStanje(gumb, true);
+            sahovnica.podlaga.label1.Text = sahovnica.igralec1.Vsota.ToString();
+            sahovnica.podlaga.label2.Text = sahovnica.igralec2.Vsota.ToString();
             sahovnica.Zadnja_prestavljena_celica.Figura = fig;
             sahovnica.Zadnja_prestavljena_celica.Image = fig.Slika;
             this.Skrij();
 
             //PreveriMAt();
-            if (sahovnica.Trenutni_igralec == "W")
+            if (sahovnica.Trenutni_igralec == sahovnica.igralec1)
             {
  
-                if (Figura.Mat(sahovnica, "W"))
+                if (Figura.Mat(sahovnica, sahovnica.igralec1.Barva))
                 {
                     MessageBox.Show("MAT");
                 }
-                sahovnica.Trenutni_igralec = "B";
+                sahovnica.Trenutni_igralec = sahovnica.igralec2;
             }
             else
             {
                
-                if (Figura.Mat(sahovnica, "B"))
+                if (Figura.Mat(sahovnica, sahovnica.igralec2.Barva))
                 {
                     MessageBox.Show("MAT");
                 }
-                sahovnica.Trenutni_igralec = "W";
+                sahovnica.Trenutni_igralec = sahovnica.igralec1;
             }
             if (sahovnica.podlaga.racunalnik)
             {
                 //RAČUNALNIK NAREDI POTEZO
-                if (sahovnica.Trenutni_igralec == "W")
+                if (sahovnica.Trenutni_igralec == sahovnica.igralec1)
                 {
                     //sahovnica.Trenutni_igralec = "B";
-                    if (Figura.Mat(sahovnica, "B"))
+                    if (Figura.Mat(sahovnica, sahovnica.igralec2.Barva))
                     {
                         MessageBox.Show("MAT");
                         sahovnica.podlaga.Close();
@@ -182,18 +184,19 @@ namespace poskus2
                 else
                 {
                     //sahovnica.Trenutni_igralec = "W";
-                    if (Figura.Mat(sahovnica, "W"))
+                    if (Figura.Mat(sahovnica, sahovnica.igralec1.Barva))
                     {
                         MessageBox.Show("MAT");
                         sahovnica.podlaga.Close();
                     }
                 }
 
-                List<(Celica, Celica)> vse_poteze = Figura.VseMoznePoteze(sahovnica, sahovnica.Trenutni_igralec);
+                List<(Celica, Celica)> vse_poteze = Figura.VseMoznePoteze(sahovnica, sahovnica.Trenutni_igralec.Barva);
                 int index = sahovnica.random.Next(vse_poteze.Count);
                 Celica celica1 = vse_poteze[index].Item1;
                 Celica celica2 = vse_poteze[index].Item2;
                 Figura nova = new Figura("", sahovnica.Zadnja_celica.X, sahovnica.Zadnja_celica.Y, sahovnica.Zadnja_celica.Size);
+                
                 celica2.Figura = celica1.Figura;
                 celica2.Figura.X = celica2.X;
                 celica2.Figura.Y = celica2.Y;
@@ -204,10 +207,10 @@ namespace poskus2
 
 
                 //PREVERI MAT IN ZAMENJI IGRALCA
-                if (sahovnica.Trenutni_igralec == "W")
+                if (sahovnica.Trenutni_igralec == sahovnica.igralec1)
                 {
-                    sahovnica.Trenutni_igralec = "B";
-                    if (Figura.Mat(sahovnica, "B"))
+                    sahovnica.Trenutni_igralec.Barva = sahovnica.igralec2.Barva;
+                    if (Figura.Mat(sahovnica, sahovnica.igralec2.Barva))
                     {
                         MessageBox.Show("MAT");
                         sahovnica.podlaga.Close();
@@ -215,8 +218,8 @@ namespace poskus2
                 }
                 else
                 {
-                    sahovnica.Trenutni_igralec = "W";
-                    if (Figura.Mat(sahovnica, "W"))
+                    sahovnica.Trenutni_igralec = sahovnica.igralec1;
+                    if (Figura.Mat(sahovnica, sahovnica.igralec1.Barva))
                     {
                         MessageBox.Show("MAT");
                         sahovnica.podlaga.Close();
