@@ -13,49 +13,50 @@ namespace poskus2
         private Celica[] tabela_celic;
         private Sahovnica sahovnica;
 
-        public RezervaFigure(int velikost,Form podlaga,string barva, Sahovnica sahovnica)
+        public RezervaFigure(int velikost, Form podlaga, string barva, Sahovnica sahovnica)
         {
 
 
             Celica[] tabela = new Celica[4];
             this.sahovnica = sahovnica;
             int lokacija_figure = 0;
-            for (int i = 0;i < 4; i++)
+            for (int i = 0; i < 4; i++)
             {
                 Celica gumb = new Celica(lokacija_figure, lokacija_figure);
                 gumb.Size = new Size(velikost, velikost);
                 if (barva == "B")
                 {
-                    
+
                     //lokacija bo odvisna od tega ali je barva bela ali črna...
                     gumb.Location = new Point(50 + i * velikost, 50 + 8 * velikost);
                     if (i == 0)
                     {
-                        Figura fig = new Figura("BQ", lokacija_figure, lokacija_figure, gumb.Size);
+                        Figura fig = new Figura("BQ", i + 1, lokacija_figure, gumb.Size);
                         gumb.Tag = "BQ";
                         gumb.Image = fig.Slika;
                         gumb.Figura = fig;
+                        
 
                     }
                     if (i == 1)
                     {
 
 
-                        Figura fig = new Figura("BR", lokacija_figure, lokacija_figure, gumb.Size);
+                        Figura fig = new Figura("BR", i + 1, lokacija_figure, gumb.Size);
                         gumb.Tag = "BR";
                         gumb.Image = fig.Slika;
                         gumb.Figura = fig;
                     }
                     if (i == 2)
                     {
-                        Figura fig = new Figura("BB", lokacija_figure, lokacija_figure, gumb.Size);
+                        Figura fig = new Figura("BB", i + 1, lokacija_figure, gumb.Size);
                         gumb.Tag = "BB";
                         gumb.Image = fig.Slika;
                         gumb.Figura = fig;
                     }
                     if (i == 3)
                     {
-                        Figura fig = new Figura("BN", lokacija_figure, lokacija_figure, gumb.Size);
+                        Figura fig = new Figura("BN", i + 1, lokacija_figure, gumb.Size);
                         gumb.Tag = "BN";
                         gumb.Image = fig.Slika;
                         gumb.Figura = fig;
@@ -64,10 +65,10 @@ namespace poskus2
                 }
                 else
                 {
-                    gumb.Location =  new Point(50 + i * velikost, 10);
+                    gumb.Location = new Point(50 + i * velikost, 10);
                     if (i == 0)
                     {
-                        Figura fig = new Figura("WQ", lokacija_figure, lokacija_figure, gumb.Size);
+                        Figura fig = new Figura("WQ", i + 1, lokacija_figure, gumb.Size);
                         gumb.Tag = "WQ";
                         gumb.Image = fig.Slika;
                         gumb.Figura = fig;
@@ -77,21 +78,21 @@ namespace poskus2
                     {
 
 
-                        Figura fig = new Figura("WR", lokacija_figure, lokacija_figure, gumb.Size);
+                        Figura fig = new Figura("WR", i + 1, lokacija_figure, gumb.Size);
                         gumb.Tag = "WR";
                         gumb.Image = fig.Slika;
                         gumb.Figura = fig;
                     }
                     if (i == 2)
                     {
-                        Figura fig = new Figura("WB", lokacija_figure, lokacija_figure, gumb.Size);
+                        Figura fig = new Figura("WB", i + 1, lokacija_figure, gumb.Size);
                         gumb.Tag = "WB";
                         gumb.Image = fig.Slika;
                         gumb.Figura = fig;
                     }
                     if (i == 3)
                     {
-                        Figura fig = new Figura("WN", lokacija_figure, lokacija_figure, gumb.Size);
+                        Figura fig = new Figura("WN", i + 1, lokacija_figure, gumb.Size);
                         gumb.Tag = "WN";
                         gumb.Image = fig.Slika;
                         gumb.Figura = fig;
@@ -107,18 +108,18 @@ namespace poskus2
 
 
             }
-            this.Tabela_celic =  tabela;
+            this.Tabela_celic = tabela;
 
         }
 
-        public Celica[] Tabela_celic { get;  set; }
+        public Celica[] Tabela_celic { get; set; }
 
         public void Prikaži()//prikaže vse gumbe 
         {
-            for (int i = 0;i< 4; i++)
+            for (int i = 0; i < 4; i++)
             {
                 this.Tabela_celic[i].Show();
-                
+
             }
         }
 
@@ -129,7 +130,7 @@ namespace poskus2
                 this.Tabela_celic[i].Hide();
             }
         }
-        
+
         private void button2_Click(object sender, EventArgs e)
         {
             //ko se to zgodi, moramo zamenjati zadnjo prestavljeno
@@ -137,15 +138,20 @@ namespace poskus2
 
 
             Celica gumb = (Celica)sender;
-            Figura fig = gumb.Figura;
-            Sahovnica.Odmrzni(sahovnica);
             
+            Figura fig = gumb.Figura;
+            int poslji = fig.X;
+            Sahovnica.Odmrzni(sahovnica);
+
             fig.X = sahovnica.Zadnja_prestavljena_celica.Figura.X;
             fig.Y = sahovnica.Zadnja_prestavljena_celica.Figura.Y;
+            int posljiX2 = 7 - fig.X;
+            int posljiY2 = fig.Y;
 
             sahovnica.Trenutni_igralec.SpremeniStanje(gumb, true);
             sahovnica.podlaga.label1.Text = sahovnica.igralec1.Vsota.ToString();
             sahovnica.podlaga.label2.Text = sahovnica.igralec2.Vsota.ToString();
+
             sahovnica.Zadnja_prestavljena_celica.Figura = fig;
             sahovnica.Zadnja_prestavljena_celica.Image = fig.Slika;
             this.Skrij();
@@ -153,21 +159,27 @@ namespace poskus2
             //PreveriMAt();
             if (sahovnica.Trenutni_igralec == sahovnica.igralec1)
             {
- 
+
                 if (Figura.Mat(sahovnica, sahovnica.igralec1.Barva))
                 {
                     MessageBox.Show("MAT");
                 }
-                sahovnica.Trenutni_igralec = sahovnica.igralec2;
+                if (sahovnica.podlaga.solo)
+                {
+                    sahovnica.Trenutni_igralec = sahovnica.igralec2;
+                }
             }
             else
             {
-               
+
                 if (Figura.Mat(sahovnica, sahovnica.igralec2.Barva))
                 {
                     MessageBox.Show("MAT");
                 }
-                sahovnica.Trenutni_igralec = sahovnica.igralec1;
+                if (sahovnica.podlaga.solo)
+                {
+                    sahovnica.Trenutni_igralec = sahovnica.igralec1;
+                }
             }
             if (sahovnica.podlaga.racunalnik)
             {
@@ -196,7 +208,7 @@ namespace poskus2
                 Celica celica1 = vse_poteze[index].Item1;
                 Celica celica2 = vse_poteze[index].Item2;
                 Figura nova = new Figura("", sahovnica.Zadnja_celica.X, sahovnica.Zadnja_celica.Y, sahovnica.Zadnja_celica.Size);
-                
+
                 celica2.Figura = celica1.Figura;
                 celica2.Figura.X = celica2.X;
                 celica2.Figura.Y = celica2.Y;
@@ -209,7 +221,10 @@ namespace poskus2
                 //PREVERI MAT IN ZAMENJI IGRALCA
                 if (sahovnica.Trenutni_igralec == sahovnica.igralec1)
                 {
-                    sahovnica.Trenutni_igralec.Barva = sahovnica.igralec2.Barva;
+                    if (sahovnica.podlaga.solo)
+                    {
+                        sahovnica.Trenutni_igralec = sahovnica.igralec2;
+                    }
                     if (Figura.Mat(sahovnica, sahovnica.igralec2.Barva))
                     {
                         MessageBox.Show("MAT");
@@ -218,7 +233,11 @@ namespace poskus2
                 }
                 else
                 {
-                    sahovnica.Trenutni_igralec = sahovnica.igralec1;
+                    if (sahovnica.podlaga.solo)
+                    {
+                        sahovnica.Trenutni_igralec = sahovnica.igralec1;
+                    }
+                    
                     if (Figura.Mat(sahovnica, sahovnica.igralec1.Barva))
                     {
                         MessageBox.Show("MAT");
@@ -226,7 +245,23 @@ namespace poskus2
                     }
                 }
             }
+
+            if (!sahovnica.podlaga.solo)//Pošlji podatek še nasprotniku
+            {
+
+                int posljiX1 = 7-sahovnica.ZadnjaPrestavljenaCelicaRezerva.X;
+                int posljiY1 = sahovnica.ZadnjaPrestavljenaCelicaRezerva.Y;
+                byte[] num = { (byte)posljiX1, (byte)posljiY1, (byte)posljiX2, (byte)posljiY2, (byte)poslji};
+                MessageBox.Show(poslji.ToString());
+    
+                sahovnica.podlaga.socket.Send(num);
+                sahovnica.podlaga.MessageReceiver.RunWorkerAsync();
+                
+
             }
+
+
+        }
 
 
 

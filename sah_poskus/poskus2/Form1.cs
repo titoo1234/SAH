@@ -26,7 +26,11 @@ namespace poskus2
         private TcpClient client;
         public bool solo;
         public bool racunalnik;
-        
+
+        public bool IsHost { get;  set; }
+
+ 
+         
         
 
         public Game(bool solo,bool racunalnik ,bool isHost, string ip = null)
@@ -34,6 +38,7 @@ namespace poskus2
             
             this.solo = solo;
             this.racunalnik = racunalnik;
+            this.IsHost = isHost;
             
        
             InitializeComponent();
@@ -135,23 +140,58 @@ namespace poskus2
         {
 
 
-            byte[] buffer = new byte[4];
+            byte[] buffer = new byte[5];
             socket.Receive(buffer);
             int xStara = int.Parse(buffer[0].ToString());
             int yStara = int.Parse(buffer[1].ToString());
             int xNova = int.Parse(buffer[2].ToString());
             int yNova = int.Parse(buffer[3].ToString());
-            Celica stara = sahovnica.Celice[xStara, yStara];
-            Celica nova = sahovnica.Celice[xNova, yNova];
-            nova.Figura = stara.Figura;
-            nova.Figura.X = nova.X;
-            nova.Figura.Y = nova.Y;
-            nova.Image = nova.Figura.Slika;
-            Figura nova1 = new Figura("", stara.X, stara.Y, stara.Size);
-            stara.Figura = nova1;
-            stara.Image = nova1.Slika;
-            //if (Figura.Mat(sahovnica,barva)
 
+            //Rezerva bo število od 0 do 4, če je 0, potem gre za navaden premik,
+            //sicer pa je igralec zamenjal figuro z neko rezervo
+            int rezerva = int.Parse(buffer[4].ToString());
+
+           
+
+            if (rezerva != 0)//Premaknjena je bila rezerva
+            {
+                Celica nova = sahovnica.Celice[xNova, yNova];
+
+                //Najdimo pravo rezervo
+                Figura izbranaFiguraRezerva;
+                if (IsHost)
+                {
+                    izbranaFiguraRezerva = sahovnica.rezerva_crni.Tabela_celic[rezerva-1].Figura;
+                }
+                else
+                {
+                    izbranaFiguraRezerva = sahovnica.rezerva_beli.Tabela_celic[rezerva-1].Figura;
+                   
+                }
+                Celica stara = sahovnica.Celice[xStara, yStara];
+                izbranaFiguraRezerva.X = nova.X;
+                izbranaFiguraRezerva.Y = nova.Y;
+                nova.Figura = izbranaFiguraRezerva;
+                nova.Image = izbranaFiguraRezerva.Slika;
+                Figura nova1 = new Figura("", stara.X, stara.Y, stara.Size);
+                stara.Figura = nova1;
+                stara.Image = nova1.Slika;
+
+            }
+            else
+            {
+                //MessageBox.Show("asd");
+                Celica stara = sahovnica.Celice[xStara, yStara];
+                Celica nova = sahovnica.Celice[xNova, yNova];
+                nova.Figura = stara.Figura;
+                nova.Figura.X = nova.X;
+                nova.Figura.Y = nova.Y;
+                nova.Image = nova.Figura.Slika;
+                Figura nova1 = new Figura("", stara.X, stara.Y, stara.Size);
+                stara.Figura = nova1;
+                stara.Image = nova1.Slika;
+
+            }
         }
 
         private void Form1_SizeChanged(object sender, EventArgs e)

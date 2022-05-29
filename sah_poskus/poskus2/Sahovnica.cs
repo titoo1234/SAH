@@ -23,6 +23,7 @@ namespace poskus2
         private bool naVrsti;
         public Igralec igralec1;
         public Igralec igralec2;
+        public Celica ZadnjaPrestavljenaCelicaRezerva;//Zadnja celica kmeta, preden gre le ta v zadnjo vrstico
         public Sahovnica(int velikost, Game podlaga,bool naVrsti,string barva)
         {
             igralec1 = new Igralec(barva);
@@ -34,8 +35,8 @@ namespace poskus2
             {
                 igralec2 = new Igralec("W");
             }
-            
 
+            this.ZadnjaPrestavljenaCelicaRezerva = null;
             this.NaVrsti = naVrsti;
             this.ZacetekBarva = barva;
             this.rezerva_beli = null;
@@ -485,6 +486,7 @@ namespace poskus2
                     int posljiY2 = gumb.Y;
                     int posljiX1 = 7-Zadnja_figura.X;
                     int posljiY1 = Zadnja_figura.Y;
+                    this.ZadnjaPrestavljenaCelicaRezerva = Zadnja_prestavljena_celica;
                     this.Zadnja_prestavljena_celica = gumb;
                     Figura nova = new Figura("", this.Zadnja_celica.X, this.Zadnja_celica.Y, this.Zadnja_celica.Size);
                     //MessageBox.Show("tle sem");
@@ -506,7 +508,7 @@ namespace poskus2
 
                         return;
                     }
-                    else if (gumb.Figura.Ime == "BP" && gumb.X == 7)
+                    else if (gumb.Figura.Ime == "BP" && gumb.X == 0)
                     {
                         Zamrzni(this);
                         rezerva_crni.Prikaži();
@@ -521,7 +523,7 @@ namespace poskus2
                             {
                                 MessageBox.Show("MAT");
                                 //MORAMO ŠE POSLATI ZADNJO POTEZO
-                                byte[] num1 = { (byte)posljiX1, (byte)posljiY1, (byte)posljiX2, (byte)posljiY2 };
+                                byte[] num1 = { (byte)posljiX1, (byte)posljiY1, (byte)posljiX2, (byte)posljiY2,(byte)0 };
                                 this.podlaga.socket.Send(num1);
                                 this.podlaga.MessageReceiver.RunWorkerAsync();
                                 this.podlaga.Close();
@@ -530,10 +532,10 @@ namespace poskus2
                         }
                         else
                         {
-                            if (Figura.Mat(this, "W"))
+                            if (Figura.Mat(this, igralec1.Barva))
                             {
                                 MessageBox.Show("MAT");
-                                byte[] num2 = { (byte)posljiX1, (byte)posljiY1, (byte)posljiX2, (byte)posljiY2 };
+                                byte[] num2 = { (byte)posljiX1, (byte)posljiY1, (byte)posljiX2, (byte)posljiY2,(byte)0 };
                                 this.podlaga.socket.Send(num2);
                                 this.podlaga.MessageReceiver.RunWorkerAsync();
                                 this.podlaga.Close();
@@ -542,7 +544,7 @@ namespace poskus2
                         }
 
                         //POŠLI NASPROTNIKU
-                        byte[] num = { (byte)posljiX1, (byte)posljiY1, (byte)posljiX2, (byte)posljiY2 };
+                        byte[] num = { (byte)posljiX1, (byte)posljiY1, (byte)posljiX2, (byte)posljiY2,(byte)0 };
                         this.podlaga.socket.Send(num);
                         this.podlaga.MessageReceiver.RunWorkerAsync();
                     }
