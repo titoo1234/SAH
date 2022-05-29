@@ -150,7 +150,7 @@ namespace poskus2
 
             sahovnica.Trenutni_igralec.SpremeniStanje(gumb, true);
             sahovnica.podlaga.label1.Text = sahovnica.igralec1.Vsota.ToString();
-            sahovnica.podlaga.label2.Text = sahovnica.igralec2.Vsota.ToString();
+            sahovnica.podlaga.label2.Text = sahovnica.igralec2.Vsota.ToString(); 
 
             sahovnica.Zadnja_prestavljena_celica.Figura = fig;
             sahovnica.Zadnja_prestavljena_celica.Image = fig.Slika;

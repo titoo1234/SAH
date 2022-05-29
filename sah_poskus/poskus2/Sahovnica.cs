@@ -431,10 +431,11 @@ namespace poskus2
                     //ČE IGRAMO PROTI RAČUNALNIKU NAREDI POTEZO
                     if (this.podlaga.racunalnik)
                     {
+
                         //RAČUNALNIK NAREDI POTEZO
 
                         List<(Celica, Celica)> vse_poteze = Figura.VseMoznePoteze(this, Trenutni_igralec.Barva);
-
+                        //PoisciNajboljso(VseMoznePoteze,korak)
                         int index = random.Next(vse_poteze.Count);
 
                         Celica celica1 = vse_poteze[index].Item1;
@@ -581,6 +582,42 @@ namespace poskus2
 
             }
         }
+
+        public int TrenutnoStanje()
+        {
+            return igralec1.Vsota - igralec2.Vsota;
+        }
+
+        public (Celica,Celica) NajboljsaPoteza(List<(Celica, Celica)> VseMoznePoteze,int korak)
+        {
+            if (korak == 0)
+            {
+                return (null,null);
+            }
+            int najStanje = 5000000;
+            (Celica, Celica) najboljsa = VseMoznePoteze[0];
+            foreach ((Celica, Celica) poteza in VseMoznePoteze)
+            {
+                Celica c1 = poteza.Item1;
+                Celica c2 = poteza.Item2;
+                bool premaknjen1 = c1.Figura.Premaknjen;
+                bool premaknjen2 = c2.Figura.Premaknjen;
+                Figura PraznaFigura = new Figura("", c1.X, c1.Y, c1.Size);
+                Celica.NavidezniPremik(c1, c2, c1.Figura, PraznaFigura);
+                int stanje = this.TrenutnoStanje();
+                if (stanje < najStanje)
+                {
+                    najStanje = stanje;
+                    najboljsa = poteza;
+                }
+
+            }
+
+
+
+            return najboljsa;
+        }
+        
 
 
     }

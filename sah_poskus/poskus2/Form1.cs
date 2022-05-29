@@ -139,8 +139,11 @@ namespace poskus2
         private void ReceiveMove()
         {
 
+            //Celica.PobarvajCeliceNazaj(sahovnica.)
+            
 
-            byte[] buffer = new byte[5];
+
+                byte[] buffer = new byte[5];
             socket.Receive(buffer);
             int xStara = int.Parse(buffer[0].ToString());
             int yStara = int.Parse(buffer[1].ToString());
@@ -150,6 +153,7 @@ namespace poskus2
             //Rezerva bo število od 0 do 4, če je 0, potem gre za navaden premik,
             //sicer pa je igralec zamenjal figuro z neko rezervo
             int rezerva = int.Parse(buffer[4].ToString());
+
 
            
 
@@ -192,6 +196,18 @@ namespace poskus2
                 stara.Image = nova1.Slika;
 
             }
+            //for (int stolpec = 0; stolpec < 8; stolpec++)
+            //{
+            //    for (int vrtica = 0; stolpec < 8; stolpec++)
+            //    {
+            //        Celica cel = sahovnica.Celice[stolpec, vrtica];
+
+            //        Figura fig = cel.Figura;
+            //        cel.BackColor = Color.Transparent;
+            //        cel.Image = fig.Slika;
+            //        cel.Mozen = false;
+            //    }
+            //}
         }
 
         private void Form1_SizeChanged(object sender, EventArgs e)

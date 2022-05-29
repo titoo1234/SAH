@@ -1278,7 +1278,7 @@ namespace poskus2
 
 
             sahovnica.Celice[mozna.X, mozna.Y].Figura = sh1;
-                sahovnica.Celice[gumb.X, gumb.Y].Figura = sh2;
+            sahovnica.Celice[gumb.X, gumb.Y].Figura = sh2;
                 //NASTAVIMO NAZAJ VSE TAK KOT JE BILO PRED NAVIDEZNIM PREMIKOM
 
 

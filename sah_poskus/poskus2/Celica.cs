@@ -127,6 +127,14 @@ namespace poskus2
                 this.BackColor= barvaLihoMesto;
             }
         }
+        public static void NavidezniPremik(Celica ZadnjaCelica, Celica TrenutnaCelica, Figura ZadnjaFigura, Figura PraznaFigura)
+        {
+            ZadnjaCelica.Figura = PraznaFigura;         
+            ZadnjaFigura.X = TrenutnaCelica.X;
+            ZadnjaFigura.Y = TrenutnaCelica.Y;
+            ZadnjaFigura.Premaknjen = true;
+            TrenutnaCelica.Figura = ZadnjaFigura;  
+        }
 
     }
 }
