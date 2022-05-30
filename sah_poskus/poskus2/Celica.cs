@@ -136,5 +136,17 @@ namespace poskus2
             TrenutnaCelica.Figura = ZadnjaFigura;  
         }
 
+        public static void NavidezniPremik_nazaj(Celica CelicaNazaj, Celica TrenutnaCelica, Figura fig1, Figura fig2, bool premik1, bool premik2)
+        {
+            fig1.Premaknjen = premik1;
+            fig1.X = CelicaNazaj.X;
+            fig1.Y = CelicaNazaj.Y;
+            fig2.Premaknjen = premik2;
+            fig2.X = TrenutnaCelica.X;
+            fig2.Y = TrenutnaCelica.Y;
+            CelicaNazaj.Figura = fig1;
+            TrenutnaCelica.Figura = fig2;
+        }
+
     }
 }

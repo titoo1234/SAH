@@ -436,10 +436,18 @@ namespace poskus2
 
                         List<(Celica, Celica)> vse_poteze = Figura.VseMoznePoteze(this, Trenutni_igralec.Barva);
                         //PoisciNajboljso(VseMoznePoteze,korak)
-                        int index = random.Next(vse_poteze.Count);
+                        //int index = random.Next(vse_poteze.Count);
 
-                        Celica celica1 = vse_poteze[index].Item1;
-                        Celica celica2 = vse_poteze[index].Item2;
+                        //Celica celica1 = vse_poteze[index].Item1;
+                        //Celica celica2 = vse_poteze[index].Item2;
+
+
+                        (Celica, Celica, int) naredi_potezo = NajboljsaPoteza(vse_poteze, 2);
+
+                        Celica celica1 = naredi_potezo.Item1;
+                        Celica celica2 = naredi_potezo.Item2;
+
+
                         nova = new Figura("", this.Zadnja_celica.X, this.Zadnja_celica.Y, this.Zadnja_celica.Size);
 
                         celica2.Figura = celica1.Figura;
@@ -588,36 +596,103 @@ namespace poskus2
             return igralec1.Vsota - igralec2.Vsota;
         }
 
-        public (Celica,Celica) NajboljsaPoteza(List<(Celica, Celica)> VseMoznePoteze,int korak)
+        public int Izracunaj_trenutno_stanje()
+        {
+            int vsota = 0;
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+
+                    Celica ce = this.Celice[i, j];
+                    Figura figura = ce.Figura;
+                    if (figura.Barva == "B")
+                    {
+                        vsota -= figura.Vrednost;
+                    }
+                    else
+                    {
+                        vsota += figura.Vrednost;
+                    }
+                }
+            }
+            return vsota;
+        }
+
+        public (Celica,Celica,int) NajboljsaPoteza(List<(Celica, Celica)> VseMoznePoteze,int korak)
         {
             if (korak == 0)
             {
-                return (null,null);
+                return (null,null,this.Izracunaj_trenutno_stanje());
             }
-            int najStanje = 5000000;
+            int najStanje = this.Izracunaj_trenutno_stanje();
             (Celica, Celica) najboljsa = VseMoznePoteze[0];
             foreach ((Celica, Celica) poteza in VseMoznePoteze)
             {
                 Celica c1 = poteza.Item1;
                 Celica c2 = poteza.Item2;
+                Figura fig1 = c1.Figura;
+                Figura fig2 = c2.Figura;
                 bool premaknjen1 = c1.Figura.Premaknjen;
                 bool premaknjen2 = c2.Figura.Premaknjen;
                 Figura PraznaFigura = new Figura("", c1.X, c1.Y, c1.Size);
                 Celica.NavidezniPremik(c1, c2, c1.Figura, PraznaFigura);
-                int stanje = this.TrenutnoStanje();
+                //int stanje = this.TrenutnoStanje();
+                //if (stanje < najStanje)
+                //{
+                //    najStanje = stanje;
+                //    najboljsa = poteza;
+                //}
+                List<(Celica, Celica)> naslednje = Figura.VseMoznePoteze(this, igralec1.Barva);
+                (Celica, Celica, int) naslednja = NajboljsaPoteza_drugi(naslednje, korak - 1);
+                int stanje = naslednja.Item3;
                 if (stanje < najStanje)
                 {
                     najStanje = stanje;
                     najboljsa = poteza;
                 }
-
+                Celica.NavidezniPremik_nazaj(c1, c2, fig1, fig2, premaknjen1, premaknjen2);
             }
-
-
-
-            return najboljsa;
+            return (najboljsa.Item1, najboljsa.Item2, najStanje);
         }
-        
+
+        public (Celica, Celica, int) NajboljsaPoteza_drugi(List<(Celica, Celica)> VseMoznePoteze, int korak)
+        {
+            if (korak == 0)
+            {
+                return (null, null, this.Izracunaj_trenutno_stanje());
+            }
+            int najStanje = this.Izracunaj_trenutno_stanje();
+            (Celica, Celica) najboljsa = VseMoznePoteze[0];
+            foreach ((Celica, Celica) poteza in VseMoznePoteze)
+            {
+                Celica c1 = poteza.Item1;
+                Celica c2 = poteza.Item2;
+                Figura fig1 = c1.Figura;
+                Figura fig2 = c2.Figura;
+                bool premaknjen1 = c1.Figura.Premaknjen;
+                bool premaknjen2 = c2.Figura.Premaknjen;
+                Figura PraznaFigura = new Figura("", c1.X, c1.Y, c1.Size);
+                Celica.NavidezniPremik(c1, c2, c1.Figura, PraznaFigura);
+                //int stanje = this.TrenutnoStanje();
+                //if (stanje < najStanje)
+                //{
+                //    najStanje = stanje;
+                //    najboljsa = poteza;
+                //}
+                List<(Celica, Celica)> naslednje = Figura.VseMoznePoteze(this, igralec2.Barva);
+                (Celica, Celica, int) naslednja = NajboljsaPoteza(naslednje, korak - 1);
+                int stanje = naslednja.Item3;
+                if (stanje > najStanje)
+                {
+                    najStanje = stanje;
+                    najboljsa = poteza;
+                }
+                Celica.NavidezniPremik_nazaj(c1, c2, fig1, fig2, premaknjen1, premaknjen2);
+            }
+            return (najboljsa.Item1, najboljsa.Item2, najStanje);
+        }
+
 
 
     }
