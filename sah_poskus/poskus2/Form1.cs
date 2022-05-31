@@ -143,7 +143,7 @@ namespace poskus2
             
 
 
-                byte[] buffer = new byte[5];
+            byte[] buffer = new byte[5];
             socket.Receive(buffer);
             int xStara = int.Parse(buffer[0].ToString());
             int yStara = int.Parse(buffer[1].ToString());
@@ -173,10 +173,10 @@ namespace poskus2
                    
                 }
                 Celica stara = sahovnica.Celice[xStara, yStara];
-                izbranaFiguraRezerva.X = nova.X;
-                izbranaFiguraRezerva.Y = nova.Y;
-                nova.Figura = izbranaFiguraRezerva;
-                nova.Image = izbranaFiguraRezerva.Slika;
+                Figura NovaFigura = new Figura(izbranaFiguraRezerva.Ime, nova.X, nova.Y, nova.Size); 
+             
+                nova.Figura = NovaFigura;
+                nova.Image = NovaFigura.Slika;
                 Figura nova1 = new Figura("", stara.X, stara.Y, stara.Size);
                 stara.Figura = nova1;
                 stara.Image = nova1.Slika;
@@ -184,7 +184,7 @@ namespace poskus2
             }
             else
             {
-                //MessageBox.Show("asd");
+                
                 Celica stara = sahovnica.Celice[xStara, yStara];
                 Celica nova = sahovnica.Celice[xNova, yNova];
                 nova.Figura = stara.Figura;
@@ -217,9 +217,32 @@ namespace poskus2
         //asdad
         private void button1_Click(object sender, EventArgs e)
         {
-            Button gumb= (Button)sender;
-            string vrstica = (string)gumb.Tag;
-            MessageBox.Show("ŠE NE GRE :)");
+            //Button gumb= (Button)sender;
+            //string vrstica = (string)gumb.Tag;
+            //MessageBox.Show("ŠE NE GRE :)");
+
+            if (!label3.Visible)
+            {
+                label4.Visible = true;
+                label5.Visible = true;
+                label6.Visible = true;
+                label7.Visible = true;
+                label8.Visible = true;
+                label3.Visible = true;
+            }
+            else
+            {
+                label4.Visible = false;
+                label5.Visible = false;
+                label6.Visible = false;
+                label7.Visible = false;
+                label8.Visible = false;
+                label3.Visible = false;
+            }
+            
+            
+
+
         }
 
         private void Game_FormClosing(object sender, FormClosingEventArgs e)
@@ -238,5 +261,11 @@ namespace poskus2
         {
 
         }
+
+        private void Game_Load(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

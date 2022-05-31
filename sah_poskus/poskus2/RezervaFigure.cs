@@ -142,7 +142,7 @@ namespace poskus2
             Figura fig = gumb.Figura;
             int poslji = fig.X;
             Sahovnica.Odmrzni(sahovnica);
-
+            Figura novaFigura = new Figura(fig.Ime, fig.X, fig.Y, gumb.Size);
             fig.X = sahovnica.Zadnja_prestavljena_celica.Figura.X;
             fig.Y = sahovnica.Zadnja_prestavljena_celica.Figura.Y;
             int posljiX2 = 7 - fig.X;
@@ -154,6 +154,7 @@ namespace poskus2
 
             sahovnica.Zadnja_prestavljena_celica.Figura = fig;
             sahovnica.Zadnja_prestavljena_celica.Image = fig.Slika;
+            gumb.Figura = novaFigura;
             this.Skrij();
 
             //PreveriMAt();
