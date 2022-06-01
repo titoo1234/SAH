@@ -13,9 +13,9 @@ namespace poskus2
     {
         private int x;
         private int y;
-        private bool mozen;
-
+        private bool mozen; // S to lastnostnjo povemo, ali se da na to celico priti (s trenutno figuro)
         private Figura figura;
+
         public Celica(int x, int y)
         {
             this.X = x;
@@ -24,7 +24,10 @@ namespace poskus2
             this.Mozen= false;
         }
 
+        // LASTNOSTI: 
+        // ====================================================
         public bool Mozen { get; set; }
+
         public Figura Figura { get; set; }
 
         public int X
@@ -42,6 +45,7 @@ namespace poskus2
                 this.x = value;
             }
         }
+
         public int Y
         {
             get
@@ -58,6 +62,9 @@ namespace poskus2
             }
         }
 
+        // FUNKCIJE:
+        // ==================================================================
+
         /// <summary>
         /// STARE MOŽNE POTEZE POBARVAMO NAZAJ NA PRVOTNO BARVO CELIC
         /// </summary>
@@ -68,15 +75,12 @@ namespace poskus2
             {
                 Celica ce = mozne[i];
                 Figura fig = ce.Figura;
-
                 //SpremeniBarvo(ce,barva1,barva2);
                 //ce.SpremeniBarvo(Color.Transparent, Color.Green);
                 ce.BackColor = Color.Transparent;
                 ce.Image = fig.Slika;
                 ce.Mozen = false;
-
             }
-
         }
         /// <summary>
         /// Možne celice pobarva v "ustrezno" barvo, da vemo kam lahko prestavimo neko figuro
@@ -87,12 +91,11 @@ namespace poskus2
             for (int i = 0; i < mozne.Count; i++)
             {
                 Celica ce = mozne[i];
-                //MessageBox.Show(ce.X.ToString() + ce.Y.ToString());
                 ce.BackColor = Color.Red;
                 ce.Mozen = true;
-
             }
         }
+
         /// <summary>
         /// Naredi premik iz "zadnje celice" na "trenutno celico", 
         /// na zadnjo celico "nastavi" novo figuro, ki je "prazna".
@@ -101,7 +104,7 @@ namespace poskus2
         /// <param name="TrenutnaCelica"></param>
         /// <param name="ZadnjaFigura"></param>
         /// <param name="PraznaFigura"></param>
-        public static void Premik(Celica ZadnjaCelica,  Celica TrenutnaCelica,Figura ZadnjaFigura, Figura PraznaFigura)
+        public static void Premik(Celica ZadnjaCelica,  Celica TrenutnaCelica, Figura ZadnjaFigura, Figura PraznaFigura)
         {
             ZadnjaCelica.Figura = PraznaFigura;
             ZadnjaCelica.Image = PraznaFigura.Slika;
@@ -111,6 +114,7 @@ namespace poskus2
             TrenutnaCelica.Figura = ZadnjaFigura;
             TrenutnaCelica.Image = ZadnjaFigura.Slika;
         }
+
         /// <summary>
         /// Funkcija spremeni barvo celice, glede na pozicijo kje se celica nahaja
         /// </summary>
@@ -127,6 +131,7 @@ namespace poskus2
                 this.BackColor= barvaLihoMesto;
             }
         }
+
         public static void NavidezniPremik(Celica ZadnjaCelica, Celica TrenutnaCelica, Figura ZadnjaFigura, Figura PraznaFigura)
         {
             ZadnjaCelica.Figura = PraznaFigura;         
@@ -147,6 +152,5 @@ namespace poskus2
             CelicaNazaj.Figura = fig1;
             TrenutnaCelica.Figura = fig2;
         }
-
     }
 }
