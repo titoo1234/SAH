@@ -9,7 +9,18 @@ namespace poskus2
 {
     public class Sahovnica
     {
-
+        private string niz_igre = "";
+        private string crke = "abcdefgh";
+        private Dictionary<string, int> crke_v_stevke = new Dictionary<string, int>(){
+                                                            {"a", 1},
+                                                            {"b", 2},
+                                                            {"c", 3},
+                                                            {"d", 4},
+                                                            {"e", 5},
+                                                            {"f", 6},
+                                                            {"g", 7},
+                                                            {"h", 8},
+                                                                                        };
         private Figura zadnja_figura;
         private Celica zadnja_celica;
         private Celica zadnja_prestavljena_celica;
@@ -24,7 +35,7 @@ namespace poskus2
         public Igralec igralec1;
         public Igralec igralec2;
         public Celica ZadnjaPrestavljenaCelicaRezerva;//Zadnja celica kmeta, preden gre le ta v zadnjo vrstico
-        public Sahovnica(int velikost, Game podlaga,bool naVrsti,string barva)
+        public Sahovnica(int velikost, Game podlaga, bool naVrsti, string barva)
         {
             igralec1 = new Igralec(barva);
             if (barva == "W")
@@ -45,7 +56,7 @@ namespace poskus2
             this.Zadnja_celica = null;
             this.Zadnja_figura = null;
             this.Zadnja_prestavljena_celica = null;
-            this.Trenutni_igralec =  igralec1;
+            this.Trenutni_igralec = igralec1;
             celice = new Celica[8, 8];
             for (int vrstica = 0; vrstica < 8; vrstica++)
             {
@@ -182,7 +193,7 @@ namespace poskus2
                         //this.Height
                         Celica gumb = new Celica(vrstica, stolpec);
                         gumb.Size = new Size(velikost, velikost);
-                        
+
 
                         gumb.Location = new Point(50 + stolpec * velikost, 50 + vrstica * velikost);
                         //gumb.Text = "" + vrstica + '/' + stolpec;
@@ -291,21 +302,21 @@ namespace poskus2
 
                         gumb.UseVisualStyleBackColor = true;
                         //gumb.SpremeniBarvo(Color.Transparent, Color.Green);
-                        
+
 
                         podlaga.Controls.Add(gumb);
                         celice[vrstica, stolpec] = gumb;
                     }
                 }
-                
+
             }
             this.celice = celice;
-            
+
 
         }
         public bool NaVrsti { get; set; }
-        public string ZacetekBarva { get;  set; }
-        public Igralec Trenutni_igralec { get;  set; }
+        public string ZacetekBarva { get; set; }
+        public Igralec Trenutni_igralec { get; set; }
 
         public Celica[,] Celice
         {
@@ -313,12 +324,12 @@ namespace poskus2
             {
                 return this.celice;
             }
-           
+
         }
 
-        public Celica Zadnja_celica { get;  set; }
-        public Figura Zadnja_figura { get;  set; }
-        public Celica Zadnja_prestavljena_celica { get;  set; }
+        public Celica Zadnja_celica { get; set; }
+        public Figura Zadnja_figura { get; set; }
+        public Celica Zadnja_prestavljena_celica { get; set; }
 
         List<Celica> mozne = new List<Celica>();
 
@@ -328,7 +339,7 @@ namespace poskus2
             Celica gumb = (Celica)sender;
             //TODO PREVERI ALI SMO ŽE KLIKNALI NA ZAMENJAVO: OZ LAŽJE, PREVERI ALI JE REZERVA PRIKAZANA
 
-            if (!gumb.Mozen) 
+            if (!gumb.Mozen)
             //KLIKNALI SMO NA GUMB, KJER NI MOŽNA POTEZA
             //ZATO NAJPREJ IZBIRŠEMO STARE MOŽNE POTEZE
             //ZATO POGLEDAMO KATERE SO MOŽNE POTEZE
@@ -366,18 +377,33 @@ namespace poskus2
 
                     if (this.Trenutni_igralec == igralec1)
                     {
-                        igralec2.SpremeniStanje(gumb,false);
+                        igralec2.SpremeniStanje(gumb, false);
                         this.podlaga.label2.Text = igralec2.Vsota.ToString();
                     }
                     else
                     {
-                        igralec1.SpremeniStanje(gumb,false);
+                        igralec1.SpremeniStanje(gumb, false);
                         this.podlaga.label1.Text = igralec1.Vsota.ToString();
                     }
-                    
-                    
-                    Celica.Premik(this.Zadnja_celica, gumb,this.Zadnja_figura, nova);
-                    
+
+
+                    Celica.Premik(this.Zadnja_celica, gumb, this.Zadnja_figura, nova);
+
+
+                    try
+                    {
+                        this.niz_igre = PodaljsajNiz(this.zadnja_celica, gumb, this.zadnja_figura, this.niz_igre);
+                        //TODO naredi da se izpiše na oknu zaenkrat piše kr na label1 namesto na label9
+                        this.podlaga.label1.Text = this.niz_igre;
+
+                    }
+
+                    catch
+                    {
+
+                    }
+
+                    //MessageBox.Show(this.niz_igre);
 
 
                     //SPREMENI NAZAJ BARVO 
@@ -402,11 +428,11 @@ namespace poskus2
                     }
 
 
-                    
+
 
                     if (Trenutni_igralec == igralec1)
                     {
-                        
+
                         Trenutni_igralec = igralec2;
                         if (Figura.Mat(this, igralec2.Barva))
                         {
@@ -491,9 +517,9 @@ namespace poskus2
                         MessageBox.Show("Nisi na potezi");
                         return;
                     }
-                    int posljiX2 = 7-gumb.X;
+                    int posljiX2 = 7 - gumb.X;
                     int posljiY2 = gumb.Y;
-                    int posljiX1 = 7-Zadnja_figura.X;
+                    int posljiX1 = 7 - Zadnja_figura.X;
                     int posljiY1 = Zadnja_figura.Y;
                     this.ZadnjaPrestavljenaCelicaRezerva = Zadnja_prestavljena_celica;
                     this.Zadnja_prestavljena_celica = gumb;
@@ -532,7 +558,7 @@ namespace poskus2
                             {
                                 MessageBox.Show("MAT");
                                 //MORAMO ŠE POSLATI ZADNJO POTEZO
-                                byte[] num1 = { (byte)posljiX1, (byte)posljiY1, (byte)posljiX2, (byte)posljiY2,(byte)0 };
+                                byte[] num1 = { (byte)posljiX1, (byte)posljiY1, (byte)posljiX2, (byte)posljiY2, (byte)0 };
                                 this.podlaga.socket.Send(num1);
                                 this.podlaga.MessageReceiver.RunWorkerAsync();
                                 this.podlaga.Close();
@@ -544,7 +570,7 @@ namespace poskus2
                             if (Figura.Mat(this, igralec1.Barva))
                             {
                                 MessageBox.Show("MAT");
-                                byte[] num2 = { (byte)posljiX1, (byte)posljiY1, (byte)posljiX2, (byte)posljiY2,(byte)0 };
+                                byte[] num2 = { (byte)posljiX1, (byte)posljiY1, (byte)posljiX2, (byte)posljiY2, (byte)0 };
                                 this.podlaga.socket.Send(num2);
                                 this.podlaga.MessageReceiver.RunWorkerAsync();
                                 this.podlaga.Close();
@@ -553,12 +579,12 @@ namespace poskus2
                         }
 
                         //POŠLI NASPROTNIKU
-                        byte[] num = { (byte)posljiX1, (byte)posljiY1, (byte)posljiX2, (byte)posljiY2,(byte)0 };
+                        byte[] num = { (byte)posljiX1, (byte)posljiY1, (byte)posljiX2, (byte)posljiY2, (byte)0 };
                         this.podlaga.socket.Send(num);
                         this.podlaga.MessageReceiver.RunWorkerAsync();
                     }
-                    
-                    
+
+
                 }
 
             }
@@ -568,9 +594,9 @@ namespace poskus2
 
         public static void Zamrzni(Sahovnica sahovnica)
         {
-            for(int i = 0; i < 8; i++)
+            for (int i = 0; i < 8; i++)
             {
-                for(int j = 0; j < 8; j++)
+                for (int j = 0; j < 8; j++)
                 {
                     Celica celica = sahovnica.Celice[i, j];
                     celica.Enabled = false;
@@ -619,11 +645,11 @@ namespace poskus2
             return vsota;
         }
 
-        public (Celica,Celica,int) NajboljsaPoteza(List<(Celica, Celica)> VseMoznePoteze,int korak)
+        public (Celica, Celica, int) NajboljsaPoteza(List<(Celica, Celica)> VseMoznePoteze, int korak)
         {
             if (korak == 0)
             {
-                return (null,null,this.Izracunaj_trenutno_stanje());
+                return (null, null, this.Izracunaj_trenutno_stanje());
             }
             int najStanje = this.Izracunaj_trenutno_stanje();
             (Celica, Celica) najboljsa = VseMoznePoteze[0];
@@ -691,6 +717,14 @@ namespace poskus2
                 Celica.NavidezniPremik_nazaj(c1, c2, fig1, fig2, premaknjen1, premaknjen2);
             }
             return (najboljsa.Item1, najboljsa.Item2, najStanje);
+        }
+
+
+        public string PodaljsajNiz(Celica c1, Celica c2, Figura f, string niz)
+        {
+
+            return niz + c2.Figura.Ime.Substring(1, 1) + crke[c2.Y] + (8 - c2.X) + " ";
+
         }
 
 
