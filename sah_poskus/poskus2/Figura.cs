@@ -1123,11 +1123,7 @@ namespace poskus2
 
                 }
             }
-
             return mozne;
-
-
-
         }
 
         public bool Nasprotnik(Figura druga)
@@ -1283,8 +1279,6 @@ namespace poskus2
 
 
             }
-     
-
             return ustrezne;
         }
     

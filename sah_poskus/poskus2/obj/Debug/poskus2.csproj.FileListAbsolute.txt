@@ -53,3 +53,4 @@ C:\Users\damij\Desktop\Projekt\SAH\sah_poskus\poskus2\obj\Debug\poskus2.csproj.G
 C:\Users\damij\Desktop\Projekt\SAH\sah_poskus\poskus2\obj\Debug\poskus2.csproj.CoreCompileInputs.cache
 C:\Users\damij\Desktop\Projekt\SAH\sah_poskus\poskus2\obj\Debug\poskus2.exe
 C:\Users\damij\Desktop\Projekt\SAH\sah_poskus\poskus2\obj\Debug\poskus2.pdb
+C:\Users\damij\Desktop\Projekt\SAH\sah_poskus\poskus2\obj\Debug\poskus2.csproj.SuggestedBindingRedirects.cache
