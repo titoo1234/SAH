@@ -49,9 +49,14 @@
     <Compile Include="Celica.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Konj.cs" />
     <Compile Include="Figura.cs" />
     <Compile Include="Igralec.cs" />
     <Compile Include="Kmet.cs" />
+    <Compile Include="Kralj.cs" />
+    <Compile Include="Kraljica.cs" />
+    <Compile Include="NavideznaCelica.cs" />
+    <Compile Include="NavideznaFigura.cs" />
     <Compile Include="NavideznaSahovnica.cs" />
     <Compile Include="RezervaFigure.cs" />
     <Compile Include="Sahovnica.cs" />
@@ -64,6 +69,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tekac.cs" />
+    <Compile Include="Trdnjava.cs" />
     <Compile Include="Zacetek.cs">
       <SubType>Form</SubType>
     </Compile>

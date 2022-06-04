@@ -7,23 +7,23 @@ using System.Threading.Tasks;
 
 namespace poskus2
 {
-    public class Kmet : NavideznaFigura
+    public class Tekac : NavideznaFigura
     {
-        public Kmet(string barva, Size velikost)
+        public Tekac(string barva, Size velikost)
         {
-            this.Ime = barva + "P";
+            this.Ime = barva + "B";
             this.Barva = barva;
             NastaviSliko();
             Premaknjen = false;
-            Vrednost = 1;
+            Vrednost = 3;
         }
         /// <summary>
         /// Funkcija nastavi sliko Figure na podlagi njene barve
         /// </summary>
         public void NastaviSliko()
         {
-            if (this.Barva == "W") { this.Slika = new Bitmap(Properties.Resources.White_Pawn, Velikost); }
-            else { this.Slika = new Bitmap(Properties.Resources.Black_Pawn, Velikost); }
+            if (this.Barva == "W") { this.Slika = new Bitmap(Properties.Resources.White_Bishop, Velikost); }
+            else { this.Slika = new Bitmap(Properties.Resources.Black_Bishop, Velikost); }
         }
     }
 }

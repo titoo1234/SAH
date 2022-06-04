@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,23 +9,27 @@ namespace poskus2
 {
     public class NavideznaSahovnica
     {
-        private string[,] polja;
+        private NavideznaCelica[,] celice;
+        private Size velikost;
 
-        public NavideznaSahovnica(string barva)
+        public NavideznaSahovnica(string barva, Size velikost)
         {
-            this.Polja = NarediSahovnico(barva);
+            this.Velikost = velikost;
+            this.Celice = NarediSahovnico(barva, Velikost);
         }
 
-        public string[,] Polja { get; set; }   
+        public NavideznaCelica[,] Celice { get; set; }   
+        public Size Velikost { get; set; }
 
         /// <summary>
-        /// Funkcija naredi sahovnico v obliki matrike nizov
+        /// Funkcija naredi sahovnico v obliki matrike Celic
         /// </summary>
-        /// <param name="barva"> barva nam pove s katerim figurim začnemo</param>
-        /// <returns>Vrne matriko nizov</returns>
-        public static string[,] NarediSahovnico(string barva)
+        /// <param name="barva"> barva nam pove s katerimi figurami začnemo</param>
+        /// <param name="velikost"></param>
+        /// <returns>Vrne matriko Celic</returns>
+        public static NavideznaCelica[,] NarediSahovnico(string barva, Size velikost)
         {
-            string[,] polja = new string[8, 8];
+            NavideznaCelica[,] celice = new NavideznaCelica[8, 8];
             string nasprotna_barva = NasprotnaBarva(barva);
 
             // v sredini sahovnice so prazna polja, ki jih označimo z praznimi nizi ""
@@ -32,57 +37,69 @@ namespace poskus2
             {
                 for (int j = 0; j < 8; j++)
                 {
-                    polja[i, j] = ""; 
+                    celice[i, j] = new NavideznaCelica(i, j);
+                    // Figura je privzeto null
                 }
             }
 
             // ustvarimo kmete
             for (int j = 0; j < 8; j++)
             {
-                string zgornji_kmetje = nasprotna_barva + "P";
-                string spodnji_kmetje = barva + "P";
-                polja[1, j] = zgornji_kmetje;
-                polja[6, j] = spodnji_kmetje;
+                celice[1, j] = new NavideznaCelica(1, j);
+                celice[1, j].Figura = new Kmet(nasprotna_barva, velikost);
+                celice[6, j] = new NavideznaCelica(1, j);
+                celice[6, j].Figura = new Kmet(barva, velikost);
             }
 
             // ostala polja 
             // Trdnjave:
-            string zgornje_trdnjave = nasprotna_barva + "R";
-            string spodnje_trdnjave = barva + "R";
-            polja[0, 0] = zgornje_trdnjave;
-            polja[0, 7] = zgornje_trdnjave;
-            polja[7, 0] = spodnje_trdnjave;
-            polja[7, 7] = spodnje_trdnjave;
+            celice[0, 0] = new NavideznaCelica(0, 0);
+            celice[0, 0].Figura = new Trdnjava(nasprotna_barva, velikost);
+            celice[0, 7] = new NavideznaCelica(0, 7);
+            celice[0, 7].Figura = new Trdnjava(nasprotna_barva, velikost);
+
+            celice[7, 0] = new NavideznaCelica(7, 0);
+            celice[7, 0].Figura = new Trdnjava(barva, velikost);
+            celice[7, 7] = new NavideznaCelica(7, 7);
+            celice[7, 7].Figura = new Trdnjava(barva, velikost);
 
             // konji:
-            string zgornji_konji = nasprotna_barva + "N";
-            string spodnji_konji = barva + "N";
-            polja[0, 1] = zgornji_konji;
-            polja[0, 6] = zgornji_konji;
-            polja[1, 0] = spodnji_konji;
-            polja[6, 7] = spodnji_konji;
+            celice[0, 1] = new NavideznaCelica(0, 1);
+            celice[0, 1].Figura = new Konj(nasprotna_barva, velikost);
+            celice[0, 6] = new NavideznaCelica(0, 6);
+            celice[0, 6].Figura = new Konj(nasprotna_barva, velikost);
+
+            celice[7, 1] = new NavideznaCelica(7, 1);
+            celice[7, 1].Figura = new Konj(barva, velikost);
+            celice[7, 6] = new NavideznaCelica(7, 6);
+            celice[7, 6].Figura = new Konj(barva, velikost);
 
             // tekači:
-            string zgornji_tekaci = nasprotna_barva + "B";
-            string spodnji_tekaci = barva + "B";
-            polja[0, 2] = zgornji_tekaci;
-            polja[0, 5] = zgornji_tekaci;
-            polja[2, 0] = spodnji_tekaci;
-            polja[5, 7] = spodnji_tekaci;
+            celice[0, 2] = new NavideznaCelica(0, 2);
+            celice[0, 2].Figura = new Tekac(nasprotna_barva, velikost);
+            celice[0, 5] = new NavideznaCelica(0, 5);
+            celice[0, 5].Figura = new Tekac(nasprotna_barva, velikost);
+
+            celice[7, 2] = new NavideznaCelica(7, 2);
+            celice[7, 2].Figura = new Tekac(barva, velikost);
+            celice[7, 5] = new NavideznaCelica(7, 5);
+            celice[7, 5].Figura = new Tekac(barva, velikost);
 
             // kraljici:
-            string zgornja_kraljica = nasprotna_barva + "Q";
-            string spodnja_kraljica = barva + "Q";
-            polja[0, 3] = zgornja_kraljica;
-            polja[7, 3] = spodnja_kraljica;
+            celice[0, 3] = new NavideznaCelica(0, 3);
+            celice[0, 3].Figura = new Tekac(nasprotna_barva, velikost);
+
+            celice[7, 3] = new NavideznaCelica(7, 3);
+            celice[7, 3].Figura = new Tekac(barva, velikost);
 
             // kraljici:
-            string zgornji_kralj = nasprotna_barva + "K";
-            string spodnji_kralj = barva + "K";
-            polja[0, 4] = zgornji_kralj;
-            polja[7, 4] = spodnji_kralj;
+            celice[0, 4] = new NavideznaCelica(0, 4);
+            celice[0, 4].Figura = new Tekac(nasprotna_barva, velikost);
 
-            return polja;   
+            celice[7, 4] = new NavideznaCelica(7, 4);
+            celice[7, 4].Figura = new Tekac(barva, velikost);
+
+            return celice;   
         }
 
         /// <summary>
