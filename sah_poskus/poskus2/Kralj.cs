@@ -9,13 +9,14 @@ namespace poskus2
 {
     public class Kralj : NavideznaFigura
     {
-        public Kralj(string barva, Size velikost)
+        public Kralj(string barva, Size velikost, NavideznaCelica celica)
         {
             this.Ime = barva + "K";
             this.Barva = barva;
             NastaviSliko();
             Premaknjen = false;
             Vrednost = 200;
+            this.Celica = celica;   
         }
         /// <summary>
         /// Funkcija nastavi sliko Figure na podlagi njene barve

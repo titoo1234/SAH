@@ -9,13 +9,14 @@ namespace poskus2
 {
     public class Trdnjava : NavideznaFigura
     {
-        public Trdnjava(string barva, Size velikost)
+        public Trdnjava(string barva, Size velikost, NavideznaCelica celica)
         {
             this.Ime = barva + "R";
             this.Barva = barva;
             NastaviSliko();
             Premaknjen = false;
             Vrednost = 5;
+            this.Celica = celica;
         }
         /// <summary>
         /// Funkcija nastavi sliko Figure na podlagi njene barve

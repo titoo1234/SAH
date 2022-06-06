@@ -11,13 +11,14 @@ namespace poskus2
 {
     public class Konj : NavideznaFigura
     {
-        public Konj(string barva, Size velikost)
+        public Konj(string barva, Size velikost, NavideznaCelica celica)
         {
             this.Ime = barva + "N";
             this.Barva = barva;
             NastaviSliko();
             Premaknjen = false;
             Vrednost = 3;
+            this.Celica = celica;
         }
         /// <summary>
         /// Funkcija nastavi sliko Figure na podlagi njene barve

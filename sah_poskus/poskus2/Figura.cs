@@ -357,7 +357,6 @@ namespace poskus2
                         {
                             mozne.Add(trenutna_celica);
                             //trenutna_celica.Mozen = true;
-
                         }
                         break;
                     }
@@ -1238,50 +1237,6 @@ namespace poskus2
                 
             }
             return false;
-        }
-        /// <summary>
-        /// Funkcija vrne samo tiste poteze iz vseh možnih, ki so dovoljene (pri tem ne dobimo šaha)
-        /// </summary>
-        /// <param name="sahovnica">Navidezna šahovnica, ki poskrbi za premike in preverjanja</param>
-        /// <param name="mozne_poteze">Seznam vseh možnih potez</param>
-        /// <param name="gumb">Gumb kamor smo kliknili</param>
-        /// <returns>Vrne seznam filtriranih potez</returns>
-        public static List<Celica> FiltrirajPoteze(NavideznaSahovnica sahovnica, List<Celica> mozne_poteze, Celica trenutna_celica)
-        {
-            List<Celica> ustrezne = new List<Celica>();
-            foreach (Celica mozna in mozne_poteze)
-            {
-                string barva = trenutna_celica.Figura.Barva;
-                Figura shrani1 = sahovnica.Celice[mozna.X, mozna.Y].Figura;
-                Figura sh1 = new Figura(shrani1.Ime, shrani1.X, shrani1.Y, gumb.Size);
-                sh1.Premaknjen = shrani1.Premaknjen;
-                Figura shrani2 = sahovnica.Celice[gumb.X, gumb.Y].Figura;
-                Figura sh2 = new Figura(shrani2.Ime, shrani2.X, shrani2.Y, gumb.Size);
-                sh2.Premaknjen = shrani2.Premaknjen;
-                //PRESTAVIMO FIGURO
-                sahovnica.Celice[mozna.X, mozna.Y].Figura = gumb.Figura;
-
-                //sahovnica.Celice[mozna.X, mozna.Y].Figura.X = mozna.X;
-                //sahovnica.Celice[mozna.X, mozna.Y].Figura.Y = mozna.Y;
-                //NA STAREM MESTU SEDAJ NI FIGURE
-                sahovnica.Celice[gumb.X, gumb.Y].Figura = new Figura("", gumb.X, gumb.Y, gumb.Size);
-                //PREVERIMO ALI JE PO TEM KORAKU ŠAH
-
-
-                if (!JeSah(sahovnica, barva + "K"))
-                {
-
-                    ustrezne.Add(mozna);
-                }
-
-
-                sahovnica.Celice[mozna.X, mozna.Y].Figura = sh1;
-                sahovnica.Celice[gumb.X, gumb.Y].Figura = sh2;
-                //NASTAVIMO NAZAJ VSE TAK KOT JE BILO PRED NAVIDEZNIM PREMIKOM
-
-
-            }
-            return ustrezne;
         }
 
         public static List<Celica> PreveriMoznePoteze(Sahovnica sahovnica, List<Celica> mozne_poteze, Celica gumb)
