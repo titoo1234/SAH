@@ -16,7 +16,6 @@ namespace poskus2
             NastaviSliko();
             Premaknjen = false;
             Vrednost = 3;
-            this.Celica = celica;
         }
         /// <summary>
         /// Funkcija nastavi sliko Figure na podlagi njene barve
@@ -25,6 +24,34 @@ namespace poskus2
         {
             if (this.Barva == "W") { this.Slika = new Bitmap(Properties.Resources.White_Bishop, Velikost); }
             else { this.Slika = new Bitmap(Properties.Resources.Black_Bishop, Velikost); }
+        }
+
+        /// <summary>
+        /// Poišče vse možne premike tekača
+        /// </summary>
+        /// <param name="celica"></param>
+        /// <returns>Vrne seznam možnih potez</returns>
+        public List<NavideznaCelica> MoznePoteze(NavideznaCelica celica)
+        {
+            List<NavideznaCelica> mozne = new List<NavideznaCelica>();
+            int i = 1;
+            while (celica.X + i <= 7 && celica.Y + i <= 7 && DodajPremik_DolDesno(mozne, celica, i))
+            {
+                i++;
+            }
+            while (celica.X - i >= 0 && celica.Y + i <= 7 && DodajPremik_GorDesno(mozne, celica, i))
+            {
+                i++;
+            }
+            while (celica.X + i <= 7 && celica.Y - i >= 0 && DodajPremik_DolLevo(mozne, celica, i))
+            {
+                i++;
+            }
+            while (celica.X - i >= 0 && celica.Y - i >= 0 && DodajPremik_GorLevo(mozne, celica, i))
+            {
+                i++;
+            }
+            return mozne;
         }
     }
 }

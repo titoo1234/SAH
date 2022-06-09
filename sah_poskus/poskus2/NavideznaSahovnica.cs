@@ -105,6 +105,22 @@ namespace poskus2
             return celice;   
         }
 
+        public override string ToString()
+        {
+            string niz = "";
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    if (celice[i, j].Figura == null) { niz += "00"; }
+                    else { niz += celice[i, j].Figura.Ime + " "; }
+                }
+                niz += '\n';
+            }
+            return niz;
+        }
+
+
         /// <summary>
         /// Funkcija vrne nasprotno barvo 
         /// </summary>

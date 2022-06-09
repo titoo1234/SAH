@@ -501,8 +501,6 @@ namespace poskus2
                     i++;
                 }
 
-
-
             }
 
             // TRDNJAVA

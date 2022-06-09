@@ -18,7 +18,6 @@ namespace poskus2
             NastaviSliko();
             Premaknjen = false;
             Vrednost = 3;
-            this.Celica = celica;
         }
         /// <summary>
         /// Funkcija nastavi sliko Figure na podlagi njene barve
@@ -27,6 +26,62 @@ namespace poskus2
         {
             if (this.Barva == "W") { this.Slika = new Bitmap(Properties.Resources.White_Knight, Velikost); }
             else { this.Slika = new Bitmap(Properties.Resources.Black_Knight, Velikost); }
+        }
+
+        /// <summary>
+        /// Poišče vse možne premike konja
+        /// </summary>
+        /// <param name="celica"></param>
+        /// <returns>Vrne seznam možnih potez</returns>
+        public List<NavideznaCelica> MoznePoteze(NavideznaCelica celica)
+        {
+            List<NavideznaCelica> mozne = new List<NavideznaCelica>();
+            int i = 1;
+            int j = 2;
+            if (celica.X - i >= 0 && celica.Y - j >= 0)
+            {
+                NavideznaCelica trenutna_celica = Sahovnica.Celice[celica.X - i, celica.Y - j];
+                this.DodajPremik(mozne, trenutna_celica);
+            }
+            if (celica.X + i <= 7 && celica.Y - j >= 0)
+            {
+                NavideznaCelica trenutna_celica = Sahovnica.Celice[celica.X + i, celica.Y - j];
+                this.DodajPremik(mozne, trenutna_celica);
+            }
+            if (celica.X - i >= 0 && celica.Y + j <= 7)
+            {
+                NavideznaCelica trenutna_celica = Sahovnica.Celice[celica.X - i, celica.Y + j];
+                this.DodajPremik(mozne, trenutna_celica);
+            }
+            if (celica.X + i <= 7 && celica.Y + j <= 7)
+            {
+                NavideznaCelica trenutna_celica = Sahovnica.Celice[celica.X + i, celica.Y + j];
+                this.DodajPremik(mozne, trenutna_celica);
+            }
+            
+            i = 2;
+            j = 1;
+            if (celica.X - i >= 0 && celica.Y - j >= 0)
+            {
+                NavideznaCelica trenutna_celica = Sahovnica.Celice[celica.X - i, celica.Y - j];
+                this.DodajPremik(mozne, trenutna_celica);
+            }
+            if (celica.X + i <= 7 && celica.Y - j >= 0)
+            {
+                NavideznaCelica trenutna_celica = Sahovnica.Celice[celica.X + i, celica.Y - j];
+                this.DodajPremik(mozne, trenutna_celica);
+            }
+            if (celica.X - i >= 0 && celica.Y + j <= 7)
+            {
+                NavideznaCelica trenutna_celica = Sahovnica.Celice[celica.X - i, celica.Y + j];
+                this.DodajPremik(mozne, trenutna_celica);
+            }
+            if (celica.X + i <= 7 && celica.Y + j <= 7)
+            {
+                NavideznaCelica trenutna_celica = Sahovnica.Celice[celica.X + i, celica.Y + j];
+                this.DodajPremik(mozne, trenutna_celica);
+            }
+            return mozne;
         }
     }
 }

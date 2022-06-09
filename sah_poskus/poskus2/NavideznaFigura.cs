@@ -171,6 +171,35 @@ namespace poskus2
             return DodajPremik(mozne_poteze, trenutna_celica);
         }
 
+        /// <summary>
+        /// Funkcija nam vrne true, če je trenutno na šahovnici napaden naš kralj
+        /// </summary>
+        /// <param name="sahovnica"></param>
+        /// <param name="kralj"></param>
+        /// <returns>true ali false</returns>
+        public bool JeSah()
+        {
+            return false;
+            //GREMO SKOZI VSE FIGURE, ZA VSAKO PREVERIMO ČE "NAPADA" NASPROTNEGA KRALJA
+            //for (int i = 0; i < 8; i++)
+            //{
+            //    for (int j = 0; j < 8; j++)
+            //    {
+            //        NavideznaCelica celica = Sahovnica.Celice[i, j];
+            //        NavideznaFigura figura = celica.Figura;
+            //        List<Celica> mozne_poteze = figura.MoznePoteze(sahovnica);
+            //        foreach (Celica mozna in mozne_poteze)
+            //        {
+            //            if (mozna.Figura.Ime == kralj)
+            //            {
+            //                return true;
+            //            }
+            //        }
+            //    }
+            //}
+            //return false;
+        }
+
     }
     
 }
