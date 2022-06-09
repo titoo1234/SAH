@@ -54,3 +54,15 @@ C:\Users\damij\Desktop\Projekt\SAH\sah_poskus\poskus2\obj\Debug\poskus2.csproj.C
 C:\Users\damij\Desktop\Projekt\SAH\sah_poskus\poskus2\obj\Debug\poskus2.exe
 C:\Users\damij\Desktop\Projekt\SAH\sah_poskus\poskus2\obj\Debug\poskus2.pdb
 C:\Users\damij\Desktop\Projekt\SAH\sah_poskus\poskus2\obj\Debug\poskus2.csproj.SuggestedBindingRedirects.cache
+C:\Users\Uporabnik\Source\Repos\titoo1234\SAH\sah_poskus\poskus2\bin\Debug\poskus2.exe.config
+C:\Users\Uporabnik\Source\Repos\titoo1234\SAH\sah_poskus\poskus2\bin\Debug\poskus2.exe
+C:\Users\Uporabnik\Source\Repos\titoo1234\SAH\sah_poskus\poskus2\bin\Debug\poskus2.pdb
+C:\Users\Uporabnik\Source\Repos\titoo1234\SAH\sah_poskus\poskus2\obj\Debug\poskus2.csproj.AssemblyReference.cache
+C:\Users\Uporabnik\Source\Repos\titoo1234\SAH\sah_poskus\poskus2\obj\Debug\poskus2.csproj.SuggestedBindingRedirects.cache
+C:\Users\Uporabnik\Source\Repos\titoo1234\SAH\sah_poskus\poskus2\obj\Debug\poskus2.Game.resources
+C:\Users\Uporabnik\Source\Repos\titoo1234\SAH\sah_poskus\poskus2\obj\Debug\poskus2.Properties.Resources.resources
+C:\Users\Uporabnik\Source\Repos\titoo1234\SAH\sah_poskus\poskus2\obj\Debug\poskus2.Zacetek.resources
+C:\Users\Uporabnik\Source\Repos\titoo1234\SAH\sah_poskus\poskus2\obj\Debug\poskus2.csproj.GenerateResource.cache
+C:\Users\Uporabnik\Source\Repos\titoo1234\SAH\sah_poskus\poskus2\obj\Debug\poskus2.csproj.CoreCompileInputs.cache
+C:\Users\Uporabnik\Source\Repos\titoo1234\SAH\sah_poskus\poskus2\obj\Debug\poskus2.exe
+C:\Users\Uporabnik\Source\Repos\titoo1234\SAH\sah_poskus\poskus2\obj\Debug\poskus2.pdb

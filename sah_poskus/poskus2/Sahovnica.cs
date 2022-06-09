@@ -468,7 +468,7 @@ namespace poskus2
                         //Celica celica2 = vse_poteze[index].Item2;
 
 
-                        (Celica, Celica, int) naredi_potezo = NajboljsaPoteza(vse_poteze, 1);
+                        (Celica, Celica, int) naredi_potezo = NajboljsaPoteza(vse_poteze,1);
 
                         Celica celica1 = naredi_potezo.Item1;
                         Celica celica2 = naredi_potezo.Item2;
