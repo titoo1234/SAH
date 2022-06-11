@@ -26,12 +26,10 @@ namespace Sah_projekt
         private TcpClient client;
         public bool solo;
         public bool racunalnik;
+        private Igra igra;
 
         public bool IsHost { get;  set; }
-
- 
-         
-        
+        public Igra Igra { get;  set; }
 
         public Game(bool solo,bool racunalnik ,bool isHost, string ip = null)
         {
@@ -39,6 +37,7 @@ namespace Sah_projekt
             this.solo = solo;
             this.racunalnik = racunalnik;
             this.IsHost = isHost;
+            this.Igra = null;
             
        
             InitializeComponent();

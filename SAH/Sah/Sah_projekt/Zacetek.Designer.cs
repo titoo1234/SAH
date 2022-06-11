@@ -37,9 +37,10 @@
             // 
             // HostGumb
             // 
-            this.HostGumb.Location = new System.Drawing.Point(70, 311);
+            this.HostGumb.Location = new System.Drawing.Point(52, 253);
+            this.HostGumb.Margin = new System.Windows.Forms.Padding(2);
             this.HostGumb.Name = "HostGumb";
-            this.HostGumb.Size = new System.Drawing.Size(302, 54);
+            this.HostGumb.Size = new System.Drawing.Size(226, 44);
             this.HostGumb.TabIndex = 0;
             this.HostGumb.Text = "JAZ BOM HOST";
             this.HostGumb.UseVisualStyleBackColor = true;
@@ -47,16 +48,18 @@
             // 
             // IpText
             // 
-            this.IpText.Location = new System.Drawing.Point(70, 248);
+            this.IpText.Location = new System.Drawing.Point(52, 202);
+            this.IpText.Margin = new System.Windows.Forms.Padding(2);
             this.IpText.Name = "IpText";
-            this.IpText.Size = new System.Drawing.Size(129, 22);
+            this.IpText.Size = new System.Drawing.Size(98, 20);
             this.IpText.TabIndex = 1;
             // 
             // IpGumb
             // 
-            this.IpGumb.Location = new System.Drawing.Point(218, 248);
+            this.IpGumb.Location = new System.Drawing.Point(164, 202);
+            this.IpGumb.Margin = new System.Windows.Forms.Padding(2);
             this.IpGumb.Name = "IpGumb";
-            this.IpGumb.Size = new System.Drawing.Size(154, 57);
+            this.IpGumb.Size = new System.Drawing.Size(116, 46);
             this.IpGumb.TabIndex = 2;
             this.IpGumb.Text = "Poveži se";
             this.IpGumb.UseVisualStyleBackColor = true;
@@ -64,9 +67,10 @@
             // 
             // SoloGumb
             // 
-            this.SoloGumb.Location = new System.Drawing.Point(70, 85);
+            this.SoloGumb.Location = new System.Drawing.Point(52, 69);
+            this.SoloGumb.Margin = new System.Windows.Forms.Padding(2);
             this.SoloGumb.Name = "SoloGumb";
-            this.SoloGumb.Size = new System.Drawing.Size(302, 50);
+            this.SoloGumb.Size = new System.Drawing.Size(226, 41);
             this.SoloGumb.TabIndex = 3;
             this.SoloGumb.Text = "Solo";
             this.SoloGumb.UseVisualStyleBackColor = true;
@@ -74,9 +78,10 @@
             // 
             // RacunalnikGumb
             // 
-            this.RacunalnikGumb.Location = new System.Drawing.Point(400, 85);
+            this.RacunalnikGumb.Location = new System.Drawing.Point(300, 69);
+            this.RacunalnikGumb.Margin = new System.Windows.Forms.Padding(2);
             this.RacunalnikGumb.Name = "RacunalnikGumb";
-            this.RacunalnikGumb.Size = new System.Drawing.Size(302, 50);
+            this.RacunalnikGumb.Size = new System.Drawing.Size(226, 41);
             this.RacunalnikGumb.TabIndex = 4;
             this.RacunalnikGumb.Text = "Računalnik";
             this.RacunalnikGumb.UseVisualStyleBackColor = true;
@@ -84,16 +89,18 @@
             // 
             // Zacetek
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(720, 429);
             this.Controls.Add(this.RacunalnikGumb);
             this.Controls.Add(this.SoloGumb);
             this.Controls.Add(this.IpGumb);
             this.Controls.Add(this.IpText);
             this.Controls.Add(this.HostGumb);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Zacetek";
             this.Text = "Zacetek";
+            this.Load += new System.EventHandler(this.Zacetek_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
