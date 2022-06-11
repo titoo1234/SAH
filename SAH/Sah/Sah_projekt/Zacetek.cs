@@ -37,11 +37,18 @@ namespace Sah_projekt
 
         private void SoloGumb_Click(object sender, EventArgs e)
         {
-            Game newGame = new Game(true,false, false);
+            
+            //Nastavitve nastavitve = new Nastavitve(solo);
+            Nastavitve nastavitve = new Nastavitve();
             Visible = false;
-            if (!newGame.IsDisposed)
-                newGame.ShowDialog();
+            if (!nastavitve.IsDisposed)
+                nastavitve.ShowDialog();
             Visible = true;
+            //Game newGame = new Game(true,false, false);
+            //Visible = false;
+            //if (!newGame.IsDisposed)
+            //    newGame.ShowDialog();
+            //Visible = true;
         }
 
         private void RacunalnikGumb_Click(object sender, EventArgs e)
@@ -51,6 +58,11 @@ namespace Sah_projekt
             if (!newGame.IsDisposed)
                 newGame.ShowDialog();
             Visible = true;
+
+        }
+
+        private void Zacetek_Load(object sender, EventArgs e)
+        {
 
         }
     }
