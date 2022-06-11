@@ -1163,6 +1163,7 @@ namespace Sah_projekt
         }
         /// <summary>
         /// NAREDIMO ROŠADO, PRESTAVIMO KRALJA IN TRDNJAVO NA USTREZNO MESTO
+        /// ČE NI MOŽNA NE NAREDIMO NIČESAR!!
         /// </summary>
         /// <param name="sahovnica"></param>
         /// <param name="kralj"></param>
