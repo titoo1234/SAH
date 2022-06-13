@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,14 +9,18 @@ namespace Sah_projekt
 {
     public class SoloIgra : Igra
     {
-        public SoloIgra() 
+        public SoloIgra(string barva, Size velikost) 
         {
+            this.NavideznaSahovnica = new NavideznaSahovnica(barva, velikost);
+            //this.Sahovnica = new Sahovnica();
             SpremeniLastnostGumbov();
-            this.Sahovnica = new Sahovnica();
         }
 
         //gremo skozi vse gumbe
         //gumb.click += funckcija
+        /// <summary>
+        /// Funkcija nastavi lastnosti posameznemu polju(gumbu) na šahovnici
+        /// </summary>
         public void SpremeniLastnostGumbov()
         {
             for (int i = 0; i < 8; i++)
@@ -27,6 +32,7 @@ namespace Sah_projekt
                 }
             }
         }
+
         List<Celica> mozne = new List<Celica>();
         private void KlikNaCelico(object sender, EventArgs e)
         {
@@ -58,7 +64,6 @@ namespace Sah_projekt
 
             else//KLIKNEŠ NA CELICO, KAMOR  JE MOŽNO PRESTAVITI FIGURO
             {
-
                 if (this.Sahovnica.podlaga.solo)//IGRAMO SAMI SOLO ALI PROTI RAČUNALNIKU
                 {
                     //ZADNJO FIGURO PRESTAVIMO, TO POMENI DA NA ZADNJO CELICO NASTAVIMO FIGURO, KI JE PRAZNA
@@ -68,7 +73,6 @@ namespace Sah_projekt
                     {
                         Figura.Rosada(this.Sahovnica, this.Sahovnica.Zadnja_figura, gumb);
                     }
-
                     if (this.Sahovnica.Trenutni_igralec == this.Sahovnica.igralec1)
                     {
                         this.Sahovnica.igralec2.SpremeniStanje(gumb, false);
@@ -80,23 +84,7 @@ namespace Sah_projekt
                         this.Sahovnica.podlaga.label1.Text = this.Sahovnica.igralec1.Vsota.ToString();
                     }
 
-
                     Celica.Premik(this.Sahovnica.Zadnja_celica, gumb, this.Sahovnica.Zadnja_figura, nova);
-
-
-                    //try
-                    //{
-                    //    this.Sahovnica.niz_igre = PodaljsajNiz(this.Sahovnica.zadnja_celica, gumb, this.Sahovnica.zadnja_figura, this.Sahovnica.niz_igre);
-                    //    //TODO naredi da se izpiše na oknu zaenkrat piše kr na label1 namesto na label9
-                    //    this.Sahovnica.podlaga.label1.Text = this.Sahovnica.niz_igre;
-
-                    //}
-
-                    //catch
-                    //{
-
-                    //}
-
 
                     //SPREMENI NAZAJ BARVO 
                     Celica.PobarvajCeliceNazaj(mozne);
@@ -118,9 +106,6 @@ namespace Sah_projekt
                         Sahovnica.Zamrzni(this.Sahovnica);
                         return;
                     }
-
-
-
 
                     if (this.Sahovnica.Trenutni_igralec == this.Sahovnica.igralec1)
                     {
