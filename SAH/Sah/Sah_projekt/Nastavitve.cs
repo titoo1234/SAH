@@ -13,25 +13,17 @@ namespace Sah_projekt
     public partial class Nastavitve : Form
     {
         private Igra igra;
-
-        
-
         public Nastavitve()
         {
             InitializeComponent();
             BelaBarva_Gumb.Enabled = false;
             this.Igra = igra;
-
         }
-
         public Igra Igra { get; set; }
-
-
         private void label2_Click(object sender, EventArgs e)
         {
 
         }
-
         private void BelaBarva_Gumb_Click(object sender, EventArgs e)
         {
             BelaBarva_Gumb.Enabled = false;
@@ -46,7 +38,7 @@ namespace Sah_projekt
         private void ZacetekIgre_Click(object sender, EventArgs e)
         {
             Game newGame = new Game(true, false, false);
-            newGame.Igra = new SoloIgra("B",  Color.White, new Size(40,40), newGame);
+            newGame.Igra = new SoloIgra("B", new Color[] { Color.Orange, Color.Violet, Color.Yellow }, new Size(40,40), newGame);
             //SoloIgra solo = new SoloIgra(string barva, string tema);
 
 

@@ -51,7 +51,7 @@ namespace Sah_projekt
                     }
                     Podlaga.Controls.Add(gumb);
                     Celice[vrstica, stolpec] = gumb;
-                    gumb.SpremeniBarvo(Color.Green, Color.White);
+                    gumb.SpremeniBarvo(Tema[0], Tema[1]);
                 }
             }
         }

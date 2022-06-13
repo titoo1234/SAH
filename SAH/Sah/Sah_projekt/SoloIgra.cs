@@ -9,10 +9,10 @@ namespace Sah_projekt
 {
     public class SoloIgra : Igra
     {
-        public SoloIgra(string barva, Color tema, Size velikost, Game podlaga) 
+        public SoloIgra(string barva, Color[] tema, Size velikost, Game podlaga) 
         {
             this.NavideznaSahovnica = new NavideznaSahovnica(barva, velikost);
-            this.PravaSahovnica = new PravaSahovnica(NavideznaSahovnica, podlaga);
+            this.PravaSahovnica = new PravaSahovnica(NavideznaSahovnica, podlaga, tema);
             this.Igralec1 = new Igralec(barva);
             this.Igralec2 = new Igralec(NavideznaSahovnica.NasprotnaBarva(barva));
             this.TrenutniIgralec = Igralec1;
@@ -56,6 +56,8 @@ namespace Sah_projekt
             {
                 //prikaziMoznePoteze();
             }
+
+            gumb.BackColor = PravaSahovnica.Tema[2];
         }
 
         /// <summary>
