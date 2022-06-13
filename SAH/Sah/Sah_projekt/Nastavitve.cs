@@ -21,9 +21,12 @@ namespace Sah_projekt
             InitializeComponent();
             BelaBarva_Gumb.Enabled = false;
             this.Igra = igra;
+
         }
 
         public Igra Igra { get; set; }
+
+
         private void label2_Click(object sender, EventArgs e)
         {
 
@@ -43,8 +46,8 @@ namespace Sah_projekt
         private void ZacetekIgre_Click(object sender, EventArgs e)
         {
             Game newGame = new Game(true, false, false);
-            newGame.Igra = igra;
-            //SoloIgra solo = new SoloIgra(string barva,string tema);
+            newGame.Igra = new SoloIgra("B",  Color.White, new Size(40,40), newGame);
+            //SoloIgra solo = new SoloIgra(string barva, string tema);
 
 
             Visible = false;

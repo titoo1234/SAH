@@ -13,6 +13,7 @@ namespace Sah_projekt
         {
             this.Ime = barva + "P";
             this.Barva = barva;
+            this.Velikost = velikost;
             NastaviSliko();
             Premaknjen = false;
             Vrednost = 1;
@@ -23,7 +24,10 @@ namespace Sah_projekt
         public void NastaviSliko()
         {
             if (this.Barva == "W") { this.Slika = new Bitmap(Properties.Resources.White_Pawn, Velikost); }
-            else { this.Slika = new Bitmap(Properties.Resources.Black_Pawn, Velikost); }
+            
+            else { this.Slika = new Bitmap(Properties.Resources.Black_Pawn, Velikost);
+               
+            }
         }
 
         /// <summary>

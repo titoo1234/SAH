@@ -31,86 +31,88 @@ namespace Sah_projekt
         public bool IsHost { get;  set; }
         public Igra Igra { get;  set; }
 
-        public Game(bool solo,bool racunalnik ,bool isHost, string ip = null)
+        public Game(bool solo, bool racunalnik, bool isHost, string ip = null)
         {
-            
+
             this.solo = solo;
             this.racunalnik = racunalnik;
             this.IsHost = isHost;
             this.Igra = null;
-            
-       
+
+
             InitializeComponent();
-            
-            if (!isHost)
-            {
-                if (solo)
-                {
-                    sahovnica = new Sahovnica(velikost, this, false, "W");
-                }
-                else
-                {
-                    sahovnica = new Sahovnica(velikost, this, false, "B");
-                }
-                
-            }
-            else
-            {
-                sahovnica = new Sahovnica(velikost, this, true, "W");
-                
-            }
-            
-           
-            
-            rezerva_beli = new RezervaFigure(velikost, this, "W", sahovnica);
-            rezerva_crni = new RezervaFigure(velikost, this, "B", sahovnica);
-            sahovnica.rezerva_beli = rezerva_beli;
-            sahovnica.rezerva_crni = rezerva_crni;
+
+            //    if (!isHost)
+            //    {
+            //        if (solo)
+            //        {
+            //            sahovnica = new Sahovnica(velikost, this, false, "W");
+            //        }
+            //        else
+            //        {
+            //            sahovnica = new Sahovnica(velikost, this, false, "B");
+            //        }
+
+            //    }
+            //    else
+            //    {
+            //        sahovnica = new Sahovnica(velikost, this, true, "W");
+
+            //    }
 
 
-            if (!solo)
-            {
-                MessageReceiver.DoWork += MessageReceiver_DoWork;
-                CheckForIllegalCrossThreadCalls = false;
 
-                if (isHost)
-                {
-                    this.Text = "Šah ;-) Host";
-                    //Igralec1.barva = "W"
-                    //Igralec2.barva = "B"
-
-                    server = new TcpListener(System.Net.IPAddress.Any, 5732);
-                    //server = new TcpListener(5732);
-                    //MessageBox.Show(System.Net.IPAddress.Any.ToString());
+            //    rezerva_beli = new RezervaFigure(velikost, this, "W", sahovnica);
+            //    rezerva_crni = new RezervaFigure(velikost, this, "B", sahovnica);
+            //    sahovnica.rezerva_beli = rezerva_beli;
+            //    sahovnica.rezerva_crni = rezerva_crni;
 
 
-                    //System.Net.IPAddress.Any
+            //    if (!solo)
+            //    {
+            //        MessageReceiver.DoWork += MessageReceiver_DoWork;
+            //        CheckForIllegalCrossThreadCalls = false;
 
-                    server.Start();
-                    socket = server.AcceptSocket();
+            //        if (isHost)
+            //        {
+            //            this.Text = "Šah ;-) Host";
+            //            //Igralec1.barva = "W"
+            //            //Igralec2.barva = "B"
 
-                }
-                else
-                {
-                    //Igralec2.barva = "W"
-                    //Igralec1.barva = "B"
-                    
-                    try
-                    {
-                        client = new TcpClient(ip,5732);
-                        socket = client.Client;
-                        MessageReceiver.RunWorkerAsync();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                        Close();
-                    }
-                }
-            }
-           
+            //            server = new TcpListener(System.Net.IPAddress.Any, 5732);
+            //            //server = new TcpListener(5732);
+            //            //MessageBox.Show(System.Net.IPAddress.Any.ToString());
 
+
+            //            //System.Net.IPAddress.Any
+
+            //            server.Start();
+            //            socket = server.AcceptSocket();
+
+            //        }
+            //        else
+            //        {
+            //            //Igralec2.barva = "W"
+            //            //Igralec1.barva = "B"
+
+            //            try
+            //            {
+            //                client = new TcpClient(ip,5732);
+            //                socket = client.Client;
+            //                MessageReceiver.RunWorkerAsync();
+            //            }
+            //            catch (Exception ex)
+            //            {
+            //                MessageBox.Show(ex.Message);
+            //                Close();
+            //            }
+            //        }
+            //    }
+
+
+            //}
         }
+
 
         public static IPAddress GetLocalIPAddress()
         {

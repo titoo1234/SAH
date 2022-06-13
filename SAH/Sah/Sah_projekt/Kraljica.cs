@@ -14,6 +14,7 @@ namespace Sah_projekt
         {
             this.Ime = barva + "Q";
             this.Barva = barva;
+            this.Velikost = velikost;
             NastaviSliko();
             Premaknjen = false;
             Vrednost = 9;

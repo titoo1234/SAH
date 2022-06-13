@@ -9,11 +9,13 @@ namespace Sah_projekt
 {
     public class SoloIgra : Igra
     {
-        public SoloIgra(string barva, Size velikost) 
+        public SoloIgra(string barva, Color tema, Size velikost, Game podlaga) 
         {
             this.NavideznaSahovnica = new NavideznaSahovnica(barva, velikost);
+            this.PravaSahovnica = new PravaSahovnica(NavideznaSahovnica, podlaga);
+
             //this.Sahovnica = new Sahovnica();
-            SpremeniLastnostGumbov();
+            //SpremeniLastnostGumbov();
         }
 
         //gremo skozi vse gumbe

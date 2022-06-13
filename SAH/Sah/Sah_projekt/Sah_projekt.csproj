@@ -65,6 +65,7 @@
     <Compile Include="NavideznaCelica.cs" />
     <Compile Include="NavideznaFigura.cs" />
     <Compile Include="NavideznaSahovnica.cs" />
+    <Compile Include="PravaSahovnica.cs" />
     <Compile Include="RezervaFigure.cs" />
     <Compile Include="Sahovnica.cs" />
     <Compile Include="Funkcije.cs" />
