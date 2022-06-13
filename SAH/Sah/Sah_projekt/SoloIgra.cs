@@ -13,9 +13,10 @@ namespace Sah_projekt
         {
             this.NavideznaSahovnica = new NavideznaSahovnica(barva, velikost);
             this.PravaSahovnica = new PravaSahovnica(NavideznaSahovnica, podlaga);
-
-            //this.Sahovnica = new Sahovnica();
-            //SpremeniLastnostGumbov();
+            this.Igralec1 = new Igralec(barva);
+            this.Igralec2 = new Igralec(NavideznaSahovnica.NasprotnaBarva(barva));
+            this.TrenutniIgralec = Igralec1;
+            SpremeniLastnostGumbov();
         }
 
         //gremo skozi vse gumbe
@@ -29,111 +30,71 @@ namespace Sah_projekt
             {
                 for (int j = 0; j < 8; j++)
                 {
-                    Celica celica = Sahovnica.Celice[i, j];
+                    Celica celica = PravaSahovnica.Celice[i, j];
                     celica.Click += KlikNaCelico;
                 }
             }
         }
 
-        List<Celica> mozne = new List<Celica>();
+        /// <summary>
+        /// Funkcija predstavlja delovanje igre. S kllikom na celico lahko:
+        /// - prestavimo figuro
+        /// - pogledamo možne poteze 
+        /// </summary>
+        /// <param name="sender">gumb na katerega kliknemo</param>
+        /// <param name="e"></param>
         private void KlikNaCelico(object sender, EventArgs e)
         {
             Celica gumb = (Celica)sender;
-            //TODO PREVERI ALI SMO ŽE KLIKNALI NA ZAMENJAVO: OZ LAŽJE, PREVERI ALI JE REZERVA PRIKAZANA
 
-            if (!gumb.Mozen)
-            //KLIKNALI SMO NA GUMB, KJER NI MOŽNA POTEZA
-            //ZATO NAJPREJ IZBIRŠEMO STARE MOŽNE POTEZE
-            //ZATO POGLEDAMO KATERE SO MOŽNE POTEZE
+            if (jeObarvanoPolje(gumb))
             {
-                Celica.PobarvajCeliceNazaj(mozne);
-                mozne.Clear();
-                // TO CELICO SI SHRANIMO ZA KASNEJE, KO BOMO KLIKANLI NA MOŽNO CELICO,
-                // DA BOMO VEDELI, KATERO FIGURO SMO PRESTAVILI NA TO MESTO 
-                this.Sahovnica.Zadnja_celica = gumb;
-                this.Sahovnica.Zadnja_figura = gumb.Figura;
-                int x = gumb.X;
-                int y = gumb.Y;
-                Figura figura = gumb.Figura;
-                //PREVERIMO ČE SMO KLIKNALI NA "PRAVO" FIGURO 
-                if (figura.Barva == this.Sahovnica.Trenutni_igralec.Barva)
-                {
-                    mozne = figura.MoznePoteze(this.Sahovnica);
-                    mozne = Figura.PreveriMoznePoteze(this.Sahovnica, mozne, gumb);
-                }
-                Celica.PobarvajMozneCelice(mozne);
+                PrestaviFiguro(gumb);
+                ZamenjajIgralca();
             }
-
-            else//KLIKNEŠ NA CELICO, KAMOR  JE MOŽNO PRESTAVITI FIGURO
+            else
             {
-                if (this.Sahovnica.podlaga.solo)//IGRAMO SAMI SOLO ALI PROTI RAČUNALNIKU
-                {
-                    //ZADNJO FIGURO PRESTAVIMO, TO POMENI DA NA ZADNJO CELICO NASTAVIMO FIGURO, KI JE PRAZNA
-                    this.Sahovnica.Zadnja_prestavljena_celica = gumb;
-                    Figura nova = new Figura("", this.Sahovnica.Zadnja_celica.X, this.Sahovnica.Zadnja_celica.Y, this.Sahovnica.Zadnja_celica.Size);
-                    if (this.Sahovnica.Zadnja_figura.Ime == "BK" || this.Sahovnica.Zadnja_figura.Ime == "WK")
-                    {
-                        Figura.Rosada(this.Sahovnica, this.Sahovnica.Zadnja_figura, gumb);
-                    }
-                    if (this.Sahovnica.Trenutni_igralec == this.Sahovnica.igralec1)
-                    {
-                        this.Sahovnica.igralec2.SpremeniStanje(gumb, false);
-                        this.Sahovnica.podlaga.label2.Text = this.Sahovnica.igralec2.Vsota.ToString();
-                    }
-                    else
-                    {
-                        this.Sahovnica.igralec1.SpremeniStanje(gumb, false);
-                        this.Sahovnica.podlaga.label1.Text = this.Sahovnica.igralec1.Vsota.ToString();
-                    }
-
-                    Celica.Premik(this.Sahovnica.Zadnja_celica, gumb, this.Sahovnica.Zadnja_figura, nova);
-
-                    //SPREMENI NAZAJ BARVO 
-                    Celica.PobarvajCeliceNazaj(mozne);
-                    //SPRAZNI MOZNE FIGURE
-                    mozne.Clear();
-                    //PREVERIMO ALI JE PRIŠEL KMET DO ZADNJEGA POLJA
-                    //V TEM PRIMERU PRIKAŽEMO "REZERVO" IN IZBEREMO  POLJUBNO FIGURO
-
-                    //TODO POTREBNO NAREDITI DA !!MORE!! KLIKNATI NA GUMB
-                    if (gumb.Figura.Ime == "WP" && gumb.X == 0)
-                    {
-                        this.Sahovnica.rezerva_beli.Prikaži();
-                        Sahovnica.Zamrzni(this.Sahovnica);
-                        return;
-                    }
-                    if (gumb.Figura.Ime == "BP" && gumb.X == 7)
-                    {
-                        this.Sahovnica.rezerva_crni.Prikaži();
-                        Sahovnica.Zamrzni(this.Sahovnica);
-                        return;
-                    }
-
-                    if (this.Sahovnica.Trenutni_igralec == this.Sahovnica.igralec1)
-                    {
-
-                        this.Sahovnica.Trenutni_igralec = this.Sahovnica.igralec2;
-                        if (Figura.Mat(this.Sahovnica, this.Sahovnica.igralec2.Barva))
-                        {
-                            //MessageBox.Show("MAT");
-                            this.Sahovnica.podlaga.Close();
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        this.Sahovnica.Trenutni_igralec = this.Sahovnica.igralec1;
-                        if (Figura.Mat(this.Sahovnica, this.Sahovnica.igralec1.Barva))
-                        {
-                            //MessageBox.Show("MAT");
-                            this.Sahovnica.podlaga.Close();
-                            return;
-                        }
-                    }
-                }
+                //prikaziMoznePoteze();
             }
+        }
 
+        /// <summary>
+        /// Funkcija nam pove, ali je polje na katerega kliknemo že obarvano oziroma
+        /// lahko tja prestavimo figuro.
+        /// </summary>
+        /// <returns>true ali false</returns>
+        public bool jeObarvanoPolje(Celica gumb)
+        {
+            return NavideznaSahovnica.jeObarvanoPolje(gumb);
+        }
 
+        /// <summary>
+        /// Funkcija za prestavljanje figur
+        /// </summary>
+        /// <param name="gumb"></param>
+        public void PrestaviFiguro(Celica gumb)
+        {
+            PravaSahovnica.PrestaviFiguro(gumb);
+        }
+
+        /// <summary>
+        /// Funkcija zamenja trenutnega igralca 
+        /// </summary>
+        public void ZamenjajIgralca()
+        {
+            if (this.TrenutniIgralec == this.Igralec1)
+            {
+                this.TrenutniIgralec = this.Igralec2;
+            }
+            else
+            {
+                this.TrenutniIgralec = this.Igralec2;
+            }
+        }
+
+        public void PrikaziMozneCelice()
+        {
+            // Naslednjič...
         }
     }
 }

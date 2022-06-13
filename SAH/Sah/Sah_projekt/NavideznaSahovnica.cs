@@ -12,17 +12,22 @@ namespace Sah_projekt
         private NavideznaCelica[,] celice;
         private Size velikost;
         private string zacetnaBarva;
+        private NavideznaCelica prejsnaCelica;
+        private List<NavideznaCelica> mozneCelice;
 
         public NavideznaSahovnica(string zacetnaBarva, Size velikost)
         {
             this.ZacetnaBarva = zacetnaBarva;
             this.Velikost = velikost;
             this.Celice = NarediSahovnico(zacetnaBarva, Velikost);
+            this.MozneCelice = new List<NavideznaCelica>();
         }
 
         public NavideznaCelica[,] Celice { get; set; }   
         public Size Velikost { get; set; }
         public string ZacetnaBarva { get; set; }
+        public NavideznaCelica PrejsnaCelica { get; set; }
+        public List<NavideznaCelica> MozneCelice { get; set; }
 
         /// <summary>
         /// Funkcija naredi sahovnico v obliki matrike Celic
@@ -120,7 +125,6 @@ namespace Sah_projekt
             return niz;
         }
 
-
         /// <summary>
         /// Funkcija vrne nasprotno barvo 
         /// </summary>
@@ -130,6 +134,44 @@ namespace Sah_projekt
         {
             if (barva == "W") return "B";
             else return "W";
+        }
+
+        /// <summary>
+        /// Funkcija nam pove, ali je polje na katerega kliknemo že obarvano oziroma
+        /// lahko tja prestavimo figuro.
+        /// </summary>
+        /// <returns>true ali false</returns>
+        public bool jeObarvanoPolje(Celica gumb)
+        {
+            NavideznaCelica celica = Celice[gumb.X, gumb.Y];
+            return celica.JeMozna;
+        }
+
+        /// <summary>
+        /// Fumnkcija naredi premik figure na navidezni sahovnici.
+        /// </summary>
+        /// <param name="gumb"></param>
+        /// <returns>Vrne celico, iz katere se je figura prestavila</returns>
+        public NavideznaCelica PrestaviFiguro(Celica gumb)
+        {
+            NavideznaCelica celica = Celice[gumb.X, gumb.Y];
+            NavideznaFigura figura = Celice[gumb.X, gumb.Y].Figura;
+
+            celica.Figura = PrejsnaCelica.Figura;
+            PrejsnaCelica.Figura = null;
+
+            PonastaviMozneCelice();
+
+            return PrejsnaCelica;
+        }
+
+        public void PonastaviMozneCelice()
+        {
+            foreach (NavideznaCelica moznaCelica in this.MozneCelice)
+            {
+                moznaCelica.JeMozna = false;
+            }
+            this.MozneCelice = new List<NavideznaCelica>();
         }
 
     }
