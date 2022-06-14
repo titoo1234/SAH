@@ -52,6 +52,7 @@ namespace Sah_projekt
                     Podlaga.Controls.Add(gumb);
                     Celice[vrstica, stolpec] = gumb;
                     gumb.SpremeniBarvo(Tema[0], Tema[1]);
+                    gumb.FlatAppearance.BorderSize = 0;
                 }
             }
         }
@@ -73,6 +74,7 @@ namespace Sah_projekt
             foreach (NavideznaCelica moznaCelica in NavideznaSahovnica.MozneCelice)
             {
                 Celice[moznaCelica.X, moznaCelica.Y].SpremeniBarvo(Tema[0], Tema[1]);
+                Celice[moznaCelica.X, moznaCelica.Y].FlatAppearance.BorderSize = 0;
             }
         }
 

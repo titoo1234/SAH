@@ -268,5 +268,9 @@ namespace Sah_projekt
 
         }
 
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

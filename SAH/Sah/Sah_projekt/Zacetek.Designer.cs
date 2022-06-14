@@ -37,10 +37,11 @@
             // 
             // HostGumb
             // 
-            this.HostGumb.Location = new System.Drawing.Point(52, 253);
+            this.HostGumb.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.HostGumb.Location = new System.Drawing.Point(55, 211);
             this.HostGumb.Margin = new System.Windows.Forms.Padding(2);
             this.HostGumb.Name = "HostGumb";
-            this.HostGumb.Size = new System.Drawing.Size(226, 44);
+            this.HostGumb.Size = new System.Drawing.Size(225, 47);
             this.HostGumb.TabIndex = 0;
             this.HostGumb.Text = "JAZ BOM HOST";
             this.HostGumb.UseVisualStyleBackColor = true;
@@ -48,18 +49,19 @@
             // 
             // IpText
             // 
-            this.IpText.Location = new System.Drawing.Point(52, 202);
+            this.IpText.Location = new System.Drawing.Point(55, 345);
             this.IpText.Margin = new System.Windows.Forms.Padding(2);
             this.IpText.Name = "IpText";
-            this.IpText.Size = new System.Drawing.Size(98, 20);
+            this.IpText.Size = new System.Drawing.Size(225, 20);
             this.IpText.TabIndex = 1;
             // 
             // IpGumb
             // 
-            this.IpGumb.Location = new System.Drawing.Point(164, 202);
+            this.IpGumb.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.IpGumb.Location = new System.Drawing.Point(55, 277);
             this.IpGumb.Margin = new System.Windows.Forms.Padding(2);
             this.IpGumb.Name = "IpGumb";
-            this.IpGumb.Size = new System.Drawing.Size(116, 46);
+            this.IpGumb.Size = new System.Drawing.Size(225, 49);
             this.IpGumb.TabIndex = 2;
             this.IpGumb.Text = "Poveži se";
             this.IpGumb.UseVisualStyleBackColor = true;
@@ -67,10 +69,11 @@
             // 
             // SoloGumb
             // 
-            this.SoloGumb.Location = new System.Drawing.Point(52, 69);
+            this.SoloGumb.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.SoloGumb.Location = new System.Drawing.Point(407, 33);
             this.SoloGumb.Margin = new System.Windows.Forms.Padding(2);
             this.SoloGumb.Name = "SoloGumb";
-            this.SoloGumb.Size = new System.Drawing.Size(226, 41);
+            this.SoloGumb.Size = new System.Drawing.Size(225, 44);
             this.SoloGumb.TabIndex = 3;
             this.SoloGumb.Text = "Solo";
             this.SoloGumb.UseVisualStyleBackColor = true;
@@ -78,10 +81,11 @@
             // 
             // RacunalnikGumb
             // 
-            this.RacunalnikGumb.Location = new System.Drawing.Point(300, 69);
+            this.RacunalnikGumb.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.RacunalnikGumb.Location = new System.Drawing.Point(407, 91);
             this.RacunalnikGumb.Margin = new System.Windows.Forms.Padding(2);
             this.RacunalnikGumb.Name = "RacunalnikGumb";
-            this.RacunalnikGumb.Size = new System.Drawing.Size(226, 41);
+            this.RacunalnikGumb.Size = new System.Drawing.Size(225, 44);
             this.RacunalnikGumb.TabIndex = 4;
             this.RacunalnikGumb.Text = "Računalnik";
             this.RacunalnikGumb.UseVisualStyleBackColor = true;
@@ -91,7 +95,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(720, 429);
+            this.BackgroundImage = global::Sah_projekt.Properties.Resources.naslovnaSlika;
+            this.ClientSize = new System.Drawing.Size(783, 431);
             this.Controls.Add(this.RacunalnikGumb);
             this.Controls.Add(this.SoloGumb);
             this.Controls.Add(this.IpGumb);

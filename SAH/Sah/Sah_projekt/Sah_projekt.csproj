@@ -163,6 +163,15 @@
   <ItemGroup>
     <None Include="Resources\s3.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sahovnica1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sahovnica2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\naslovnaSlika.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

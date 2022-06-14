@@ -58,6 +58,7 @@ namespace Sah_projekt
             }
 
             gumb.BackColor = PravaSahovnica.Tema[2];
+            gumb.FlatAppearance.BorderSize = 2;
         }
 
         /// <summary>
