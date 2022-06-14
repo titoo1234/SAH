@@ -13,6 +13,7 @@ namespace Sah_projekt
         private Sahovnica sahovnica;
         private Igralec igralec1;
         private Igralec igralec2;
+        private Igralec trenutniIgralec;
 
         public Igra() { }
         public NavideznaSahovnica NavideznaSahovnica { get; set; }
@@ -20,6 +21,7 @@ namespace Sah_projekt
         public Sahovnica Sahovnica { get; set; }
         public Igralec Igralec1 { get; set; }
         public Igralec Igralec2 { get; set; }
+        public Igralec TrenutniIgralec { get; set; }
 
     }
 }

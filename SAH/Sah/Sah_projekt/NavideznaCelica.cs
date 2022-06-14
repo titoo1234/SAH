@@ -12,17 +12,20 @@ namespace Sah_projekt
         private int y;
         private NavideznaFigura figura;
         private NavideznaSahovnica sahovnica;
+        private bool jeMozna;
 
         public NavideznaCelica(int x, int y)
         {
             this.X = x; 
             this.Y = y;
             this.Figura = null;
+            this.JeMozna = false;
         }
         public int X { get; set; }
         public int Y { get; set; }  
         public NavideznaFigura Figura { get; set; } 
         public NavideznaSahovnica Sahovnica { get; set; }
+        public bool JeMozna { get; set; }
 
         /// <summary>
         /// Funkcija vrne celico nad trenutno celico.

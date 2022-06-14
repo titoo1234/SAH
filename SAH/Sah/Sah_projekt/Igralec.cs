@@ -14,9 +14,7 @@ namespace Sah_projekt
         {
             this.Barva = barva;
             this.Vsota = 39;
-
         }
-
         public string Barva { get;  set; }
         public int Vsota { get;  set; }
 
@@ -30,8 +28,6 @@ namespace Sah_projekt
             {
                 this.Vsota -= celica.Figura.Vrednost;
             }
-            
-
         }
     }
 }
