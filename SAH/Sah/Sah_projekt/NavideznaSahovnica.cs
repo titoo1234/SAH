@@ -35,7 +35,7 @@ namespace Sah_projekt
         /// <param name="barva"> barva nam pove s katerimi figurami začnemo</param>
         /// <param name="velikost"></param>
         /// <returns>Vrne matriko Celic</returns>
-        public static NavideznaCelica[,] NarediSahovnico(string barva, Size velikost)
+        public NavideznaCelica[,] NarediSahovnico(string barva, Size velikost)
         {
             NavideznaCelica[,] celice = new NavideznaCelica[8, 8];
             string nasprotna_barva = NasprotnaBarva(barva);
@@ -45,7 +45,7 @@ namespace Sah_projekt
             {
                 for (int j = 0; j < 8; j++)
                 {
-                    celice[i, j] = new NavideznaCelica(i, j);
+                    celice[i, j] = new NavideznaCelica(i, j, this);
                     // Figura je privzeto null
                 }
             }
@@ -53,59 +53,59 @@ namespace Sah_projekt
             // ustvarimo kmete
             for (int j = 0; j < 8; j++)
             {
-                celice[1, j] = new NavideznaCelica(1, j);
-                celice[1, j].Figura = new Kmet(nasprotna_barva, velikost, celice[1, j]);
-                celice[6, j] = new NavideznaCelica(1, j);
-                celice[6, j].Figura = new Kmet(barva, velikost, celice[6, j]);
+                celice[1, j] = new NavideznaCelica(1, j, this);
+                celice[1, j].Figura = new Kmet(nasprotna_barva, velikost);
+                celice[6, j] = new NavideznaCelica(6, j, this);
+                celice[6, j].Figura = new Kmet(barva, velikost);
             }
 
             // ostala polja 
             // Trdnjave:
-            celice[0, 0] = new NavideznaCelica(0, 0);
-            celice[0, 0].Figura = new Trdnjava(nasprotna_barva, velikost, celice[0, 0]);
-            celice[0, 7] = new NavideznaCelica(0, 7);
-            celice[0, 7].Figura = new Trdnjava(nasprotna_barva, velikost, celice[0, 7]);
+            celice[0, 0] = new NavideznaCelica(0, 0, this);
+            celice[0, 0].Figura = new Trdnjava(nasprotna_barva, velikost);
+            celice[0, 7] = new NavideznaCelica(0, 7, this);
+            celice[0, 7].Figura = new Trdnjava(nasprotna_barva, velikost);
 
-            celice[7, 0] = new NavideznaCelica(7, 0);
-            celice[7, 0].Figura = new Trdnjava(barva, velikost, celice[7, 0]);
-            celice[7, 7] = new NavideznaCelica(7, 7);
-            celice[7, 7].Figura = new Trdnjava(barva, velikost, celice[7, 7]);
+            celice[7, 0] = new NavideznaCelica(7, 0, this);
+            celice[7, 0].Figura = new Trdnjava(barva, velikost);
+            celice[7, 7] = new NavideznaCelica(7, 7, this);
+            celice[7, 7].Figura = new Trdnjava(barva, velikost);
 
             // konji:
-            celice[0, 1] = new NavideznaCelica(0, 1);
-            celice[0, 1].Figura = new Konj(nasprotna_barva, velikost, celice[0, 1]);
-            celice[0, 6] = new NavideznaCelica(0, 6);
-            celice[0, 6].Figura = new Konj(nasprotna_barva, velikost, celice[0, 6]);
+            celice[0, 1] = new NavideznaCelica(0, 1, this);
+            celice[0, 1].Figura = new Konj(nasprotna_barva, velikost);
+            celice[0, 6] = new NavideznaCelica(0, 6, this);
+            celice[0, 6].Figura = new Konj(nasprotna_barva, velikost);
 
-            celice[7, 1] = new NavideznaCelica(7, 1);
-            celice[7, 1].Figura = new Konj(barva, velikost, celice[7, 1]);
-            celice[7, 6] = new NavideznaCelica(7, 6);
-            celice[7, 6].Figura = new Konj(barva, velikost, celice[7, 6]);
+            celice[7, 1] = new NavideznaCelica(7, 1, this);
+            celice[7, 1].Figura = new Konj(barva, velikost);
+            celice[7, 6] = new NavideznaCelica(7, 6, this);
+            celice[7, 6].Figura = new Konj(barva, velikost);
 
             // tekači:
-            celice[0, 2] = new NavideznaCelica(0, 2);
-            celice[0, 2].Figura = new Tekac(nasprotna_barva, velikost, celice[0, 2]);
-            celice[0, 5] = new NavideznaCelica(0, 5);
-            celice[0, 5].Figura = new Tekac(nasprotna_barva, velikost, celice[0, 5]);
+            celice[0, 2] = new NavideznaCelica(0, 2, this);
+            celice[0, 2].Figura = new Tekac(nasprotna_barva, velikost);
+            celice[0, 5] = new NavideznaCelica(0, 5, this);
+            celice[0, 5].Figura = new Tekac(nasprotna_barva, velikost);
 
-            celice[7, 2] = new NavideznaCelica(7, 2);
-            celice[7, 2].Figura = new Tekac(barva, velikost, celice[7, 2]);
-            celice[7, 5] = new NavideznaCelica(7, 5);
-            celice[7, 5].Figura = new Tekac(barva, velikost, celice[7, 5]);
-
-            // kraljici:
-            celice[0, 3] = new NavideznaCelica(0, 3);
-            celice[0, 3].Figura = new Kraljica(nasprotna_barva, velikost, celice[0, 3]);
-
-            celice[7, 3] = new NavideznaCelica(7, 3);
-            celice[7, 3].Figura = new Kraljica(barva, velikost, celice[7, 3]);
+            celice[7, 2] = new NavideznaCelica(7, 2, this);
+            celice[7, 2].Figura = new Tekac(barva, velikost);
+            celice[7, 5] = new NavideznaCelica(7, 5, this);
+            celice[7, 5].Figura = new Tekac(barva, velikost);
 
             // kraljici:
-            celice[0, 4] = new NavideznaCelica(0, 4);
-            celice[0, 4].Figura = new Kralj(nasprotna_barva, velikost, celice[0, 4]);
+            celice[0, 3] = new NavideznaCelica(0, 3, this);
+            celice[0, 3].Figura = new Kraljica(nasprotna_barva, velikost);
 
-            celice[7, 4] = new NavideznaCelica(7, 4);
-            celice[7, 4].Figura = new Kralj(barva, velikost, celice[7, 4]);
+            celice[7, 3] = new NavideznaCelica(7, 3, this);
+            celice[7, 3].Figura = new Kraljica(barva, velikost);
+
+            // kraljici:
+            celice[0, 4] = new NavideznaCelica(0, 4, this);
+            celice[0, 4].Figura = new Kralj(nasprotna_barva, velikost);
+
+            celice[7, 4] = new NavideznaCelica(7, 4, this);
+            celice[7, 4].Figura = new Kralj(barva, velikost);
 
             return celice;   
         }
@@ -165,6 +165,9 @@ namespace Sah_projekt
             return PrejsnaCelica;
         }
 
+        /// <summary>
+        /// Funkcija ponastavi vse celice, ki so bile nastavljene kot mozne
+        /// </summary>
         public void PonastaviMozneCelice()
         {
             foreach (NavideznaCelica moznaCelica in this.MozneCelice)
@@ -172,6 +175,27 @@ namespace Sah_projekt
                 moznaCelica.JeMozna = false;
             }
             this.MozneCelice = new List<NavideznaCelica>();
+        }
+
+        /// <summary>
+        /// Funkcija poisce mozne poteze izbrane figure na navidezni sahovnici 
+        /// in nastavi lastnost "jeMozna" posamezni celici
+        /// </summary>
+        /// <param name="gumb"></param>
+        /// <returns> vrne seznam moznih celic </returns>
+        public List<NavideznaCelica> PoisciMoznePoteze(Celica gumb)
+        {
+            NavideznaCelica celica = this.Celice[gumb.X, gumb.Y];
+            NavideznaFigura figura = celica.Figura;
+
+            if (figura is null) return new List<NavideznaCelica>();
+            List<NavideznaCelica> moznePoteze = figura.MoznePoteze(celica, this);
+            foreach (NavideznaCelica moznaCelica in moznePoteze)
+            {
+                moznaCelica.JeMozna = true;
+            }
+            PrejsnaCelica = celica;
+            return moznePoteze;
         }
 
     }

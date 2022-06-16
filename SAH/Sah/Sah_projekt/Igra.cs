@@ -8,7 +8,7 @@ namespace Sah_projekt
 {
     public class Igra
     {
-        private NavideznaSahovnica navideznaSahovnica;
+        private static NavideznaSahovnica navideznaSahovnica;
         private PravaSahovnica pravaSahovnica;
         private Sahovnica sahovnica;
         private Igralec igralec1;
@@ -16,7 +16,7 @@ namespace Sah_projekt
         private Igralec trenutniIgralec;
 
         public Igra() { }
-        public NavideznaSahovnica NavideznaSahovnica { get; set; }
+        public static NavideznaSahovnica NavideznaSahovnica { get; set; }
         public PravaSahovnica PravaSahovnica { get; set; }
         public Sahovnica Sahovnica { get; set; }
         public Igralec Igralec1 { get; set; }

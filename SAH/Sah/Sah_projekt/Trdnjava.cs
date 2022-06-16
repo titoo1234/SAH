@@ -9,7 +9,7 @@ namespace Sah_projekt
 {
     public class Trdnjava : NavideznaFigura
     {
-        public Trdnjava(string barva, Size velikost, NavideznaCelica celica)
+        public Trdnjava(string barva, Size velikost)
         {
             this.Ime = barva + "R";
             this.Barva = barva;
@@ -32,23 +32,23 @@ namespace Sah_projekt
         /// </summary>
         /// <param name="celica"></param>
         /// <returns>Vrne seznam možnih potez</returns>
-        public List<NavideznaCelica> MoznePoteze(NavideznaCelica celica)
+        public override List<NavideznaCelica> MoznePoteze(NavideznaCelica celica, NavideznaSahovnica Sahovnica)
         {
             List<NavideznaCelica> mozne = new List<NavideznaCelica>();
             int i = 1;
-            while (celica.X - i >= 0 && DodajPremik_Gor(mozne, celica, i))
+            while (celica.X - i >= 0 && DodajPremik_Gor(mozne, celica, i, Sahovnica))
             {
                 i++;
             }
-            while (celica.X + i <= 7 && DodajPremik_Dol(mozne, celica, i))
+            while (celica.X + i <= 7 && DodajPremik_Dol(mozne, celica, i, Sahovnica))
             {
                 i++;
             }
-            while (celica.Y + i <= 7 && DodajPremik_Desno(mozne, celica, i))
+            while (celica.Y + i <= 7 && DodajPremik_Desno(mozne, celica, i, Sahovnica))
             {
                 i++;
             }
-            while (celica.X - i >= 0 && DodajPremik_Levo(mozne, celica, i))
+            while (celica.X - i >= 0 && DodajPremik_Levo(mozne, celica, i, Sahovnica))
             {
                 i++;
             }

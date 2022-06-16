@@ -9,7 +9,7 @@ namespace Sah_projekt
 {
     public class Tekac : NavideznaFigura
     {
-        public Tekac(string barva, Size velikost, NavideznaCelica celica)
+        public Tekac(string barva, Size velikost)
         {
             this.Ime = barva + "B";
             this.Barva = barva;
@@ -32,23 +32,23 @@ namespace Sah_projekt
         /// </summary>
         /// <param name="celica"></param>
         /// <returns>Vrne seznam možnih potez</returns>
-        public List<NavideznaCelica> MoznePoteze(NavideznaCelica celica)
+        public override List<NavideznaCelica> MoznePoteze(NavideznaCelica celica, NavideznaSahovnica Sahovnica)
         {
             List<NavideznaCelica> mozne = new List<NavideznaCelica>();
             int i = 1;
-            while (celica.X + i <= 7 && celica.Y + i <= 7 && DodajPremik_DolDesno(mozne, celica, i))
+            while (celica.X + i <= 7 && celica.Y + i <= 7 && DodajPremik_DolDesno(mozne, celica, i, Sahovnica))
             {
                 i++;
             }
-            while (celica.X - i >= 0 && celica.Y + i <= 7 && DodajPremik_GorDesno(mozne, celica, i))
+            while (celica.X - i >= 0 && celica.Y + i <= 7 && DodajPremik_GorDesno(mozne, celica, i, Sahovnica))
             {
                 i++;
             }
-            while (celica.X + i <= 7 && celica.Y - i >= 0 && DodajPremik_DolLevo(mozne, celica, i))
+            while (celica.X + i <= 7 && celica.Y - i >= 0 && DodajPremik_DolLevo(mozne, celica, i, Sahovnica))
             {
                 i++;
             }
-            while (celica.X - i >= 0 && celica.Y - i >= 0 && DodajPremik_GorLevo(mozne, celica, i))
+            while (celica.X - i >= 0 && celica.Y - i >= 0 && DodajPremik_GorLevo(mozne, celica, i, Sahovnica))
             {
                 i++;
             }

@@ -17,7 +17,7 @@ namespace Sah_projekt
         {
             InitializeComponent();
             BelaBarva_Gumb.Enabled = false;
-            temaSagovnicaGumb1.Enabled = false;
+            temaSahovnicaGumb1.Enabled = false;
             this.Igra = igra;
         }
         public Igra Igra { get; set; }
@@ -42,8 +42,9 @@ namespace Sah_projekt
 
         private void ZacetekIgre_Click(object sender, EventArgs e)
         {
-            
             string barvaFigur;
+            Color[] barve;
+
             if (BelaBarva_Gumb.Enabled == false)
             {
                 barvaFigur = "W";
@@ -52,10 +53,9 @@ namespace Sah_projekt
             {
                 barvaFigur = "B";
             }
-            Color[] barve;
-            if(temaSagovnicaGumb1.Enabled == false)
+            
+            if (temaSahovnicaGumb1.Enabled == false)
             {
-
                 barve = new Color[] {Color.White, Color.Green, Color.Yellow };
             }
             else
@@ -68,24 +68,23 @@ namespace Sah_projekt
             newGame.Igra = new SoloIgra(barvaFigur, barve, new Size(40,40), newGame);
             //SoloIgra solo = new SoloIgra(string barva, string tema);
 
-
             Visible = false;
             if (!newGame.IsDisposed)
                 newGame.ShowDialog();
             Visible = true;
         }
 
-        private void temaSagovnicaGumb1_Click(object sender, EventArgs e)
+        private void temaSahovnicaGumb1_Click(object sender, EventArgs e)
         {
-            temaSagovnicaGumb1.Enabled = false;
+            temaSahovnicaGumb1.Enabled = false;
             temaSahovnicaGumb2.Enabled = true;
-            IzbranaTema.Image = temaSagovnicaGumb1.Image;
+            IzbranaTema.Image = temaSahovnicaGumb1.Image;
         }
 
         private void temaSahovnicaGumb2_Click(object sender, EventArgs e)
         {
             temaSahovnicaGumb2.Enabled = false;
-            temaSagovnicaGumb1.Enabled = true;
+            temaSahovnicaGumb1.Enabled = true;
             IzbranaTema.Image = temaSahovnicaGumb2.Image;
         }
 
@@ -93,5 +92,6 @@ namespace Sah_projekt
         {
 
         }
+
     }
 }

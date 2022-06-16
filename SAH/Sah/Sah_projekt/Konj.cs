@@ -11,7 +11,7 @@ namespace Sah_projekt
 {
     public class Konj : NavideznaFigura
     {
-        public Konj(string barva, Size velikost, NavideznaCelica celica)
+        public Konj(string barva, Size velikost)
         {
             this.Ime = barva + "N";
             this.Barva = barva;
@@ -34,8 +34,9 @@ namespace Sah_projekt
         /// </summary>
         /// <param name="celica"></param>
         /// <returns>Vrne seznam možnih potez</returns>
-        public List<NavideznaCelica> MoznePoteze(NavideznaCelica celica)
+        public override List<NavideznaCelica> MoznePoteze(NavideznaCelica celica, NavideznaSahovnica Sahovnica)
         {
+            this.Sahovnica = celica.Sahovnica;
             List<NavideznaCelica> mozne = new List<NavideznaCelica>();
             int i = 1;
             int j = 2;

@@ -11,7 +11,7 @@ namespace Sah_projekt
     {
         public SoloIgra(string barva, Color[] tema, Size velikost, Game podlaga) 
         {
-            this.NavideznaSahovnica = new NavideznaSahovnica(barva, velikost);
+            NavideznaSahovnica = new NavideznaSahovnica(barva, velikost);
             this.PravaSahovnica = new PravaSahovnica(NavideznaSahovnica, podlaga, tema);
             this.Igralec1 = new Igralec(barva);
             this.Igralec2 = new Igralec(NavideznaSahovnica.NasprotnaBarva(barva));
@@ -54,11 +54,10 @@ namespace Sah_projekt
             }
             else
             {
-                //prikaziMoznePoteze();
+                PrikaziMoznePoteze(gumb);
             }
 
-            gumb.BackColor = PravaSahovnica.Tema[2];
-            gumb.FlatAppearance.BorderSize = 2;
+            
         }
 
         /// <summary>
@@ -95,9 +94,9 @@ namespace Sah_projekt
             }
         }
 
-        public void PrikaziMozneCelice()
+        public void PrikaziMoznePoteze(Celica gumb)
         {
-            // Naslednjič...
+            PravaSahovnica.PrikaziMoznePoteze(gumb);
         }
     }
 }

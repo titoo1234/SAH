@@ -78,5 +78,18 @@ namespace Sah_projekt
             }
         }
 
+        /// <summary>
+        /// Funkcija obarva vse celice, kamor lahko prestavimo izbrano figuro
+        /// </summary>
+        public void PrikaziMoznePoteze(Celica gumb)
+        {
+            PonastaviMozneCelice();
+            List<NavideznaCelica> moznePoteze = NavideznaSahovnica.PoisciMoznePoteze(gumb);
+            foreach (NavideznaCelica navideznaCelica in moznePoteze)
+            {
+                this.Celice[navideznaCelica.X, navideznaCelica.Y].SpremeniBarvo(Tema[2], Tema[2]);
+            }
+        }
+
     }
 }

@@ -29,6 +29,11 @@ namespace Sah_projekt
         public Size Velikost { get; set; }
         public NavideznaSahovnica Sahovnica { get; set; }
 
+        public virtual List<NavideznaCelica> MoznePoteze(NavideznaCelica celica, NavideznaSahovnica sahovnica)
+        {
+            return new List<NavideznaCelica>();
+        }
+
         /// <summary>
         /// Funkcija pove ali je podana figura nasprotne barve
         /// </summary>
@@ -75,7 +80,7 @@ namespace Sah_projekt
         /// Funkcija doda zgornjo celico med mozne_poteze, ce se lahko tja prestavimo 
         /// </summary>
         /// <param name="mozne_poteze"></param>
-        public bool DodajPremik_Gor(List<NavideznaCelica> mozne_poteze, NavideznaCelica celica, int i)
+        public bool DodajPremik_Gor(List<NavideznaCelica> mozne_poteze, NavideznaCelica celica, int i, NavideznaSahovnica sahovnica)
         {
             NavideznaCelica trenutna_celica = sahovnica.Celice[celica.X + i, celica.Y];
             return DodajPremik(mozne_poteze, trenutna_celica);
@@ -87,7 +92,7 @@ namespace Sah_projekt
         /// <param name="mozne_poteze"></param>
         /// <param name="trenutna_celica"></param>
         /// <returns></returns>
-        public bool DodajPremik_Dol(List<NavideznaCelica> mozne_poteze, NavideznaCelica celica, int i)
+        public bool DodajPremik_Dol(List<NavideznaCelica> mozne_poteze, NavideznaCelica celica, int i, NavideznaSahovnica sahovnica)
         {
             NavideznaCelica trenutna_celica = sahovnica.Celice[celica.X - i, celica.Y];
             return DodajPremik(mozne_poteze, trenutna_celica);
@@ -100,7 +105,7 @@ namespace Sah_projekt
         /// <param name="celica"></param>
         /// <param name="i"></param>
         /// <returns></returns>
-        public bool DodajPremik_Levo(List<NavideznaCelica> mozne_poteze, NavideznaCelica celica, int i)
+        public bool DodajPremik_Levo(List<NavideznaCelica> mozne_poteze, NavideznaCelica celica, int i, NavideznaSahovnica sahovnica)
         {
             NavideznaCelica trenutna_celica = sahovnica.Celice[celica.X, celica.Y - i];
             return DodajPremik(mozne_poteze, trenutna_celica);
@@ -113,7 +118,7 @@ namespace Sah_projekt
         /// <param name="celica"></param>
         /// <param name="i"></param>
         /// <returns></returns>
-        public bool DodajPremik_Desno(List<NavideznaCelica> mozne_poteze, NavideznaCelica celica, int i)
+        public bool DodajPremik_Desno(List<NavideznaCelica> mozne_poteze, NavideznaCelica celica, int i, NavideznaSahovnica sahovnica)
         {
             NavideznaCelica trenutna_celica = sahovnica.Celice[celica.X, celica.Y + i];
             return DodajPremik(mozne_poteze, trenutna_celica);
@@ -126,7 +131,7 @@ namespace Sah_projekt
         /// <param name="celica"></param>
         /// <param name="i"></param>
         /// <returns></returns>
-        public bool DodajPremik_GorDesno(List<NavideznaCelica> mozne_poteze, NavideznaCelica celica, int i)
+        public bool DodajPremik_GorDesno(List<NavideznaCelica> mozne_poteze, NavideznaCelica celica, int i, NavideznaSahovnica sahovnica)
         {
             NavideznaCelica trenutna_celica = sahovnica.Celice[celica.X - i, celica.Y + i];
             return DodajPremik(mozne_poteze, trenutna_celica);
@@ -139,7 +144,7 @@ namespace Sah_projekt
         /// <param name="celica"></param>
         /// <param name="i"></param>
         /// <returns></returns>
-        public bool DodajPremik_DolDesno(List<NavideznaCelica> mozne_poteze, NavideznaCelica celica, int i)
+        public bool DodajPremik_DolDesno(List<NavideznaCelica> mozne_poteze, NavideznaCelica celica, int i, NavideznaSahovnica sahovnica)
         {
             NavideznaCelica trenutna_celica = sahovnica.Celice[celica.X + i, celica.Y + i];
             return DodajPremik(mozne_poteze, trenutna_celica);
@@ -152,7 +157,7 @@ namespace Sah_projekt
         /// <param name="celica"></param>
         /// <param name="i"></param>
         /// <returns></returns>
-        public bool DodajPremik_GorLevo(List<NavideznaCelica> mozne_poteze, NavideznaCelica celica, int i)
+        public bool DodajPremik_GorLevo(List<NavideznaCelica> mozne_poteze, NavideznaCelica celica, int i, NavideznaSahovnica sahovnica)
         {
             NavideznaCelica trenutna_celica = sahovnica.Celice[celica.X - i, celica.Y - i];
             return DodajPremik(mozne_poteze, trenutna_celica);
@@ -165,7 +170,7 @@ namespace Sah_projekt
         /// <param name="celica"></param>
         /// <param name="i"></param>
         /// <returns></returns>
-        public bool DodajPremik_DolLevo(List<NavideznaCelica> mozne_poteze, NavideznaCelica celica, int i)
+        public bool DodajPremik_DolLevo(List<NavideznaCelica> mozne_poteze, NavideznaCelica celica, int i, NavideznaSahovnica sahovnica)
         {
             NavideznaCelica trenutna_celica = sahovnica.Celice[celica.X + i, celica.Y - i];
             return DodajPremik(mozne_poteze, trenutna_celica);

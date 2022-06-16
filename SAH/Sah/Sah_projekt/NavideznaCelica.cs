@@ -14,12 +14,13 @@ namespace Sah_projekt
         private NavideznaSahovnica sahovnica;
         private bool jeMozna;
 
-        public NavideznaCelica(int x, int y)
+        public NavideznaCelica(int x, int y, NavideznaSahovnica sahovnica)
         {
             this.X = x; 
             this.Y = y;
             this.Figura = null;
             this.JeMozna = false;
+            this.Sahovnica = sahovnica;
         }
         public int X { get; set; }
         public int Y { get; set; }  

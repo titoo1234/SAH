@@ -9,7 +9,7 @@ namespace Sah_projekt
 {
     public class Kmet : NavideznaFigura
     {
-        public Kmet(string barva, Size velikost, NavideznaCelica celica)
+        public Kmet(string barva, Size velikost)
         {
             this.Ime = barva + "P";
             this.Barva = barva;
@@ -35,8 +35,9 @@ namespace Sah_projekt
         /// </summary>
         /// <param name="celica"></param>
         /// <returns>Vrne seznam</returns>
-        public List<NavideznaCelica> MoznePoteze(NavideznaCelica celica)
+        public override List<NavideznaCelica> MoznePoteze(NavideznaCelica celica, NavideznaSahovnica Sahovnica)
         {
+            this.Sahovnica = celica.Sahovnica;
             List<NavideznaCelica> mozne = new List<NavideznaCelica>();
             if ((this.Barva == "W" && Sahovnica.ZacetnaBarva == "W") || (this.Barva == "B" && Sahovnica.ZacetnaBarva == "B"))
             // Igramo z belimi in so bele figure spodaj, igramo s črnimi in so črne spodaj

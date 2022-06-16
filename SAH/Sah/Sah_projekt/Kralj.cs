@@ -9,7 +9,7 @@ namespace Sah_projekt
 {
     public class Kralj : NavideznaFigura
     {
-        public Kralj(string barva, Size velikost, NavideznaCelica celica)
+        public Kralj(string barva, Size velikost)
         {
             this.Ime = barva + "K";
             this.Barva = barva;
@@ -32,7 +32,7 @@ namespace Sah_projekt
         /// </summary>
         /// <param name="celica"></param>
         /// <returns></returns>
-        public bool MoznaLevaRosada(NavideznaCelica celica)
+        public bool MoznaLevaRosada(NavideznaCelica celica, NavideznaSahovnica Sahovnica)
         {
             NavideznaCelica celica_trdnjava = Sahovnica.Celice[celica.X, 0];
             NavideznaFigura trdnjava_figura = celica_trdnjava.Figura;
@@ -53,7 +53,7 @@ namespace Sah_projekt
         /// </summary>
         /// <param name="celica"></param>
         /// <returns></returns>
-        public bool MoznaDesnaRosada(NavideznaCelica celica)
+        public bool MoznaDesnaRosada(NavideznaCelica celica, NavideznaSahovnica Sahovnica)
         {
             NavideznaCelica celica_trdnjava = Sahovnica.Celice[celica.X, 7];
             NavideznaFigura trdnjava_figura = celica_trdnjava.Figura;
@@ -74,15 +74,15 @@ namespace Sah_projekt
         /// </summary>
         /// <param name="celica"></param>
         /// <returns>Vrne seznam možnih potez</returns>
-        public List<NavideznaCelica> MoznePoteze(NavideznaCelica celica)
+        public override List<NavideznaCelica> MoznePoteze(NavideznaCelica celica, NavideznaSahovnica Sahovnica)
         {
             List<NavideznaCelica> mozne = new List<NavideznaCelica>();
-            if (this.MoznaDesnaRosada(celica))
+            if (this.MoznaDesnaRosada(celica, Sahovnica))
             {
                 NavideznaCelica trenutna_celica = Sahovnica.Celice[celica.X, celica.Y + 2];
                 mozne.Add(trenutna_celica);
             }
-            if (this.MoznaLevaRosada(celica))
+            if (this.MoznaLevaRosada(celica, Sahovnica))
             {
                 NavideznaCelica trenutna_celica = Sahovnica.Celice[celica.X, celica.Y - 2];
                 mozne.Add(trenutna_celica);
