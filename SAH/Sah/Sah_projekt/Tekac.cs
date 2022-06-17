@@ -40,14 +40,17 @@ namespace Sah_projekt
             {
                 i++;
             }
+            i = 1;
             while (celica.X - i >= 0 && celica.Y + i <= 7 && DodajPremik_GorDesno(mozne, celica, i, Sahovnica))
             {
                 i++;
             }
+            i = 1;
             while (celica.X + i <= 7 && celica.Y - i >= 0 && DodajPremik_DolLevo(mozne, celica, i, Sahovnica))
             {
                 i++;
             }
+            i = 1;
             while (celica.X - i >= 0 && celica.Y - i >= 0 && DodajPremik_GorLevo(mozne, celica, i, Sahovnica))
             {
                 i++;

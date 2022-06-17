@@ -82,7 +82,7 @@ namespace Sah_projekt
         /// <param name="mozne_poteze"></param>
         public bool DodajPremik_Gor(List<NavideznaCelica> mozne_poteze, NavideznaCelica celica, int i, NavideznaSahovnica sahovnica)
         {
-            NavideznaCelica trenutna_celica = sahovnica.Celice[celica.X + i, celica.Y];
+            NavideznaCelica trenutna_celica = sahovnica.Celice[celica.X - i, celica.Y];
             return DodajPremik(mozne_poteze, trenutna_celica);
         }
 
@@ -94,7 +94,7 @@ namespace Sah_projekt
         /// <returns></returns>
         public bool DodajPremik_Dol(List<NavideznaCelica> mozne_poteze, NavideznaCelica celica, int i, NavideznaSahovnica sahovnica)
         {
-            NavideznaCelica trenutna_celica = sahovnica.Celice[celica.X - i, celica.Y];
+            NavideznaCelica trenutna_celica = sahovnica.Celice[celica.X + i, celica.Y];
             return DodajPremik(mozne_poteze, trenutna_celica);
         }
 

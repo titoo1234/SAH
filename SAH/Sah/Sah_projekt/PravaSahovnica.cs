@@ -76,6 +76,7 @@ namespace Sah_projekt
                 Celice[moznaCelica.X, moznaCelica.Y].SpremeniBarvo(Tema[0], Tema[1]);
                 Celice[moznaCelica.X, moznaCelica.Y].FlatAppearance.BorderSize = 0;
             }
+            NavideznaSahovnica.MozneCelice.Clear();
         }
 
         /// <summary>

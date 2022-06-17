@@ -192,9 +192,10 @@ namespace Sah_projekt
             List<NavideznaCelica> moznePoteze = figura.MoznePoteze(celica, this);
             foreach (NavideznaCelica moznaCelica in moznePoteze)
             {
-                moznaCelica.JeMozna = true;
+                this.Celice[moznaCelica.X, moznaCelica.Y].JeMozna = true;
             }
             PrejsnaCelica = celica;
+            this.MozneCelice = moznePoteze;
             return moznePoteze;
         }
 
