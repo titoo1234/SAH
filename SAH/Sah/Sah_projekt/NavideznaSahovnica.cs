@@ -172,7 +172,7 @@ namespace Sah_projekt
         {
             foreach (NavideznaCelica moznaCelica in this.MozneCelice)
             {
-                moznaCelica.JeMozna = false;
+                this.Celice[moznaCelica.X, moznaCelica.Y].JeMozna = false;
             }
             this.MozneCelice = new List<NavideznaCelica>();
         }
@@ -185,6 +185,7 @@ namespace Sah_projekt
         /// <returns> vrne seznam moznih celic </returns>
         public List<NavideznaCelica> PoisciMoznePoteze(Celica gumb)
         {
+            PonastaviMozneCelice();
             NavideznaCelica celica = this.Celice[gumb.X, gumb.Y];
             NavideznaFigura figura = celica.Figura;
 
