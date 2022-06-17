@@ -172,6 +172,9 @@
   <ItemGroup>
     <None Include="Resources\naslovnaSlika.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="TODO-lista.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>
