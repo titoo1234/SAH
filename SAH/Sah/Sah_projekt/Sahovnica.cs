@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -387,14 +388,15 @@ namespace Sah_projekt
                     }
 
 
-                    Celica.Premik(this.Zadnja_celica, gumb, this.Zadnja_figura, nova);
+
 
 
                     try
                     {
-                        this.niz_igre = PodaljsajNiz(this.zadnja_celica, gumb, this.zadnja_figura, this.niz_igre);
+                        this.niz_igre = PodaljsajNiz(this.Zadnja_celica, gumb, this.Zadnja_figura, this.niz_igre);
                         //TODO naredi da se izpiše na oknu zaenkrat piše kr na label1 namesto na label9
-                        this.podlaga.label1.Text = this.niz_igre;
+
+
 
                     }
 
@@ -403,8 +405,19 @@ namespace Sah_projekt
 
                     }
 
-                    //MessageBox.Show(this.niz_igre);
+                    Celica.Premik(this.Zadnja_celica, gumb, this.Zadnja_figura, nova);
 
+                    if (this.Trenutni_igralec == igralec1 && Figura.JeSah(this, "BK"))
+                    {
+                        this.niz_igre = this.niz_igre.Remove(this.niz_igre.Length - 1, 1) + "+ ";
+                    }
+                    if (this.Trenutni_igralec == igralec2 && Figura.JeSah(this, "WK"))
+                    {
+                        this.niz_igre = this.niz_igre.Remove(this.niz_igre.Length - 1, 1) + "+ ";
+                    }
+                    this.podlaga.label1.Text = this.niz_igre;
+
+                    NajbolsaPotezaTest(this.niz_igre);
 
                     //SPREMENI NAZAJ BARVO 
                     Celica.PobarvajCeliceNazaj(mozne);
@@ -412,6 +425,7 @@ namespace Sah_projekt
                     mozne.Clear();
                     //PREVERIMO ALI JE PRIŠEL KMET DO ZADNJEGA POLJA
                     //V TEM PRIMERU PRIKAŽEMO "REZERVO" IN IZBEREMO  POLJUBNO FIGURO
+
 
                     //TODO POTREBNO NAREDITI DA !!MORE!! KLIKNATI NA GUMB
                     if (gumb.Figura.Ime == "WP" && gumb.X == 0)
@@ -468,7 +482,7 @@ namespace Sah_projekt
                         //Celica celica2 = vse_poteze[index].Item2;
 
 
-                        (Celica, Celica, int) naredi_potezo = NajboljsaPoteza(vse_poteze,1);
+                        (Celica, Celica, int) naredi_potezo = NajboljsaPoteza(vse_poteze, 1);
 
                         Celica celica1 = naredi_potezo.Item1;
                         Celica celica2 = naredi_potezo.Item2;
@@ -721,12 +735,190 @@ namespace Sah_projekt
 
 
         public string PodaljsajNiz(Celica c1, Celica c2, Figura f, string niz)
+        //KO JE ŠAH JE TREBA NA KONCU DODAT '+'
+        //TO NAREDI PO NAREJENI POTEZI
         {
+            if (c1.Figura.Ime.Substring(1, 1) == "P")
+            {
+                if (c2.Figura.Ime != "")
+                {
+                    return niz + crke[c1.Y] + "x" + crke[c2.Y] + (8 - c2.X) + " ";
+                }
+                else
+                {
+                    return niz + crke[c2.Y] + (8 - c2.X) + " ";
+                }
+            }
+            else if (c1.Figura.Ime.Substring(1, 1) == "N")
+            {
+                for (int i = 0; i < 8; i++)
+                {
+                    for (int j = 0; j < 8; j++)
+                    {
+                        Celica c = this.Celice[i, j];
+                        if (c1.Figura.Ime == c.Figura.Ime && ((c1.Figura.X != c.Figura.X) || (c1.Figura.Y != c.Figura.Y)))
+                        {
+                            List<Celica> mozne = c.Figura.MoznePoteze(this);
+                            if (mozne.Contains(c2) && c2.Figura.Ime != "")
+                            {
+                                // preveri a ločis po stolpcu al vrstici (uporabiš x)
+                                if (c.Figura.X == c1.Figura.X)
+                                {
+                                    return niz + c1.Figura.Ime.Substring(1, 1) + crke[c1.Y] + "x" + crke[c2.Y] + (8 - c2.X) + " ";
+                                    //return
+                                }
+                                else if (c.Figura.Y == c1.Figura.Y)
+                                {
+                                    return niz + c1.Figura.Ime.Substring(1, 1) + (8 - c1.X) + "x" + crke[c2.Y] + (8 - c2.X) + " ";
+                                }
+                                else
+                                {
+                                    return niz + c1.Figura.Ime.Substring(1, 1) + crke[c1.Y] + "x" + crke[c2.Y] + (8 - c2.X) + " ";
+                                    //return
+                                }
 
-            return niz + c2.Figura.Ime.Substring(1, 1) + crke[c2.Y] + (8 - c2.X) + " ";
+                            }
+                            else if (mozne.Contains(c2) && c2.Figura.Ime == "")
+                            {
+                                // preveri a ločis po stolpcu al vrstici (NEuporabiš x)
+                                if (c.Figura.X == c1.Figura.X)
+                                {
+                                    return niz + c1.Figura.Ime.Substring(1, 1) + crke[c1.Y] + crke[c2.Y] + (8 - c2.X) + " ";
+                                    //return
+                                }
+                                else if (c.Figura.Y == c1.Figura.Y)
+                                {
+                                    return niz + c1.Figura.Ime.Substring(1, 1) + (8 - c1.X) + crke[c2.Y] + (8 - c2.X) + " ";
+                                }
+                                else
+                                {
+                                    return niz + c1.Figura.Ime.Substring(1, 1) + crke[c1.Y] + crke[c2.Y] + (8 - c2.X) + " ";
+                                    //return
+                                }
+                            }
+
+                        }
+
+                    }
+
+                }
+                //nisi našel drugega ki lahko gre na isto celico
+                if (c2.Figura.Ime != "")
+                {
+                    return niz + c1.Figura.Ime.Substring(1, 1) + "x" + crke[c2.Y] + (8 - c2.X) + " ";
+                }
+                else
+                {
+                    return niz + c1.Figura.Ime.Substring(1, 1) + crke[c2.Y] + (8 - c2.X) + " ";
+                }
+
+            }
+            else if (c1.Figura.Ime.Substring(1, 1) == "R")
+            {
+                for (int i = 0; i < 8; i++)
+                {
+                    for (int j = 0; j < 8; j++)
+                    {
+                        Celica c = this.Celice[i, j];
+                        if (c1.Figura.Ime == c.Figura.Ime && ((c1.Figura.X != c.Figura.X) || (c1.Figura.Y != c.Figura.Y)))
+                        {
+                            List<Celica> mozne = c.Figura.MoznePoteze(this);
+                            if (mozne.Contains(c2) && c2.Figura.Ime != "")
+                            {
+                                // preveri a ločis po stolpcu al vrstici (uporabiš x)
+                                if (c.Figura.X == c1.Figura.X)
+                                {
+                                    return niz + c1.Figura.Ime.Substring(1, 1) + crke[c1.Y] + "x" + crke[c2.Y] + (8 - c2.X) + " ";
+                                    //return
+                                }
+                                else if (c.Figura.Y == c1.Figura.Y)
+                                {
+                                    return niz + c1.Figura.Ime.Substring(1, 1) + (8 - c1.X) + "x" + crke[c2.Y] + (8 - c2.X) + " ";
+                                }
+                                else
+                                {
+                                    return niz + c1.Figura.Ime.Substring(1, 1) + crke[c1.Y] + "x" + crke[c2.Y] + (8 - c2.X) + " ";
+                                    //return
+                                }
+
+                            }
+                            else if (mozne.Contains(c2) && c2.Figura.Ime == "")
+                            {
+                                // preveri a ločis po stolpcu al vrstici (NEuporabiš x)
+                                if (c.Figura.X == c1.Figura.X)
+                                {
+                                    return niz + c1.Figura.Ime.Substring(1, 1) + crke[c1.Y] + crke[c2.Y] + (8 - c2.X) + " ";
+                                    //return
+                                }
+                                else if (c.Figura.Y == c1.Figura.Y)
+                                {
+                                    return niz + c1.Figura.Ime.Substring(1, 1) + (8 - c1.X) + crke[c2.Y] + (8 - c2.X) + " ";
+                                }
+                                else
+                                {
+                                    return niz + c1.Figura.Ime.Substring(1, 1) + crke[c1.Y] + crke[c2.Y] + (8 - c2.X) + " ";
+                                    //return
+                                }
+                            }
+
+                        }
+
+                    }
+
+                }
+                //nisi našel drugega ki lahko gre na isto celico
+                if (c2.Figura.Ime != "")
+                {
+                    return niz + c1.Figura.Ime.Substring(1, 1) + "x" + crke[c2.Y] + (8 - c2.X) + " ";
+                }
+                else
+                {
+                    return niz + c1.Figura.Ime.Substring(1, 1) + crke[c2.Y] + (8 - c2.X) + " ";
+                }
+
+            }
+            else
+            {
+                if (c1.Figura.Ime.Substring(1, 1) == "K") // tu se preverja rošada
+                {
+                    if (c1.Y - c2.Y == -2)// primerjamo Y, če se kralj premakne za 2 v levo je leva rošada
+                    {
+                        return niz + "O-O ";
+                    }
+                    if (c1.Y - c2.Y == 2)
+                    {
+                        return niz + "O-O-O ";
+                    }
+                }
+                if (c2.Figura.Ime != "")
+                {
+                    return niz + c1.Figura.Ime.Substring(1, 1) + "x" + crke[c2.Y] + (8 - c2.X) + " ";
+                }
+                else
+                {
+                    return niz + c1.Figura.Ime.Substring(1, 1) + crke[c2.Y] + (8 - c2.X) + " ";
+                }
+            }
+
 
         }
 
+        public string NajbolsaPotezaTest(string niz)
+        {
+            //using (var client = new WebClient())
+            //{
+            //    var contents = client.DownloadString("https://nextchessmove.com/");
+            //    MessageBox.Show(contents);
+            //}
+            //MessageBox.Show(client.ToString());
+            //WebBrowser wb = new WebBrowser();
+            ////wb.Contains("https://nextchessmove.com/");
+            //MessageBox.Show(wb.ToString());
+            System.Diagnostics.Process.Start("http://www.google.com");
+
+            //MessageBox.Show(data);
+            return "a";
+        }
 
 
     }
