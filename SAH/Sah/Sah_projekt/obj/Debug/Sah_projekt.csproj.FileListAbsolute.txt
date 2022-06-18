@@ -38,3 +38,4 @@ C:\Users\Uporabnik\Desktop\sah\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.pdb
 C:\Users\Uporabnik\Desktop\sah\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.Nastavitve.resources
 >>>>>>> c01fc4079fc700cdf893dde3e0b3ddce888fe795
 C:\Users\damij\Desktop\Projekt\SAH\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.Nastavitve.resources
+C:\Users\damij\Desktop\Projekt\SAH\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.csproj.SuggestedBindingRedirects.cache

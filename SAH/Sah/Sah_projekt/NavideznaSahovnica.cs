@@ -152,17 +152,67 @@ namespace Sah_projekt
         /// </summary>
         /// <param name="gumb"></param>
         /// <returns>Vrne celico, iz katere se je figura prestavila</returns>
-        public NavideznaCelica PrestaviFiguro(Celica gumb)
+        public List<NavideznaCelica> PrestaviFiguro(Celica gumb)
         {
+            List<NavideznaCelica> prejsneCelice = new List<NavideznaCelica>();   
+            
             NavideznaCelica celica = Celice[gumb.X, gumb.Y];
             NavideznaFigura figura = Celice[gumb.X, gumb.Y].Figura;
+            prejsneCelice.Add(this.PrejsnaCelica);
+
+            if (jeRosada(celica)) {
+                NarediRosado(celica, prejsneCelice);
+            }
 
             celica.Figura = PrejsnaCelica.Figura;
             PrejsnaCelica.Figura = null;
 
+            if (!(figura is null))
+            {
+                figura.Premaknjen = true;
+            }
+            
             PonastaviMozneCelice();
 
-            return PrejsnaCelica;
+            return prejsneCelice;
+        }
+
+        /// <summary>
+        /// Funkcija vrne true, če premik na podano celico predstavlja rošado
+        /// </summary>
+        /// <param name="celica"></param>
+        /// <returns></returns>
+        public bool jeRosada(NavideznaCelica celica)
+        {
+            if (PrejsnaCelica is null) return false;
+            if (PrejsnaCelica.Figura is null) return false;
+            if (PrejsnaCelica.Figura.GetType() == typeof(Kralj) && Math.Abs(celica.Y - PrejsnaCelica.Y) == 2)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Funkcija "premakne" trdnjavo na pravilno mesto po rošadi
+        /// </summary>
+        /// <param name="celica"></param>
+        public void NarediRosado(NavideznaCelica celica, List<NavideznaCelica> prejsneCelice)
+        {
+            if (celica.Y < 3)
+            {
+                this.Celice[celica.X, 2].Figura = this.Celice[celica.X, 0].Figura;
+                this.Celice[celica.X, 0].Figura = null;
+                prejsneCelice.Add(this.Celice[celica.X, 0]);
+                this.Celice[celica.X, 2].Figura.Premaknjen = true;
+            }
+            else
+            {
+                this.Celice[celica.X, 4].Figura = this.Celice[celica.X, 7].Figura;
+                this.Celice[celica.X, 7].Figura = null;
+                prejsneCelice.Add(this.Celice[celica.X, 7]);
+                this.Celice[celica.X, 4].Figura.Premaknjen = true;
+            }
         }
 
         /// <summary>

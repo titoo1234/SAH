@@ -60,8 +60,25 @@ namespace Sah_projekt
         public void PrestaviFiguro(Celica gumb)
         {
             PonastaviMozneCelice();
-            NavideznaCelica prejsnaCelica = NavideznaSahovnica.PrestaviFiguro(gumb);
-            Celica prejsniGumb = Celice[prejsnaCelica.X, prejsnaCelica.Y];
+
+            List<NavideznaCelica> prejsneCelice = NavideznaSahovnica.PrestaviFiguro(gumb);
+            if (prejsneCelice.Count == 2) // Če je bila narejena rošada
+            {
+                // premik trdnjave
+                Celica trdnjava = this.Celice[prejsneCelice[1].X, prejsneCelice[1].Y];
+                if (trdnjava.Y < 3) // leva rošada  
+                {
+                    NavideznaFigura premaknjenaTrdnjava = NavideznaSahovnica.Celice[trdnjava.X, trdnjava.Y + 2].Figura;
+                    this.Celice[trdnjava.X, 2].Image = premaknjenaTrdnjava.Slika;
+                }
+                else // desna rošada
+                {
+                    NavideznaFigura premaknjenaTrdnjava = NavideznaSahovnica.Celice[trdnjava.X, trdnjava.Y - 3].Figura;
+                    this.Celice[trdnjava.X, 4].Image = premaknjenaTrdnjava.Slika;
+                }
+                trdnjava.Image = null;
+            }
+            Celica prejsniGumb = this.Celice[prejsneCelice[0].X, prejsneCelice[0].Y];
             gumb.Image = prejsniGumb.Image;
             prejsniGumb.Image = null;
         }
