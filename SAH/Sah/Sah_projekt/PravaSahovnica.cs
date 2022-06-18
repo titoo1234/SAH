@@ -87,6 +87,7 @@ namespace Sah_projekt
             List<NavideznaCelica> moznePoteze = NavideznaSahovnica.PoisciMoznePoteze(gumb);
             foreach (NavideznaCelica navideznaCelica in moznePoteze)
             {
+                this.Celice[navideznaCelica.X, navideznaCelica.Y].FlatAppearance.BorderSize = 2;
                 this.Celice[navideznaCelica.X, navideznaCelica.Y].SpremeniBarvo(Tema[2], Tema[2]);
             }
         }
