@@ -14,6 +14,7 @@ namespace Sah_projekt
         private string zacetnaBarva;
         private NavideznaCelica prejsnaCelica;
         private List<NavideznaCelica> mozneCelice;
+        private NavideznaRezerva navideznaRezerva;
 
         public NavideznaSahovnica(string zacetnaBarva, Size velikost)
         {
@@ -21,6 +22,7 @@ namespace Sah_projekt
             this.Velikost = velikost;
             this.Celice = NarediSahovnico(zacetnaBarva, Velikost);
             this.MozneCelice = new List<NavideznaCelica>();
+            this.NavideznaRezerva = new NavideznaRezerva(ZacetnaBarva, Velikost);
         }
 
         public NavideznaCelica[,] Celice { get; set; }   
@@ -28,6 +30,7 @@ namespace Sah_projekt
         public string ZacetnaBarva { get; set; }
         public NavideznaCelica PrejsnaCelica { get; set; }
         public List<NavideznaCelica> MozneCelice { get; set; }
+        public NavideznaRezerva NavideznaRezerva { get;  set; }
 
         /// <summary>
         /// Funkcija naredi sahovnico v obliki matrike Celic
@@ -176,26 +179,17 @@ namespace Sah_projekt
         /// <returns>Vrne celico, iz katere se je figura prestavila</returns>
         public List<NavideznaCelica> PrestaviFiguro(Celica gumb)
         {
-            List<NavideznaCelica> prejsneCelice = new List<NavideznaCelica>();   
-            
+            List<NavideznaCelica> prejsneCelice = new List<NavideznaCelica>();         
             NavideznaCelica celica = Celice[gumb.X, gumb.Y];
             NavideznaFigura figura = Celice[gumb.X, gumb.Y].Figura;
             prejsneCelice.Add(this.PrejsnaCelica);
-
             if (jeRosada(celica)) {
                 NarediRosado(celica, prejsneCelice);
             }
-
             celica.Figura = PrejsnaCelica.Figura;
+            celica.Figura.Premaknjen = true;
             PrejsnaCelica.Figura = null;
-
-            if (!(figura is null))
-            {
-                figura.Premaknjen = true;
-            }
-            
             PonastaviMozneCelice();
-
             return prejsneCelice;
         }
 
@@ -236,15 +230,17 @@ namespace Sah_projekt
             if (this.ZacetnaBarva == "W")
             {
                 this.Celice[celica.X, 3].Figura = this.Celice[celica.X, 0].Figura;
+                this.Celice[celica.X, 3].Figura.Premaknjen = true;
                 this.Celice[celica.X, 0].Figura = null;
-                prejsneCelice.Add(this.Celice[celica.X, 0]);
+                prejsneCelice.Add(this.Celice[celica.X, 3]);
                 this.Celice[celica.X, 3].Figura.Premaknjen = true;
             }
             else
             {
                 this.Celice[celica.X, 2].Figura = this.Celice[celica.X, 0].Figura;
+                this.Celice[celica.X, 2].Figura.Premaknjen = true;
                 this.Celice[celica.X, 0].Figura = null;
-                prejsneCelice.Add(this.Celice[celica.X, 0]);
+                prejsneCelice.Add(this.Celice[celica.X, 2]);
                 this.Celice[celica.X, 2].Figura.Premaknjen = true;
             }
         }
@@ -254,15 +250,17 @@ namespace Sah_projekt
             if (this.ZacetnaBarva == "W")
             {
                 this.Celice[celica.X, 5].Figura = this.Celice[celica.X, 7].Figura;
+                this.Celice[celica.X, 5].Figura.Premaknjen = true;
                 this.Celice[celica.X, 7].Figura = null;
-                prejsneCelice.Add(this.Celice[celica.X, 7]);
+                prejsneCelice.Add(this.Celice[celica.X, 5]);
                 this.Celice[celica.X, 5].Figura.Premaknjen = true;
             }
             else
             {
                 this.Celice[celica.X, 4].Figura = this.Celice[celica.X, 7].Figura;
+                this.Celice[celica.X, 4].Figura.Premaknjen = true;
                 this.Celice[celica.X, 7].Figura = null;
-                prejsneCelice.Add(this.Celice[celica.X, 7]);
+                prejsneCelice.Add(this.Celice[celica.X, 4]);
                 this.Celice[celica.X, 4].Figura.Premaknjen = true;
             }
         }

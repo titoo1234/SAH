@@ -23,6 +23,11 @@ namespace Sah_projekt
             this.Figura = null;
             this.Mozen= false;
         }
+        public Celica(int x)
+        {
+            this.X = x;
+            this.Figura = null;
+        }
 
         // LASTNOSTI: 
         // ====================================================

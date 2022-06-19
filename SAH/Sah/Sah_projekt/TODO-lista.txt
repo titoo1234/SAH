@@ -1,7 +1,7 @@
 ﻿TODO-LISTA:
 =================================
 - možne poteze (preprečevanje šaha na našega kralja)
-- rošada
+- rošada ✓
 - rezerva
 - (en passant kmeta)
 - igra proti računalniku :
