@@ -94,18 +94,40 @@ namespace Sah_projekt
             celice[7, 5].Figura = new Tekac(barva, velikost);
 
             // kraljici:
-            celice[0, 3] = new NavideznaCelica(0, 3, this);
-            celice[0, 3].Figura = new Kraljica(nasprotna_barva, velikost);
+            if (this.ZacetnaBarva == "W") // bela kraljica je vedno na belem polju, črna pa na črnem!
+            {
+                celice[0, 3] = new NavideznaCelica(0, 3, this);
+                celice[0, 3].Figura = new Kraljica(nasprotna_barva, velikost);
 
-            celice[7, 3] = new NavideznaCelica(7, 3, this);
-            celice[7, 3].Figura = new Kraljica(barva, velikost);
+                celice[7, 3] = new NavideznaCelica(7, 3, this);
+                celice[7, 3].Figura = new Kraljica(barva, velikost);
+            }
+            else
+            {
+                celice[0, 4] = new NavideznaCelica(0, 4, this);
+                celice[0, 4].Figura = new Kraljica(nasprotna_barva, velikost);
 
-            // kraljici:
-            celice[0, 4] = new NavideznaCelica(0, 4, this);
-            celice[0, 4].Figura = new Kralj(nasprotna_barva, velikost);
+                celice[7, 4] = new NavideznaCelica(7, 4, this);
+                celice[7, 4].Figura = new Kraljica(barva, velikost);
+            }
 
-            celice[7, 4] = new NavideznaCelica(7, 4, this);
-            celice[7, 4].Figura = new Kralj(barva, velikost);
+            // kralja:
+            if (this.ZacetnaBarva == "W") // bela kralj je vedno na črnem polju, črni pa na belem!
+            {
+                celice[0, 4] = new NavideznaCelica(0, 4, this);
+                celice[0, 4].Figura = new Kralj(nasprotna_barva, velikost);
+
+                celice[7, 4] = new NavideznaCelica(7, 4, this);
+                celice[7, 4].Figura = new Kralj(barva, velikost);
+            }
+            else
+            {
+                celice[0, 3] = new NavideznaCelica(0, 3, this);
+                celice[0, 3].Figura = new Kralj(nasprotna_barva, velikost);
+
+                celice[7, 3] = new NavideznaCelica(7, 3, this);
+                celice[7, 3].Figura = new Kralj(barva, velikost);
+            }
 
             return celice;   
         }
@@ -186,7 +208,7 @@ namespace Sah_projekt
         {
             if (PrejsnaCelica is null) return false;
             if (PrejsnaCelica.Figura is null) return false;
-            if (PrejsnaCelica.Figura.GetType() == typeof(Kralj) && Math.Abs(celica.Y - PrejsnaCelica.Y) == 2)
+            if (PrejsnaCelica.Figura.GetType() == typeof(Kralj) && Math.Abs(celica.Y - PrejsnaCelica.Y) == 2) // rosada je takrat, ko se kralj pomakne za 2 mesti
             {
                 return true;
             }
@@ -199,12 +221,42 @@ namespace Sah_projekt
         /// <param name="celica"></param>
         public void NarediRosado(NavideznaCelica celica, List<NavideznaCelica> prejsneCelice)
         {
-            if (celica.Y < 3)
+            if (celica.Y < this.PrejsnaCelica.Y)
+            {
+                NarediLevoRosado(celica, prejsneCelice);
+            }
+            else
+            {
+                NarediDesnoRosado(celica, prejsneCelice);
+            }
+        }
+
+        public void NarediLevoRosado(NavideznaCelica celica, List<NavideznaCelica> prejsneCelice)
+        {
+            if (this.ZacetnaBarva == "W")
+            {
+                this.Celice[celica.X, 3].Figura = this.Celice[celica.X, 0].Figura;
+                this.Celice[celica.X, 0].Figura = null;
+                prejsneCelice.Add(this.Celice[celica.X, 0]);
+                this.Celice[celica.X, 3].Figura.Premaknjen = true;
+            }
+            else
             {
                 this.Celice[celica.X, 2].Figura = this.Celice[celica.X, 0].Figura;
                 this.Celice[celica.X, 0].Figura = null;
                 prejsneCelice.Add(this.Celice[celica.X, 0]);
                 this.Celice[celica.X, 2].Figura.Premaknjen = true;
+            }
+        }
+
+        public void NarediDesnoRosado(NavideznaCelica celica, List<NavideznaCelica> prejsneCelice)
+        {
+            if (this.ZacetnaBarva == "W")
+            {
+                this.Celice[celica.X, 5].Figura = this.Celice[celica.X, 7].Figura;
+                this.Celice[celica.X, 7].Figura = null;
+                prejsneCelice.Add(this.Celice[celica.X, 7]);
+                this.Celice[celica.X, 5].Figura.Premaknjen = true;
             }
             else
             {

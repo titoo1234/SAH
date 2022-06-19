@@ -36,14 +36,12 @@ namespace Sah_projekt
         {
             NavideznaCelica celica_trdnjava = Sahovnica.Celice[celica.X, 0];
             NavideznaFigura trdnjava_figura = celica_trdnjava.Figura;
+            if (trdnjava_figura is null) return false; // če trdnjave ni več na svojem mestu ne moremo narediti rošade
 
-            if (!this.Premaknjen && !trdnjava_figura.Premaknjen && (trdnjava_figura.Ime == "WR" || trdnjava_figura.Ime == "BR"))
+            if (!this.Premaknjen && !trdnjava_figura.Premaknjen)
             {
-                //preverimo če so umesne prazne
-                if (Sahovnica.Celice[celica.X, 1].Figura is null && Sahovnica.Celice[celica.X, 2].Figura is null && Sahovnica.Celice[celica.X, 3].Figura is null)
-                {
-                    return true;
-                }
+                //preverimo če so vmesne celice prazne
+                return PreglejVmesneCelice(celica_trdnjava, celica, Sahovnica);
             }
             return false;
         }
@@ -57,16 +55,30 @@ namespace Sah_projekt
         {
             NavideznaCelica celica_trdnjava = Sahovnica.Celice[celica.X, 7];
             NavideznaFigura trdnjava_figura = celica_trdnjava.Figura;
+            if (trdnjava_figura is null) return false; // če trdnjave ni več na svojem mestu ne moremo narediti rošade
 
-            if (!this.Premaknjen && !trdnjava_figura.Premaknjen && (trdnjava_figura.Ime == "WR" || trdnjava_figura.Ime == "BR"))
+            if (!this.Premaknjen && !trdnjava_figura.Premaknjen)
             {
-                //preverimo če so umesne prazne
-                if (Sahovnica.Celice[celica.X, 6].Figura is null && Sahovnica.Celice[celica.X, 5].Figura is null)
-                {
-                    return true;
-                }
+                //preverimo če so vmesne celice prazne
+                return PreglejVmesneCelice(celica, celica_trdnjava, Sahovnica);
             }
             return false;
+        }
+
+        /// <summary>
+        /// Funkcija vrne true, če so vmesne celice (vodoravno) prazne in false sicer
+        /// </summary>
+        /// <param name="zacetna"></param>
+        /// <param name="koncna"></param>
+        /// <param name="sahovnica"></param>
+        /// <returns></returns>
+        public bool PreglejVmesneCelice(NavideznaCelica zacetna, NavideznaCelica koncna, NavideznaSahovnica sahovnica)
+        {
+            for (int i = zacetna.Y + 1; i < koncna.Y; i++)
+            {
+                if (!(sahovnica.Celice[zacetna.X, i].Figura is null)) return false;
+            }
+            return true;
         }
 
         /// <summary>
