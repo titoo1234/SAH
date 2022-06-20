@@ -34,6 +34,13 @@ namespace Sah_projekt
                     celica.Click += KlikNaCelico;
                 }
             }
+            for (int i = 0;i < 4; i++)
+            {
+                Celica nasaCelica = PravaSahovnica.PravaRezerva.NasaRezerva[i];
+                nasaCelica.Click += KlikNaCelico;
+                Celica nasprotnaCelica = PravaSahovnica.PravaRezerva.NasprotnaRezerva[i];
+                nasprotnaCelica.Click += KlikNaCelico;
+            }
         }
 
         /// <summary>
@@ -47,17 +54,62 @@ namespace Sah_projekt
         {
             Celica gumb = (Celica)sender;
 
-            if (jeObarvanoPolje(gumb))
+
+            if (KliknemoNaRezervo(gumb))
             {
-                PrestaviFiguro(gumb);
-                ZamenjajIgralca();
+                NarediZamenjavo(gumb);
             }
             else
             {
-                PrikaziMoznePoteze(gumb);
+                if (jeObarvanoPolje(gumb))
+                {
+                    PrestaviFiguro(gumb);
+                    if (PrikaziRezervo(gumb))
+                    {
+                        if(TrenutniIgralec == Igralec1)
+                        {
+                            PravaSahovnica.PravaRezerva.PrikaziNasoRezervo();
+                        }
+                        else
+                        {
+                            PravaSahovnica.PravaRezerva.PrikaziNasprotnoRezervo();
+                        }
+                        
+                    }
+
+                    ZamenjajIgralca();
+                }
+                else
+                {
+                    PrikaziMoznePoteze(gumb);
+                }
             }
 
+        }
+        /// <summary>
+        /// Funkcija preveri ali je kmet na koncu.
+        /// </summary>
+        /// <returns>true, če je kmet na koncu</returns>
+        public bool PrikaziRezervo(Celica gumb)
+        {
+            return (NavideznaSahovnica.PrikaziRezervo(gumb));
+        }
+        /// <summary>
+        /// Preveri ali smo kliknali na gumb, ki se nahaja v rezervi
+        /// </summary>
+        /// <param name="gumb"></param>
+        /// <returns></returns>
+        public bool KliknemoNaRezervo(Celica gumb)
+        {
             
+            return (gumb.Y == -1);
+        }
+        /// <summary>
+        /// Funkcija naredi zamenjavo rezerve s kmetom.
+        /// </summary>
+        public void NarediZamenjavo(Celica gumb)
+        {
+            PravaSahovnica.NarediZamenjavo(gumb);
         }
 
         /// <summary>
@@ -69,6 +121,7 @@ namespace Sah_projekt
         {
             return NavideznaSahovnica.jeObarvanoPolje(gumb);
         }
+        
 
         /// <summary>
         /// Funkcija za prestavljanje figur

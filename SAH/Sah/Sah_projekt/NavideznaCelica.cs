@@ -22,6 +22,11 @@ namespace Sah_projekt
             this.JeMozna = false;
             this.Sahovnica = sahovnica;
         }
+        public NavideznaCelica(int x)
+        {
+            this.X = x;
+            this.Figura = null;
+        }
         public int X { get; set; }
         public int Y { get; set; }  
         public NavideznaFigura Figura { get; set; } 
