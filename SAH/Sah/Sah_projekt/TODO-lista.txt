@@ -2,7 +2,7 @@
 =================================
 - možne poteze (preprečevanje šaha na našega kralja)
 - rošada ✓
-- rezerva
+- rezerva ✓
 - (en passant kmeta)
 - igra proti računalniku :
 	--> naključno izbiranje

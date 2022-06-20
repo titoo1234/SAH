@@ -66,7 +66,7 @@ namespace Sah_projekt
                     PrestaviFiguro(gumb);
                     if (PrikaziRezervo(gumb))
                     {
-                        if(TrenutniIgralec == Igralec1)
+                        if (TrenutniIgralec == Igralec1)
                         {
                             PravaSahovnica.PravaRezerva.PrikaziNasoRezervo();
                         }
@@ -143,7 +143,7 @@ namespace Sah_projekt
             }
             else
             {
-                this.TrenutniIgralec = this.Igralec2;
+                this.TrenutniIgralec = this.Igralec1;
             }
         }
 
