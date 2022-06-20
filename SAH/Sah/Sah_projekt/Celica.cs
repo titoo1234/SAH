@@ -27,6 +27,7 @@ namespace Sah_projekt
         {
             this.X = x;
             this.Figura = null;
+            this.Y = -1;
         }
 
         // LASTNOSTI: 
@@ -59,7 +60,7 @@ namespace Sah_projekt
             }
             set
             {
-                if (value < 0 || value > 7)
+                if (value < -1 || value > 7)
                 {
                     throw new ArgumentException("Y mora biti med 0 in 7");
                 }

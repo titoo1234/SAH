@@ -89,9 +89,8 @@ namespace Sah_projekt
             // premik kralja
             Celica prejsniGumb = this.Celice[prejsneCelice[0].X, prejsneCelice[0].Y];
             gumb.Image = prejsniGumb.Image;
-            prejsniGumb.Image = null;
+            prejsniGumb.Image = null;   
         }
-
         /// <summary>
         /// Funkcija pobarva mozne celice nazaj na prvotno barvo ;-)
         /// </summary>
@@ -116,6 +115,14 @@ namespace Sah_projekt
                 this.Celice[navideznaCelica.X, navideznaCelica.Y].FlatAppearance.BorderSize = 2;
                 this.Celice[navideznaCelica.X, navideznaCelica.Y].SpremeniBarvo(Tema[2], Tema[2]);
             }
+        }
+        public void NarediZamenjavo(Celica gumb)
+        {
+            NavideznaCelica navideznaCelica = NavideznaSahovnica.NarediZamenjavo(gumb);
+            Celica celica = this.Celice[navideznaCelica.X, navideznaCelica.Y];
+            celica.Image = navideznaCelica.Figura.Slika;
+            PravaRezerva.SkrijNasoRezervo();
+            PravaRezerva.SkrijNasprotnoRezervo();
         }
 
     }

@@ -190,6 +190,8 @@ namespace Sah_projekt
             celica.Figura.Premaknjen = true;
             PrejsnaCelica.Figura = null;
             PonastaviMozneCelice();
+            PrejsnaCelica = celica;
+
             return prejsneCelice;
         }
 
@@ -244,6 +246,39 @@ namespace Sah_projekt
                 this.Celice[celica.X, 2].Figura.Premaknjen = true;
             }
         }
+        /// <summary>
+        /// Funkcija preveri ali smo prestavili kmeta na zadnjo polje
+        /// </summary>
+        /// <param name="gumb"></param>
+        /// <returns>vrne true, če je kmet na zadnjem polju na sahovnici</returns>
+        public bool PrikaziRezervo(Celica gumb)
+        {
+            NavideznaCelica celica = Celice[gumb.X, gumb.Y];
+            NavideznaFigura figura = Celice[gumb.X, gumb.Y].Figura;
+            if ((figura.GetType() == typeof(Kmet)) && (celica.X == 0 || celica.X == 7)) return true;
+            return false;
+        }
+        /// <summary>
+        /// Naredi zamenjavo kmeta z rezervo.
+        /// </summary>
+        /// <param name="gumb"></param>
+        /// <returns></returns>
+        public NavideznaCelica NarediZamenjavo(Celica gumb)
+        {
+            NavideznaFigura rezervnaFigura;
+            if (PrejsnaCelica.Figura.Barva == "W")
+            {
+                rezervnaFigura = NavideznaRezerva.BelaRezerva[gumb.X].Figura;
+            }
+            else
+            {
+                rezervnaFigura = NavideznaRezerva.CrnaRezerva[gumb.X].Figura;
+            }
+            PrejsnaCelica.Figura = rezervnaFigura;
+            return this.PrejsnaCelica;
+        }
+
+
 
         public void NarediDesnoRosado(NavideznaCelica celica, List<NavideznaCelica> prejsneCelice)
         {

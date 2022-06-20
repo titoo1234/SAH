@@ -38,5 +38,6 @@ namespace Sah_projekt
             celice[3].Figura = new Tekac(zacetnaBarva, velikost);
             return celice;
         }
+
     }
 }

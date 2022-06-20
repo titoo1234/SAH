@@ -22,7 +22,7 @@ namespace Sah_projekt
             this.NasaRezerva = NarediRezervo(navideznaRezerva.ZacetnaBarva);
             this.NasprotnaRezerva = NarediRezervo(NavideznaSahovnica.NasprotnaBarva(navideznaRezerva.ZacetnaBarva));
             this.Tema = tema;
-            
+
         }
 
         public NavideznaRezerva NavideznaRezerva { get; set; }
@@ -36,10 +36,10 @@ namespace Sah_projekt
             Celica[] rezerva = new Celica[4];
             if (zacetnaBarva == NavideznaRezerva.ZacetnaBarva)
             {
-                for(int i = 0; i < 4; i++)
+                for (int i = 0; i < 4; i++)
                 {
                     Celica gumb = new Celica(i);
-                    gumb.Location = new Point(50 + i * velikost.Width, 50-velikost.Width);
+                    gumb.Location = new Point(50 + i * velikost.Width, 50 - velikost.Width);
                     gumb.Size = velikost;
                     gumb.TabStop = false;
                     gumb.FlatStyle = FlatStyle.Flat;
@@ -53,9 +53,10 @@ namespace Sah_projekt
                         gumb.Image = NavideznaRezerva.CrnaRezerva[i].Figura.Slika;
 
                     }
+                    gumb.Visible = false;
                     Podlaga.Controls.Add(gumb);
                     rezerva[i] = gumb;
-                }  
+                }
 
             }
             else
@@ -77,13 +78,47 @@ namespace Sah_projekt
                         gumb.Image = NavideznaRezerva.CrnaRezerva[i].Figura.Slika;
 
                     }
+                    gumb.Visible = false;
                     Podlaga.Controls.Add(gumb);
                     rezerva[i] = gumb;
                 }
             }
-            
+
             return rezerva;
 
+        }
+        public void PrikaziNasoRezervo()
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                Celica gumb = NasaRezerva[i];
+                gumb.Visible = true;
+            }
+
+        }
+        public void SkrijNasoRezervo()
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                Celica gumb = NasaRezerva[i];
+                gumb.Visible = false;
+            }
+        }
+        public void PrikaziNasprotnoRezervo()
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                Celica gumb = NasprotnaRezerva[i];
+                gumb.Visible = true;
+            }
+        }
+        public void SkrijNasprotnoRezervo()
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                Celica gumb = NasprotnaRezerva[i];
+                gumb.Visible = false;
+            }
         }
     }
 }
