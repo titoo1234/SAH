@@ -246,6 +246,7 @@ namespace Sah_projekt
                 this.Celice[celica.X, 2].Figura.Premaknjen = true;
             }
         }
+
         /// <summary>
         /// Funkcija preveri ali smo prestavili kmeta na zadnjo polje
         /// </summary>
@@ -258,6 +259,7 @@ namespace Sah_projekt
             if ((figura.GetType() == typeof(Kmet)) && (celica.X == 0 || celica.X == 7)) return true;
             return false;
         }
+
         /// <summary>
         /// Naredi zamenjavo kmeta z rezervo.
         /// </summary>
@@ -277,7 +279,6 @@ namespace Sah_projekt
             PrejsnaCelica.Figura = rezervnaFigura;
             return this.PrejsnaCelica;
         }
-
 
 
         public void NarediDesnoRosado(NavideznaCelica celica, List<NavideznaCelica> prejsneCelice)
@@ -323,16 +324,86 @@ namespace Sah_projekt
             PonastaviMozneCelice();
             NavideznaCelica celica = this.Celice[gumb.X, gumb.Y];
             NavideznaFigura figura = celica.Figura;
+            PrejsnaCelica = celica;
+            //if (PrejsnaCelica is null) PrejsnaCelica = celica; 
 
             if (figura is null) return new List<NavideznaCelica>();
             List<NavideznaCelica> moznePoteze = figura.MoznePoteze(celica, this);
+            moznePoteze = FiltrirajPoteze(moznePoteze); // odstranimo neveljavne poteze (šah na našega kralja)
             foreach (NavideznaCelica moznaCelica in moznePoteze)
             {
                 this.Celice[moznaCelica.X, moznaCelica.Y].JeMozna = true;
             }
-            PrejsnaCelica = celica;
             this.MozneCelice = moznePoteze;
             return moznePoteze;
+        }
+
+        public List<NavideznaCelica> FiltrirajPoteze(List<NavideznaCelica> moznePoteze)
+        {
+            List<NavideznaCelica> filtriranePoteze = new List<NavideznaCelica>();
+            foreach (NavideznaCelica moznaPoteza in moznePoteze)
+            {
+                NavideznaFigura kopija = moznaPoteza.Figura;
+                moznaPoteza.Figura = this.PrejsnaCelica.Figura;
+                this.PrejsnaCelica.Figura = null;
+                String barva = moznaPoteza.Figura.Barva;
+                if (!JeSah(barva))
+                {
+                    filtriranePoteze.Add(moznaPoteza);
+                }
+                NastaviPrvotnoStanje(moznaPoteza, PrejsnaCelica, kopija);
+            }
+            return filtriranePoteze;
+        }
+
+        /// <summary>
+        /// Funkcija vrne figure v stanje pred potezo
+        /// </summary>
+        /// <param name="moznaPoteza"></param>
+        /// <param name="prejsnaPoteza"></param>
+        /// <param name="kopija"></param>
+        public void NastaviPrvotnoStanje(NavideznaCelica moznaPoteza, NavideznaCelica prejsnaPoteza, NavideznaFigura kopija)
+        {
+            prejsnaPoteza.Figura = moznaPoteza.Figura;
+            moznaPoteza.Figura = kopija;
+        }
+
+        /// <summary>
+        /// Funkcija nam vrne true, če je trenutno na šahovnici napaden naš kralj
+        /// </summary>
+        /// <param name="sahovnica"></param>
+        /// <param name="kralj"></param>
+        /// <returns>true ali false</returns>
+        public bool JeSah(String barva)
+        {
+            //GREMO SKOZI VSE FIGURE, ZA VSAKO PREVERIMO ČE "NAPADA" NASPROTNEGA KRALJA
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    NavideznaCelica celica = this.Celice[i, j];
+                    NavideznaFigura figura = celica.Figura;
+                    if (figura.GetType() == typeof(Kralj))
+                    {
+                        // TODO
+                    }
+                    if (!(figura is null) && figura.Barva != barva) // gledamo samo nasprotne figure
+                    {
+                        List<NavideznaCelica> mozne_poteze = figura.MoznePoteze(celica, this);
+                        foreach (NavideznaCelica mozna in mozne_poteze)
+                        {
+                            if (!(mozna.Figura is null))
+                            {
+                                if (mozna.Figura.GetType() == typeof(Kralj))
+                                {
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return false;
         }
 
     }

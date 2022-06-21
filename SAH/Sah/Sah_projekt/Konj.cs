@@ -36,7 +36,6 @@ namespace Sah_projekt
         /// <returns>Vrne seznam možnih potez</returns>
         public override List<NavideznaCelica> MoznePoteze(NavideznaCelica celica, NavideznaSahovnica Sahovnica)
         {
-            this.Sahovnica = celica.Sahovnica;
             List<NavideznaCelica> mozne = new List<NavideznaCelica>();
             int i = 1;
             int j = 2;

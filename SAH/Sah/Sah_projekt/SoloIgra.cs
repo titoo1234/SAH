@@ -26,6 +26,7 @@ namespace Sah_projekt
         /// </summary>
         public void SpremeniLastnostGumbov()
         {
+            // Za šahovnico
             for (int i = 0; i < 8; i++)
             {
                 for (int j = 0; j < 8; j++)
@@ -34,6 +35,7 @@ namespace Sah_projekt
                     celica.Click += KlikNaCelico;
                 }
             }
+            // Za rezervne figure (ko pridemo s kmetom do konca)
             for (int i = 0;i < 4; i++)
             {
                 Celica nasaCelica = PravaSahovnica.PravaRezerva.NasaRezerva[i];
@@ -54,27 +56,21 @@ namespace Sah_projekt
         {
             Celica gumb = (Celica)sender;
 
-
             if (KliknemoNaRezervo(gumb))
             {
                 NarediZamenjavo(gumb);
             }
-            else
+            else 
+            // kliknali smo na šahovnico
             {
                 if (jeObarvanoPolje(gumb))
                 {
                     PrestaviFiguro(gumb);
+
                     if (PrikaziRezervo(gumb))
                     {
-                        if (TrenutniIgralec == Igralec1)
-                        {
-                            PravaSahovnica.PravaRezerva.PrikaziNasoRezervo();
-                        }
-                        else
-                        {
-                            PravaSahovnica.PravaRezerva.PrikaziNasprotnoRezervo();
-                        }
-                        
+                        if (TrenutniIgralec == Igralec1) PravaSahovnica.PravaRezerva.PrikaziNasoRezervo();
+                        else PravaSahovnica.PravaRezerva.PrikaziNasprotnoRezervo();
                     }
 
                     ZamenjajIgralca();
@@ -84,8 +80,8 @@ namespace Sah_projekt
                     PrikaziMoznePoteze(gumb);
                 }
             }
-
         }
+
         /// <summary>
         /// Funkcija preveri ali je kmet na koncu.
         /// </summary>
@@ -94,6 +90,7 @@ namespace Sah_projekt
         {
             return (NavideznaSahovnica.PrikaziRezervo(gumb));
         }
+
         /// <summary>
         /// Preveri ali smo kliknali na gumb, ki se nahaja v rezervi
         /// </summary>
@@ -104,6 +101,7 @@ namespace Sah_projekt
             
             return (gumb.Y == -1);
         }
+
         /// <summary>
         /// Funkcija naredi zamenjavo rezerve s kmetom.
         /// </summary>
@@ -122,7 +120,6 @@ namespace Sah_projekt
             return NavideznaSahovnica.jeObarvanoPolje(gumb);
         }
         
-
         /// <summary>
         /// Funkcija za prestavljanje figur
         /// </summary>
@@ -147,6 +144,10 @@ namespace Sah_projekt
             }
         }
 
+        /// <summary>
+        /// Funkcija na šahovnici obarva polja, na katere se lahko prestavimo z izbrano figuro
+        /// </summary>
+        /// <param name="gumb"></param>
         public void PrikaziMoznePoteze(Celica gumb)
         {
             PravaSahovnica.PrikaziMoznePoteze(gumb);
