@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Sah_projekt
 {
     public class NavideznaSahovnica
@@ -16,6 +17,7 @@ namespace Sah_projekt
         private List<NavideznaCelica> mozneCelice;
         private NavideznaRezerva navideznaRezerva;
         private string nasprotnaBarva;
+        private Random random;
 
         public NavideznaSahovnica(string zacetnaBarva, Size velikost)
         {
@@ -25,9 +27,11 @@ namespace Sah_projekt
             this.MozneCelice = new List<NavideznaCelica>();
             this.NavideznaRezerva = new NavideznaRezerva(ZacetnaBarva, Velikost);
             this.NasprotnaBarva = VrniNasprotnoBarvo(ZacetnaBarva);
+            this.Random = new Random();
         }
 
         public NavideznaCelica[,] Celice { get; set; }   
+        public Random Random { get; set; }
         public Size Velikost { get; set; }
         public string ZacetnaBarva { get; set; }
         public NavideznaCelica PrejsnaCelica { get; set; }
@@ -141,7 +145,12 @@ namespace Sah_projekt
         public List<NavideznaCelica> RacunalnikNarediPotezo()
         {
             List<(NavideznaCelica, NavideznaCelica)> vseMoznePoteze = VrniVseMoznePoteze();
-            return new List<NavideznaCelica>{ vseMoznePoteze[0].Item1, vseMoznePoteze[0].Item2 };
+            int rand = Random.Next(vseMoznePoteze.Count);
+            NavideznaCelica prejsnaCelica = vseMoznePoteze[rand].Item1;
+            NavideznaCelica novaCelica = vseMoznePoteze[rand].Item2;
+            novaCelica.Figura = prejsnaCelica.Figura;
+            prejsnaCelica.Figura = null;
+            return new List<NavideznaCelica>{ prejsnaCelica, novaCelica };
         }
 
         /// <summary>
