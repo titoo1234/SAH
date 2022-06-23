@@ -325,7 +325,7 @@ namespace Sah_projekt
             NavideznaCelica celica = this.Celice[gumb.X, gumb.Y];
             NavideznaFigura figura = celica.Figura;
             PrejsnaCelica = celica;
-            //if (PrejsnaCelica is null) PrejsnaCelica = celica; 
+            if (PrejsnaCelica is null) PrejsnaCelica = celica; 
 
             if (figura is null) return new List<NavideznaCelica>();
             List<NavideznaCelica> moznePoteze = figura.MoznePoteze(celica, this);
@@ -353,8 +353,83 @@ namespace Sah_projekt
                 }
                 NastaviPrvotnoStanje(moznaPoteza, PrejsnaCelica, kopija);
             }
+            if (!(PrejsnaCelica is null) && PrejsnaCelica.Figura.GetType() == typeof(Kralj))
+            {
+                if (!PrejsnaCelica.Figura.Premaknjen)
+                {
+                    preveriMoznoDesnoCelicoZaRosado(filtriranePoteze);
+                    preveriMoznoLevoCelicoZaRosado(filtriranePoteze);
+                }
+            }
+
             return filtriranePoteze;
         }
+        /// <summary>
+        /// Funkcija preveri ali lahko naredimo desno rošado in ustrezno ukrepa(odstrani potezo iz možnih potez)
+        /// </summary>
+        /// <param name="filtriranePoteze"></param>
+        public void preveriMoznoDesnoCelicoZaRosado(List<NavideznaCelica> filtriranePoteze)
+        {
+            if (VsebujeCelico(filtriranePoteze, this.Celice[PrejsnaCelica.X, PrejsnaCelica.Y + 2]))
+            {
+                if (!VsebujeCelico(filtriranePoteze, this.Celice[PrejsnaCelica.X, PrejsnaCelica.Y + 1]))
+                {
+                    foreach (NavideznaCelica celica in filtriranePoteze)
+                    {
+                        if (celica.X == PrejsnaCelica.X && celica.Y == PrejsnaCelica.Y + 2)
+                        {
+                            filtriranePoteze.Remove(celica);
+                            break;
+                        }
+                    }
+
+                }
+
+            }
+        }
+        /// <summary>
+        /// Funkcija preveri ali lahko naredimo levo rošado in ustrezno ukrepa(odstrani potezo iz možnih potez)
+        /// </summary>
+        /// <param name="filtriranePoteze"></param>
+        public void preveriMoznoLevoCelicoZaRosado(List<NavideznaCelica> filtriranePoteze)
+        {
+            if (VsebujeCelico(filtriranePoteze, this.Celice[PrejsnaCelica.X, PrejsnaCelica.Y - 2]))
+            {
+                if (!VsebujeCelico(filtriranePoteze, this.Celice[PrejsnaCelica.X, PrejsnaCelica.Y - 1]))
+                {
+                    foreach (NavideznaCelica celica in filtriranePoteze)
+                    {
+                        if (celica.X == PrejsnaCelica.X && celica.Y == PrejsnaCelica.Y - 2)
+                        {
+                            filtriranePoteze.Remove(celica);
+                            break;
+                        }
+                    }
+
+                }
+
+            }
+        }
+        /// <summary>
+        /// Funkcija pove ali "celice" vsebuje celico "celica"
+        /// </summary>
+        /// <param name="celice"></param>
+        /// <param name="celica"></param>
+        /// <returns></returns>
+        public bool VsebujeCelico(List<NavideznaCelica> celice,NavideznaCelica iskanaCelica)
+        {
+            foreach(NavideznaCelica celica in celice)
+            {
+                if(celica.X == iskanaCelica.X && celica.Y == iskanaCelica.Y)
+                {
+                    return true;
+                }
+
+            }
+            return false;
+        }
+
+
 
         /// <summary>
         /// Funkcija vrne figure v stanje pred potezo
@@ -383,10 +458,6 @@ namespace Sah_projekt
                 {
                     NavideznaCelica celica = this.Celice[i, j];
                     NavideznaFigura figura = celica.Figura;
-                    if (figura.GetType() == typeof(Kralj))
-                    {
-                        // TODO
-                    }
                     if (!(figura is null) && figura.Barva != barva) // gledamo samo nasprotne figure
                     {
                         List<NavideznaCelica> mozne_poteze = figura.MoznePoteze(celica, this);

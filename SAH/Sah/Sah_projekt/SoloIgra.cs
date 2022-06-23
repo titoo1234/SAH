@@ -4,20 +4,48 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Sah_projekt
 {
     public class SoloIgra : Igra
     {
-        public SoloIgra(string barva, Color[] tema, Size velikost, Game podlaga) 
-        {
+        public SoloIgra(Nastavitve nastavitve)
+        {//string barva, Color[] tema, Size velikost, Game podlaga
+            string barva = nastavitve.Barva;
+            Size velikost = nastavitve.Velikost;
+            this.Podlaga = nastavitve.Game;
+            Color[] tema = nastavitve.Tema;
+            int cas = nastavitve.Cas;
             NavideznaSahovnica = new NavideznaSahovnica(barva, velikost);
-            this.PravaSahovnica = new PravaSahovnica(NavideznaSahovnica, podlaga, tema);
+            this.PravaSahovnica = new PravaSahovnica(NavideznaSahovnica, Podlaga, tema);
             this.Igralec1 = new Igralec(barva);
             this.Igralec2 = new Igralec(NavideznaSahovnica.NasprotnaBarva(barva));
-            this.TrenutniIgralec = Igralec1;
+            NastaviCas(cas);
+            NastaviTrenutnegaIgralca();
             SpremeniLastnostGumbov();
         }
+        public void NastaviCas(int cas)
+        {
+            Igralec1.NastaviCas(cas,Podlaga.label1);
+            Igralec2.NastaviCas(cas, Podlaga.label2);
+        }
+        /// <summary>
+        /// Funckija nastavi začetnega igralca glede na barvo
+        /// </summary>
+        private void NastaviTrenutnegaIgralca()
+        {
+            if (Igralec1.Barva == "W")
+            {
+                this.TrenutniIgralec = Igralec1;
+            }
+            else
+            {
+                this.TrenutniIgralec = Igralec2;
+            }
+            TrenutniIgralec.Timer.Start();
+        }
+
 
         //gremo skozi vse gumbe
         //gumb.click += funckcija
@@ -55,10 +83,11 @@ namespace Sah_projekt
         private void KlikNaCelico(object sender, EventArgs e)
         {
             Celica gumb = (Celica)sender;
-
             if (KliknemoNaRezervo(gumb))
             {
                 NarediZamenjavo(gumb);
+                OdmrzniSahovnico();
+                //ODMRZNICELICE
             }
             else 
             // kliknali smo na šahovnico
@@ -71,15 +100,31 @@ namespace Sah_projekt
                     {
                         if (TrenutniIgralec == Igralec1) PravaSahovnica.PravaRezerva.PrikaziNasoRezervo();
                         else PravaSahovnica.PravaRezerva.PrikaziNasprotnoRezervo();
+                        ZamrzniSahovnico();
                     }
 
                     ZamenjajIgralca();
                 }
                 else
                 {
-                    PrikaziMoznePoteze(gumb);
+                    PrikaziMoznePoteze(gumb); 
                 }
             }
+        }
+        /// <summary>
+        /// Funkcija odmrzne vse celice na sahovnici
+        /// </summary>
+        private void ZamrzniSahovnico()
+        {
+            PravaSahovnica.ZamrzniSahovnico();
+        }
+
+        /// <summary>
+        /// Funkcija "zamrzne" vse celice v sahovnici
+        /// </summary>
+        private void OdmrzniSahovnico()
+        {
+            PravaSahovnica.OdmrzniSahovnico();
         }
 
         /// <summary>
@@ -134,14 +179,17 @@ namespace Sah_projekt
         /// </summary>
         public void ZamenjajIgralca()
         {
+            TrenutniIgralec.Timer.Stop();
             if (this.TrenutniIgralec == this.Igralec1)
             {
+              
                 this.TrenutniIgralec = this.Igralec2;
             }
             else
             {
                 this.TrenutniIgralec = this.Igralec1;
             }
+            TrenutniIgralec.Timer.Start();
         }
 
         /// <summary>
@@ -150,7 +198,7 @@ namespace Sah_projekt
         /// <param name="gumb"></param>
         public void PrikaziMoznePoteze(Celica gumb)
         {
-            PravaSahovnica.PrikaziMoznePoteze(gumb);
+            PravaSahovnica.PrikaziMoznePoteze(gumb, TrenutniIgralec);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿TODO-LISTA:
 =================================
-- možne poteze (preprečevanje šaha na našega kralja)
+- možne poteze (preprečevanje šaha na našega kralja)✓
 - rošada ✓
 - rezerva ✓
 - (en passant kmeta)
