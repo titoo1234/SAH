@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace Sah_projekt
 {
-    public class SoloIgra : Igra
+    public class RacunalnikIgra : Igra
     {
-        public SoloIgra(Nastavitve nastavitve)
+        public RacunalnikIgra(Nastavitve nastavitve)
         {//string barva, Color[] tema, Size velikost, Game podlaga
             string barva = nastavitve.Barva;
             Size velikost = nastavitve.Velikost;
@@ -27,7 +27,7 @@ namespace Sah_projekt
         }
         public void NastaviCas(int cas)
         {
-            Igralec1.NastaviCas(cas,Podlaga.label1);
+            Igralec1.NastaviCas(cas, Podlaga.label1);
             Igralec2.NastaviCas(cas, Podlaga.label2);
         }
         /// <summary>
@@ -64,7 +64,7 @@ namespace Sah_projekt
                 }
             }
             // Za rezervne figure (ko pridemo s kmetom do konca)
-            for (int i = 0;i < 4; i++)
+            for (int i = 0; i < 4; i++)
             {
                 Celica nasaCelica = PravaSahovnica.PravaRezerva.NasaRezerva[i];
                 nasaCelica.Click += KlikNaCelico;
@@ -86,10 +86,11 @@ namespace Sah_projekt
             if (KliknemoNaRezervo(gumb))
             {
                 NarediZamenjavo(gumb);
+                // zamenjaj igralca 
+                // RacunalnikNarediPotezo();
                 OdmrzniSahovnico();
-                //ODMRZNICELICE
             }
-            else 
+            else
             // kliknali smo na šahovnico
             {
                 if (jeObarvanoPolje(gumb))
@@ -101,16 +102,25 @@ namespace Sah_projekt
                         if (TrenutniIgralec == Igralec1) PravaSahovnica.PravaRezerva.PrikaziNasoRezervo();
                         else PravaSahovnica.PravaRezerva.PrikaziNasprotnoRezervo();
                         ZamrzniSahovnico();
+                        // break
                     }
 
                     ZamenjajIgralca();
+                    RacunalnikNarediPotezo();
                 }
                 else
                 {
-                    PrikaziMoznePoteze(gumb); 
+                    PrikaziMoznePoteze(gumb);
                 }
             }
         }
+
+        private void RacunalnikNarediPotezo()
+        {
+            PravaSahovnica.RacunalnikNarediPotezo();
+            ZamenjajIgralca();
+        }
+
         /// <summary>
         /// Funkcija odmrzne vse celice na sahovnici
         /// </summary>
@@ -143,7 +153,6 @@ namespace Sah_projekt
         /// <returns></returns>
         public bool KliknemoNaRezervo(Celica gumb)
         {
-            
             return (gumb.Y == -1);
         }
 
@@ -164,7 +173,7 @@ namespace Sah_projekt
         {
             return NavideznaSahovnica.jeObarvanoPolje(gumb);
         }
-        
+
         /// <summary>
         /// Funkcija za prestavljanje figur
         /// </summary>
@@ -182,7 +191,6 @@ namespace Sah_projekt
             TrenutniIgralec.Timer.Stop();
             if (this.TrenutniIgralec == this.Igralec1)
             {
-              
                 this.TrenutniIgralec = this.Igralec2;
             }
             else

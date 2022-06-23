@@ -20,7 +20,7 @@ namespace Sah_projekt
             this.NavideznaRezerva = navideznaRezerva;
             this.Podlaga = podlaga;
             this.NasaRezerva = NarediRezervo(navideznaRezerva.ZacetnaBarva);
-            this.NasprotnaRezerva = NarediRezervo(NavideznaSahovnica.NasprotnaBarva(navideznaRezerva.ZacetnaBarva));
+            this.NasprotnaRezerva = NarediRezervo(NavideznaSahovnica.VrniNasprotnoBarvo(navideznaRezerva.ZacetnaBarva));
             this.Tema = tema;
 
         }

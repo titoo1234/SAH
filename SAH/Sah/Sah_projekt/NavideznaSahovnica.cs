@@ -15,6 +15,7 @@ namespace Sah_projekt
         private NavideznaCelica prejsnaCelica;
         private List<NavideznaCelica> mozneCelice;
         private NavideznaRezerva navideznaRezerva;
+        private string nasprotnaBarva;
 
         public NavideznaSahovnica(string zacetnaBarva, Size velikost)
         {
@@ -23,6 +24,7 @@ namespace Sah_projekt
             this.Celice = NarediSahovnico(zacetnaBarva, Velikost);
             this.MozneCelice = new List<NavideznaCelica>();
             this.NavideznaRezerva = new NavideznaRezerva(ZacetnaBarva, Velikost);
+            this.NasprotnaBarva = VrniNasprotnoBarvo(ZacetnaBarva);
         }
 
         public NavideznaCelica[,] Celice { get; set; }   
@@ -31,6 +33,7 @@ namespace Sah_projekt
         public NavideznaCelica PrejsnaCelica { get; set; }
         public List<NavideznaCelica> MozneCelice { get; set; }
         public NavideznaRezerva NavideznaRezerva { get;  set; }
+        public string NasprotnaBarva { get; set; }
 
         /// <summary>
         /// Funkcija naredi sahovnico v obliki matrike Celic
@@ -41,7 +44,7 @@ namespace Sah_projekt
         public NavideznaCelica[,] NarediSahovnico(string barva, Size velikost)
         {
             NavideznaCelica[,] celice = new NavideznaCelica[8, 8];
-            string nasprotna_barva = NasprotnaBarva(barva);
+            string nasprotna_barva = VrniNasprotnoBarvo(barva);
 
             // v sredini sahovnice so prazna polja, ki jih označimo z praznimi nizi ""
             for (int i = 2; i < 6; i++)
@@ -135,6 +138,37 @@ namespace Sah_projekt
             return celice;   
         }
 
+        public List<NavideznaCelica> RacunalnikNarediPotezo()
+        {
+            List<(NavideznaCelica, NavideznaCelica)> vseMoznePoteze = VrniVseMoznePoteze();
+            return new List<NavideznaCelica>{ vseMoznePoteze[0].Item1, vseMoznePoteze[0].Item2 };
+        }
+
+        /// <summary>
+        /// Funkcija vrne vse mozne poteze za nasprotnega igralca
+        /// </summary>
+        /// <returns></returns>
+        public List<(NavideznaCelica, NavideznaCelica)> VrniVseMoznePoteze()
+        {
+            List<(NavideznaCelica, NavideznaCelica)> vseMoznePoteze = new List<(NavideznaCelica, NavideznaCelica)>();
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    NavideznaCelica trenutnaCelica = this.Celice[i, j];
+                    NavideznaFigura trenutnaFigura = trenutnaCelica.Figura;
+                    if (!(trenutnaFigura is null) && trenutnaFigura.Barva == this.NasprotnaBarva)  
+                    {
+                        foreach (NavideznaCelica celica in FiltrirajPoteze(trenutnaFigura.MoznePoteze(trenutnaCelica, this)))
+                        {
+                            vseMoznePoteze.Add((trenutnaCelica, celica));
+                        }
+                    }
+                }
+            }
+            return vseMoznePoteze;
+        }
+
         public override string ToString()
         {
             string niz = "";
@@ -155,7 +189,7 @@ namespace Sah_projekt
         /// </summary>
         /// <param name="barva"></param>
         /// <returns>Vrne niz "W" ali "B"</returns>
-        public static string NasprotnaBarva(string barva)
+        public static string VrniNasprotnoBarvo(string barva)
         {
             if (barva == "W") return "B";
             else return "W";
@@ -428,8 +462,6 @@ namespace Sah_projekt
             }
             return false;
         }
-
-
 
         /// <summary>
         /// Funkcija vrne figure v stanje pred potezo
