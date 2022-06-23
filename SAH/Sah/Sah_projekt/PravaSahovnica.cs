@@ -92,6 +92,33 @@ namespace Sah_projekt
             prejsniGumb.Image = null;   
         }
         /// <summary>
+        /// Funkcija odmrzne vse celice na sahovnici
+        /// </summary>
+        public void OdmrzniSahovnico()
+        {
+            for(int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    Celice[i, j].Enabled = true;
+                }
+            }
+        }
+        /// <summary>
+        /// Funkcija zamrzne vse celice na sahovnici
+        /// </summary>
+        public void ZamrzniSahovnico()
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    Celice[i, j].Enabled = false;
+                }
+            }
+        }
+
+        /// <summary>
         /// Funkcija pobarva mozne celice nazaj na prvotno barvo ;-)
         /// </summary>
         public void PonastaviMozneCelice()
@@ -106,15 +133,20 @@ namespace Sah_projekt
         /// <summary>
         /// Funkcija obarva vse celice, kamor lahko prestavimo izbrano figuro
         /// </summary>
-        public void PrikaziMoznePoteze(Celica gumb)
+        public void PrikaziMoznePoteze(Celica gumb,Igralec TrenutniIgralec)
         {
             PonastaviMozneCelice();
-            List<NavideznaCelica> moznePoteze = NavideznaSahovnica.PoisciMoznePoteze(gumb);
-            foreach (NavideznaCelica navideznaCelica in moznePoteze)
+            NavideznaCelica celica = NavideznaSahovnica.Celice[gumb.X, gumb.Y];
+            if (!(celica.Figura is null) && (celica.Figura.Barva == TrenutniIgralec.Barva))
             {
-                this.Celice[navideznaCelica.X, navideznaCelica.Y].FlatAppearance.BorderSize = 2;
-                this.Celice[navideznaCelica.X, navideznaCelica.Y].SpremeniBarvo(Tema[2], Tema[2]);
+                List<NavideznaCelica> moznePoteze = NavideznaSahovnica.PoisciMoznePoteze(gumb);
+                foreach (NavideznaCelica navideznaCelica in moznePoteze)
+                {
+                    this.Celice[navideznaCelica.X, navideznaCelica.Y].FlatAppearance.BorderSize = 2;
+                    this.Celice[navideznaCelica.X, navideznaCelica.Y].SpremeniBarvo(Tema[2], Tema[2]);
+                }
             }
+            
         }
         public void NarediZamenjavo(Celica gumb)
         {

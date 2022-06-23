@@ -12,15 +12,25 @@ namespace Sah_projekt
 {
     public partial class Nastavitve : Form
     {
-        private Igra igra;
+        private Color[] tema;
+        private Size velikost;
+        private string barva;
+        private Game game;
+        private int cas;
+
         public Nastavitve()
         {
             InitializeComponent();
             BelaBarva_Gumb.Enabled = false;
             temaSahovnicaGumb1.Enabled = false;
-            this.Igra = igra;
+            IzberiCas.SelectedIndex = 2;
         }
-        public Igra Igra { get; set; }
+        public Game Game { get; set; }
+        public Color[] Tema { get; set; }
+        public Size Velikost { get; set; }
+        public string Barva { get; set; }
+        public int Cas { get; set; }
+
         private void label2_Click(object sender, EventArgs e)
         {
 
@@ -48,29 +58,43 @@ namespace Sah_projekt
             if (BelaBarva_Gumb.Enabled == false)
             {
                 barvaFigur = "W";
+                this.Barva = "W";
+
             }
             else
             {
                 barvaFigur = "B";
+                this.Barva = "B";
             }
             
             if (temaSahovnicaGumb1.Enabled == false)
             {
                 barve = new Color[] {Color.White, Color.Green, Color.Yellow };
+                this.Tema = barve = new Color[] { Color.White, Color.Green, Color.Yellow };
             }
             else
             {
                 System.Drawing.Color col = System.Drawing.ColorTranslator.FromHtml("#4F2B1B");
                 System.Drawing.Color col1 = System.Drawing.ColorTranslator.FromHtml("#fccc74");
                 barve = new Color[] { col1, col, Color.Yellow };
+                this.Tema = new Color[] { col1, col, Color.Yellow };
             }
-            Game newGame = new Game(true, false, false);
-            newGame.Igra = new SoloIgra(barvaFigur, barve, new Size(40,40), newGame);
+            this.Velikost = new Size(40, 40);
+            this.Cas = int.Parse((string)IzberiCas.SelectedItem);
+            this.Game = new Game(true, false, false);
+
+            
+
+            this.Game.Igra = new SoloIgra(this);
+            
+
+            //barvaFigur, barve, new Size(40,40), newGame
+
             //SoloIgra solo = new SoloIgra(string barva, string tema);
 
             Visible = false;
-            if (!newGame.IsDisposed)
-                newGame.ShowDialog();
+            if (!this.Game.IsDisposed)
+                this.Game.ShowDialog();
             Visible = true;
         }
 
@@ -93,5 +117,9 @@ namespace Sah_projekt
 
         }
 
+        private void Nastavitve_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

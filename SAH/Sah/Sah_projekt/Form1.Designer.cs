@@ -49,7 +49,7 @@
             // Zacetek_gumb
             // 
             this.Zacetek_gumb.Location = new System.Drawing.Point(396, 496);
-            this.Zacetek_gumb.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Zacetek_gumb.Margin = new System.Windows.Forms.Padding(2);
             this.Zacetek_gumb.Name = "Zacetek_gumb";
             this.Zacetek_gumb.Size = new System.Drawing.Size(73, 38);
             this.Zacetek_gumb.TabIndex = 0;
@@ -177,7 +177,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Zacetek_gumb);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Game";
             this.Text = "ŠAH ;-)";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Game_FormClosing);
