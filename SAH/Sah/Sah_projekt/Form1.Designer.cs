@@ -65,7 +65,6 @@
             this.label1.Size = new System.Drawing.Size(21, 15);
             this.label1.TabIndex = 1;
             this.label1.Text = "39";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -139,7 +138,6 @@
             this.label6.Size = new System.Drawing.Size(10, 12);
             this.label6.TabIndex = 9;
             this.label6.Visible = false;
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // label7
             // 

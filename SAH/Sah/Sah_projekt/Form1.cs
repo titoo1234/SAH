@@ -258,17 +258,7 @@ namespace Sah_projekt
             
         }
 
-        public void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void Game_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
         {
 
         }

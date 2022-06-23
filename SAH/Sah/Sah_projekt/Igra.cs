@@ -14,6 +14,7 @@ namespace Sah_projekt
         private Igralec igralec1;
         private Igralec igralec2;
         private Igralec trenutniIgralec;
+        private Game podlaga;
 
         public Igra() { }
         public static NavideznaSahovnica NavideznaSahovnica { get; set; }
@@ -22,6 +23,7 @@ namespace Sah_projekt
         public Igralec Igralec1 { get; set; }
         public Igralec Igralec2 { get; set; }
         public Igralec TrenutniIgralec { get; set; }
+        public Game Podlaga { get; set; }
 
     }
 }
