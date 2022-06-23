@@ -68,6 +68,7 @@
     <Compile Include="NavideznaSahovnica.cs" />
     <Compile Include="PravaRezerva.cs" />
     <Compile Include="PravaSahovnica.cs" />
+    <Compile Include="RacunalnikIgra.cs" />
     <Compile Include="RezervaFigure.cs" />
     <Compile Include="Sahovnica.cs" />
     <Compile Include="Funkcije.cs" />

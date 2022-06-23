@@ -86,7 +86,6 @@ namespace Sah_projekt
                 }
                 
             }
-            // premik kralja
             Celica prejsniGumb = this.Celice[prejsneCelice[0].X, prejsneCelice[0].Y];
             gumb.Image = prejsniGumb.Image;
             prejsniGumb.Image = null;   
@@ -104,6 +103,17 @@ namespace Sah_projekt
                 }
             }
         }
+        /// <summary>
+        /// Funkcija "prestavi" figuro, ki jo izbere računalnik
+        /// </summary>
+        public void RacunalnikNarediPotezo()
+        {
+            List<NavideznaCelica> poteza = NavideznaSahovnica.RacunalnikNarediPotezo();
+
+            this.Celice[poteza[1].X, poteza[1].Y].Image = this.Celice[poteza[0].X, poteza[0].Y].Image;
+            this.Celice[poteza[0].X, poteza[0].Y].Image = null;
+        }
+
         /// <summary>
         /// Funkcija zamrzne vse celice na sahovnici
         /// </summary>

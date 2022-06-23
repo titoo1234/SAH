@@ -3,7 +3,6 @@
 - možne poteze (preprečevanje šaha na našega kralja)✓
 - rošada ✓
 - rezerva ✓
-- (en passant kmeta)
 - igra proti računalniku :
 	--> naključno izbiranje
 	--> umetna intelegenca
@@ -12,3 +11,4 @@
 - igra na čas?
 - možna izbira velikosti okna? 
 - končna oblika (dizajn)
+- (en passant kmeta)
