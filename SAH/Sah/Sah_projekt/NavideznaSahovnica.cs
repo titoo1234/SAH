@@ -141,15 +141,20 @@ namespace Sah_projekt
 
             return celice;   
         }
-
+        /// <summary>
+        /// Funkcija med vsemi možnimi potezami izbere naključno eno in jo vrne
+        /// </summary>
+        /// <returns>vrne potezo, tako da poda začetno in končno celico</returns>
         public List<NavideznaCelica> RacunalnikNarediPotezo()
         {
             List<(NavideznaCelica, NavideznaCelica)> vseMoznePoteze = VrniVseMoznePoteze();
+            // TODO - če so vse mozne poteze prazen seznam je mat ali remi (sedaj vrze napako)
             int rand = Random.Next(vseMoznePoteze.Count);
             NavideznaCelica prejsnaCelica = vseMoznePoteze[rand].Item1;
             NavideznaCelica novaCelica = vseMoznePoteze[rand].Item2;
             novaCelica.Figura = prejsnaCelica.Figura;
             prejsnaCelica.Figura = null;
+            novaCelica.Figura.Premaknjen = true;
             return new List<NavideznaCelica>{ prejsnaCelica, novaCelica };
         }
 
@@ -168,7 +173,7 @@ namespace Sah_projekt
                     NavideznaFigura trenutnaFigura = trenutnaCelica.Figura;
                     if (!(trenutnaFigura is null) && trenutnaFigura.Barva == this.NasprotnaBarva)  
                     {
-                        foreach (NavideznaCelica celica in FiltrirajPoteze(trenutnaFigura.MoznePoteze(trenutnaCelica, this)))
+                        foreach (NavideznaCelica celica in FiltrirajPoteze(trenutnaFigura.MoznePoteze(trenutnaCelica, this), trenutnaCelica))
                         {
                             vseMoznePoteze.Add((trenutnaCelica, celica));
                         }
@@ -372,7 +377,7 @@ namespace Sah_projekt
 
             if (figura is null) return new List<NavideznaCelica>();
             List<NavideznaCelica> moznePoteze = figura.MoznePoteze(celica, this);
-            moznePoteze = FiltrirajPoteze(moznePoteze); // odstranimo neveljavne poteze (šah na našega kralja)
+            moznePoteze = FiltrirajPoteze(moznePoteze, this.PrejsnaCelica); // odstranimo neveljavne poteze (šah na našega kralja)
             foreach (NavideznaCelica moznaCelica in moznePoteze)
             {
                 this.Celice[moznaCelica.X, moznaCelica.Y].JeMozna = true;
@@ -380,13 +385,19 @@ namespace Sah_projekt
             this.MozneCelice = moznePoteze;
             return moznePoteze;
         }
-
-        public List<NavideznaCelica> FiltrirajPoteze(List<NavideznaCelica> moznePoteze)
+        /// <summary>
+        /// Funkcija na podlagi podanih možnih potez vrne nove poteze, pri katerih upoštevamo šah na našega kralja
+        /// </summary>
+        /// <param name="moznePoteze"></param>
+        /// <returns>Vrne seznam celic</returns>
+        public List<NavideznaCelica> FiltrirajPoteze(List<NavideznaCelica> moznePoteze, NavideznaCelica prejsnaCelica)
         {
+            NavideznaCelica kopijaPrejsneCelice = this.PrejsnaCelica;
+            this.PrejsnaCelica = prejsnaCelica;
             List<NavideznaCelica> filtriranePoteze = new List<NavideznaCelica>();
             foreach (NavideznaCelica moznaPoteza in moznePoteze)
             {
-                NavideznaFigura kopija = moznaPoteza.Figura;
+                NavideznaFigura kopijaMoznePoteze = moznaPoteza.Figura;
                 moznaPoteza.Figura = this.PrejsnaCelica.Figura;
                 this.PrejsnaCelica.Figura = null;
                 String barva = moznaPoteza.Figura.Barva;
@@ -394,8 +405,9 @@ namespace Sah_projekt
                 {
                     filtriranePoteze.Add(moznaPoteza);
                 }
-                NastaviPrvotnoStanje(moznaPoteza, PrejsnaCelica, kopija);
+                NastaviPrvotnoStanje(moznaPoteza, PrejsnaCelica, kopijaMoznePoteze);
             }
+            // pazimo še na rošado...
             if (!(PrejsnaCelica is null) && PrejsnaCelica.Figura.GetType() == typeof(Kralj))
             {
                 if (!PrejsnaCelica.Figura.Premaknjen)
@@ -404,7 +416,7 @@ namespace Sah_projekt
                     preveriMoznoLevoCelicoZaRosado(filtriranePoteze);
                 }
             }
-
+            this.PrejsnaCelica = kopijaPrejsneCelice;
             return filtriranePoteze;
         }
         /// <summary>
@@ -478,9 +490,9 @@ namespace Sah_projekt
         /// <param name="moznaPoteza"></param>
         /// <param name="prejsnaPoteza"></param>
         /// <param name="kopija"></param>
-        public void NastaviPrvotnoStanje(NavideznaCelica moznaPoteza, NavideznaCelica prejsnaPoteza, NavideznaFigura kopija)
+        public void NastaviPrvotnoStanje(NavideznaCelica moznaPoteza, NavideznaCelica prejsnaCelica, NavideznaFigura kopija)
         {
-            prejsnaPoteza.Figura = moznaPoteza.Figura;
+            prejsnaCelica.Figura = moznaPoteza.Figura;
             moznaPoteza.Figura = kopija;
         }
 
