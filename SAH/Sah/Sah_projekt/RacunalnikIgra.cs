@@ -24,6 +24,10 @@ namespace Sah_projekt
             NastaviCas(cas);
             NastaviTrenutnegaIgralca();
             SpremeniLastnostGumbov();
+            if (TrenutniIgralec != Igralec1)
+            {  
+                RacunalnikNarediPotezo();
+            }
         }
 
         /// <summary>
