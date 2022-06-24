@@ -64,6 +64,7 @@ namespace Sah_projekt
                 }
             }
         }
-        
+        // OSTALE FUNKCIJE SO V RAZREDU IGRA
+
     }
 }

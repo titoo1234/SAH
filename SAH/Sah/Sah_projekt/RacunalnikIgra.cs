@@ -75,5 +75,7 @@ namespace Sah_projekt
             PravaSahovnica.RacunalnikNarediPotezo();
             ZamenjajIgralca();
         }
+
+        // OSTALE FUNKCIJE SO V RAZREDU IGRA
     }
 }
