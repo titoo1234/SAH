@@ -165,16 +165,14 @@ namespace Sah_projekt
         {
             PravaSahovnica.PrikaziMoznePoteze(gumb, TrenutniIgralec);
         }
-        public void PreveriMat()
+        public bool PreveriMat()
         {
             if (NavideznaSahovnica.JeMat(TrenutniIgralec.Barva))
             {
-                //Podlaga.
-                MessageBox.Show("MAT, ZAMGAL JE " + TrenutniIgralec.Barva + "IGRALEC");
-                Podlaga.Close();
-                
-                
+                MessageBox.Show("MAT, ZAMGAL JE " + TrenutniIgralec.Barva + " GRALEC");
+                Podlaga.Close();return true;
             }
+            return false;
         }
 
     }

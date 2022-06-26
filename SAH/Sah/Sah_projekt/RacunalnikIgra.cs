@@ -45,7 +45,10 @@ namespace Sah_projekt
                 NarediZamenjavo(gumb);
                 OdmrzniSahovnico();
                 ZamenjajIgralca();
-                PreveriMat();
+                if (PreveriMat())
+                {
+                    return;
+                }
                 RacunalnikNarediPotezo();
             }
             else
@@ -65,7 +68,10 @@ namespace Sah_projekt
                     else
                     {
                         ZamenjajIgralca();
-                        PreveriMat();
+                        if (PreveriMat())
+                        {
+                            return;
+                        }
                         RacunalnikNarediPotezo();
                     }
                 }
