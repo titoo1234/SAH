@@ -16,7 +16,8 @@ namespace Sah_projekt
             Size velikost = nastavitve.Velikost;
             this.Podlaga = nastavitve.Game;
             Color[] tema = nastavitve.Tema;
-            int cas = nastavitve.Cas;
+            int cas = nastavitve.Cas * 60; // minute 
+            this.SteviloPotez = 0;
             NavideznaSahovnica = new NavideznaSahovnica(barva, velikost);
             this.PravaSahovnica = new PravaSahovnica(NavideznaSahovnica, Podlaga, tema);
             this.Igralec1 = new Igralec(barva);
@@ -27,7 +28,7 @@ namespace Sah_projekt
         }
        
         /// <summary>
-        /// Funkcija predstavlja delovanje igre. S kllikom na celico lahko:
+        /// Funkcija predstavlja delovanje igre. S klikom na celico lahko:
         /// - prestavimo figuro
         /// - pogledamo možne poteze 
         /// </summary>
@@ -41,15 +42,15 @@ namespace Sah_projekt
                 NarediZamenjavo(gumb);
                 OdmrzniSahovnico();
                 PreveriMat();
-                //ODMRZNICELICE
             }
             else 
             // kliknali smo na šahovnico
             {
                 if (jeObarvanoPolje(gumb))
                 {
+                    if (SteviloPotez == 0) TrenutniIgralec.Timer.Start(); // začnemo odštevati čas
                     PrestaviFiguro(gumb);
-
+                    SteviloPotez++;
                     if (PrikaziRezervo(gumb))
                     {
                         if (TrenutniIgralec == Igralec1) PravaSahovnica.PravaRezerva.PrikaziNasoRezervo();

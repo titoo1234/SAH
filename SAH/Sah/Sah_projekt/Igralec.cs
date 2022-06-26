@@ -10,9 +10,10 @@ namespace Sah_projekt
     {
         private int vsota;
         private string barva;
-        private double cas;
+        private int cas;
         private Timer timer;
         private Label napis;
+        private Form podalga; 
 
         public Igralec(string barva)
         {
@@ -21,9 +22,11 @@ namespace Sah_projekt
         }
         public string Barva { get;  set; }
         public int Vsota { get;  set; }
-        public double Cas { get; set; }
+        //public double Cas { get; set; }
+        public int Cas { get; set; }
         public Timer Timer { get; set; }
         public Label Napis { get; set; }
+        public Form Podlaga { get; set; }
         public void  SpremeniStanje(Celica celica,bool rezerva)
         {
             if (rezerva)
@@ -35,20 +38,49 @@ namespace Sah_projekt
                 this.Vsota -= celica.Figura.Vrednost;
             }
         }
-        public void NastaviCas(int cas,Label napis)
+        public void NastaviCas(int cas, Label napis, Form podlaga)
         {
             this.Cas = cas;
             this.Timer = new Timer();
             this.Napis = napis;
-            napis.Text = cas.ToString();
+            this.Podlaga = podlaga;
+            napis.Text = ZapisCasa(this.Cas);
             Timer.Interval = 100;
             Timer.Tick += TimerTick;    
+        }
+        /// <summary>
+        /// Funkcija vrne urejen zapis casa mm:ss
+        /// </summary>
+        /// <param name="cas"></param>
+        /// <returns></returns>
+        public string ZapisCasa(int cas)
+        {
+            int minute = (cas / 60);
+            int sekunde = (cas % 60);
+            return $"{minute}:{sekunde}";
         }
 
         private void TimerTick(object sender, EventArgs e)
         {
-            this.Cas -= ((double)Timer.Interval / (double)1000);
-            Napis.Text = Cas.ToString();
+            //this.Cas -= ((double)Timer.Interval / (double)1000);
+            this.Cas -= 1;
+            Napis.Text = ZapisCasa(this.Cas);
+            if (this.Cas == 0)
+            {
+                Timer.Stop();
+                if (this.jeBel()) MessageBox.Show("MAT, ZAMGAL JE ČRNI IGRALEC");
+                else MessageBox.Show("MAT, ZAMGAL JE BEL IGRALEC");
+                Podlaga.Close();
+            }
+        }
+        /// <summary>
+        /// Funkcija nam pove ali je igralec bel ali črn
+        /// </summary>
+        /// <returns></returns>
+        public bool jeBel()
+        {
+            if (this.Barva == "W") return true;
+            else return false;
         }
     }
 }

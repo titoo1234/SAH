@@ -18,6 +18,7 @@ namespace Sah_projekt
         private NavideznaRezerva navideznaRezerva;
         private string nasprotnaBarva;
         private Random random;
+        private bool izvedenEnPassant;
 
         public NavideznaSahovnica(string zacetnaBarva, Size velikost)
         {
@@ -28,6 +29,7 @@ namespace Sah_projekt
             this.NavideznaRezerva = new NavideznaRezerva(ZacetnaBarva, Velikost);
             this.NasprotnaBarva = VrniNasprotnoBarvo(ZacetnaBarva);
             this.Random = new Random();
+            this.IzvedenEnPassant = false;
         }
 
         public NavideznaCelica[,] Celice { get; set; }   
@@ -38,6 +40,7 @@ namespace Sah_projekt
         public List<NavideznaCelica> MozneCelice { get; set; }
         public NavideznaRezerva NavideznaRezerva { get;  set; }
         public string NasprotnaBarva { get; set; }
+        public bool IzvedenEnPassant { get; set; }
 
         /// <summary>
         /// Funkcija naredi sahovnico v obliki matrike Celic
@@ -224,23 +227,85 @@ namespace Sah_projekt
         /// Fumnkcija naredi premik figure na navidezni sahovnici.
         /// </summary>
         /// <param name="gumb"></param>
-        /// <returns>Vrne celico, iz katere se je figura prestavila</returns>
+        /// <returns>Vrne celico, iz katere se je figura prestavila (v primeru rošade vrnemo dve) </returns>
         public List<NavideznaCelica> PrestaviFiguro(Celica gumb)
         {
+            this.IzvedenEnPassant = false;
             List<NavideznaCelica> prejsneCelice = new List<NavideznaCelica>();         
             NavideznaCelica celica = Celice[gumb.X, gumb.Y];
             NavideznaFigura figura = Celice[gumb.X, gumb.Y].Figura;
             prejsneCelice.Add(this.PrejsnaCelica);
+            // rosada
             if (jeRosada(celica)) {
                 NarediRosado(celica, prejsneCelice);
             }
+            // naredi enPassant
+            if (jeEnPassant(celica))
+            {
+                narediEnPassant(celica);
+            }
             celica.Figura = PrejsnaCelica.Figura;
             celica.Figura.Premaknjen = true;
+            // nastavi enPassant
+            if (kmetZaDvaNaprej(this.PrejsnaCelica, celica)) celica.Figura.EnPassant = true;
+            else celica.Figura.EnPassant = false;
+
             PrejsnaCelica.Figura = null;
             PonastaviMozneCelice();
             PrejsnaCelica = celica;
+            PonastaviEnPassant();
 
             return prejsneCelice;
+        }
+        /// <summary>
+        /// Funkcija preveri ali je bil izveden enPassant
+        /// </summary>
+        /// <param name="celica"></param>
+        /// <returns></returns>
+        public bool jeEnPassant(NavideznaCelica celica)
+        {
+            if (this.PrejsnaCelica.Figura.jeKmet() && celica.jeDiagonalna(this.PrejsnaCelica) && celica.Figura == null)
+            {
+                return true;
+            }
+            return false;
+        }
+        /// <summary>
+        /// Funkcija izvede en Passant - kmet vzame kmeta s premikom v diagonalo
+        /// </summary>
+        /// <param name="celica"></param>
+        /// <param name="prejsneCelice"></param>
+        public void narediEnPassant(NavideznaCelica celica)
+        {
+            this.Celice[PrejsnaCelica.X, celica.Y].Figura = null;
+            this.IzvedenEnPassant = true;
+        }
+        /// <summary>
+        /// Funkcija onemogoči enPassant vsem kmetom 
+        /// </summary>
+        public void PonastaviEnPassant()
+        {
+            foreach (NavideznaCelica celica in this.Celice)
+            {
+                if (celica.Figura != null && celica.Figura.jeKmet() && this.PrejsnaCelica.Figura.Nasprotnik(celica.Figura))
+                {
+                    celica.Figura.EnPassant = false;
+                }
+            }
+        }
+        /// <summary>
+        /// Funkcija preveri če smo prestavili kmeta za dve polji
+        /// </summary>
+        /// <param name="trenutnaCelica"></param>
+        /// <param name="prestaviCelica"></param>
+        /// <returns> Vrne true ali false </returns>
+        public bool kmetZaDvaNaprej(NavideznaCelica trenutnaCelica, NavideznaCelica prestaviCelica)
+        {
+            if (trenutnaCelica.Figura.GetType() == typeof(Kmet) && Math.Abs(trenutnaCelica.X - prestaviCelica.X) == 2)
+            {
+                return true;
+            }
+            return false;
         }
 
         /// <summary>
@@ -408,7 +473,7 @@ namespace Sah_projekt
                 NastaviPrvotnoStanje(moznaPoteza, PrejsnaCelica, kopijaMoznePoteze);
             }
             // pazimo še na rošado...
-            if (!(PrejsnaCelica is null) && PrejsnaCelica.Figura.GetType() == typeof(Kralj))
+            if (!(PrejsnaCelica is null) && PrejsnaCelica.Figura.jeKralj() && !PrejsnaCelica.Figura.Premaknjen)
             {
                 if (JeSah(PrejsnaCelica.Figura.Barva)) OnemogociRosado(filtriranePoteze); // Če je šah na našega kralja ne smemo narediti rošade
                 if (!PrejsnaCelica.Figura.Premaknjen)
