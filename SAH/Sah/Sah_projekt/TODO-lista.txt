@@ -11,4 +11,4 @@
 - igra na čas?
 - možna izbira velikosti okna? 
 - končna oblika (dizajn)
-- (en passant kmeta)
+- (en passant kmeta) ✓
