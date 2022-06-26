@@ -10,19 +10,6 @@ C:\Users\damij\Desktop\Projekt\SAH\SAH\sah_poskus\Sah_projekt\obj\Debug\Sah_proj
 C:\Users\damij\Desktop\Projekt\SAH\SAH\sah_poskus\Sah_projekt\obj\Debug\Sah_projekt.Zacetek.resources
 C:\Users\damij\Desktop\Projekt\SAH\SAH\sah_poskus\Sah_projekt\obj\Debug\Sah_projekt.exe
 C:\Users\damij\Desktop\Projekt\SAH\SAH\sah_poskus\Sah_projekt\obj\Debug\Sah_projekt.pdb
-<<<<<<< HEAD
-C:\Users\damij\Desktop\Projekt\SAH\SAH\Sah\Sah_projekt\bin\Debug\Sah_projekt.exe.config
-C:\Users\damij\Desktop\Projekt\SAH\SAH\Sah\Sah_projekt\bin\Debug\Sah_projekt.exe
-C:\Users\damij\Desktop\Projekt\SAH\SAH\Sah\Sah_projekt\bin\Debug\Sah_projekt.pdb
-C:\Users\damij\Desktop\Projekt\SAH\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.csproj.AssemblyReference.cache
-C:\Users\damij\Desktop\Projekt\SAH\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.Game.resources
-C:\Users\damij\Desktop\Projekt\SAH\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.Properties.Resources.resources
-C:\Users\damij\Desktop\Projekt\SAH\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.Zacetek.resources
-C:\Users\damij\Desktop\Projekt\SAH\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.csproj.GenerateResource.cache
-C:\Users\damij\Desktop\Projekt\SAH\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.csproj.CoreCompileInputs.cache
-C:\Users\damij\Desktop\Projekt\SAH\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.exe
-C:\Users\damij\Desktop\Projekt\SAH\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.pdb
-=======
 C:\Users\Uporabnik\Desktop\sah\SAH\Sah\Sah_projekt\bin\Debug\Sah_projekt.exe.config
 C:\Users\Uporabnik\Desktop\sah\SAH\Sah\Sah_projekt\bin\Debug\Sah_projekt.exe
 C:\Users\Uporabnik\Desktop\sah\SAH\Sah\Sah_projekt\bin\Debug\Sah_projekt.pdb
@@ -36,6 +23,15 @@ C:\Users\Uporabnik\Desktop\sah\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.csproj.
 C:\Users\Uporabnik\Desktop\sah\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.exe
 C:\Users\Uporabnik\Desktop\sah\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.pdb
 C:\Users\Uporabnik\Desktop\sah\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.Nastavitve.resources
->>>>>>> c01fc4079fc700cdf893dde3e0b3ddce888fe795
+C:\Users\damij\Desktop\Projekt\SAH\SAH\Sah\Sah_projekt\bin\Debug\Sah_projekt.exe.config
+C:\Users\damij\Desktop\Projekt\SAH\SAH\Sah\Sah_projekt\bin\Debug\Sah_projekt.exe
+C:\Users\damij\Desktop\Projekt\SAH\SAH\Sah\Sah_projekt\bin\Debug\Sah_projekt.pdb
+C:\Users\damij\Desktop\Projekt\SAH\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.csproj.AssemblyReference.cache
+C:\Users\damij\Desktop\Projekt\SAH\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.Game.resources
 C:\Users\damij\Desktop\Projekt\SAH\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.Nastavitve.resources
-C:\Users\damij\Desktop\Projekt\SAH\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.csproj.SuggestedBindingRedirects.cache
+C:\Users\damij\Desktop\Projekt\SAH\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.Properties.Resources.resources
+C:\Users\damij\Desktop\Projekt\SAH\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.Zacetek.resources
+C:\Users\damij\Desktop\Projekt\SAH\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.csproj.GenerateResource.cache
+C:\Users\damij\Desktop\Projekt\SAH\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.csproj.CoreCompileInputs.cache
+C:\Users\damij\Desktop\Projekt\SAH\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.exe
+C:\Users\damij\Desktop\Projekt\SAH\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.pdb

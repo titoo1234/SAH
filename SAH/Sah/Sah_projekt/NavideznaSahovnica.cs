@@ -473,7 +473,7 @@ namespace Sah_projekt
                 NastaviPrvotnoStanje(moznaPoteza, PrejsnaCelica, kopijaMoznePoteze);
             }
             // pazimo še na rošado...
-            if (!(PrejsnaCelica is null) && PrejsnaCelica.Figura.GetType() == typeof(Kralj))
+            if (!(PrejsnaCelica is null) && PrejsnaCelica.Figura.jeKralj() && !PrejsnaCelica.Figura.Premaknjen)
             {
                 if (JeSah(PrejsnaCelica.Figura.Barva)) OnemogociRosado(filtriranePoteze); // Če je šah na našega kralja ne smemo narediti rošade
                 if (!PrejsnaCelica.Figura.Premaknjen)
