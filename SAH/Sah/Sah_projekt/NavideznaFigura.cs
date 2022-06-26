@@ -17,6 +17,7 @@ namespace Sah_projekt
         private int vrednost;
         private Size velikost;
         private NavideznaSahovnica sahovnica;
+        private bool enPassant;
         public NavideznaFigura()
         {
 
@@ -29,11 +30,45 @@ namespace Sah_projekt
         public bool Premaknjen { get; set; }
         public Size Velikost { get; set; }
         public NavideznaSahovnica Sahovnica { get; set; }
+        public bool EnPassant { get; set; }
 
         public virtual List<NavideznaCelica> MoznePoteze(NavideznaCelica celica, NavideznaSahovnica sahovnica)
         {
             return new List<NavideznaCelica>();
         }
+        // Naslednje funkcije preverijo ali je podana figura ustreznega tipa
+        // ===================================================
+        public bool jeKmet()
+        {
+            if (this != null && this.GetType() == typeof(Kmet)) return true;
+            return false;
+        }
+        public bool jeTrdnjava()
+        {
+            if (this != null && this.GetType() == typeof(Trdnjava)) return true;
+            return false;
+        }
+        public bool jeKonj()
+        {
+            if (this != null && this.GetType() == typeof(Konj)) return true;
+            return false;
+        }
+        public bool jeTekac()
+        {
+            if (this != null && this.GetType() == typeof(Tekac)) return true;
+            return false;
+        }
+        public bool jeKraljica()
+        {
+            if (this != null && this.GetType() == typeof(Kraljica)) return true;
+            return false;
+        }
+        public bool jeKralj()
+        {
+            if (this != null && this.GetType() == typeof(Kralj)) return true;
+            return false;
+        }
+        // ===================================================
 
         /// <summary>
         /// Funkcija pove ali je podana figura nasprotne barve

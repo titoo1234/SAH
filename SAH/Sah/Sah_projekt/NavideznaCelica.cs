@@ -76,6 +76,16 @@ namespace Sah_projekt
             if (this.X != 7) { return Sahovnica.Celice[this.X, this.Y + 1]; }
             else return this;
         }
+        /// <summary>
+        /// Funkcija vrne ali je neka celica diagonalna trenutni
+        /// </summary>
+        /// <param name="drugaCelica"></param>
+        /// <returns></returns>
+        public bool jeDiagonalna(NavideznaCelica drugaCelica)
+        {
+            if (Math.Abs(this.X - drugaCelica.X) == 1 && Math.Abs(this.Y - drugaCelica.Y) == 1) return true;
+            return false;
+        }
 
     }
 

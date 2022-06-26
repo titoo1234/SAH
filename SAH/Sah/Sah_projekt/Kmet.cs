@@ -17,7 +17,9 @@ namespace Sah_projekt
             NastaviSliko();
             Premaknjen = false;
             Vrednost = 1;
+            this.EnPassant = false;
         }
+
         /// <summary>
         /// Funkcija nastavi sliko Figure na podlagi njene barve
         /// </summary>
@@ -78,6 +80,27 @@ namespace Sah_projekt
                         mozne.Add(trenutna_celica);
                     }
                 }
+                // enPassant
+                if (celica.X == 3 && celica.Y >= 0 && celica.Y < 7) // enPassant je mozen le na eni vrtici sahovnice
+                {
+                    // enPassant v desno
+                    NavideznaCelica nasprotnikDesnaCelica = Sahovnica.Celice[celica.X, celica.Y + 1];
+                    NavideznaFigura nasprotnikDesnaFigura = nasprotnikDesnaCelica.Figura;
+                    if (this.Nasprotnik(nasprotnikDesnaFigura) && nasprotnikDesnaFigura.GetType() == typeof(Kmet) && nasprotnikDesnaFigura.EnPassant)
+                    {
+                        mozne.Add(Sahovnica.Celice[celica.X - 1, celica.Y + 1]);
+                    }
+                }
+                if (celica.X == 3 && celica.Y > 0 && celica.Y < 8)
+                {
+                    // enPassant v levo
+                    NavideznaCelica nasprotnikLevaCelica = Sahovnica.Celice[celica.X, celica.Y - 1];
+                    NavideznaFigura nasprotnikLevaFigura = nasprotnikLevaCelica.Figura;
+                    if (this.Nasprotnik(nasprotnikLevaFigura) && nasprotnikLevaFigura.GetType() == typeof(Kmet) && nasprotnikLevaFigura.EnPassant)
+                    {
+                        mozne.Add(Sahovnica.Celice[celica.X - 1, celica.Y - 1]);
+                    }
+                }
             }
             else
             {
@@ -116,6 +139,27 @@ namespace Sah_projekt
                     if (this.Nasprotnik(trenutna_figura))
                     {
                         mozne.Add(trenutna_celica);
+                    }
+                }
+                // enPassant
+                if (celica.X == 4 && celica.Y >= 0 && celica.Y < 7) // enPassant je mozen le na eni vrtici sahovnice
+                {
+                    // enPassant v desno
+                    NavideznaCelica nasprotnikDesnaCelica = Sahovnica.Celice[celica.X, celica.Y + 1];
+                    NavideznaFigura nasprotnikDesnaFigura = nasprotnikDesnaCelica.Figura;
+                    if (this.Nasprotnik(nasprotnikDesnaFigura) && nasprotnikDesnaFigura.GetType() == typeof(Kmet) && nasprotnikDesnaFigura.EnPassant)
+                    {
+                        mozne.Add(Sahovnica.Celice[celica.X + 1, celica.Y + 1]);
+                    }
+                }
+                if (celica.X == 4 && celica.Y > 0 && celica.Y < 8)
+                {
+                    // enPassant v levo
+                    NavideznaCelica nasprotnikLevaCelica = Sahovnica.Celice[celica.X, celica.Y - 1];
+                    NavideznaFigura nasprotnikLevaFigura = nasprotnikLevaCelica.Figura;
+                    if (this.Nasprotnik(nasprotnikLevaFigura) && nasprotnikLevaFigura.GetType() == typeof(Kmet) && nasprotnikLevaFigura.EnPassant)
+                    {
+                        mozne.Add(Sahovnica.Celice[celica.X + 1, celica.Y - 1]);
                     }
                 }
             }

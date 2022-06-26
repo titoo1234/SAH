@@ -50,5 +50,14 @@ namespace Sah_projekt
             this.Cas -= ((double)Timer.Interval / (double)1000);
             Napis.Text = Cas.ToString();
         }
+        /// <summary>
+        /// Funkcija nam pove ali je igralec bel ali črn
+        /// </summary>
+        /// <returns></returns>
+        public bool jeBel()
+        {
+            if (this.Barva == "W") return true;
+            else return false;
+        }
     }
 }

@@ -27,7 +27,7 @@ namespace Sah_projekt
         }
        
         /// <summary>
-        /// Funkcija predstavlja delovanje igre. S kllikom na celico lahko:
+        /// Funkcija predstavlja delovanje igre. S klikom na celico lahko:
         /// - prestavimo figuro
         /// - pogledamo možne poteze 
         /// </summary>
@@ -41,7 +41,6 @@ namespace Sah_projekt
                 NarediZamenjavo(gumb);
                 OdmrzniSahovnico();
                 PreveriMat();
-                //ODMRZNICELICE
             }
             else 
             // kliknali smo na šahovnico

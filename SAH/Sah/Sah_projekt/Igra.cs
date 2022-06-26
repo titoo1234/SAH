@@ -165,11 +165,17 @@ namespace Sah_projekt
         {
             PravaSahovnica.PrikaziMoznePoteze(gumb, TrenutniIgralec);
         }
+        /// <summary>
+        /// Funkcija nam pove ali je mat. V tem primeru izpiše na zaslon kdo je zmagal.
+        /// </summary>
+        /// <returns> Vrne true, če je mat. </returns>
         public bool PreveriMat()
         {
             if (NavideznaSahovnica.JeMat(TrenutniIgralec.Barva))
             {
-                MessageBox.Show("MAT, ZAMGAL JE " + TrenutniIgralec.Barva + " GRALEC");
+                if (this.TrenutniIgralec.jeBel()) MessageBox.Show("MAT, ZAMGAL JE ČRNI IGRALEC");
+                else MessageBox.Show("MAT, ZAMGAL JE BEL IGRALEC");
+
                 Podlaga.Close();return true;
             }
             return false;

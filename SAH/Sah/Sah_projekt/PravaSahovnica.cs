@@ -86,6 +86,11 @@ namespace Sah_projekt
                 }
                 
             }
+            // naredimo EnPassant - izbrisemo ustreznega kmeta
+            if (this.NavideznaSahovnica.IzvedenEnPassant)
+            {
+                this.Celice[prejsneCelice[0].X, gumb.Y].Image = null;
+            }
             Celica prejsniGumb = this.Celice[prejsneCelice[0].X, prejsneCelice[0].Y];
             gumb.Image = prejsniGumb.Image;
             prejsniGumb.Image = null;   
