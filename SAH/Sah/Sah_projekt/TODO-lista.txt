@@ -1,10 +1,10 @@
 ﻿TODO-LISTA:
 =================================
-- možne poteze (preprečevanje šaha na našega kralja)✓
+- možne poteze (preprečevanje šaha na našega kralja) ✓
 - rošada ✓
 - rezerva ✓
 - igra proti računalniku :
-	--> naključno izbiranje
+	--> naključno izbiranje ✓
 	--> umetna intelegenca
 	--> poteze iz interneta
 - multiplayer (laho dodamo navodila za nastavitev strežnika)

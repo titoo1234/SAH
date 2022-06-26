@@ -410,6 +410,7 @@ namespace Sah_projekt
             // pazimo še na rošado...
             if (!(PrejsnaCelica is null) && PrejsnaCelica.Figura.GetType() == typeof(Kralj))
             {
+                if (JeSah(PrejsnaCelica.Figura.Barva)) OnemogociRosado(filtriranePoteze); // Če je šah na našega kralja ne smemo narediti rošade
                 if (!PrejsnaCelica.Figura.Premaknjen)
                 {
                     preveriMoznoDesnoCelicoZaRosado(filtriranePoteze);
@@ -418,6 +419,39 @@ namespace Sah_projekt
             }
             this.PrejsnaCelica = kopijaPrejsneCelice;
             return filtriranePoteze;
+        }
+        /// <summary>
+        /// Funkcija izbriše možnost rošade iz filtriranih celic
+        /// </summary>
+        /// <param name="filtriranePoteze"></param>
+        public void OnemogociRosado(List<NavideznaCelica> filtriranePoteze)
+        {
+            NavideznaCelica iskanaCelicaDesno = this.Celice[PrejsnaCelica.X, PrejsnaCelica.Y + 2];
+            if (VsebujeCelico(filtriranePoteze, iskanaCelicaDesno))
+            {
+                OdstraniCelico(filtriranePoteze, iskanaCelicaDesno);
+            }
+            NavideznaCelica iskanaCelicaLevo = this.Celice[PrejsnaCelica.X, PrejsnaCelica.Y - 2];
+            if (VsebujeCelico(filtriranePoteze, iskanaCelicaLevo))
+            {
+                OdstraniCelico(filtriranePoteze, iskanaCelicaLevo);
+            }
+        }
+        /// <summary>
+        /// Funckija iz seznama izbriše podano celico
+        /// </summary>
+        /// <param name="celice"></param>
+        /// <param name="odstraniCelica"></param>
+        public void OdstraniCelico(List<NavideznaCelica> celice, NavideznaCelica odstraniCelica)
+        {
+            foreach (NavideznaCelica celica in celice)
+            {
+                if (celica.X == odstraniCelica.X && celica.Y == odstraniCelica.Y)
+                {
+                    celice.Remove(celica);
+                    break;
+                }
+            }
         }
         /// <summary>
         /// Funkcija preveri ali lahko naredimo desno rošado in ustrezno ukrepa(odstrani potezo iz možnih potez)
@@ -437,9 +471,7 @@ namespace Sah_projekt
                             break;
                         }
                     }
-
                 }
-
             }
         }
         /// <summary>
@@ -460,9 +492,7 @@ namespace Sah_projekt
                             break;
                         }
                     }
-
                 }
-
             }
         }
         /// <summary>
@@ -479,7 +509,6 @@ namespace Sah_projekt
                 {
                     return true;
                 }
-
             }
             return false;
         }
