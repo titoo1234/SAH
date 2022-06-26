@@ -558,6 +558,16 @@ namespace Sah_projekt
             }
             return false;
         }
+        /// <summary>
+        /// Funkcija preveri ali je na trenutnemu igralcu storjen mat.
+        /// </summary>
+        /// <param name="barva"></param>
+        /// <returns></returns>
+        public bool JeMat(string barva)
+        {
+            if (JeSah(barva) && VrniVseMoznePoteze().Count == 0) return true;
+            return false;
+        }
 
     }
 }

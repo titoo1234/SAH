@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows.Forms;
 namespace Sah_projekt
 {
     public abstract class Igra
@@ -164,6 +164,17 @@ namespace Sah_projekt
         public void PrikaziMoznePoteze(Celica gumb)
         {
             PravaSahovnica.PrikaziMoznePoteze(gumb, TrenutniIgralec);
+        }
+        public void PreveriMat()
+        {
+            if (NavideznaSahovnica.JeMat(TrenutniIgralec.Barva))
+            {
+                //Podlaga.
+                MessageBox.Show("MAT, ZAMGAL JE " + TrenutniIgralec.Barva + "IGRALEC");
+                Podlaga.Close();
+                
+                
+            }
         }
 
     }

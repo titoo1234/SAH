@@ -40,6 +40,7 @@ namespace Sah_projekt
             {
                 NarediZamenjavo(gumb);
                 OdmrzniSahovnico();
+                PreveriMat();
                 //ODMRZNICELICE
             }
             else 
@@ -57,6 +58,7 @@ namespace Sah_projekt
                     }
 
                     ZamenjajIgralca();
+                    PreveriMat();
                 }
                 else
                 {
