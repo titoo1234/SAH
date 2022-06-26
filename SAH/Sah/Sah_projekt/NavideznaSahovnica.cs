@@ -19,22 +19,29 @@ namespace Sah_projekt
         private string nasprotnaBarva;
         private Random random;
         private bool izvedenEnPassant;
-
+        private List<NavideznaFigura> naseFigure;
+        private List<NavideznaFigura> nasprotneFigure;
         public NavideznaSahovnica(string zacetnaBarva, Size velikost)
         {
             this.ZacetnaBarva = zacetnaBarva;
             this.Velikost = velikost;
+            this.NasprotneFigure = new List<NavideznaFigura>();
+            this.NaseFigure = new List<NavideznaFigura>();
             this.Celice = NarediSahovnico(zacetnaBarva, Velikost);
             this.MozneCelice = new List<NavideznaCelica>();
             this.NavideznaRezerva = new NavideznaRezerva(ZacetnaBarva, Velikost);
             this.NasprotnaBarva = VrniNasprotnoBarvo(ZacetnaBarva);
             this.Random = new Random();
             this.IzvedenEnPassant = false;
+            
+
         }
 
         public NavideznaCelica[,] Celice { get; set; }   
         public Random Random { get; set; }
         public Size Velikost { get; set; }
+        public List<NavideznaFigura> NasprotneFigure { get;  set; }
+        public List<NavideznaFigura> NaseFigure { get;  set; }
         public string ZacetnaBarva { get; set; }
         public NavideznaCelica PrejsnaCelica { get; set; }
         public List<NavideznaCelica> MozneCelice { get; set; }
@@ -70,6 +77,8 @@ namespace Sah_projekt
                 celice[1, j].Figura = new Kmet(nasprotna_barva, velikost);
                 celice[6, j] = new NavideznaCelica(6, j, this);
                 celice[6, j].Figura = new Kmet(barva, velikost);
+                NaseFigure.Add(celice[6, j].Figura);
+                NasprotneFigure.Add(celice[1, j].Figura);
             }
 
             // ostala polja 
@@ -78,50 +87,52 @@ namespace Sah_projekt
             celice[0, 0].Figura = new Trdnjava(nasprotna_barva, velikost);
             celice[0, 7] = new NavideznaCelica(0, 7, this);
             celice[0, 7].Figura = new Trdnjava(nasprotna_barva, velikost);
-
+            NasprotneFigure.Add(celice[0, 7].Figura);
             celice[7, 0] = new NavideznaCelica(7, 0, this);
             celice[7, 0].Figura = new Trdnjava(barva, velikost);
             celice[7, 7] = new NavideznaCelica(7, 7, this);
             celice[7, 7].Figura = new Trdnjava(barva, velikost);
-
+            NaseFigure.Add(celice[7, 7].Figura);
             // konji:
             celice[0, 1] = new NavideznaCelica(0, 1, this);
             celice[0, 1].Figura = new Konj(nasprotna_barva, velikost);
             celice[0, 6] = new NavideznaCelica(0, 6, this);
             celice[0, 6].Figura = new Konj(nasprotna_barva, velikost);
-
+            NasprotneFigure.Add(celice[0, 6].Figura);
             celice[7, 1] = new NavideznaCelica(7, 1, this);
             celice[7, 1].Figura = new Konj(barva, velikost);
             celice[7, 6] = new NavideznaCelica(7, 6, this);
             celice[7, 6].Figura = new Konj(barva, velikost);
-
+            NaseFigure.Add(celice[7, 6].Figura);
             // tekači:
             celice[0, 2] = new NavideznaCelica(0, 2, this);
             celice[0, 2].Figura = new Tekac(nasprotna_barva, velikost);
             celice[0, 5] = new NavideznaCelica(0, 5, this);
             celice[0, 5].Figura = new Tekac(nasprotna_barva, velikost);
-
+            NasprotneFigure.Add(celice[0, 5].Figura);
             celice[7, 2] = new NavideznaCelica(7, 2, this);
             celice[7, 2].Figura = new Tekac(barva, velikost);
             celice[7, 5] = new NavideznaCelica(7, 5, this);
             celice[7, 5].Figura = new Tekac(barva, velikost);
-
+            NaseFigure.Add(celice[7, 5].Figura);
             // kraljici:
             if (this.ZacetnaBarva == "W") // bela kraljica je vedno na belem polju, črna pa na črnem!
             {
                 celice[0, 3] = new NavideznaCelica(0, 3, this);
                 celice[0, 3].Figura = new Kraljica(nasprotna_barva, velikost);
-
+                NasprotneFigure.Add(celice[0, 3].Figura);
                 celice[7, 3] = new NavideznaCelica(7, 3, this);
                 celice[7, 3].Figura = new Kraljica(barva, velikost);
+                NaseFigure.Add(celice[7, 3].Figura);
             }
             else
             {
                 celice[0, 4] = new NavideznaCelica(0, 4, this);
                 celice[0, 4].Figura = new Kraljica(nasprotna_barva, velikost);
-
+                NasprotneFigure.Add(celice[0, 4].Figura);
                 celice[7, 4] = new NavideznaCelica(7, 4, this);
                 celice[7, 4].Figura = new Kraljica(barva, velikost);
+                NaseFigure.Add(celice[7, 4].Figura);
             }
 
             // kralja:
@@ -129,21 +140,34 @@ namespace Sah_projekt
             {
                 celice[0, 4] = new NavideznaCelica(0, 4, this);
                 celice[0, 4].Figura = new Kralj(nasprotna_barva, velikost);
-
+                NasprotneFigure.Add(celice[0, 4].Figura);
                 celice[7, 4] = new NavideznaCelica(7, 4, this);
                 celice[7, 4].Figura = new Kralj(barva, velikost);
+                NaseFigure.Add(celice[7, 4].Figura);
             }
             else
             {
                 celice[0, 3] = new NavideznaCelica(0, 3, this);
                 celice[0, 3].Figura = new Kralj(nasprotna_barva, velikost);
-
+                NasprotneFigure.Add(celice[0, 3].Figura);
                 celice[7, 3] = new NavideznaCelica(7, 3, this);
                 celice[7, 3].Figura = new Kralj(barva, velikost);
+                NaseFigure.Add(celice[7, 3].Figura);
             }
 
             return celice;   
         }
+        /// <summary>
+        /// Funkcija preveri ali je pat.
+        /// </summary>
+        /// <param name="barva"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        internal bool JePat()
+        {
+            return VrniVseMoznePoteze().Count == 0;
+        }
+
         /// <summary>
         /// Funkcija med vsemi možnimi potezami izbere naključno eno in jo vrne
         /// </summary>
@@ -155,6 +179,7 @@ namespace Sah_projekt
             int rand = Random.Next(vseMoznePoteze.Count);
             NavideznaCelica prejsnaCelica = vseMoznePoteze[rand].Item1;
             NavideznaCelica novaCelica = vseMoznePoteze[rand].Item2;
+            NaseFigure.Remove(novaCelica.Figura);
             novaCelica.Figura = prejsnaCelica.Figura;
             prejsnaCelica.Figura = null;
             novaCelica.Figura.Premaknjen = true;
@@ -234,6 +259,8 @@ namespace Sah_projekt
             List<NavideznaCelica> prejsneCelice = new List<NavideznaCelica>();         
             NavideznaCelica celica = Celice[gumb.X, gumb.Y];
             NavideznaFigura figura = Celice[gumb.X, gumb.Y].Figura;
+            if (PrejsnaCelica.Figura.Barva == ZacetnaBarva) NasprotneFigure.Remove(figura);
+            else NaseFigure.Remove(figura);
             prejsneCelice.Add(this.PrejsnaCelica);
             // rosada
             if (jeRosada(celica)) {
@@ -249,12 +276,10 @@ namespace Sah_projekt
             // nastavi enPassant
             if (kmetZaDvaNaprej(this.PrejsnaCelica, celica)) celica.Figura.EnPassant = true;
             else celica.Figura.EnPassant = false;
-
             PrejsnaCelica.Figura = null;
             PonastaviMozneCelice();
             PrejsnaCelica = celica;
             PonastaviEnPassant();
-
             return prejsneCelice;
         }
         /// <summary>
@@ -277,6 +302,8 @@ namespace Sah_projekt
         /// <param name="prejsneCelice"></param>
         public void narediEnPassant(NavideznaCelica celica)
         {
+            if (PrejsnaCelica.Figura.Barva == ZacetnaBarva) NasprotneFigure.Remove(this.Celice[PrejsnaCelica.X, celica.Y].Figura);
+            else NaseFigure.Remove(this.Celice[PrejsnaCelica.X, celica.Y].Figura);
             this.Celice[PrejsnaCelica.X, celica.Y].Figura = null;
             this.IzvedenEnPassant = true;
         }
@@ -389,7 +416,11 @@ namespace Sah_projekt
             {
                 rezervnaFigura = NavideznaRezerva.CrnaRezerva[gumb.X].Figura;
             }
+            if (PrejsnaCelica.Figura.Barva == ZacetnaBarva) NasprotneFigure.Remove(PrejsnaCelica.Figura);
+            else NaseFigure.Remove(PrejsnaCelica.Figura);
             PrejsnaCelica.Figura = rezervnaFigura;
+            if (PrejsnaCelica.Figura.Barva == ZacetnaBarva) NasprotneFigure.Add(rezervnaFigura);
+            else NaseFigure.Add(rezervnaFigura);
             return this.PrejsnaCelica;
         }
 
@@ -632,6 +663,36 @@ namespace Sah_projekt
         {
             if (JeSah(barva) && VrniVseMoznePoteze().Count == 0) return true;
             return false;
+        }
+        public bool JeRemi()
+        {
+            if (NaseFigure.Count <= 2 && NasprotneFigure.Count <= 2)
+            {
+                if ((SestevekFigur("W") == 200 || SestevekFigur("W") == 203)  && (SestevekFigur("B") == 200 || SestevekFigur("B") == 203))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        public int SestevekFigur(string barva)
+        {
+            int vsota = 0;
+            if (ZacetnaBarva == barva)
+            {
+                foreach (NavideznaFigura figura in NaseFigure)
+                {
+                    vsota += figura.Vrednost;
+                }
+            }
+            else
+            {
+                foreach (NavideznaFigura figura in NasprotneFigure)
+                {
+                    vsota += figura.Vrednost;
+                }
+            }
+            return vsota;
         }
 
     }

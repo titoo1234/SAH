@@ -49,6 +49,7 @@
     <Compile Include="Celica.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="MultiplayerIgra.cs" />
     <Compile Include="Nastavitve.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -4,13 +4,20 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net.Sockets;
+using System.Net;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace Sah_projekt
 {
-    public class SoloIgra : Igra
+    class MultiplayerIgra : Igra
     {
-        public SoloIgra(Nastavitve nastavitve)
+        private Socket socket;
+        private BackgroundWorker messageReceiver = new BackgroundWorker();
+        private TcpListener server = null;
+        private TcpClient client;
+        public MultiplayerIgra(Nastavitve nastavitve)
         {
             string barva = nastavitve.Barva;
             Size velikost = nastavitve.Velikost;
@@ -25,8 +32,18 @@ namespace Sah_projekt
             NastaviCas(cas);
             NastaviTrenutnegaIgralca();
             SpremeniLastnostGumbov();
-        }
-       
+            //MessageReceiver.DoWork += MessageReceiver_DoWork;
+            //CheckForIllegalCrossThreadCalls = false;
+            this.MessageReceiver = new BackgroundWorker();
+            this.Server = null; 
+            //this.Client;
+    }
+
+        public object Socket { get;  set; }
+        public BackgroundWorker MessageReceiver { get;  set; }
+        public object Server { get;  set; }
+        public object Client { get;  set; }
+
         /// <summary>
         /// Funkcija predstavlja delovanje igre. S klikom na celico lahko:
         /// - prestavimo figuro
@@ -43,7 +60,7 @@ namespace Sah_projekt
                 OdmrzniSahovnico();
                 PreveriKonecIgre();
             }
-            else 
+            else
             // kliknali smo na šahovnico
             {
                 if (jeObarvanoPolje(gumb))
@@ -63,11 +80,13 @@ namespace Sah_projekt
                 }
                 else
                 {
-                    PrikaziMoznePoteze(gumb); 
+                    PrikaziMoznePoteze(gumb);
                 }
             }
         }
         // OSTALE FUNKCIJE SO V RAZREDU IGRA
 
+
     }
 }
+

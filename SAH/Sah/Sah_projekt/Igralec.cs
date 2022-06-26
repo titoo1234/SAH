@@ -45,7 +45,7 @@ namespace Sah_projekt
             this.Napis = napis;
             this.Podlaga = podlaga;
             napis.Text = ZapisCasa(this.Cas);
-            Timer.Interval = 100;
+            Timer.Interval = 1000;
             Timer.Tick += TimerTick;    
         }
         /// <summary>

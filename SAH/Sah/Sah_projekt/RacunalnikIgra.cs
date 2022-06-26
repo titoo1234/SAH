@@ -45,7 +45,7 @@ namespace Sah_projekt
                 NarediZamenjavo(gumb);
                 OdmrzniSahovnico();
                 ZamenjajIgralca();
-                if (PreveriMat())
+                if (PreveriKonecIgre())
                 {
                     return;
                 }
@@ -68,7 +68,7 @@ namespace Sah_projekt
                     else
                     {
                         ZamenjajIgralca();
-                        if (PreveriMat())
+                        if (PreveriKonecIgre())
                         {
                             return;
                         }

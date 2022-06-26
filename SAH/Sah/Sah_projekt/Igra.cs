@@ -170,7 +170,7 @@ namespace Sah_projekt
         /// Funkcija nam pove ali je mat. V tem primeru izpiše na zaslon kdo je zmagal.
         /// </summary>
         /// <returns> Vrne true, če je mat. </returns>
-        public bool PreveriMat()
+        public bool PreveriKonecIgre()
         {
             if (NavideznaSahovnica.JeMat(TrenutniIgralec.Barva))
             {
@@ -179,6 +179,19 @@ namespace Sah_projekt
                 Podlaga.Close();
                 return true;
             }
+            if (NavideznaSahovnica.JePat())
+            {
+                MessageBox.Show("PAT, IGRA JE NEODLOČENA");
+                Podlaga.Close();
+                return true;
+            }
+            if (NavideznaSahovnica.JeRemi())
+            {
+                MessageBox.Show("REMI, IGRA JE NEODLOČENA");
+                Podlaga.Close();
+                return true;
+            }
+            
             return false;
         }
 

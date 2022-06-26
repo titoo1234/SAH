@@ -19,19 +19,19 @@ namespace Sah_projekt
 
         private void HostGumb_Click(object sender, EventArgs e)
         {
-            Game newGame = new Game(false, false, true);
+            Nastavitve nastavitve = new Nastavitve("HOST");
             Visible = false;
-            if (!newGame.IsDisposed)
-                newGame.ShowDialog();
+            if (!nastavitve.IsDisposed)
+                nastavitve.ShowDialog();
             Visible = true;
         }
 
         private void IpGumb_Click(object sender, EventArgs e)
         {
-            Game newGame = new Game(false,false, false, IpText.Text);
+            Nastavitve nastavitve = new Nastavitve("GOST");
             Visible = false;
-            if (!newGame.IsDisposed)
-                newGame.ShowDialog();
+            if (!nastavitve.IsDisposed)
+                nastavitve.ShowDialog();
             Visible = true;
         }
 
