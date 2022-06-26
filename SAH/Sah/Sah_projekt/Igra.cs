@@ -15,6 +15,7 @@ namespace Sah_projekt
         private Igralec igralec2;
         private Igralec trenutniIgralec;
         private Game podlaga;
+        private int steviloPotez;
 
         public Igra() { }
         public static NavideznaSahovnica NavideznaSahovnica { get; set; }
@@ -24,11 +25,12 @@ namespace Sah_projekt
         public Igralec Igralec2 { get; set; }
         public Igralec TrenutniIgralec { get; set; }
         public Game Podlaga { get; set; }
+        public int SteviloPotez { get; set; }
 
         public void NastaviCas(int cas)
         {
-            Igralec1.NastaviCas(cas, Podlaga.label1);
-            Igralec2.NastaviCas(cas, Podlaga.label2);
+            Igralec1.NastaviCas(cas, Podlaga.Igralec1_Cas, Podlaga);
+            Igralec2.NastaviCas(cas, Podlaga.Igralec2_Cas, Podlaga);
         }
         /// <summary>
         /// Funckija nastavi začetnega igralca glede na barvo
@@ -43,7 +45,6 @@ namespace Sah_projekt
             {
                 this.TrenutniIgralec = Igralec2;
             }
-            TrenutniIgralec.Timer.Start();
         }
 
         //gremo skozi vse gumbe
@@ -175,8 +176,8 @@ namespace Sah_projekt
             {
                 if (this.TrenutniIgralec.jeBel()) MessageBox.Show("MAT, ZAMGAL JE ČRNI IGRALEC");
                 else MessageBox.Show("MAT, ZAMGAL JE BEL IGRALEC");
-
-                Podlaga.Close();return true;
+                Podlaga.Close();
+                return true;
             }
             return false;
         }

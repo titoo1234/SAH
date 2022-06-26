@@ -149,8 +149,8 @@ namespace Sah_projekt
             int posljiY2 = fig.Y;
 
             sahovnica.Trenutni_igralec.SpremeniStanje(gumb, true);
-            sahovnica.podlaga.label1.Text = sahovnica.igralec1.Vsota.ToString();
-            sahovnica.podlaga.label2.Text = sahovnica.igralec2.Vsota.ToString(); 
+            sahovnica.podlaga.Igralec1_Cas.Text = sahovnica.igralec1.Vsota.ToString();
+            sahovnica.podlaga.Igralec2_Cas.Text = sahovnica.igralec2.Vsota.ToString(); 
 
             sahovnica.Zadnja_prestavljena_celica.Figura = fig;
             sahovnica.Zadnja_prestavljena_celica.Image = fig.Slika;

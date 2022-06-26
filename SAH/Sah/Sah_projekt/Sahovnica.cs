@@ -379,12 +379,12 @@ namespace Sah_projekt
                     if (this.Trenutni_igralec == igralec1)
                     {
                         igralec2.SpremeniStanje(gumb, false);
-                        this.podlaga.label2.Text = igralec2.Vsota.ToString();
+                        this.podlaga.Igralec2_Cas.Text = igralec2.Vsota.ToString();
                     }
                     else
                     {
                         igralec1.SpremeniStanje(gumb, false);
-                        this.podlaga.label1.Text = igralec1.Vsota.ToString();
+                        this.podlaga.Igralec1_Cas.Text = igralec1.Vsota.ToString();
                     }
 
 
@@ -415,7 +415,7 @@ namespace Sah_projekt
                     {
                         this.niz_igre = this.niz_igre.Remove(this.niz_igre.Length - 1, 1) + "+ ";
                     }
-                    this.podlaga.label1.Text = this.niz_igre;
+                    this.podlaga.Igralec1_Cas.Text = this.niz_igre;
 
                     NajbolsaPotezaTest(this.niz_igre);
 

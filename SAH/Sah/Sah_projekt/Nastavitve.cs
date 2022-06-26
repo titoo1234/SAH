@@ -58,14 +58,8 @@ namespace Sah_projekt
             string barvaFigur;
             Color[] barve;
 
-            if (BelaBarva_Gumb.Enabled == false)
-            {
-                this.Barva = "W";
-            }
-            else
-            {
-                this.Barva = "B";
-            }
+            if (BelaBarva_Gumb.Enabled == false) this.Barva = "W";
+            else this.Barva = "B";
             
             if (temaSahovnicaGumb1.Enabled == false)
             {
@@ -77,10 +71,11 @@ namespace Sah_projekt
                 System.Drawing.Color col1 = System.Drawing.ColorTranslator.FromHtml("#fccc74");
                 this.Tema = new Color[] { col1, col, Color.Yellow };
             }
-            this.Velikost = new Size(40, 40);
             this.Cas = int.Parse((string)IzberiCas.SelectedItem);
             this.Game = new Game(true, false, false);
-            
+            Console.WriteLine(Game.Size);
+            this.Velikost = new Size(40, 40);
+
             if (this.NacinIgre == "SOLO") this.Game.Igra = new SoloIgra(this);
             else if (this.NacinIgre == "RACUNALNIK") this.Game.Igra = new RacunalnikIgra(this);
             else this.Game.Igra = new SoloIgra(this);

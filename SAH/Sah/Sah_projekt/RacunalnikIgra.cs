@@ -16,7 +16,7 @@ namespace Sah_projekt
             Size velikost = nastavitve.Velikost;
             this.Podlaga = nastavitve.Game;
             Color[] tema = nastavitve.Tema;
-            int cas = nastavitve.Cas;
+            int cas = nastavitve.Cas * 60; // minute 
             NavideznaSahovnica = new NavideznaSahovnica(barva, velikost);
             this.PravaSahovnica = new PravaSahovnica(NavideznaSahovnica, Podlaga, tema);
             this.Igralec1 = new Igralec(barva);

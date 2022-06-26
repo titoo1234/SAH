@@ -18,10 +18,7 @@ namespace Sah_projekt
         private Size velikost;
         private NavideznaSahovnica sahovnica;
         private bool enPassant;
-        public NavideznaFigura()
-        {
-
-        }
+        public NavideznaFigura() {}
 
         public string Ime { get; set; }
         public int Vrednost { get; set; }
@@ -40,32 +37,32 @@ namespace Sah_projekt
         // ===================================================
         public bool jeKmet()
         {
-            if (this != null && this.GetType() == typeof(Kmet)) return true;
+            if (this.GetType() == typeof(Kmet)) return true;
             return false;
         }
         public bool jeTrdnjava()
         {
-            if (this != null && this.GetType() == typeof(Trdnjava)) return true;
+            if (this.GetType() == typeof(Trdnjava)) return true;
             return false;
         }
         public bool jeKonj()
         {
-            if (this != null && this.GetType() == typeof(Konj)) return true;
+            if (this.GetType() == typeof(Konj)) return true;
             return false;
         }
         public bool jeTekac()
         {
-            if (this != null && this.GetType() == typeof(Tekac)) return true;
+            if (this.GetType() == typeof(Tekac)) return true;
             return false;
         }
         public bool jeKraljica()
         {
-            if (this != null && this.GetType() == typeof(Kraljica)) return true;
+            if (this.GetType() == typeof(Kraljica)) return true;
             return false;
         }
         public bool jeKralj()
         {
-            if (this != null && this.GetType() == typeof(Kralj)) return true;
+            if (this.GetType() == typeof(Kralj)) return true;
             return false;
         }
         // ===================================================
