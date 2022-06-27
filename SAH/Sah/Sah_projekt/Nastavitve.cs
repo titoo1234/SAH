@@ -33,6 +33,7 @@ namespace Sah_projekt
             PrivzeteNastavitve();
             this.NacinIgre = nacinIgre;
             this.IpNaslov = ip;
+            this.Text += NacinIgre;
             VzpostaviPovezavo();
             
         }
@@ -44,8 +45,8 @@ namespace Sah_projekt
             if (NacinIgre == "HOST")
             {
                 this.MessageReceiver = new BackgroundWorker();
-                //MessageReceiver.DoWork += MessageReceiver_DoWork;
-                server = new TcpListener(System.Net.IPAddress.Any, 5732);
+                MessageReceiver.DoWork += SprejmiSignalHost;
+                server = new TcpListener(System.Net.IPAddress.Any, 5742);
                 server.Start();
                 Socket = server.AcceptSocket();
             }
@@ -59,19 +60,39 @@ namespace Sah_projekt
                 this.IpNaslov = "localhost";
                 ZacetekIgre.Enabled = false;
                 this.MessageReceiver = new BackgroundWorker();
-                //MessageReceiver.DoWork += MessageReceiver_DoWork;
+                MessageReceiver.DoWork += SprejmiSignalGost;
                 try
                 {
-                    client = new TcpClient(IpNaslov, 5732);
+                    client = new TcpClient(IpNaslov, 5742);
                     Socket = client.Client;
                     MessageReceiver.RunWorkerAsync();
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
-                    this.Close();
+                    //this.Close();
                 }
             }
+        }
+
+        private void SprejmiSignalGost(object sender, DoWorkEventArgs e)
+        { 
+            byte[] buffer = new byte[2];
+            Socket.Receive(buffer);
+            int barva = int.Parse(buffer[0].ToString());
+            if (barva == 1) this.Barva = "W";
+            else this.Barva = "B";
+            this.Cas = int.Parse(buffer[1].ToString());
+            ZacetekIgre.Enabled = true;
+            //sprejmemo podatke ... nastavimo temo....
+        }
+
+        private void SprejmiSignalHost(object sender, DoWorkEventArgs e)
+        {
+            byte[] buffer = new byte[5];
+            Socket.Receive(buffer);
+            int x = int.Parse(buffer[0].ToString());
+            ZacniIgro();
         }
 
         /// <summary>
@@ -82,7 +103,6 @@ namespace Sah_projekt
             BelaBarva_Gumb.Enabled = false;
             temaSahovnicaGumb1.Enabled = false;
             IzberiCas.SelectedIndex = 2;
-
         }
 
         public Socket Socket { get; set; }
@@ -116,14 +136,38 @@ namespace Sah_projekt
 
         private void ZacetekIgre_Click(object sender, EventArgs e)
         {
-            NastaviBarvo();
             NastaviTemo();
-            this.Cas = int.Parse((string)IzberiCas.SelectedItem);
-            this.Game = new Game(true, false, false);
             this.Velikost = new Size(40, 40);
+            if (NacinIgre != "GOST")
+            {
+                this.Cas = int.Parse((string)IzberiCas.SelectedItem);
+                NastaviBarvo();
+            }
+                
+            this.Game = new Game(true, false, false);
             NastaviIgro();
-            ZacniIgro();
+            if (NacinIgre == "GOST") PosljiSignal();
+            if (NacinIgre != "HOST") ZacniIgro();
+            else PosljiNastavitveIgre();
         }
+
+        private void PosljiNastavitveIgre()
+        {
+            byte[] num;
+            if (this.Barva == "W") num = new byte[] {(byte)0, (byte)this.Cas};
+            else num = new byte[] { (byte)1, (byte)this.Cas };
+            Socket.Send(num);
+            MessageReceiver.RunWorkerAsync();
+
+        }
+
+        private void PosljiSignal()
+        {
+            byte[] num = { (byte)1 };
+            Socket.Send(num);
+            MessageReceiver.RunWorkerAsync();
+        }
+
         /// <summary>
         /// Funkcija nastavi zacetno barvo sahovnice
         /// </summary>
@@ -147,10 +191,10 @@ namespace Sah_projekt
         private void ZacniIgro()
         {
             Visible = false;
-            //POŠLJEMO NASPORTONIKU
+            //POŠLJEMO NASPORTONIKUs
             if (!this.Game.IsDisposed)
                 this.Game.ShowDialog();
-            Visible = true;
+            this.Close();
         }
         /// <summary>
         /// Funkcija nastavi temo igre
