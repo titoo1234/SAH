@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\SAH",
+    "\\SAH\\Sah",
+    "\\SAH\\Sah\\Sah_projekt"
   ],
-  "SelectedNode": "\\Sah.sln",
+  "SelectedNode": "\\SAH\\Sah\\Sah_projekt\\SoloIgra.cs",
   "PreviewInSolutionExplorer": false
 }
