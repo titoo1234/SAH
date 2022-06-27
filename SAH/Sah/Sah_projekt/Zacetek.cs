@@ -28,7 +28,8 @@ namespace Sah_projekt
 
         private void IpGumb_Click(object sender, EventArgs e)
         {
-            Nastavitve nastavitve = new Nastavitve("GOST");
+        
+            Nastavitve nastavitve = new Nastavitve("GOST","localhost"); // ,this.IpText.Text
             Visible = false;
             if (!nastavitve.IsDisposed)
                 nastavitve.ShowDialog();
@@ -56,7 +57,7 @@ namespace Sah_projekt
 
         private void Zacetek_Load(object sender, EventArgs e)
         {
-
+            
         }
     }
 }
