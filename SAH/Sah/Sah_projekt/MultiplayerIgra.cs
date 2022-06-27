@@ -25,6 +25,10 @@ namespace Sah_projekt
             Size velikost = nastavitve.Velikost;
             this.Podlaga = nastavitve.Game;
             Color[] tema = nastavitve.Tema;
+            this.Socket = nastavitve.Socket;
+            this.MessageReceiver = nastavitve.MessageReceiver;
+            this.Server = nastavitve.Server;
+            this.Client = nastavitve.Client;
             int cas = nastavitve.Cas * 60; // minute 
             this.SteviloPotez = 0;
             NavideznaSahovnica = new NavideznaSahovnica(barva, velikost);
@@ -34,32 +38,8 @@ namespace Sah_projekt
             NastaviCas(cas);
             NastaviTrenutnegaIgralca();
             SpremeniLastnostGumbov();
-            this.MessageReceiver = new BackgroundWorker();
-            nastavitve.MessageReceiver.DoWork += MessageReceiver_DoWork;
+            nastavitve.MessageReceiver.DoWork += SprejmiPotezo;
             Podlaga.Text = nacinIgre;
-            //CheckForIllegalCrossThreadCalls = false;
-            //if (nacinIgre == "HOST")
-            //{
-            //    server = new TcpListener(System.Net.IPAddress.Any, 5732);
-            //    server.Start();
-            //    Socket = server.AcceptSocket();
-            //}
-            //else
-            //{
-            //    try
-            //    {
-            //        client = new TcpClient(ipNaslov, 5732);
-            //        Socket = client.Client;
-            //        MessageReceiver.RunWorkerAsync();
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        MessageBox.Show(ex.Message);
-            //        Podlaga.Close();
-            //    }
-            //}
-
-
         }
 
         public Socket Socket { get;  set; }
@@ -103,10 +83,14 @@ namespace Sah_projekt
                         ZamenjajIgralca();
                         PreveriKonecIgre();
                     }
+                    else
+                    {
+                        MessageBox.Show("Nisi na potezi!");
+                    }
                 }
                 else
                 {
-                    PrikaziMoznePoteze(gumb);
+                    PrikaziMoznePotezeMultiplayer(gumb);
                 }
             }
         }
@@ -125,22 +109,15 @@ namespace Sah_projekt
         /// Funkcija pošlje podatke nasprotniku
         /// </summary>
         /// <param name="gumb"></param>
-        /// <exception cref="NotImplementedException"></exception>
         private void PosljiPotezo(Celica gumb)
         {
             byte[] num = { (byte)gumb.X, (byte)gumb.Y };
             Socket.Send(num);
             MessageReceiver.RunWorkerAsync();
         }
-        private void MessageReceiver_DoWork(object sender, DoWorkEventArgs e)
+        private void SprejmiPotezo(object sender, DoWorkEventArgs e)
         {
-            //FREEZEBOARD
-            //sahovnica.Zamrzni();
-            //sahovnica.NaVrsti = false;
             ReceiveMove();
-            //sahovnica.NaVrsti = true;
-            //sahovnica.Odmrzni();
-
         }
         private void ReceiveMove()
         {
@@ -152,6 +129,10 @@ namespace Sah_projekt
             ZamenjajIgralca();
         }
 
+        public void PrikaziMoznePotezeMultiplayer(Celica gumb)
+        {
+            PravaSahovnica.PrikaziMoznePoteze(gumb, Igralec1);
+        }
     }
 }
 

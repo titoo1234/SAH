@@ -84,6 +84,7 @@ namespace Sah_projekt
             else this.Barva = "B";
             this.Cas = int.Parse(buffer[1].ToString());
             ZacetekIgre.Enabled = true;
+            MessageReceiver.DoWork -= SprejmiSignalGost;
             //sprejmemo podatke ... nastavimo temo....
         }
 
@@ -92,6 +93,7 @@ namespace Sah_projekt
             byte[] buffer = new byte[5];
             Socket.Receive(buffer);
             int x = int.Parse(buffer[0].ToString());
+            MessageReceiver.DoWork -= SprejmiSignalHost;
             ZacniIgro();
         }
 
@@ -154,11 +156,11 @@ namespace Sah_projekt
         private void PosljiNastavitveIgre()
         {
             byte[] num;
-            if (this.Barva == "W") num = new byte[] {(byte)0, (byte)this.Cas};
+            if (this.Barva == "W") num = new byte[] { (byte)0, (byte)this.Cas };
             else num = new byte[] { (byte)1, (byte)this.Cas };
+            this.ZacetekIgre.Enabled = false;
             Socket.Send(num);
             MessageReceiver.RunWorkerAsync();
-
         }
 
         private void PosljiSignal()
@@ -190,11 +192,13 @@ namespace Sah_projekt
         /// </summary>
         private void ZacniIgro()
         {
-            Visible = false;
+            this.Visible = false;
             //POŠLJEMO NASPORTONIKUs
             if (!this.Game.IsDisposed)
                 this.Game.ShowDialog();
+            this.MessageReceiver.CancelAsync();
             this.Close();
+            
         }
         /// <summary>
         /// Funkcija nastavi temo igre
