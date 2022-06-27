@@ -695,5 +695,88 @@ namespace Sah_projekt
             return vsota;
         }
 
+        public string FENniz(string barva)
+        {
+            string vrni = "";
+            int stevec = 0;
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    NavideznaFigura trenutna = this.Celice[i, j].Figura;
+                    string ime = trenutna.Ime;
+                    if (ime == "")
+                    {
+                        stevec++;
+                        continue;
+                    }
+                    if (stevec != 0)
+                    {
+                        vrni = vrni + stevec;
+                        stevec = 0;
+                    }
+                    if (ime[0] == 'W')
+                    {
+
+                        vrni = vrni + ime[1];
+                    }
+                    else
+                    {
+                        vrni = vrni + Char.ToLower(ime[1]);
+                    }
+                }
+                if (stevec != 0)
+                {
+                    vrni = vrni + stevec;
+                }
+                stevec = 0;
+                vrni = vrni + "/";
+            }
+
+            vrni = vrni.Substring(0, vrni.Length - 1) + " " + barva.ToLower() + " ";
+            bool crtica = true;
+            NavideznaFigura potencial_kralj_w = this.Celice[7, 4].Figura;
+            if (potencial_kralj_w.Ime == "WK" && !potencial_kralj_w.Premaknjen)
+            {
+                NavideznaFigura desna_trdnjava = this.Celice[7, 7].Figura;
+                if (desna_trdnjava.Ime == "WR" && !desna_trdnjava.Premaknjen)
+                {
+                    vrni = vrni + "K";
+                    crtica = false;
+                }
+                NavideznaFigura leva_trdnjava = this.Celice[7, 0].Figura;
+                if (leva_trdnjava.Ime == "WR" && !leva_trdnjava.Premaknjen)
+                {
+                    vrni = vrni + "Q";
+                    crtica = false;
+                }
+            }
+            NavideznaFigura potencial_kralj_b = this.Celice[0, 4].Figura;
+            if (potencial_kralj_b.Ime == "BK" && !potencial_kralj_b.Premaknjen)
+            {
+                NavideznaFigura desna_trdnjava = this.Celice[0, 7].Figura;
+                if (desna_trdnjava.Ime == "BR" && !desna_trdnjava.Premaknjen)
+                {
+                    vrni = vrni + "k";
+                    crtica = false;
+                }
+                NavideznaFigura leva_trdnjava = this.Celice[0, 0].Figura;
+                if (leva_trdnjava.Ime == "BR" && !leva_trdnjava.Premaknjen)
+                {
+                    vrni = vrni + "q";
+                    crtica = false;
+                }
+            }
+
+            if (crtica)
+            {
+                vrni = vrni + "- ";
+            }
+
+            vrni = vrni + "- 0 1";
+
+            return vrni;
+        }
+
     }
 }
