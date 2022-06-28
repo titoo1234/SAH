@@ -33,8 +33,6 @@ namespace Sah_projekt
             this.NasprotnaBarva = VrniNasprotnoBarvo(ZacetnaBarva);
             this.Random = new Random();
             this.IzvedenEnPassant = false;
-            
-
         }
 
         public NavideznaCelica[,] Celice { get; set; }   
@@ -424,7 +422,6 @@ namespace Sah_projekt
             return this.PrejsnaCelica;
         }
 
-
         public void NarediDesnoRosado(NavideznaCelica celica, List<NavideznaCelica> prejsneCelice)
         {
             if (this.ZacetnaBarva == "W")
@@ -675,6 +672,12 @@ namespace Sah_projekt
             }
             return false;
         }
+        /// <summary>
+        /// Funkcija nam vrne skupno vrednost vseh naših figur 
+        /// Na podlagi te skupne vrednosti določimo "kako dobro nam v igri gre"
+        /// </summary>
+        /// <param name="barva"></param>
+        /// <returns></returns>
         public int SestevekFigur(string barva)
         {
             int vsota = 0;
@@ -693,6 +696,18 @@ namespace Sah_projekt
                 }
             }
             return vsota;
+        }
+        /// <summary>
+        /// Funkcija nam vrne vrednost igre (sestevek belih - sestevek črnih figur)
+        /// </summary>
+        /// <returns></returns>
+        public int VrednostIgre(string barva)
+        {
+            int vrednostBelihFigur = SestevekFigur("W");
+            int vrednostCrnihFigur = SestevekFigur("B");
+            int vrednostIgre = vrednostBelihFigur - vrednostCrnihFigur;
+            if (barva == "W") return vrednostIgre;
+            else return -vrednostIgre;
         }
 
         public string FENniz(string barva)
