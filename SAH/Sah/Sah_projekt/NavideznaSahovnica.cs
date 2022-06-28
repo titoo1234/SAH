@@ -4,6 +4,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
+using System.IO;
 
 
 namespace Sah_projekt
@@ -172,18 +174,20 @@ namespace Sah_projekt
         /// Funkcija med vsemi možnimi potezami izbere naključno eno in jo vrne
         /// </summary>
         /// <returns>vrne potezo, tako da poda začetno in končno celico</returns>
-        public List<NavideznaCelica> RacunalnikNarediPotezo()
+        public string RacunalnikNarediPotezo()
         {
             List<(NavideznaCelica, NavideznaCelica)> vseMoznePoteze = VrniVseMoznePoteze();
             // TODO - če so vse mozne poteze prazen seznam je mat ali remi (sedaj vrze napako)
-            int rand = Random.Next(vseMoznePoteze.Count);
-            NavideznaCelica prejsnaCelica = vseMoznePoteze[rand].Item1;
-            NavideznaCelica novaCelica = vseMoznePoteze[rand].Item2;
-            NaseFigure.Remove(novaCelica.Figura);
-            novaCelica.Figura = prejsnaCelica.Figura;
-            prejsnaCelica.Figura = null;
-            novaCelica.Figura.Premaknjen = true;
-            return new List<NavideznaCelica>{ prejsnaCelica, novaCelica };
+            string poteza = Stockfish();
+            return poteza;
+            //int rand = Random.Next(vseMoznePoteze.Count);
+            //NavideznaCelica prejsnaCelica = vseMoznePoteze[rand].Item1;
+            //NavideznaCelica novaCelica = vseMoznePoteze[rand].Item2;
+            //NaseFigure.Remove(novaCelica.Figura);
+            //novaCelica.Figura = prejsnaCelica.Figura;
+            //prejsnaCelica.Figura = null;
+            //novaCelica.Figura.Premaknjen = true;
+            //return new List<NavideznaCelica>{ prejsnaCelica, novaCelica };
         }
 
         /// <summary>
@@ -704,7 +708,15 @@ namespace Sah_projekt
                 for (int j = 0; j < 8; j++)
                 {
                     NavideznaFigura trenutna = this.Celice[i, j].Figura;
-                    string ime = trenutna.Ime;
+                    string ime;
+                    if (trenutna != null)
+                    {
+                        ime = trenutna.Ime;
+                    }
+                    else
+                    {
+                        ime = "";
+                    }
                     if (ime == "")
                     {
                         stevec++;
@@ -777,6 +789,32 @@ namespace Sah_projekt
 
             return vrni;
         }
+
+        public string Stockfish()
+        {
+            Process info = new Process();
+            //info.StartInfo.FileName = "C:/Users/Lenovo/Desktop/SAH-Server/sah_poskus/poskus2/stockfish_15_win_x64_avx2/stockfish_15_x64_avx2.exe";
+            info.StartInfo.FileName = "C:/WINDOWS/system32/cmd.exe";
+            string a = FENniz("b");
+            //info.StartInfo.Arguments = "position fen rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1\ngo depth 12";
+            info.StartInfo.Arguments = "start C:/Users/Lenovo/Desktop/SAH-Server/sah_poskus/poskus2/stockfish_15_win_x64_avx2/stockfish_15_x64_avx2.exe go depth 12";
+            info.StartInfo.CreateNoWindow = true;
+            info.StartInfo.RedirectStandardOutput = true;
+            info.StartInfo.UseShellExecute = false;
+            info.StartInfo.RedirectStandardError = true;
+
+            info.EnableRaisingEvents = true;
+
+            //Process app = new Process(info);
+            info.Start();
+            string output = info.StandardOutput.ReadToEnd();
+            string output2 = info.StandardError.ReadToEnd();
+            info.WaitForExit();
+            
+            return output;
+        }
+
+
 
     }
 }

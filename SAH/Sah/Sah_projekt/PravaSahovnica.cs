@@ -113,10 +113,10 @@ namespace Sah_projekt
         /// </summary>
         public void RacunalnikNarediPotezo()
         {
-            List<NavideznaCelica> poteza = NavideznaSahovnica.RacunalnikNarediPotezo();
-
-            this.Celice[poteza[1].X, poteza[1].Y].Image = this.Celice[poteza[0].X, poteza[0].Y].Image;
-            this.Celice[poteza[0].X, poteza[0].Y].Image = null;
+            string poteza = NavideznaSahovnica.RacunalnikNarediPotezo();
+            MessageBox.Show(poteza);
+            //this.Celice[poteza[1].X, poteza[1].Y].Image = this.Celice[poteza[0].X, poteza[0].Y].Image;
+            //this.Celice[poteza[0].X, poteza[0].Y].Image = null;
         }
 
         /// <summary>
