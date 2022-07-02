@@ -116,7 +116,7 @@ namespace Sah_projekt
             string fen = this.NavideznaSahovnica.FENniz(NavideznaSahovnica.VrniNasprotnoBarvo(this.NavideznaSahovnica.PrejsnaCelica.Figura.Barva));
             string najPoteza = this.NavideznaSahovnica.NajboljsaPoteza(fen);
             NavideznaCelica novaCelica = this.NavideznaSahovnica.pretvoriVPotezo(najPoteza);
-            Celica celica = new Celica(novaCelica.X, novaCelica.Y);
+            Celica celica = this.Celice[novaCelica.X, novaCelica.Y];
             PrestaviFiguro(celica);
 
             //this.Celice[poteza[1].X, poteza[1].Y].Image = this.Celice[poteza[0].X, poteza[0].Y].Image;
@@ -165,7 +165,6 @@ namespace Sah_projekt
                     this.Celice[navideznaCelica.X, navideznaCelica.Y].SpremeniBarvo(Tema[2], Tema[2]);
                 }
             }
-            
         }
         public void NarediZamenjavo(Celica gumb)
         {
