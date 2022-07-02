@@ -113,10 +113,14 @@ namespace Sah_projekt
         /// </summary>
         public void RacunalnikNarediPotezo()
         {
-            List<NavideznaCelica> poteza = NavideznaSahovnica.RacunalnikNarediPotezo();
+            string fen = this.NavideznaSahovnica.FENniz(NavideznaSahovnica.VrniNasprotnoBarvo(this.NavideznaSahovnica.PrejsnaCelica.Figura.Barva));
+            string najPoteza = this.NavideznaSahovnica.NajboljsaPoteza(fen);
+            NavideznaCelica novaCelica = this.NavideznaSahovnica.pretvoriVPotezo(najPoteza);
+            Celica celica = new Celica(novaCelica.X, novaCelica.Y);
+            PrestaviFiguro(celica);
 
-            this.Celice[poteza[1].X, poteza[1].Y].Image = this.Celice[poteza[0].X, poteza[0].Y].Image;
-            this.Celice[poteza[0].X, poteza[0].Y].Image = null;
+            //this.Celice[poteza[1].X, poteza[1].Y].Image = this.Celice[poteza[0].X, poteza[0].Y].Image;
+            //this.Celice[poteza[0].X, poteza[0].Y].Image = null;
         }
 
         /// <summary>

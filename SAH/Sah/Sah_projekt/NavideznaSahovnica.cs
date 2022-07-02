@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 
 namespace Sah_projekt
@@ -182,6 +184,16 @@ namespace Sah_projekt
             prejsnaCelica.Figura = null;
             novaCelica.Figura.Premaknjen = true;
             return new List<NavideznaCelica>{ prejsnaCelica, novaCelica };
+        }
+
+        public List<NavideznaCelica> RacunalnikNarediPotezo(bool stockFish)
+        {
+            string fen = FENniz(VrniNasprotnoBarvo(this.PrejsnaCelica.Figura.Barva));
+            string najPoteza = NajboljsaPoteza(fen);
+            NavideznaCelica novaCelica = pretvoriVPotezo(najPoteza);
+            Celica celica = new Celica(novaCelica.X, novaCelica.Y);
+            List<NavideznaCelica> vrniPotezo = PrestaviFiguro(celica);
+            return vrniPotezo;
         }
 
         /// <summary>
@@ -710,6 +722,12 @@ namespace Sah_projekt
             else return -vrednostIgre;
         }
 
+        /// <summary>
+        /// Funkcija nam vrne opis postavitve figur f FEN formatu 
+        /// Začetna postavitev v FEN formatu : rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
+        /// </summary>
+        /// <param name="barva"></param>
+        /// <returns> Vrne niz</returns>
         public string FENniz(string barva)
         {
             string vrni = "";
@@ -719,30 +737,28 @@ namespace Sah_projekt
                 for (int j = 0; j < 8; j++)
                 {
                     NavideznaFigura trenutna = this.Celice[i, j].Figura;
-                    string ime = trenutna.Ime;
-                    if (ime == "")
+                    if (trenutna == null)
                     {
                         stevec++;
                         continue;
                     }
                     if (stevec != 0)
                     {
-                        vrni = vrni + stevec;
+                        vrni = vrni + stevec; // za prazna polja v niz vnesemo številko, ki predstavlja število praznih polj
                         stevec = 0;
                     }
-                    if (ime[0] == 'W')
+                    if (trenutna.Ime[0] == 'W')
                     {
-
-                        vrni = vrni + ime[1];
+                        vrni = vrni + trenutna.Ime[1]; // bele figure so zapisane z VELIKIMI ČRKAMI
                     }
                     else
                     {
-                        vrni = vrni + Char.ToLower(ime[1]);
+                        vrni = vrni + Char.ToLower(trenutna.Ime[1]); // črne figure so zapisane z malimi črkami
                     }
                 }
                 if (stevec != 0)
                 {
-                    vrni = vrni + stevec;
+                    vrni = vrni + stevec; // na koncu dodamo še preostala prazna polja
                 }
                 stevec = 0;
                 vrni = vrni + "/";
@@ -793,5 +809,78 @@ namespace Sah_projekt
             return vrni;
         }
 
+        /// <summary>
+        /// Funkcija zažene stockFish program in poišče najboljšo potezo
+        /// </summary>
+        /// <param name="FENniz"></param>
+        /// <returns> Potezo vrne v obliki niza </returns>
+        public string NajboljsaPoteza(string FENniz)
+        {
+            var p = new System.Diagnostics.Process();
+            p.StartInfo.FileName = @"C:\Users\damij\Desktop\stockfish_15_win_x64_popcnt\stockfish_15_x64_popcnt.exe";
+            p.StartInfo.UseShellExecute = false;
+            p.StartInfo.RedirectStandardInput = true;
+            p.StartInfo.RedirectStandardOutput = true;
+            p.Start();
+            string nastaviPozicijo = "position fen "+ FENniz;
+            p.StandardInput.WriteLine(nastaviPozicijo);
+
+            // naredi potezo (počaka 3 sekunde)
+            string narediPotezo = "go movetime 3000";
+            p.StandardInput.WriteLine(narediPotezo);
+            Thread.Sleep(3000);
+            p.StandardInput.Flush();
+            p.StandardInput.Close();
+
+            string output = null;
+            while (!p.StandardOutput.EndOfStream)
+            {
+                output = p.StandardOutput.ReadLine();
+            }
+            p.Close();
+
+            string[] tabNizov = output.Split(' ');
+            string najPoteza = tabNizov[1];
+
+            return najPoteza;
+        }
+
+        /// <summary>
+        /// Funkcija pretvori potezo iz niza v seznam [zacetna poteza, koncna poteza]
+        /// </summary>
+        /// <param name="nizPoteza"></param>
+        /// <returns></returns>
+        public NavideznaCelica pretvoriVPotezo(string nizPoteza)
+        {
+            string prvaCelica = nizPoteza.Substring(0, 2);
+            string drugaCelica = nizPoteza.Substring(2, 2);
+            NavideznaCelica prejsna = pretvoriVCelico(prvaCelica);
+            this.PrejsnaCelica = this.Celice[prejsna.X, prejsna.Y];
+            NavideznaCelica novaCelica = pretvoriVCelico(drugaCelica);
+            return novaCelica;
+        }
+
+        /// <summary>
+        /// Funkcija pretvori zapis polja na sahovnici iz niza v celico npr.: "a1" --> polje 
+        /// </summary>
+        /// <param name="niz"></param>
+        /// <returns></returns>
+        public NavideznaCelica pretvoriVCelico(string niz)
+        {
+            Dictionary<char, int> slovar = new Dictionary<char, int>() {
+                {'a', 0},
+                {'b', 1},
+                {'c', 2},
+                {'d', 3},
+                {'e', 4},
+                {'f', 5},
+                {'g', 6},
+                {'h', 7},
+            };
+            int x = 8 - int.Parse(niz[1] + ""); // zapisa v x smeri se razlikujeta (nasa impl: 0 -> 7 ; stockFish impl: 8 -> 1)
+            int y = slovar[niz[0]];
+            NavideznaCelica celica = new NavideznaCelica(x, y, this);
+            return celica;
+        }
     }
 }
