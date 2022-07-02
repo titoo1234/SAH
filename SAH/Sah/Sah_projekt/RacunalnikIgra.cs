@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ namespace Sah_projekt
 {
     public class RacunalnikIgra : Igra
     {
+        Process process;
         public RacunalnikIgra(Nastavitve nastavitve)
         {
             string barva = nastavitve.Barva;
@@ -23,12 +25,15 @@ namespace Sah_projekt
             this.Igralec2 = new Igralec(NavideznaSahovnica.VrniNasprotnoBarvo(barva));
             NastaviCas(cas);
             NastaviTrenutnegaIgralca();
+            //ZazeniStockFish();
             SpremeniLastnostGumbov();
             if (TrenutniIgralec != Igralec1)
             {  
                 RacunalnikNarediPotezo();
             }
         }
+
+        public Process Process { get; set; }
 
         /// <summary>
         /// Funkcija predstavlja delovanje igre. S kllikom na celico lahko:
@@ -86,6 +91,17 @@ namespace Sah_projekt
         {
             PravaSahovnica.RacunalnikNarediPotezo();
             ZamenjajIgralca();
+        }
+
+        public void ZazeniStockFish()
+        {
+            this.Process = new Process();
+            Process.StartInfo.FileName = @"C:\Users\damij\Desktop\stockfish_15_win_x64_popcnt\stockfish_15_x64_popcnt.exe";
+            Process.StartInfo.UseShellExecute = false;
+            Process.StartInfo.RedirectStandardInput = true;
+            Process.StartInfo.RedirectStandardOutput = true;
+            //Process.StartInfo.CreateNoWindow = true;
+            Process.Start();
         }
 
         // OSTALE FUNKCIJE SO V RAZREDU IGRA

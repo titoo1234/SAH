@@ -767,7 +767,7 @@ namespace Sah_projekt
             vrni = vrni.Substring(0, vrni.Length - 1) + " " + barva.ToLower() + " ";
             bool crtica = true;
             NavideznaFigura potencial_kralj_w = this.Celice[7, 4].Figura;
-            if (potencial_kralj_w.Ime == "WK" && !potencial_kralj_w.Premaknjen)
+            if (!(potencial_kralj_w is null) && potencial_kralj_w.jeKralj() && !potencial_kralj_w.Premaknjen)
             {
                 NavideznaFigura desna_trdnjava = this.Celice[7, 7].Figura;
                 if (desna_trdnjava.Ime == "WR" && !desna_trdnjava.Premaknjen)
@@ -783,7 +783,7 @@ namespace Sah_projekt
                 }
             }
             NavideznaFigura potencial_kralj_b = this.Celice[0, 4].Figura;
-            if (potencial_kralj_b.Ime == "BK" && !potencial_kralj_b.Premaknjen)
+            if (!(potencial_kralj_b is null) && potencial_kralj_b.jeKralj() && !potencial_kralj_b.Premaknjen)
             {
                 NavideznaFigura desna_trdnjava = this.Celice[0, 7].Figura;
                 if (desna_trdnjava.Ime == "BR" && !desna_trdnjava.Premaknjen)
@@ -821,14 +821,17 @@ namespace Sah_projekt
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.RedirectStandardInput = true;
             p.StartInfo.RedirectStandardOutput = true;
+            p.StartInfo.CreateNoWindow = true;
             p.Start();
+            string nastaviTezavnost = "setoption name Skill Level value 1";
+            p.StandardInput.WriteLine(nastaviTezavnost);
             string nastaviPozicijo = "position fen "+ FENniz;
             p.StandardInput.WriteLine(nastaviPozicijo);
 
             // naredi potezo (počaka 3 sekunde)
-            string narediPotezo = "go movetime 3000";
+            string narediPotezo = "go movetime 1000";
             p.StandardInput.WriteLine(narediPotezo);
-            Thread.Sleep(3000);
+            p.WaitForExit(1000);
             p.StandardInput.Flush();
             p.StandardInput.Close();
 
