@@ -720,6 +720,95 @@ namespace Sah_projekt
         /// <returns> Vrne niz</returns>
         public string FENniz(string barva)
         {
+            if (this.ZacetnaBarva == "W")
+            {
+                return FENnizBeli(barva);
+            }
+            return FENnizCrni(barva);
+        }
+
+        public string FENnizCrni(string barva)
+        {
+            string vrni = "";
+            int stevec = 0;
+            for (int i = 7; i > -1; i--)
+            {
+                for (int j = 7; j > -1; j--)
+                {
+                    NavideznaFigura trenutna = this.Celice[i, j].Figura;
+                    if (trenutna == null)
+                    {
+                        stevec++;
+                        continue;
+                    }
+                    if (stevec != 0)
+                    {
+                        vrni = vrni + stevec; // za prazna polja v niz vnesemo številko, ki predstavlja število praznih polj
+                        stevec = 0;
+                    }
+                    if (trenutna.Ime[0] == 'W')
+                    {
+                        vrni = vrni + trenutna.Ime[1]; // bele figure so zapisane z VELIKIMI ČRKAMI
+                    }
+                    else
+                    {
+                        vrni = vrni + Char.ToLower(trenutna.Ime[1]); // črne figure so zapisane z malimi črkami
+                    }
+                }
+                if (stevec != 0)
+                {
+                    vrni = vrni + stevec; // na koncu dodamo še preostala prazna polja
+                }
+                stevec = 0;
+                vrni = vrni + "/";
+            }
+            vrni = vrni.Substring(0, vrni.Length - 1) + " " + barva.ToLower() + " ";
+            bool crtica = true;
+            NavideznaFigura potencial_kralj_w = this.Celice[0, 3].Figura;
+            if (!(potencial_kralj_w is null) && potencial_kralj_w.jeKralj() && !potencial_kralj_w.Premaknjen)
+            {
+                NavideznaFigura desna_trdnjava = this.Celice[0, 0].Figura;
+                if (!(desna_trdnjava is null) && desna_trdnjava.Ime == "WR" && !desna_trdnjava.Premaknjen)
+                {
+                    vrni = vrni + "K";
+                    crtica = false;
+                }
+                NavideznaFigura leva_trdnjava = this.Celice[0, 7].Figura;
+                if (!(leva_trdnjava is null) && leva_trdnjava.Ime == "WR" && !leva_trdnjava.Premaknjen)
+                {
+                    vrni = vrni + "Q";
+                    crtica = false;
+                }
+            }
+            NavideznaFigura potencial_kralj_b = this.Celice[7, 3].Figura;
+            if (!(potencial_kralj_b is null) && potencial_kralj_b.jeKralj() && !potencial_kralj_b.Premaknjen)
+            {
+                NavideznaFigura desna_trdnjava = this.Celice[7, 0].Figura;
+                if (!(desna_trdnjava is null) && desna_trdnjava.Ime == "BR" && !desna_trdnjava.Premaknjen)
+                {
+                    vrni = vrni + "k";
+                    crtica = false;
+                }
+                NavideznaFigura leva_trdnjava = this.Celice[7, 7].Figura;
+                if (!(leva_trdnjava is null) && leva_trdnjava.Ime == "BR" && !leva_trdnjava.Premaknjen)
+                {
+                    vrni = vrni + "q";
+                    crtica = false;
+                }
+            }
+            if (crtica)
+            {
+                vrni = vrni + "- ";
+            }
+
+            vrni = vrni + "- 0 1";
+
+            return vrni;
+
+        }
+
+        public string FENnizBeli(string barva)
+        {
             string vrni = "";
             int stevec = 0;
             for (int i = 0; i < 8; i++)

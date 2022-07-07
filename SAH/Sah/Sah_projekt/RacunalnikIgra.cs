@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace Sah_projekt
 {
@@ -57,6 +58,7 @@ namespace Sah_projekt
                     return;
                 }
                 RacunalnikNarediPotezo();
+                PreveriKonecIgre();
             }
             else
             // kliknali smo na šahovnico
@@ -64,7 +66,8 @@ namespace Sah_projekt
                 if (jeObarvanoPolje(gumb))
                 {
                     PrestaviFiguro(gumb);
-
+                    
+                    PreveriKonecIgre();
                     if (PrikaziRezervo(gumb))
                     {
                         if (TrenutniIgralec == Igralec1) PravaSahovnica.PravaRezerva.PrikaziNasoRezervo();
@@ -74,12 +77,15 @@ namespace Sah_projekt
                     }
                     else
                     {
+                        PreveriKonecIgre();
                         ZamenjajIgralca();
                         if (PreveriKonecIgre())
                         {
                             return;
                         }
                         RacunalnikNarediPotezo();
+                        
+                        PreveriKonecIgre();
                     }
                 }
                 else
@@ -157,7 +163,7 @@ namespace Sah_projekt
         /// </summary>
         /// <param name="nizPoteza"></param>
         /// <returns></returns>
-        public static List<NavideznaCelica> pretvoriVPotezo(string nizPoteza, NavideznaSahovnica sahovnica)
+        public List<NavideznaCelica> pretvoriVPotezo(string nizPoteza, NavideznaSahovnica sahovnica)
         {
             string[] zadnjaVrstica = nizPoteza.Split(' ');
             string najPoteza = zadnjaVrstica[1];
@@ -165,6 +171,30 @@ namespace Sah_projekt
             string drugaCelica = najPoteza.Substring(2, 2);
             NavideznaCelica prejsna = pretvoriVCelico(prvaCelica, sahovnica);
             NavideznaCelica novaCelica = pretvoriVCelico(drugaCelica, sahovnica);
+            if (najPoteza.Length == 5) // torej je kmet prišel do konca in se bo zamenjal
+            {
+                char f = najPoteza[4];
+                if (f == 'q')
+                {
+                    prejsna.Figura = new Kraljica(prejsna.Figura.Barva, sahovnica.Velikost);
+                    this.PravaSahovnica.Celice[prejsna.X, prejsna.Y].Image = prejsna.Figura.Slika;
+                }
+                if (f == 'r')
+                {
+                    prejsna.Figura = new Trdnjava(prejsna.Figura.Barva, sahovnica.Velikost);
+                    this.PravaSahovnica.Celice[prejsna.X, prejsna.Y].Image = prejsna.Figura.Slika;
+                }
+                if (f == 'b')
+                {
+                    prejsna.Figura = new Tekac(prejsna.Figura.Barva, sahovnica.Velikost);
+                    this.PravaSahovnica.Celice[prejsna.X, prejsna.Y].Image = prejsna.Figura.Slika;
+                }
+                if (f == 'n')
+                {
+                    prejsna.Figura = new Konj(prejsna.Figura.Barva, sahovnica.Velikost);
+                    this.PravaSahovnica.Celice[prejsna.X, prejsna.Y].Image = prejsna.Figura.Slika;
+                }
+            }
             return new List<NavideznaCelica> { prejsna, novaCelica };
         }
 
@@ -175,7 +205,10 @@ namespace Sah_projekt
         /// <returns></returns>
         public static NavideznaCelica pretvoriVCelico(string niz, NavideznaSahovnica sahovnica)
         {
-            Dictionary<char, int> slovar = new Dictionary<char, int>() {
+            Dictionary<char, int> slovar;
+            if (sahovnica.ZacetnaBarva == "W")
+            {
+                slovar = new Dictionary<char, int>() {
                 {'a', 0},
                 {'b', 1},
                 {'c', 2},
@@ -185,10 +218,29 @@ namespace Sah_projekt
                 {'g', 6},
                 {'h', 7},
             };
-            int x = 8 - int.Parse(niz[1] + ""); // zapisa v x smeri se razlikujeta (nasa impl: 0 -> 7 ; stockFish impl: 8 -> 1)
-            int y = slovar[niz[0]];
-            NavideznaCelica celica = sahovnica.Celice[x, y];
-            return celica;
+                int x = 8 - int.Parse(niz[1] + ""); // zapisa v x smeri se razlikujeta (nasa impl: 0 -> 7 ; stockFish impl: 8 -> 1)
+                int y = slovar[niz[0]];
+                NavideznaCelica celica = sahovnica.Celice[x, y];
+                return celica;
+            }
+            else
+            {
+                slovar = new Dictionary<char, int>() {
+                {'a', 7},
+                {'b', 6},
+                {'c', 5},
+                {'d', 4},
+                {'e', 3},
+                {'f', 2},
+                {'g', 1},
+                {'h', 0},
+            };
+                int x = int.Parse(niz[1] + "") - 1; // zapisa v x smeri se razlikujeta (nasa impl: 0 -> 7 ; stockFish impl: 8 -> 1)
+                int y = slovar[niz[0]];
+                NavideznaCelica celica = sahovnica.Celice[x, y];
+                return celica;
+            }
+            
         }
 
         // OSTALE FUNKCIJE SO V RAZREDU IGRA
