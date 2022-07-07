@@ -40,6 +40,8 @@
             this.BelaBarva_Gumb = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.IzberiCas = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.IzberiTezavnost = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.IzbranaTema)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.IzbranaBarva)).BeginInit();
             this.SuspendLayout();
@@ -51,7 +53,7 @@
             this.label1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.label1.Location = new System.Drawing.Point(29, 39);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(157, 29);
+            this.label1.Size = new System.Drawing.Size(125, 24);
             this.label1.TabIndex = 0;
             this.label1.Text = "Izberi barvo:";
             // 
@@ -62,7 +64,7 @@
             this.label2.ForeColor = System.Drawing.SystemColors.ControlText;
             this.label2.Location = new System.Drawing.Point(500, 39);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(150, 29);
+            this.label2.Size = new System.Drawing.Size(119, 24);
             this.label2.TabIndex = 3;
             this.label2.Text = "Izberi temo:";
             this.label2.Click += new System.EventHandler(this.label2_Click);
@@ -86,7 +88,7 @@
             this.Izbrano.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Izbrano.Location = new System.Drawing.Point(429, 255);
             this.Izbrano.Name = "Izbrano";
-            this.Izbrano.Size = new System.Drawing.Size(268, 29);
+            this.Izbrano.Size = new System.Drawing.Size(215, 24);
             this.Izbrano.TabIndex = 7;
             this.Izbrano.Text = "Izbrana barva in tema:";
             this.Izbrano.Click += new System.EventHandler(this.Izbrano_Click);
@@ -159,7 +161,7 @@
             this.label3.ForeColor = System.Drawing.SystemColors.ControlText;
             this.label3.Location = new System.Drawing.Point(267, 39);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(132, 29);
+            this.label3.Size = new System.Drawing.Size(105, 24);
             this.label3.TabIndex = 10;
             this.label3.Text = "Izberi čas:";
             // 
@@ -171,16 +173,48 @@
             "3",
             "5",
             "10"});
-            this.IzberiCas.Location = new System.Drawing.Point(272, 116);
+            this.IzberiCas.Location = new System.Drawing.Point(271, 85);
             this.IzberiCas.Name = "IzberiCas";
             this.IzberiCas.Size = new System.Drawing.Size(121, 21);
             this.IzberiCas.TabIndex = 11;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label4.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label4.Location = new System.Drawing.Point(267, 156);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(160, 24);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Izberi težavnost:";
+            // 
+            // IzberiTezavnost
+            // 
+            this.IzberiTezavnost.FormattingEnabled = true;
+            this.IzberiTezavnost.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10"});
+            this.IzberiTezavnost.Location = new System.Drawing.Point(271, 205);
+            this.IzberiTezavnost.Name = "IzberiTezavnost";
+            this.IzberiTezavnost.Size = new System.Drawing.Size(121, 21);
+            this.IzberiTezavnost.TabIndex = 11;
             // 
             // Nastavitve
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(736, 450);
+            this.Controls.Add(this.IzberiTezavnost);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.IzberiCas);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.IzbranaTema);
@@ -217,5 +251,7 @@
         private System.Windows.Forms.PictureBox IzbranaTema;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox IzberiCas;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox IzberiTezavnost;
     }
 }

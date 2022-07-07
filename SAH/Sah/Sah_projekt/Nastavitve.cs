@@ -26,6 +26,7 @@ namespace Sah_projekt
         private int cas;
         private string nacinIgre;
         private string ipNaslov;
+        private string tezavnost;
         public Nastavitve(string nacinIgre,string ip = null)
         {
             
@@ -105,6 +106,7 @@ namespace Sah_projekt
             BelaBarva_Gumb.Enabled = false;
             temaSahovnicaGumb1.Enabled = false;
             IzberiCas.SelectedIndex = 2;
+            IzberiTezavnost.SelectedIndex = 9;
         }
 
         public Socket Socket { get; set; }
@@ -118,6 +120,8 @@ namespace Sah_projekt
         public int Cas { get; set; }
         public string NacinIgre { get; set; }
         public string IpNaslov { get; set; }
+
+        public string Tezavnost { get; set; }
 
         private void label2_Click(object sender, EventArgs e)
         {
@@ -145,7 +149,8 @@ namespace Sah_projekt
                 this.Cas = int.Parse((string)IzberiCas.SelectedItem);
                 NastaviBarvo();
             }
-                
+            int pretovri = Int32.Parse(this.IzberiTezavnost.Text) * 2;
+            this.Tezavnost = pretovri.ToString();
             this.Game = new Game(true, false, false);
             NastaviIgro();
             if (NacinIgre == "GOST") PosljiSignal();

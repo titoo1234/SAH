@@ -26,7 +26,7 @@ namespace Sah_projekt
             this.Igralec2 = new Igralec(NavideznaSahovnica.VrniNasprotnoBarvo(barva));
             NastaviCas(cas);
             NastaviTrenutnegaIgralca();
-            ZazeniStockFish();
+            ZazeniStockFish(nastavitve.Tezavnost);
             SpremeniLastnostGumbov();
             if (TrenutniIgralec != Igralec1)
             {
@@ -99,7 +99,7 @@ namespace Sah_projekt
             Process.StandardInput.WriteLine(narediPotezo);
         }
 
-        public void ZazeniStockFish()
+        public void ZazeniStockFish(string tezavnost)
         {
             //this.Process = new Process();
             //Process.StartInfo.FileName = @"C:\Users\damij\Desktop\stockfish_15_win_x64_popcnt\stockfish_15_x64_popcnt.exe";
@@ -110,7 +110,8 @@ namespace Sah_projekt
             //Process.Start();
 
             this.Process = new Process();
-            Process.StartInfo.FileName = @"C:\Users\damij\Desktop\stockfish_15_win_x64_popcnt\stockfish_15_x64_popcnt.exe";
+            //MessageBox.Show(Environment.CurrentDirectory);
+            Process.StartInfo.FileName = Environment.CurrentDirectory + @"\stockfish_15_win_x64_avx2\stockfish_15_x64_avx2.exe";
             Process.StartInfo.UseShellExecute = false;
             Process.StartInfo.RedirectStandardInput = true;
             Process.StartInfo.RedirectStandardOutput = true;
@@ -120,7 +121,7 @@ namespace Sah_projekt
             Process.Start();
             Process.BeginOutputReadLine();
 
-            string nastaviTezavnost = "setoption name Skill Level value 20";
+            string nastaviTezavnost = "setoption name Skill Level value " + tezavnost;
             Process.StandardInput.WriteLine(nastaviTezavnost);
         }
 

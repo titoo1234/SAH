@@ -35,3 +35,15 @@ C:\Users\damij\Desktop\Projekt\SAH\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.csp
 C:\Users\damij\Desktop\Projekt\SAH\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.csproj.CoreCompileInputs.cache
 C:\Users\damij\Desktop\Projekt\SAH\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.exe
 C:\Users\damij\Desktop\Projekt\SAH\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.pdb
+C:\Users\Lenovo\Desktop\1faks\prakticna 3letnik\prog3\sahh\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.csproj.AssemblyReference.cache
+C:\Users\Lenovo\Desktop\1faks\prakticna 3letnik\prog3\sahh\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.Game.resources
+C:\Users\Lenovo\Desktop\1faks\prakticna 3letnik\prog3\sahh\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.Nastavitve.resources
+C:\Users\Lenovo\Desktop\1faks\prakticna 3letnik\prog3\sahh\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.Properties.Resources.resources
+C:\Users\Lenovo\Desktop\1faks\prakticna 3letnik\prog3\sahh\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.Zacetek.resources
+C:\Users\Lenovo\Desktop\1faks\prakticna 3letnik\prog3\sahh\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.csproj.GenerateResource.cache
+C:\Users\Lenovo\Desktop\1faks\prakticna 3letnik\prog3\sahh\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\Desktop\1faks\prakticna 3letnik\prog3\sahh\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.exe
+C:\Users\Lenovo\Desktop\1faks\prakticna 3letnik\prog3\sahh\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.pdb
+C:\Users\Lenovo\Desktop\1faks\prakticna 3letnik\prog3\sahh\SAH\Sah\Sah_projekt\bin\Debug\Sah_projekt.exe.config
+C:\Users\Lenovo\Desktop\1faks\prakticna 3letnik\prog3\sahh\SAH\Sah\Sah_projekt\bin\Debug\Sah_projekt.exe
+C:\Users\Lenovo\Desktop\1faks\prakticna 3letnik\prog3\sahh\SAH\Sah\Sah_projekt\bin\Debug\Sah_projekt.pdb

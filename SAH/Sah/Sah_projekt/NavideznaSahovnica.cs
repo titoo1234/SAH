@@ -760,13 +760,13 @@ namespace Sah_projekt
             if (!(potencial_kralj_w is null) && potencial_kralj_w.jeKralj() && !potencial_kralj_w.Premaknjen)
             {
                 NavideznaFigura desna_trdnjava = this.Celice[7, 7].Figura;
-                if (desna_trdnjava.Ime == "WR" && !desna_trdnjava.Premaknjen)
+                if (!(desna_trdnjava is null) && desna_trdnjava.Ime == "WR" && !desna_trdnjava.Premaknjen)
                 {
                     vrni = vrni + "K";
                     crtica = false;
                 }
                 NavideznaFigura leva_trdnjava = this.Celice[7, 0].Figura;
-                if (leva_trdnjava.Ime == "WR" && !leva_trdnjava.Premaknjen)
+                if (!(leva_trdnjava is null) && leva_trdnjava.Ime == "WR" && !leva_trdnjava.Premaknjen)
                 {
                     vrni = vrni + "Q";
                     crtica = false;
@@ -776,13 +776,13 @@ namespace Sah_projekt
             if (!(potencial_kralj_b is null) && potencial_kralj_b.jeKralj() && !potencial_kralj_b.Premaknjen)
             {
                 NavideznaFigura desna_trdnjava = this.Celice[0, 7].Figura;
-                if (desna_trdnjava.Ime == "BR" && !desna_trdnjava.Premaknjen)
+                if (!(desna_trdnjava is null) && desna_trdnjava.Ime == "BR" && !desna_trdnjava.Premaknjen)
                 {
                     vrni = vrni + "k";
                     crtica = false;
                 }
                 NavideznaFigura leva_trdnjava = this.Celice[0, 0].Figura;
-                if (leva_trdnjava.Ime == "BR" && !leva_trdnjava.Premaknjen)
+                if (!(leva_trdnjava is null) && leva_trdnjava.Ime == "BR" && !leva_trdnjava.Premaknjen)
                 {
                     vrni = vrni + "q";
                     crtica = false;
