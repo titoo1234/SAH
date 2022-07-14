@@ -25,10 +25,13 @@ namespace Sah_projekt
             Size velikost = nastavitve.Velikost;
             this.Podlaga = nastavitve.Game;
             Color[] tema = nastavitve.Tema;
-            this.Socket = nastavitve.Socket;
-            this.MessageReceiver = nastavitve.MessageReceiver;
-            this.Server = nastavitve.Server;
-            this.Client = nastavitve.Client;
+            //this.MessageReceiver = nastavitve.MessageReceiver;
+            //this.Server = nastavitve.Server;
+            ////this.Server.Start();
+            //this.Socket = nastavitve.Socket;
+            
+            
+            //this.Client = nastavitve.Client;
             int cas = nastavitve.Cas * 60; // minute 
             this.SteviloPotez = 0;
             NavideznaSahovnica = new NavideznaSahovnica(barva, velikost);
@@ -38,8 +41,32 @@ namespace Sah_projekt
             NastaviCas(cas);
             NastaviTrenutnegaIgralca();
             SpremeniLastnostGumbov();
-            nastavitve.MessageReceiver.DoWork += SprejmiPotezo;
+            //this.MessageReceiver.DoWork += SprejmiPotezo;
             Podlaga.Text = nacinIgre;
+            //if (nacinIgre == "HOST")
+            //{
+            //    this.MessageReceiver = new BackgroundWorker();
+            //    MessageReceiver.DoWork += SprejmiPotezo;
+            //    server = new TcpListener(System.Net.IPAddress.Any, 5743);
+            //    server.Start();
+            //    Socket = server.AcceptSocket();
+            //}
+            //if (nacinIgre == "GOST")
+            //{
+            //    this.MessageReceiver = new BackgroundWorker();
+            //    MessageReceiver.DoWork += SprejmiPotezo;
+            //    try
+            //    {
+            //        client = new TcpClient(ipNaslov, 5743);
+            //        Socket = client.Client;
+            //        MessageReceiver.RunWorkerAsync();
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show(ex.Message);
+            //        //this.Close();
+            //    }
+            //}
         }
 
         public Socket Socket { get;  set; }
@@ -101,7 +128,6 @@ namespace Sah_projekt
             {
                 return true;
             }
-            MessageBox.Show("Nisi na potezi");
             return false;
         }
 
@@ -113,7 +139,7 @@ namespace Sah_projekt
         {
             byte[] num = { (byte)gumb.X, (byte)gumb.Y };
             Socket.Send(num);
-            MessageReceiver.RunWorkerAsync();
+            //MessageReceiver.RunWorkerAsync();
         }
         private void SprejmiPotezo(object sender, DoWorkEventArgs e)
         {

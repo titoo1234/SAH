@@ -31,12 +31,13 @@ namespace Sah_projekt
         {
             
             InitializeComponent();
+
             PrivzeteNastavitve();
             this.NacinIgre = nacinIgre;
             this.IpNaslov = ip;
             this.Text += NacinIgre;
             VzpostaviPovezavo();
-            
+            if (NacinIgre != "RACUNALNIK") IzberiTezavnost.Visible = false;
         }
         /// <summary>
         /// funkcija vzpostavi povezavo med igralcema
@@ -86,6 +87,7 @@ namespace Sah_projekt
             this.Cas = int.Parse(buffer[1].ToString());
             ZacetekIgre.Enabled = true;
             MessageReceiver.DoWork -= SprejmiSignalGost;
+            
             //sprejmemo podatke ... nastavimo temo....
         }
 
@@ -95,7 +97,9 @@ namespace Sah_projekt
             Socket.Receive(buffer);
             int x = int.Parse(buffer[0].ToString());
             MessageReceiver.DoWork -= SprejmiSignalHost;
+            server.Stop();
             ZacniIgro();
+            
         }
 
         /// <summary>
@@ -107,6 +111,8 @@ namespace Sah_projekt
             temaSahovnicaGumb1.Enabled = false;
             IzberiCas.SelectedIndex = 2;
             IzberiTezavnost.SelectedIndex = 9;
+          
+
         }
 
         public Socket Socket { get; set; }
@@ -153,7 +159,7 @@ namespace Sah_projekt
             this.Tezavnost = pretovri.ToString();
             this.Game = new Game(true, false, false);
             NastaviIgro();
-            if (NacinIgre == "GOST") PosljiSignal();
+            if (NacinIgre == "GOST") PosljiSignal(); 
             if (NacinIgre != "HOST") ZacniIgro();
             else PosljiNastavitveIgre();
         }
@@ -173,6 +179,7 @@ namespace Sah_projekt
             byte[] num = { (byte)1 };
             Socket.Send(num);
             MessageReceiver.RunWorkerAsync();
+
         }
 
         /// <summary>
@@ -201,7 +208,8 @@ namespace Sah_projekt
             //POŠLJEMO NASPORTONIKUs
             if (!this.Game.IsDisposed)
                 this.Game.ShowDialog();
-            this.MessageReceiver.CancelAsync();
+            //this.MessageReceiver.CancelAsync();
+            MessageReceiver.RunWorkerAsync();
             this.Close();
             
         }

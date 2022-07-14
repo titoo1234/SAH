@@ -142,6 +142,7 @@ namespace Sah_projekt
             {
                 List<NavideznaCelica> poteza = pretvoriVPotezo(izpis.Data, this.PravaSahovnica.NavideznaSahovnica);
                 PravaSahovnica.RacunalnikNarediPotezo(poteza);
+                //preveri mat
                 ZamenjajIgralca();
             }
         }
