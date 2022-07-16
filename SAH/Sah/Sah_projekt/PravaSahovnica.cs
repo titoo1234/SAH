@@ -153,7 +153,7 @@ namespace Sah_projekt
         /// <summary>
         /// Funkcija obarva vse celice, kamor lahko prestavimo izbrano figuro
         /// </summary>
-        public void PrikaziMoznePoteze(Celica gumb,Igralec TrenutniIgralec)
+        public void PrikaziMoznePoteze(Celica gumb, Igralec TrenutniIgralec)
         {
             PonastaviMozneCelice();
             NavideznaCelica celica = NavideznaSahovnica.Celice[gumb.X, gumb.Y];

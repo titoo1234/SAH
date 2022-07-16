@@ -17,33 +17,27 @@ namespace Sah_projekt
         private BackgroundWorker messageReceiver;
         private TcpListener server;
         private TcpClient client;
+        private NavideznaCelica prejsnaCelica;
         public MultiplayerIgra(Nastavitve nastavitve)
-        {
-            
+        { 
             string nacinIgre = nastavitve.NacinIgre;
             string ipNaslov = nastavitve.IpNaslov;
             string barva = nastavitve.Barva;
             Size velikost = nastavitve.Velikost;
             this.Podlaga = nastavitve.Game;
             Color[] tema = nastavitve.Tema;
-            //this.MessageReceiver = nastavitve.MessageReceiver;
-            if (nacinIgre == "HOST")
+            this.MessageReceiver = nastavitve.MessageReceiver;
+            this.MessageReceiver = new BackgroundWorker();
+            this.MessageReceiver.DoWork += SprejmiPotezo;
+            this.Server = nastavitve.Server;
+            this.Socket = nastavitve.Socket;
+            this.Client = nastavitve.Client;
+            this.Socket = nastavitve.Socket;
+
+            if (nacinIgre == "GOST")
             {
-                //this.Server = nastavitve.Server;
-                //this.Socket = nastavitve.Socket;
+                MessageReceiver.RunWorkerAsync();
             }
-            else
-            {
-                //this.Client = nastavitve.Client;
-                //this.Socket = nastavitve.Socket;
-                //MessageReceiver.RunWorkerAsync();
-            }
-
-
-
-            ////this.Server.Start();
-            //this.Socket = nastavitve.Socket;
-            //this.Client = nastavitve.Client;
             int cas = nastavitve.Cas * 60; // minute 
             this.SteviloPotez = 0;
             NavideznaSahovnica = new NavideznaSahovnica(barva, velikost);
@@ -53,38 +47,15 @@ namespace Sah_projekt
             NastaviCas(cas);
             NastaviTrenutnegaIgralca();
             SpremeniLastnostGumbov();
-            //this.MessageReceiver.DoWork += SprejmiPotezo;
+            
             Podlaga.Text = nacinIgre;
-            //if (nacinIgre == "HOST")
-            //{
-            //    this.MessageReceiver = new BackgroundWorker();
-            //    MessageReceiver.DoWork += SprejmiPotezo;
-            //    server = new TcpListener(System.Net.IPAddress.Any, 5743);
-            //    server.Start();
-            //    Socket = server.AcceptSocket();
-            //}
-            //if (nacinIgre == "GOST")
-            //{
-            //    this.MessageReceiver = new BackgroundWorker();
-            //    MessageReceiver.DoWork += SprejmiPotezo;
-            //    try
-            //    {
-            //        client = new TcpClient(ipNaslov, 5743);
-            //        Socket = client.Client;
-            //        MessageReceiver.RunWorkerAsync();
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        MessageBox.Show(ex.Message);
-            //        //this.Close();
-            //    }
-            //}
         }
         public Socket Socket { get;  set; }
         public BackgroundWorker MessageReceiver { get;  set; }
         public TcpListener Server { get;  set; }
         public TcpClient Client { get;  set; }
-        
+        public NavideznaCelica PrejsnaCelica { get; set; }
+
         /// <summary>
         /// Funkcija predstavlja delovanje igre. S klikom na celico lahko:
         /// - prestavimo figuro
@@ -148,30 +119,43 @@ namespace Sah_projekt
         /// <param name="gumb"></param>
         private void PosljiPotezo(Celica gumb)
         {
-            byte[] num = { (byte)gumb.X, (byte)gumb.Y };
-            MessageBox.Show("Asd");
-            MessageBox.Show(Socket.ToString());
-            Socket.Send(num);
-            //MessageReceiver.RunWorkerAsync();
+            byte[] poslji;
+            poslji = new byte[] { (byte)PrejsnaCelica.X, (byte)PrejsnaCelica.Y, (byte)gumb.X, (byte)gumb.Y };
+            Socket.Send(poslji);
+            MessageReceiver.RunWorkerAsync();
         }
         private void SprejmiPotezo(object sender, DoWorkEventArgs e)
         {
             ReceiveMove();
         }
+
         private void ReceiveMove()
         {
             byte[] buffer = new byte[5];
-            //MessageBox.Show("sprejmi");
             Socket.Receive(buffer);
-            int x = int.Parse(buffer[0].ToString());
-            int y = int.Parse(buffer[1].ToString());
-            PravaSahovnica.Celice[x,y].BackColor = Color.Red;
+            int zacetnaX = obrniXY(int.Parse(buffer[0].ToString()));
+            int zacetnaY = obrniXY(int.Parse(buffer[1].ToString()));
+            int koncnaX = obrniXY(int.Parse(buffer[2].ToString()));
+            int koncnaY = obrniXY(int.Parse(buffer[3].ToString()));
+            this.PravaSahovnica.NavideznaSahovnica.PrejsnaCelica = this.PravaSahovnica.NavideznaSahovnica.Celice[zacetnaX, zacetnaY];
+            this.PravaSahovnica.PrestaviFiguro(new Celica(koncnaX, koncnaY));
             ZamenjajIgralca();
+        }
+
+        /// <summary>
+        /// Funkcija vrne polje na nasprotni sahovnici
+        /// </summary>
+        /// <param name="st"></param>
+        /// <returns></returns>
+        private int obrniXY(int st)
+        {
+            return 7 - st;
         }
 
         public void PrikaziMoznePotezeMultiplayer(Celica gumb)
         {
             PravaSahovnica.PrikaziMoznePoteze(gumb, Igralec1);
+            this.PrejsnaCelica = PravaSahovnica.NavideznaSahovnica.PrejsnaCelica;
         }
     }
 }
