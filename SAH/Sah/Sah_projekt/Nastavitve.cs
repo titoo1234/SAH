@@ -27,16 +27,19 @@ namespace Sah_projekt
         private string nacinIgre;
         private string ipNaslov;
         private string tezavnost;
+        private Boolean zacetek;
         public Nastavitve(string nacinIgre,string ip = null)
         {
             
             InitializeComponent();
+
             PrivzeteNastavitve();
+            this.zacetek = true;
             this.NacinIgre = nacinIgre;
             this.IpNaslov = ip;
             this.Text += NacinIgre;
             VzpostaviPovezavo();
-            
+            if (NacinIgre != "RACUNALNIK") IzberiTezavnost.Visible = false;
         }
         /// <summary>
         /// funkcija vzpostavi povezavo med igralcema
@@ -47,9 +50,9 @@ namespace Sah_projekt
             {
                 this.MessageReceiver = new BackgroundWorker();
                 MessageReceiver.DoWork += SprejmiSignalHost;
-                server = new TcpListener(System.Net.IPAddress.Any, 5742);
-                server.Start();
-                Socket = server.AcceptSocket();
+                this.Server = new TcpListener(System.Net.IPAddress.Any, 5742);
+                this.Server.Start();
+                Socket = Server.AcceptSocket();
             }
             if (NacinIgre == "GOST")
             {
@@ -64,8 +67,8 @@ namespace Sah_projekt
                 MessageReceiver.DoWork += SprejmiSignalGost;
                 try
                 {
-                    client = new TcpClient(IpNaslov, 5742);
-                    Socket = client.Client;
+                    this.Client = new TcpClient(IpNaslov, 5742);
+                    this.Socket = Client.Client;
                     MessageReceiver.RunWorkerAsync();
                 }
                 catch (Exception ex)
@@ -85,17 +88,23 @@ namespace Sah_projekt
             else this.Barva = "B";
             this.Cas = int.Parse(buffer[1].ToString());
             ZacetekIgre.Enabled = true;
-            MessageReceiver.DoWork -= SprejmiSignalGost;
+            //MessageReceiver.DoWork -= SprejmiSignalGost;
+            
             //sprejmemo podatke ... nastavimo temo....
         }
 
         private void SprejmiSignalHost(object sender, DoWorkEventArgs e)
         {
-            byte[] buffer = new byte[5];
-            Socket.Receive(buffer);
-            int x = int.Parse(buffer[0].ToString());
-            MessageReceiver.DoWork -= SprejmiSignalHost;
-            ZacniIgro();
+
+                byte[] buffer = new byte[5];
+                Socket.Receive(buffer);
+                int x = int.Parse(buffer[0].ToString());
+            //MessageReceiver.DoWork -= SprejmiSignalHost;
+            NastaviIgro();
+                ZacniIgro();
+            
+            
+            
         }
 
         /// <summary>
@@ -107,12 +116,14 @@ namespace Sah_projekt
             temaSahovnicaGumb1.Enabled = false;
             IzberiCas.SelectedIndex = 2;
             IzberiTezavnost.SelectedIndex = 9;
+          
+
         }
 
         public Socket Socket { get; set; }
         public BackgroundWorker MessageReceiver { get; set; }
-        public object Server { get; set; }
-        public object Client { get; set; }
+        public TcpListener Server { get; set; }
+        public TcpClient Client { get; set; }
         public Game Game { get; set; }
         public Color[] Tema { get; set; }
         public Size Velikost { get; set; }
@@ -152,8 +163,8 @@ namespace Sah_projekt
             int pretovri = Int32.Parse(this.IzberiTezavnost.Text) * 2;
             this.Tezavnost = pretovri.ToString();
             this.Game = new Game(true, false, false);
-            NastaviIgro();
-            if (NacinIgre == "GOST") PosljiSignal();
+            if (NacinIgre != "GOST" && NacinIgre != "HOST") NastaviIgro(); 
+            if (NacinIgre == "GOST") PosljiSignal(); 
             if (NacinIgre != "HOST") ZacniIgro();
             else PosljiNastavitveIgre();
         }
@@ -165,14 +176,18 @@ namespace Sah_projekt
             else num = new byte[] { (byte)1, (byte)this.Cas };
             this.ZacetekIgre.Enabled = false;
             Socket.Send(num);
-            MessageReceiver.RunWorkerAsync();
+            //MessageReceiver.RunWorkerAsync();
         }
 
         private void PosljiSignal()
         {
             byte[] num = { (byte)1 };
             Socket.Send(num);
+            NastaviIgro();
+            
+            
             MessageReceiver.RunWorkerAsync();
+
         }
 
         /// <summary>
@@ -201,7 +216,7 @@ namespace Sah_projekt
             //POŠLJEMO NASPORTONIKUs
             if (!this.Game.IsDisposed)
                 this.Game.ShowDialog();
-            this.MessageReceiver.CancelAsync();
+            //MessageReceiver.RunWorkerAsync();
             this.Close();
             
         }

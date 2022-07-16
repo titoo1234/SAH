@@ -14,21 +14,36 @@ namespace Sah_projekt
     class MultiplayerIgra : Igra
     {
         private Socket socket;
-        private BackgroundWorker messageReceiver = new BackgroundWorker();
-        private TcpListener server = null;
+        private BackgroundWorker messageReceiver;
+        private TcpListener server;
         private TcpClient client;
         public MultiplayerIgra(Nastavitve nastavitve)
         {
+            
             string nacinIgre = nastavitve.NacinIgre;
             string ipNaslov = nastavitve.IpNaslov;
             string barva = nastavitve.Barva;
             Size velikost = nastavitve.Velikost;
             this.Podlaga = nastavitve.Game;
             Color[] tema = nastavitve.Tema;
-            this.Socket = nastavitve.Socket;
-            this.MessageReceiver = nastavitve.MessageReceiver;
-            this.Server = nastavitve.Server;
-            this.Client = nastavitve.Client;
+            //this.MessageReceiver = nastavitve.MessageReceiver;
+            if (nacinIgre == "HOST")
+            {
+                //this.Server = nastavitve.Server;
+                //this.Socket = nastavitve.Socket;
+            }
+            else
+            {
+                //this.Client = nastavitve.Client;
+                //this.Socket = nastavitve.Socket;
+                //MessageReceiver.RunWorkerAsync();
+            }
+
+
+
+            ////this.Server.Start();
+            //this.Socket = nastavitve.Socket;
+            //this.Client = nastavitve.Client;
             int cas = nastavitve.Cas * 60; // minute 
             this.SteviloPotez = 0;
             NavideznaSahovnica = new NavideznaSahovnica(barva, velikost);
@@ -38,14 +53,37 @@ namespace Sah_projekt
             NastaviCas(cas);
             NastaviTrenutnegaIgralca();
             SpremeniLastnostGumbov();
-            nastavitve.MessageReceiver.DoWork += SprejmiPotezo;
+            //this.MessageReceiver.DoWork += SprejmiPotezo;
             Podlaga.Text = nacinIgre;
+            //if (nacinIgre == "HOST")
+            //{
+            //    this.MessageReceiver = new BackgroundWorker();
+            //    MessageReceiver.DoWork += SprejmiPotezo;
+            //    server = new TcpListener(System.Net.IPAddress.Any, 5743);
+            //    server.Start();
+            //    Socket = server.AcceptSocket();
+            //}
+            //if (nacinIgre == "GOST")
+            //{
+            //    this.MessageReceiver = new BackgroundWorker();
+            //    MessageReceiver.DoWork += SprejmiPotezo;
+            //    try
+            //    {
+            //        client = new TcpClient(ipNaslov, 5743);
+            //        Socket = client.Client;
+            //        MessageReceiver.RunWorkerAsync();
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show(ex.Message);
+            //        //this.Close();
+            //    }
+            //}
         }
-
         public Socket Socket { get;  set; }
         public BackgroundWorker MessageReceiver { get;  set; }
-        public object Server { get;  set; }
-        public object Client { get;  set; }
+        public TcpListener Server { get;  set; }
+        public TcpClient Client { get;  set; }
         
         /// <summary>
         /// Funkcija predstavlja delovanje igre. S klikom na celico lahko:
@@ -101,7 +139,6 @@ namespace Sah_projekt
             {
                 return true;
             }
-            MessageBox.Show("Nisi na potezi");
             return false;
         }
 
@@ -112,8 +149,10 @@ namespace Sah_projekt
         private void PosljiPotezo(Celica gumb)
         {
             byte[] num = { (byte)gumb.X, (byte)gumb.Y };
+            MessageBox.Show("Asd");
+            MessageBox.Show(Socket.ToString());
             Socket.Send(num);
-            MessageReceiver.RunWorkerAsync();
+            //MessageReceiver.RunWorkerAsync();
         }
         private void SprejmiPotezo(object sender, DoWorkEventArgs e)
         {
@@ -122,6 +161,7 @@ namespace Sah_projekt
         private void ReceiveMove()
         {
             byte[] buffer = new byte[5];
+            //MessageBox.Show("sprejmi");
             Socket.Receive(buffer);
             int x = int.Parse(buffer[0].ToString());
             int y = int.Parse(buffer[1].ToString());

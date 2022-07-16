@@ -573,8 +573,8 @@ namespace Sah_projekt
                                 MessageBox.Show("MAT");
                                 //MORAMO ŠE POSLATI ZADNJO POTEZO
                                 byte[] num1 = { (byte)posljiX1, (byte)posljiY1, (byte)posljiX2, (byte)posljiY2, (byte)0 };
-                                this.podlaga.socket.Send(num1);
-                                this.podlaga.MessageReceiver.RunWorkerAsync();
+                                //this.podlaga.socket.Send(num1);
+                                //this.podlaga.MessageReceiver.RunWorkerAsync();
                                 this.podlaga.Close();
                                 return;
                             }
@@ -585,8 +585,8 @@ namespace Sah_projekt
                             {
                                 MessageBox.Show("MAT");
                                 byte[] num2 = { (byte)posljiX1, (byte)posljiY1, (byte)posljiX2, (byte)posljiY2, (byte)0 };
-                                this.podlaga.socket.Send(num2);
-                                this.podlaga.MessageReceiver.RunWorkerAsync();
+                                //this.podlaga.socket.Send(num2);
+                                //this.podlaga.MessageReceiver.RunWorkerAsync();
                                 this.podlaga.Close();
                                 return;
                             }
@@ -594,8 +594,8 @@ namespace Sah_projekt
 
                         //POŠLI NASPROTNIKU
                         byte[] num = { (byte)posljiX1, (byte)posljiY1, (byte)posljiX2, (byte)posljiY2, (byte)0 };
-                        this.podlaga.socket.Send(num);
-                        this.podlaga.MessageReceiver.RunWorkerAsync();
+                        //this.podlaga.socket.Send(num);
+                        //this.podlaga.MessageReceiver.RunWorkerAsync();
                     }
 
 

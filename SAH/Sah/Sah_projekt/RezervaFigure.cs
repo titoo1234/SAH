@@ -255,8 +255,8 @@ namespace Sah_projekt
                 byte[] num = { (byte)posljiX1, (byte)posljiY1, (byte)posljiX2, (byte)posljiY2, (byte)poslji};
                 MessageBox.Show(poslji.ToString());
     
-                sahovnica.podlaga.socket.Send(num);
-                sahovnica.podlaga.MessageReceiver.RunWorkerAsync();
+                //sahovnica.podlaga.socket.Send(num);
+                //sahovnica.podlaga.MessageReceiver.RunWorkerAsync();
                 
 
             }
