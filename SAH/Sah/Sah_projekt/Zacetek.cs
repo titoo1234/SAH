@@ -15,6 +15,7 @@ namespace Sah_projekt
         public Zacetek()
         {
             InitializeComponent();
+            CheckForIllegalCrossThreadCalls = false;
         }
 
         private void HostGumb_Click(object sender, EventArgs e)

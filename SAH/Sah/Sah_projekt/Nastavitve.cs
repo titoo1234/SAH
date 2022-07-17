@@ -30,7 +30,6 @@ namespace Sah_projekt
         private Boolean zacetek;
         public Nastavitve(string nacinIgre,string ip = null)
         {
-            
             InitializeComponent();
 
             PrivzeteNastavitve();
@@ -95,16 +94,12 @@ namespace Sah_projekt
 
         private void SprejmiSignalHost(object sender, DoWorkEventArgs e)
         {
-
-                byte[] buffer = new byte[5];
-                Socket.Receive(buffer);
-                int x = int.Parse(buffer[0].ToString());
+            byte[] buffer = new byte[5];
+            Socket.Receive(buffer);
+            int x = int.Parse(buffer[0].ToString());
             //MessageReceiver.DoWork -= SprejmiSignalHost;
             NastaviIgro();
-                ZacniIgro();
-            
-            
-            
+            ZacniIgro();
         }
 
         /// <summary>
@@ -116,8 +111,6 @@ namespace Sah_projekt
             temaSahovnicaGumb1.Enabled = false;
             IzberiCas.SelectedIndex = 2;
             IzberiTezavnost.SelectedIndex = 9;
-          
-
         }
 
         public Socket Socket { get; set; }
@@ -176,7 +169,7 @@ namespace Sah_projekt
             else num = new byte[] { (byte)1, (byte)this.Cas };
             this.ZacetekIgre.Enabled = false;
             Socket.Send(num);
-            //MessageReceiver.RunWorkerAsync();
+            MessageReceiver.RunWorkerAsync();
         }
 
         private void PosljiSignal()
@@ -184,10 +177,6 @@ namespace Sah_projekt
             byte[] num = { (byte)1 };
             Socket.Send(num);
             NastaviIgro();
-            
-            
-            MessageReceiver.RunWorkerAsync();
-
         }
 
         /// <summary>
