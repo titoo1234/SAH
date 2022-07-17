@@ -18,6 +18,7 @@ namespace Sah_projekt
         private TcpListener server;
         private TcpClient client;
         private NavideznaCelica prejsnaCelica;
+        private Celica gumbPredRezervo;
         public MultiplayerIgra(Nastavitve nastavitve)
         { 
             string nacinIgre = nastavitve.NacinIgre;
@@ -33,8 +34,7 @@ namespace Sah_projekt
             this.Socket = nastavitve.Socket;
             this.Client = nastavitve.Client;
             this.Socket = nastavitve.Socket;
-
-            if (nacinIgre == "GOST")
+            if (barva == "B")
             {
                 MessageReceiver.RunWorkerAsync();
             }
@@ -55,6 +55,7 @@ namespace Sah_projekt
         public TcpListener Server { get;  set; }
         public TcpClient Client { get;  set; }
         public NavideznaCelica PrejsnaCelica { get; set; }
+        public Celica GumbPredRezervo { get;  set; }
 
         /// <summary>
         /// Funkcija predstavlja delovanje igre. S klikom na celico lahko:
@@ -70,6 +71,8 @@ namespace Sah_projekt
             {
                 NarediZamenjavo(gumb);
                 OdmrzniSahovnico();
+                PosljiPotezo(GumbPredRezervo,gumb);
+                ZamenjajIgralca();
                 PreveriKonecIgre();
             }
             else
@@ -84,13 +87,19 @@ namespace Sah_projekt
                         SteviloPotez++;
                         if (PrikaziRezervo(gumb))
                         {
+                            this.GumbPredRezervo = gumb;
                             if (TrenutniIgralec == Igralec1) PravaSahovnica.PravaRezerva.PrikaziNasoRezervo();
                             else PravaSahovnica.PravaRezerva.PrikaziNasprotnoRezervo();
                             ZamrzniSahovnico();
+
                         }
-                        PosljiPotezo(gumb);
-                        ZamenjajIgralca();
-                        PreveriKonecIgre();
+                        else
+                        {
+                            PosljiPotezo(gumb);
+                            ZamenjajIgralca();
+                            PreveriKonecIgre();
+                        }
+                        
                     }
                     else
                     {
@@ -120,7 +129,14 @@ namespace Sah_projekt
         private void PosljiPotezo(Celica gumb)
         {
             byte[] poslji;
-            poslji = new byte[] { (byte)PrejsnaCelica.X, (byte)PrejsnaCelica.Y, (byte)gumb.X, (byte)gumb.Y };
+            poslji = new byte[] { (byte)PrejsnaCelica.X, (byte)PrejsnaCelica.Y, (byte)gumb.X, (byte)gumb.Y,(byte)(4) };
+            Socket.Send(poslji);
+            MessageReceiver.RunWorkerAsync();
+        }
+        private void PosljiPotezo(Celica gumb, Celica rezerva)
+        {
+            byte[] poslji;
+            poslji = new byte[] { (byte)PrejsnaCelica.X, (byte)PrejsnaCelica.Y, (byte)gumb.X, (byte)gumb.Y, (byte)rezerva.X};
             Socket.Send(poslji);
             MessageReceiver.RunWorkerAsync();
         }
@@ -137,9 +153,28 @@ namespace Sah_projekt
             int zacetnaY = obrniXY(int.Parse(buffer[1].ToString()));
             int koncnaX = obrniXY(int.Parse(buffer[2].ToString()));
             int koncnaY = obrniXY(int.Parse(buffer[3].ToString()));
-            this.PravaSahovnica.NavideznaSahovnica.PrejsnaCelica = this.PravaSahovnica.NavideznaSahovnica.Celice[zacetnaX, zacetnaY];
-            this.PravaSahovnica.PrestaviFiguro(new Celica(koncnaX, koncnaY));
+            SprejmiPotezoPrestaviFiguro(new Celica(zacetnaX, zacetnaY), new Celica(koncnaX, koncnaY));
+            if (int.Parse(buffer[4].ToString()) < 4)
+            {
+                int rezerva = int.Parse(buffer[4].ToString());
+                Celica rezervaGumb = this.PravaSahovnica.PravaRezerva.NasprotnaRezerva[rezerva];
+               //this.PravaSahovnica.NavideznaSahovnica.PrejsnaCelica
+                NarediZamenjavo(rezervaGumb);
+            }
+            
+            //this.PravaSahovnica.NavideznaSahovnica.PrejsnaCelica = this.PravaSahovnica.NavideznaSahovnica.Celice[zacetnaX, zacetnaY];
+            //this.PravaSahovnica.PrestaviFiguro(new Celica(koncnaX, koncnaY));
             ZamenjajIgralca();
+        }
+        /// <summary>
+        /// Funkcija prestavi ustrezne figure, ko igralec sprejme podatke od nasprotnika
+        /// </summary>
+        /// <param name="prejsnaCelica"></param>
+        /// <param name="novaCelica"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void SprejmiPotezoPrestaviFiguro(Celica prejsnaCelica, Celica novaCelica)
+        {
+            this.PravaSahovnica.PrestaviFiguroMultiplayer(prejsnaCelica, novaCelica);
         }
 
         /// <summary>

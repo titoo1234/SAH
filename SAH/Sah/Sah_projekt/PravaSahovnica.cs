@@ -149,6 +149,20 @@ namespace Sah_projekt
                 Celice[moznaCelica.X, moznaCelica.Y].FlatAppearance.BorderSize = 0;
             }
         }
+        /// <summary>
+        /// Funkcija prestavi figuro iz "prejneCelice" na "novoCelico"
+        /// </summary>
+        /// <param name="prejsnaCelica"></param>
+        /// <param name="novaCelica"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        internal void PrestaviFiguroMultiplayer(Celica prejsnaCelica, Celica novaCelica)
+        {
+            Celica praviGumb = this.Celice[novaCelica.X, novaCelica.Y];
+            NavideznaSahovnica.PrejsnaCelica = NavideznaSahovnica.Celice[prejsnaCelica.X, prejsnaCelica.Y];
+            PrestaviFiguro(praviGumb);
+            //novaCelica.Image = prejsnaCelica.Image;
+            //prejsnaCelica.Image = null;
+        }
 
         /// <summary>
         /// Funkcija obarva vse celice, kamor lahko prestavimo izbrano figuro

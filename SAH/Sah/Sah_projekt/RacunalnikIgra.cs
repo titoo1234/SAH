@@ -84,8 +84,6 @@ namespace Sah_projekt
                             return;
                         }
                         RacunalnikNarediPotezo();
-                        
-                        PreveriKonecIgre();
                     }
                 }
                 else
@@ -143,7 +141,9 @@ namespace Sah_projekt
                 List<NavideznaCelica> poteza = pretvoriVPotezo(izpis.Data, this.PravaSahovnica.NavideznaSahovnica);
                 PravaSahovnica.RacunalnikNarediPotezo(poteza);
                 //preveri mat
+                PreveriKonecIgre();
                 ZamenjajIgralca();
+                PreveriKonecIgre();
             }
         }
 
