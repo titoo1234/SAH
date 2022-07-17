@@ -38,7 +38,11 @@ namespace Sah_projekt
             this.IpNaslov = ip;
             this.Text += NacinIgre;
             VzpostaviPovezavo();
-            if (NacinIgre != "RACUNALNIK") IzberiTezavnost.Visible = false;
+            if (NacinIgre != "RACUNALNIK")
+            {
+                IzberiTezavnost.Visible = false;
+                label4.Visible = false;
+            }
         }
         /// <summary>
         /// funkcija vzpostavi povezavo med igralcema
@@ -153,7 +157,7 @@ namespace Sah_projekt
                 this.Cas = int.Parse((string)IzberiCas.SelectedItem);
                 NastaviBarvo();
             }
-            int pretovri = Int32.Parse(this.IzberiTezavnost.Text) * 2;
+            int pretovri = Int32.Parse(this.IzberiTezavnost.Text) * 1;
             this.Tezavnost = pretovri.ToString();
             this.Game = new Game(true, false, false);
             if (NacinIgre != "GOST" && NacinIgre != "HOST") NastaviIgro(); 
