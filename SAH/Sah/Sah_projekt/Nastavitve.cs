@@ -220,12 +220,26 @@ namespace Sah_projekt
         {
             if (temaSahovnicaGumb1.Enabled == false)
             {
-                this.Tema  = new Color[] { Color.White, Color.Green, Color.Yellow };
+                System.Drawing.Color col = System.Drawing.ColorTranslator.FromHtml("#D4FFB9");
+                this.Tema  = new Color[] { col, Color.Green, Color.Yellow };
             }
-            else
+            else if (temaSahovnicaGumb2.Enabled == false)
             {
                 System.Drawing.Color col = System.Drawing.ColorTranslator.FromHtml("#4F2B1B");
                 System.Drawing.Color col1 = System.Drawing.ColorTranslator.FromHtml("#fccc74");
+                this.Tema = new Color[] { col1, col, Color.Yellow };
+            }
+            else if (temaSahovnicaGumb3.Enabled == false)
+
+            {
+                System.Drawing.Color col = System.Drawing.ColorTranslator.FromHtml("#0097FF");
+                System.Drawing.Color col1 = System.Drawing.ColorTranslator.FromHtml("#60EEFF");
+                this.Tema = new Color[] { col1, col, Color.Yellow };
+            }
+            else
+            {
+                System.Drawing.Color col = System.Drawing.ColorTranslator.FromHtml("#A72600");
+                System.Drawing.Color col1 = System.Drawing.ColorTranslator.FromHtml("#F9A07C");
                 this.Tema = new Color[] { col1, col, Color.Yellow };
             }
         }
@@ -233,7 +247,9 @@ namespace Sah_projekt
         private void temaSahovnicaGumb1_Click(object sender, EventArgs e)
         {
             temaSahovnicaGumb1.Enabled = false;
+            temaSahovnicaGumb4.Enabled = true;
             temaSahovnicaGumb2.Enabled = true;
+            temaSahovnicaGumb3.Enabled = true;
             IzbranaTema.Image = temaSahovnicaGumb1.Image;
         }
 
@@ -241,9 +257,26 @@ namespace Sah_projekt
         {
             temaSahovnicaGumb2.Enabled = false;
             temaSahovnicaGumb1.Enabled = true;
+            temaSahovnicaGumb4.Enabled = true;
+            temaSahovnicaGumb3.Enabled = true;
             IzbranaTema.Image = temaSahovnicaGumb2.Image;
         }
-
+        private void temaSahovnicaGumb3_Click(object sender, EventArgs e)
+        {
+            temaSahovnicaGumb3.Enabled = false;
+            temaSahovnicaGumb1.Enabled = true;
+            temaSahovnicaGumb2.Enabled = true;
+            temaSahovnicaGumb4.Enabled = true;
+            IzbranaTema.Image = temaSahovnicaGumb3.Image;
+        }
+        private void temaSahovnicaGumb4_Click(object sender, EventArgs e)
+        {
+            temaSahovnicaGumb4.Enabled = false;
+            temaSahovnicaGumb1.Enabled = true;
+            temaSahovnicaGumb2.Enabled = true;
+            temaSahovnicaGumb3.Enabled = true;
+            IzbranaTema.Image = temaSahovnicaGumb4.Image;
+        }
         private void Izbrano_Click(object sender, EventArgs e)
         {
 
@@ -253,5 +286,7 @@ namespace Sah_projekt
         {
 
         }
+
+        
     }
 }

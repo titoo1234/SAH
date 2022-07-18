@@ -183,6 +183,36 @@ namespace Sah_projekt.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap sahovnica3 {
+            get {
+                object obj = ResourceManager.GetObject("sahovnica3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sahovnica31 {
+            get {
+                object obj = ResourceManager.GetObject("sahovnica31", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sahovnica4 {
+            get {
+                object obj = ResourceManager.GetObject("sahovnica4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap White_Bishop {
             get {
                 object obj = ResourceManager.GetObject("White_Bishop", resourceCulture);
@@ -237,6 +267,24 @@ namespace Sah_projekt.Properties {
             get {
                 object obj = ResourceManager.GetObject("White_Rook", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream zvokEvent {
+            get {
+                return ResourceManager.GetStream("zvokEvent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream zvokPoteza {
+            get {
+                return ResourceManager.GetStream("zvokPoteza", resourceCulture);
             }
         }
     }

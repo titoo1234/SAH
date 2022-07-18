@@ -66,6 +66,7 @@ namespace Sah_projekt
                 if (jeObarvanoPolje(gumb))
                 {
                     PrestaviFiguro(gumb);
+                    ZvokPremik.Play();
                     PreveriKonecIgre();
                     if (PrikaziRezervo(gumb))
                     {
@@ -82,6 +83,7 @@ namespace Sah_projekt
                             return;
                         }
                         RacunalnikNarediPotezo();
+                        
                         PreveriKonecIgre();
                     }
                 }
@@ -100,6 +102,7 @@ namespace Sah_projekt
             // zaženemo program (počaka 3 sekunde)
             string narediPotezo = "go movetime 1000";
             Process.StandardInput.WriteLine(narediPotezo);
+        
         }
 
         public void ZazeniStockFish(string tezavnost)
@@ -195,6 +198,7 @@ namespace Sah_projekt
                     this.PravaSahovnica.Celice[prejsna.X, prejsna.Y].Image = prejsna.Figura.Slika;
                 }
             }
+            ZvokPremik.Play();
             return new List<NavideznaCelica> { prejsna, novaCelica };
         }
 

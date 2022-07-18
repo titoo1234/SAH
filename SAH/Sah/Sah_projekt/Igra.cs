@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,8 +17,13 @@ namespace Sah_projekt
         private Igralec trenutniIgralec;
         private Game podlaga;
         private int steviloPotez;
+        private SoundPlayer zvokPremik;
+        private SoundPlayer zvokEvent;
 
-        public Igra() { }
+        public Igra() {
+            this.ZvokPremik = new SoundPlayer(Properties.Resources.zvokPoteza);
+            this.ZvokEvent = new SoundPlayer(Properties.Resources.zvokEvent);
+        }
         public static NavideznaSahovnica NavideznaSahovnica { get; set; }
         public PravaSahovnica PravaSahovnica { get; set; }
         public Sahovnica Sahovnica { get; set; }
@@ -26,7 +32,8 @@ namespace Sah_projekt
         public Igralec TrenutniIgralec { get; set; }
         public Game Podlaga { get; set; }
         public int SteviloPotez { get; set; }
-
+        public SoundPlayer ZvokPremik { get; set; }
+        public SoundPlayer ZvokEvent { get; set; }
         public void NastaviCas(int cas)
         {
             Igralec1.NastaviCas(cas, Podlaga.Igralec1_Cas, Podlaga);
@@ -173,7 +180,7 @@ namespace Sah_projekt
         public bool PreveriKonecIgre()
         {
             if (NavideznaSahovnica.JeMat(TrenutniIgralec.Barva))
-            {
+            {   
                 if (this.TrenutniIgralec.jeBel()) MessageBox.Show("MAT, ZAMGAL JE ČRNI IGRALEC");
                 else MessageBox.Show("MAT, ZAMGAL JE BEL IGRALEC");
                 Podlaga.Close();
