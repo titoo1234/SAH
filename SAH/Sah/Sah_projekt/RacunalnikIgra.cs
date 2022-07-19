@@ -46,7 +46,7 @@ namespace Sah_projekt
         /// <param name="sender">gumb na katerega kliknemo</param>
         /// <param name="e"></param>
         public override void KlikNaCelico(object sender, EventArgs e)
-        {
+        {           
             Celica gumb = (Celica)sender;
             if (KliknemoNaRezervo(gumb))
             {
@@ -66,7 +66,7 @@ namespace Sah_projekt
                 if (jeObarvanoPolje(gumb))
                 {
                     PrestaviFiguro(gumb);
-                    
+                    ZvokPremik.Play();
                     PreveriKonecIgre();
                     if (PrikaziRezervo(gumb))
                     {
@@ -77,13 +77,14 @@ namespace Sah_projekt
                     }
                     else
                     {
-                        PreveriKonecIgre();
                         ZamenjajIgralca();
                         if (PreveriKonecIgre())
                         {
                             return;
                         }
                         RacunalnikNarediPotezo();
+                        
+                        PreveriKonecIgre();
                     }
                 }
                 else
@@ -101,6 +102,7 @@ namespace Sah_projekt
             // zaženemo program (počaka 3 sekunde)
             string narediPotezo = "go movetime 1000";
             Process.StandardInput.WriteLine(narediPotezo);
+        
         }
 
         public void ZazeniStockFish(string tezavnost)
@@ -141,7 +143,7 @@ namespace Sah_projekt
                 List<NavideznaCelica> poteza = pretvoriVPotezo(izpis.Data, this.PravaSahovnica.NavideznaSahovnica);
                 PravaSahovnica.RacunalnikNarediPotezo(poteza);
                 //preveri mat
-                PreveriKonecIgre();
+                
                 ZamenjajIgralca();
                 PreveriKonecIgre();
             }
@@ -196,6 +198,7 @@ namespace Sah_projekt
                     this.PravaSahovnica.Celice[prejsna.X, prejsna.Y].Image = prejsna.Figura.Slika;
                 }
             }
+            ZvokPremik.Play();
             return new List<NavideznaCelica> { prejsna, novaCelica };
         }
 

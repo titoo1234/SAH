@@ -199,7 +199,27 @@ namespace Sah_projekt
                 {
                     NavideznaCelica trenutnaCelica = this.Celice[i, j];
                     NavideznaFigura trenutnaFigura = trenutnaCelica.Figura;
-                    if (!(trenutnaFigura is null) && trenutnaFigura.Barva == this.NasprotnaBarva)  
+                    if (!(trenutnaFigura is null) && trenutnaFigura.Barva == VrniNasprotnoBarvo(this.PrejsnaCelica.Figura.Barva))  
+                    {
+                        foreach (NavideznaCelica celica in FiltrirajPoteze(trenutnaFigura.MoznePoteze(trenutnaCelica, this), trenutnaCelica))
+                        {
+                            vseMoznePoteze.Add((trenutnaCelica, celica));
+                        }
+                    }
+                }
+            }
+            return vseMoznePoteze;
+        }
+        public List<(NavideznaCelica, NavideznaCelica)> VrniVseMoznePoteze(string racunalnik)
+        {
+            List<(NavideznaCelica, NavideznaCelica)> vseMoznePoteze = new List<(NavideznaCelica, NavideznaCelica)>();
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    NavideznaCelica trenutnaCelica = this.Celice[i, j];
+                    NavideznaFigura trenutnaFigura = trenutnaCelica.Figura;
+                    if (!(trenutnaFigura is null) && trenutnaFigura.Barva == this.ZacetnaBarva)
                     {
                         foreach (NavideznaCelica celica in FiltrirajPoteze(trenutnaFigura.MoznePoteze(trenutnaCelica, this), trenutnaCelica))
                         {

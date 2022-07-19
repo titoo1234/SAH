@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace Sah_projekt
 {
@@ -25,7 +26,10 @@ namespace Sah_projekt
             NastaviCas(cas);
             NastaviTrenutnegaIgralca();
             SpremeniLastnostGumbov();
+         
+            ZvokPremik.Play();//ker sicer je treba počakati nekaj časa
         }
+            
        
         /// <summary>
         /// Funkcija predstavlja delovanje igre. S klikom na celico lahko:
@@ -36,6 +40,7 @@ namespace Sah_projekt
         /// <param name="e"></param>
         public override void KlikNaCelico(object sender, EventArgs e)
         {
+            
             Celica gumb = (Celica)sender;
             if (KliknemoNaRezervo(gumb))
             {
@@ -50,6 +55,12 @@ namespace Sah_projekt
                 {
                     if (SteviloPotez == 0) TrenutniIgralec.Timer.Start(); // začnemo odštevati čas
                     PrestaviFiguro(gumb);
+                    if (NavideznaSahovnica.JeSah(NavideznaSahovnica.VrniNasprotnoBarvo(TrenutniIgralec.Barva))) ZvokEvent.Play();//mogoče bolš da preverimo tam ko je preveri konec igre
+                    else ZvokPremik.Play();
+                    //ZvokPremik.Play();
+                    //ZvokEvent.Play();
+                    
+                    
                     SteviloPotez++;
                     if (PrikaziRezervo(gumb))
                     {

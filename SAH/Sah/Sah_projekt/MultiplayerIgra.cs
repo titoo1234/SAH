@@ -84,6 +84,7 @@ namespace Sah_projekt
                     {
                         if (SteviloPotez == 0) TrenutniIgralec.Timer.Start(); // začnemo odštevati čas
                         PrestaviFiguro(gumb);
+                        ZvokPremik.Play();
                         SteviloPotez++;
                         if (PrikaziRezervo(gumb))
                         {
@@ -161,7 +162,7 @@ namespace Sah_projekt
                //this.PravaSahovnica.NavideznaSahovnica.PrejsnaCelica
                 NarediZamenjavo(rezervaGumb);
             }
-            
+            ZvokPremik.Play();
             //this.PravaSahovnica.NavideznaSahovnica.PrejsnaCelica = this.PravaSahovnica.NavideznaSahovnica.Celice[zacetnaX, zacetnaY];
             //this.PravaSahovnica.PrestaviFiguro(new Celica(koncnaX, koncnaY));
             ZamenjajIgralca();
