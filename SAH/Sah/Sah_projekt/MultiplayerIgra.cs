@@ -96,8 +96,9 @@ namespace Sah_projekt
                         }
                         else
                         {
-                            PosljiPotezo(gumb);
                             ZamenjajIgralca();
+                            PosljiPotezo(gumb);
+                            
                             PreveriKonecIgre();
                         }
                         
@@ -166,6 +167,7 @@ namespace Sah_projekt
             //this.PravaSahovnica.NavideznaSahovnica.PrejsnaCelica = this.PravaSahovnica.NavideznaSahovnica.Celice[zacetnaX, zacetnaY];
             //this.PravaSahovnica.PrestaviFiguro(new Celica(koncnaX, koncnaY));
             ZamenjajIgralca();
+
         }
         /// <summary>
         /// Funkcija prestavi ustrezne figure, ko igralec sprejme podatke od nasprotnika

@@ -57,10 +57,6 @@ namespace Sah_projekt
                     PrestaviFiguro(gumb);
                     if (NavideznaSahovnica.JeSah(NavideznaSahovnica.VrniNasprotnoBarvo(TrenutniIgralec.Barva))) ZvokEvent.Play();//mogoče bolš da preverimo tam ko je preveri konec igre
                     else ZvokPremik.Play();
-                    //ZvokPremik.Play();
-                    //ZvokEvent.Play();
-                    
-                    
                     SteviloPotez++;
                     if (PrikaziRezervo(gumb))
                     {
