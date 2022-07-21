@@ -78,7 +78,7 @@
             this.ZacetekIgre.BackColor = System.Drawing.Color.Silver;
             this.ZacetekIgre.Font = new System.Drawing.Font("Impact", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.ZacetekIgre.Location = new System.Drawing.Point(1, 312);
-            this.ZacetekIgre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ZacetekIgre.Margin = new System.Windows.Forms.Padding(4);
             this.ZacetekIgre.Name = "ZacetekIgre";
             this.ZacetekIgre.Size = new System.Drawing.Size(313, 240);
             this.ZacetekIgre.TabIndex = 4;
@@ -120,7 +120,7 @@
             "5",
             "10"});
             this.IzberiCas.Location = new System.Drawing.Point(328, 505);
-            this.IzberiCas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.IzberiCas.Margin = new System.Windows.Forms.Padding(4);
             this.IzberiCas.Name = "IzberiCas";
             this.IzberiCas.Size = new System.Drawing.Size(160, 24);
             this.IzberiCas.TabIndex = 11;
@@ -152,7 +152,7 @@
             "9",
             "10"});
             this.IzberiTezavnost.Location = new System.Drawing.Point(328, 401);
-            this.IzberiTezavnost.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.IzberiTezavnost.Margin = new System.Windows.Forms.Padding(4);
             this.IzberiTezavnost.Name = "IzberiTezavnost";
             this.IzberiTezavnost.Size = new System.Drawing.Size(160, 24);
             this.IzberiTezavnost.TabIndex = 11;
@@ -181,7 +181,7 @@
             // 
             // IzbranaTema
             // 
-            this.IzbranaTema.Image = global::Sah_projekt.Properties.Resources.sahovnica1;
+            this.IzbranaTema.Image = global::Sah_projekt.Properties.Resources.sahovnica2;
             this.IzbranaTema.Location = new System.Drawing.Point(18, 82);
             this.IzbranaTema.Margin = new System.Windows.Forms.Padding(4);
             this.IzbranaTema.Name = "IzbranaTema";
@@ -189,6 +189,7 @@
             this.IzbranaTema.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.IzbranaTema.TabIndex = 9;
             this.IzbranaTema.TabStop = false;
+            this.IzbranaTema.Click += new System.EventHandler(this.IzbranaTema_Click);
             // 
             // IzbranaBarva
             // 
@@ -250,6 +251,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(91)))), ((int)(((byte)(92)))), ((int)(((byte)(94)))));
             this.ClientSize = new System.Drawing.Size(981, 554);
             this.Controls.Add(this.temaSahovnicaGumb4);
             this.Controls.Add(this.temaSahovnicaGumb3);
@@ -267,7 +269,7 @@
             this.Controls.Add(this.CrnaBarva_gumb);
             this.Controls.Add(this.BelaBarva_Gumb);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Nastavitve";
             this.Text = "Nastavitve";
             this.Load += new System.EventHandler(this.Nastavitve_Load);

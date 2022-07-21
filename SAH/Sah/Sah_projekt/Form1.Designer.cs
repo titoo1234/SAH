@@ -48,10 +48,9 @@
             // 
             // Zacetek_gumb
             // 
-            this.Zacetek_gumb.Location = new System.Drawing.Point(1585, 49);
-            this.Zacetek_gumb.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Zacetek_gumb.Location = new System.Drawing.Point(1057, 31);
             this.Zacetek_gumb.Name = "Zacetek_gumb";
-            this.Zacetek_gumb.Size = new System.Drawing.Size(146, 73);
+            this.Zacetek_gumb.Size = new System.Drawing.Size(97, 47);
             this.Zacetek_gumb.TabIndex = 0;
             this.Zacetek_gumb.Text = "ZAETEK";
             this.Zacetek_gumb.UseVisualStyleBackColor = true;
@@ -61,10 +60,10 @@
             // 
             this.Igralec1_Cas.AutoSize = true;
             this.Igralec1_Cas.Font = new System.Drawing.Font("Times New Roman", 19.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.Igralec1_Cas.Location = new System.Drawing.Point(1051, 619);
-            this.Igralec1_Cas.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.Igralec1_Cas.Location = new System.Drawing.Point(701, 396);
+            this.Igralec1_Cas.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Igralec1_Cas.Name = "Igralec1_Cas";
-            this.Igralec1_Cas.Size = new System.Drawing.Size(81, 61);
+            this.Igralec1_Cas.Size = new System.Drawing.Size(51, 38);
             this.Igralec1_Cas.TabIndex = 1;
             this.Igralec1_Cas.Text = "39";
             // 
@@ -72,20 +71,20 @@
             // 
             this.Igralec2_Cas.AutoSize = true;
             this.Igralec2_Cas.Font = new System.Drawing.Font("Times New Roman", 19.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Igralec2_Cas.Location = new System.Drawing.Point(1051, 125);
-            this.Igralec2_Cas.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.Igralec2_Cas.Location = new System.Drawing.Point(701, 80);
+            this.Igralec2_Cas.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Igralec2_Cas.Name = "Igralec2_Cas";
-            this.Igralec2_Cas.Size = new System.Drawing.Size(162, 122);
+            this.Igralec2_Cas.Size = new System.Drawing.Size(51, 38);
             this.Igralec2_Cas.TabIndex = 2;
             this.Igralec2_Cas.Text = "39";
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Sah_projekt.Properties.Resources.s3;
-            this.pictureBox1.Location = new System.Drawing.Point(1498, 781);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pictureBox1.Location = new System.Drawing.Point(999, 500);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(242, 267);
+            this.pictureBox1.Size = new System.Drawing.Size(161, 171);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
@@ -93,89 +92,89 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::Sah_projekt.Properties.Resources.s1;
-            this.pictureBox2.Location = new System.Drawing.Point(1498, 180);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pictureBox2.Location = new System.Drawing.Point(999, 115);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(234, 267);
+            this.pictureBox2.Size = new System.Drawing.Size(156, 171);
             this.pictureBox2.TabIndex = 4;
             this.pictureBox2.TabStop = false;
             // 
             // pictureBox3
             // 
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(1498, 474);
-            this.pictureBox3.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pictureBox3.Location = new System.Drawing.Point(999, 303);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(244, 267);
+            this.pictureBox3.Size = new System.Drawing.Size(163, 171);
             this.pictureBox3.TabIndex = 5;
             this.pictureBox3.TabStop = false;
             // 
             // label3
             // 
             this.label3.BackColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(1536, 917);
-            this.label3.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label3.Location = new System.Drawing.Point(1024, 587);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(20, 23);
+            this.label3.Size = new System.Drawing.Size(13, 15);
             this.label3.TabIndex = 6;
             this.label3.Visible = false;
             // 
             // label4
             // 
             this.label4.BackColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(1586, 917);
-            this.label4.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label4.Location = new System.Drawing.Point(1057, 587);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(20, 23);
+            this.label4.Size = new System.Drawing.Size(13, 15);
             this.label4.TabIndex = 7;
             this.label4.Visible = false;
             // 
             // label5
             // 
             this.label5.BackColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(1643, 261);
-            this.label5.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label5.Location = new System.Drawing.Point(1095, 167);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(20, 23);
+            this.label5.Size = new System.Drawing.Size(13, 15);
             this.label5.TabIndex = 8;
             this.label5.Visible = false;
             // 
             // label6
             // 
             this.label6.BackColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(1586, 261);
-            this.label6.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label6.Location = new System.Drawing.Point(1057, 167);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(20, 23);
+            this.label6.Size = new System.Drawing.Size(13, 15);
             this.label6.TabIndex = 9;
             this.label6.Visible = false;
             // 
             // label7
             // 
             this.label7.BackColor = System.Drawing.Color.Red;
-            this.label7.Location = new System.Drawing.Point(1655, 596);
-            this.label7.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label7.Location = new System.Drawing.Point(1103, 381);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(26, 19);
+            this.label7.Size = new System.Drawing.Size(17, 12);
             this.label7.TabIndex = 10;
             this.label7.Visible = false;
             // 
             // label8
             // 
             this.label8.BackColor = System.Drawing.Color.Red;
-            this.label8.Location = new System.Drawing.Point(1586, 596);
-            this.label8.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label8.Location = new System.Drawing.Point(1057, 381);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(26, 19);
+            this.label8.Size = new System.Drawing.Size(17, 12);
             this.label8.TabIndex = 11;
             this.label8.Visible = false;
             // 
             // Game
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.SteelBlue;
-            this.ClientSize = new System.Drawing.Size(1744, 1048);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(91)))), ((int)(((byte)(92)))), ((int)(((byte)(94)))));
+            this.ClientSize = new System.Drawing.Size(1163, 671);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -188,7 +187,6 @@
             this.Controls.Add(this.Igralec2_Cas);
             this.Controls.Add(this.Igralec1_Cas);
             this.Controls.Add(this.Zacetek_gumb);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Game";
             this.Text = "ŠAH ;-)";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Game_FormClosing);

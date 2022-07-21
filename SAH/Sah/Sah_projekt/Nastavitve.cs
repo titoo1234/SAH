@@ -112,7 +112,7 @@ namespace Sah_projekt
         private void PrivzeteNastavitve()
         {
             BelaBarva_Gumb.Enabled = false;
-            temaSahovnicaGumb1.Enabled = false;
+            temaSahovnicaGumb2.Enabled = false;
             IzberiCas.SelectedIndex = 2;
             IzberiTezavnost.SelectedIndex = 9;
         }
@@ -287,6 +287,9 @@ namespace Sah_projekt
 
         }
 
-        
+        private void IzbranaTema_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
