@@ -67,6 +67,12 @@
     <Compile Include="NavideznaFigura.cs" />
     <Compile Include="NavideznaRezerva.cs" />
     <Compile Include="NavideznaSahovnica.cs" />
+    <Compile Include="Obvestilo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Obvestilo.Designer.cs">
+      <DependentUpon>Obvestilo.cs</DependentUpon>
+    </Compile>
     <Compile Include="PravaRezerva.cs" />
     <Compile Include="PravaSahovnica.cs" />
     <Compile Include="RacunalnikIgra.cs" />

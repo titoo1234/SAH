@@ -181,7 +181,7 @@
             // 
             // IzbranaTema
             // 
-            this.IzbranaTema.Image = global::Sah_projekt.Properties.Resources.sahovnica1;
+            this.IzbranaTema.Image = global::Sah_projekt.Properties.Resources.sahovnica2;
             this.IzbranaTema.Location = new System.Drawing.Point(18, 82);
             this.IzbranaTema.Margin = new System.Windows.Forms.Padding(4);
             this.IzbranaTema.Name = "IzbranaTema";
@@ -189,6 +189,7 @@
             this.IzbranaTema.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.IzbranaTema.TabIndex = 9;
             this.IzbranaTema.TabStop = false;
+            this.IzbranaTema.Click += new System.EventHandler(this.IzbranaTema_Click);
             // 
             // IzbranaBarva
             // 
