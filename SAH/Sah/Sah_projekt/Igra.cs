@@ -153,7 +153,7 @@ namespace Sah_projekt
         /// </summary>
         public void ZamenjajIgralca()
         {
-            TrenutniIgralec.Timer.Stop();
+            this.TrenutniIgralec.Timer.Stop();
             if (this.TrenutniIgralec == this.Igralec1)
             {
                 this.TrenutniIgralec = this.Igralec2;
@@ -162,7 +162,7 @@ namespace Sah_projekt
             {
                 this.TrenutniIgralec = this.Igralec1;
             }
-            TrenutniIgralec.Timer.Start();
+            this.TrenutniIgralec.Timer.Start();
         }
 
         /// <summary>
