@@ -160,14 +160,11 @@ namespace Sah_projekt
             {
                 int rezerva = int.Parse(buffer[4].ToString());
                 Celica rezervaGumb = this.PravaSahovnica.PravaRezerva.NasprotnaRezerva[rezerva];
-               //this.PravaSahovnica.NavideznaSahovnica.PrejsnaCelica
                 NarediZamenjavo(rezervaGumb);
             }
             ZvokPremik.Play();
-            //this.PravaSahovnica.NavideznaSahovnica.PrejsnaCelica = this.PravaSahovnica.NavideznaSahovnica.Celice[zacetnaX, zacetnaY];
-            //this.PravaSahovnica.PrestaviFiguro(new Celica(koncnaX, koncnaY));
             ZamenjajIgralca();
-
+            PreveriKonecIgre();
         }
         /// <summary>
         /// Funkcija prestavi ustrezne figure, ko igralec sprejme podatke od nasprotnika

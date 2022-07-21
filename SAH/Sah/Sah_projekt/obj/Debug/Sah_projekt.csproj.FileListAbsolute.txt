@@ -60,3 +60,4 @@ C:\Users\Uporabnik\Desktop\Nova mapa\SAH\SAH\Sah\Sah_projekt\obj\Debug\Sah_proje
 C:\Users\Uporabnik\Desktop\Nova mapa\SAH\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.csproj.CoreCompileInputs.cache
 C:\Users\Uporabnik\Desktop\Nova mapa\SAH\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.exe
 C:\Users\Uporabnik\Desktop\Nova mapa\SAH\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.pdb
+C:\Users\damij\Desktop\Projekt\SAH\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.Obvestilo.resources

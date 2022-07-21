@@ -16,5 +16,10 @@ namespace Sah_projekt
         {
             InitializeComponent();
         }
+
+        private void Obvestilo_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

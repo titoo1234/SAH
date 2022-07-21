@@ -181,25 +181,31 @@ namespace Sah_projekt
         {
             if (NavideznaSahovnica.JeMat(TrenutniIgralec.Barva))
             {   
-                if (this.TrenutniIgralec.jeBel()) MessageBox.Show("MAT, ZAMGAL JE ČRNI IGRALEC");
-                else MessageBox.Show("MAT, ZAMGAL JE BEL IGRALEC");
-                Podlaga.Close();
+                if (this.TrenutniIgralec.jeBel()) KoncajIgro("MAT, ZAMGAL JE ČRNI IGRALEC");
+                else KoncajIgro("MAT, ZAMGAL JE BELI IGRALEC");
+               
                 return true;
             }
             if (NavideznaSahovnica.JePat())
             {
-                MessageBox.Show("PAT, IGRA JE NEODLOČENA");
-                Podlaga.Close();
+                KoncajIgro("PAT, IGRA JE NEODLOČENA");
                 return true;
             }
             if (NavideznaSahovnica.JeRemi())
             {
-                MessageBox.Show("REMI, IGRA JE NEODLOČENA");
-                Podlaga.Close();
+                KoncajIgro("REMI, IGRA JE NEODLOČENA");
                 return true;
             }
             
             return false;
+        }
+
+        public void KoncajIgro(String izpis)
+        {
+            this.Igralec1.Timer.Stop();
+            this.Igralec2.Timer.Stop();
+            this.ZamrzniSahovnico();
+            this.Podlaga.KonecIgreLabel.Text = izpis;
         }
 
     }

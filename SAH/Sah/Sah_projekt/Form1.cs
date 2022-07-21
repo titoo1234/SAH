@@ -216,35 +216,7 @@ namespace Sah_projekt
 
         }
         //asdad
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //Button gumb= (Button)sender;
-            //string vrstica = (string)gumb.Tag;
-            //MessageBox.Show("ŠE NE GRE :)");
-
-            if (!label3.Visible)
-            {
-                label4.Visible = true;
-                label5.Visible = true;
-                label6.Visible = true;
-                label7.Visible = true;
-                label8.Visible = true;
-                label3.Visible = true;
-            }
-            else
-            {
-                label4.Visible = false;
-                label5.Visible = false;
-                label6.Visible = false;
-                label7.Visible = false;
-                label8.Visible = false;
-                label3.Visible = false;
-            }
-            
-            
-
-
-        }
+        
 
         private void Game_FormClosing(object sender, FormClosingEventArgs e)
         {
