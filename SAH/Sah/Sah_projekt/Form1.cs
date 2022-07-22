@@ -38,8 +38,6 @@ namespace Sah_projekt
             this.racunalnik = racunalnik;
             this.IsHost = isHost;
             this.Igra = null;
-
-
             InitializeComponent();
 
             //    if (!isHost)
@@ -112,8 +110,6 @@ namespace Sah_projekt
 
             //}
         }
-
-
         public static IPAddress GetLocalIPAddress()
         {
             var host = Dns.GetHostEntry(Dns.GetHostName());
@@ -126,90 +122,6 @@ namespace Sah_projekt
             }
             throw new Exception("No network adapters with an IPv4 address in the system!");
         }
-        private void MessageReceiver_DoWork(object sender, DoWorkEventArgs e)
-        {
-            //FREEZEBOARD
-            //sahovnica.Zamrzni();
-            sahovnica.NaVrsti = false;
-            ReceiveMove();
-            sahovnica.NaVrsti = true;
-            //sahovnica.Odmrzni();
-
-        }
-
-        private void ReceiveMove()
-        {
-
-            //Celica.PobarvajCeliceNazaj(sahovnica.)
-            
-
-
-            //byte[] buffer = new byte[5];
-            //socket.Receive(buffer);
-            //int xStara = int.Parse(buffer[0].ToString());
-            //int yStara = int.Parse(buffer[1].ToString());
-            //int xNova = int.Parse(buffer[2].ToString());
-            //int yNova = int.Parse(buffer[3].ToString());
-
-            ////Rezerva bo število od 0 do 4, če je 0, potem gre za navaden premik,
-            ////sicer pa je igralec zamenjal figuro z neko rezervo
-            //int rezerva = int.Parse(buffer[4].ToString());
-
-
-           
-
-            //if (rezerva != 0)//Premaknjena je bila rezerva
-            //{
-            //    Celica nova = sahovnica.Celice[xNova, yNova];
-
-            //    //Najdimo pravo rezervo
-            //    Figura izbranaFiguraRezerva;
-            //    if (IsHost)
-            //    {
-            //        izbranaFiguraRezerva = sahovnica.rezerva_crni.Tabela_celic[rezerva-1].Figura;
-            //    }
-            //    else
-            //    {
-            //        izbranaFiguraRezerva = sahovnica.rezerva_beli.Tabela_celic[rezerva-1].Figura;
-                   
-            //    }
-            //    Celica stara = sahovnica.Celice[xStara, yStara];
-            //    Figura NovaFigura = new Figura(izbranaFiguraRezerva.Ime, nova.X, nova.Y, nova.Size); 
-             
-            //    nova.Figura = NovaFigura;
-            //    nova.Image = NovaFigura.Slika;
-            //    Figura nova1 = new Figura("", stara.X, stara.Y, stara.Size);
-            //    stara.Figura = nova1;
-            //    stara.Image = nova1.Slika;
-
-            //}
-            //else
-            //{
-                
-            //    Celica stara = sahovnica.Celice[xStara, yStara];
-            //    Celica nova = sahovnica.Celice[xNova, yNova];
-            //    nova.Figura = stara.Figura;
-            //    nova.Figura.X = nova.X;
-            //    nova.Figura.Y = nova.Y;
-            //    nova.Image = nova.Figura.Slika;
-            //    Figura nova1 = new Figura("", stara.X, stara.Y, stara.Size);
-            //    stara.Figura = nova1;
-            //    stara.Image = nova1.Slika;
-
-            //}
-            ////for (int stolpec = 0; stolpec < 8; stolpec++)
-            ////{
-            ////    for (int vrtica = 0; stolpec < 8; stolpec++)
-            ////    {
-            ////        Celica cel = sahovnica.Celice[stolpec, vrtica];
-
-            ////        Figura fig = cel.Figura;
-            ////        cel.BackColor = Color.Transparent;
-            ////        cel.Image = fig.Slika;
-            ////        cel.Mozen = false;
-            ////    }
-            ////}
-        }
 
         private void Form1_SizeChanged(object sender, EventArgs e)
         {
@@ -220,7 +132,7 @@ namespace Sah_projekt
 
         private void Game_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //if (!solo)
+            //try
             //{
             //    MessageReceiver.WorkerSupportsCancellation = true;
             //    MessageReceiver.CancelAsync();

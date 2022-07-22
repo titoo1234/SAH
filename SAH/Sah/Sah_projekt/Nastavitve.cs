@@ -36,6 +36,10 @@ namespace Sah_projekt
             this.zacetek = true;
             this.NacinIgre = nacinIgre;
             this.IpNaslov = ip;
+            if (ip == "")
+            {
+                this.IpNaslov = "localhost";
+            }
             this.Text += NacinIgre;
             VzpostaviPovezavo();
             if (NacinIgre != "RACUNALNIK")
@@ -64,7 +68,6 @@ namespace Sah_projekt
                 BelaBarva_Gumb.Visible = false;
                 CrnaBarva_gumb.Visible = false;
                 IzberiCas.Visible = false;
-                this.IpNaslov = "localhost";
                 ZacetekIgre.Enabled = false;
                 this.MessageReceiver = new BackgroundWorker();
                 MessageReceiver.DoWork += SprejmiSignalGost;

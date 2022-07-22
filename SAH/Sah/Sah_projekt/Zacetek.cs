@@ -30,7 +30,7 @@ namespace Sah_projekt
         private void IpGumb_Click(object sender, EventArgs e)
         {
         
-            Nastavitve nastavitve = new Nastavitve("GOST","localhost"); // ,this.IpText.Text
+            Nastavitve nastavitve = new Nastavitve("GOST", IpText.Text); // ,this.IpText.Text
             Visible = false;
             if (!nastavitve.IsDisposed)
                 nastavitve.ShowDialog();

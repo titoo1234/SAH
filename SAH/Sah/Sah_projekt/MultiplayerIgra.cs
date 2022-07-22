@@ -49,7 +49,17 @@ namespace Sah_projekt
             SpremeniLastnostGumbov();
             
             Podlaga.Text = nacinIgre;
+            Podlaga.FormClosing += ZapriOkno;
         }
+
+        private void ZapriOkno(object sender, FormClosingEventArgs e)
+        {
+            MessageReceiver.WorkerSupportsCancellation = true;
+            MessageReceiver.CancelAsync();
+            if (Server != null)
+                Server.Stop();
+        }
+
         public Socket Socket { get;  set; }
         public BackgroundWorker MessageReceiver { get;  set; }
         public TcpListener Server { get;  set; }
