@@ -13,6 +13,19 @@ namespace Sah_projekt
     public class RacunalnikIgra : Igra
     {
         Process process;
+        Dictionary<string, int> slovar_tezavnost = new Dictionary<string, int>
+        { 
+            { "1", 400 },
+            { "2", 600 },
+            { "3", 800 },
+            { "4", 1000 },
+            { "5", 1250 },
+            { "6", 1500 },
+            { "7", 1700 },
+            { "8", 1900 },
+            { "9", 2200 },
+            { "10", 2500 },
+        };
         public RacunalnikIgra(Nastavitve nastavitve)
         {
             StringBuilder stockFishOutput;
@@ -98,8 +111,18 @@ namespace Sah_projekt
             string nastaviPozicijo = "position fen " + this.PravaSahovnica.NavideznaSahovnica.FENniz(TrenutniIgralec.Barva);
             Process.StandardInput.WriteLine(nastaviPozicijo);
             // zaženemo program (počaka 3 sekunde)
-            string narediPotezo = "go depth 20";
+            int cas = MilisecRacunalnik();
+            string narediPotezo = "go "  + this.Igralec2.Barva.ToLower() + "time " + cas;
             Process.StandardInput.WriteLine(narediPotezo);
+        }
+
+        public int MilisecRacunalnik()
+        {
+            string cas = this.Podlaga.Igralec2_Cas.Text;
+            var loceno = cas.Split(':');
+            int cas_v_sek = Int32.Parse(loceno[0]) * 60 + Int32.Parse(loceno[1]);
+            int cas_v_msek = cas_v_sek * 1000;
+            return cas_v_msek;
         }
 
         public void ZazeniStockFish(string tezavnost)
@@ -115,8 +138,8 @@ namespace Sah_projekt
             Process.Start();
             Process.BeginOutputReadLine();
             Process.StandardInput.WriteLine("setoption name UCI_LimitStrength value true");
-            string nastaviTezavnost = "setoption name UCI_Elo value " + tezavnost;
-            Process.StandardInput.WriteLine("setoption name UCI_Elo value 400");
+            string nastaviTezavnost = "setoption name UCI_Elo value " + slovar_tezavnost[tezavnost];
+            Process.StandardInput.WriteLine(nastaviTezavnost);
         }
 
         /// <summary>
