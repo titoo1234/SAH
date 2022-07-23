@@ -75,3 +75,4 @@ D:\SAH\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.csproj.GenerateResource.cache
 D:\SAH\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.csproj.CoreCompileInputs.cache
 D:\SAH\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.exe
 D:\SAH\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.pdb
+C:\Users\Uporabnik\Desktop\sah\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.Obvestilo.resources

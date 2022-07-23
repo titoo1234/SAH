@@ -49,7 +49,9 @@ namespace Sah_projekt
             NastaviCas(cas);
             NastaviTrenutnegaIgralca();
             SpremeniLastnostGumbov();
-            
+            Podlaga.PredajaGumb.Visible = true;
+            Podlaga.PredajaGumb.Enabled = false;
+            Podlaga.PredajaGumb.Click += PredajIgro;
             Podlaga.Text = nacinIgre;
             Podlaga.FormClosing += ZapriOkno;
         }
@@ -112,10 +114,10 @@ namespace Sah_projekt
                         {
                             ZamenjajIgralca();
                             PosljiPotezo(gumb);
-                            
                             PreveriKonecIgre();
                         }
-                        
+                        Podlaga.PredajaGumb.Enabled = false;
+
                     }
                     else
                     {
@@ -145,15 +147,25 @@ namespace Sah_projekt
         /// <param name="gumb"></param>
         private void PosljiPotezo(Celica gumb)
         {
+            Podlaga.PredajaGumb.Enabled = false;
             byte[] poslji;
             poslji = new byte[] { (byte)PrejsnaCelica.X, (byte)PrejsnaCelica.Y, (byte)gumb.X, (byte)gumb.Y,(byte)(4) };
             Socket.Send(poslji);
             MessageReceiver.RunWorkerAsync();
         }
         private void PosljiPotezo(Celica gumb, Celica rezerva)
-        {
+        {  
             byte[] poslji;
             poslji = new byte[] { (byte)PrejsnaCelica.X, (byte)PrejsnaCelica.Y, (byte)gumb.X, (byte)gumb.Y, (byte)rezerva.X};
+            Socket.Send(poslji);
+            MessageReceiver.RunWorkerAsync();
+        }
+        public void PredajIgro(object sender, EventArgs e)
+        {
+            Podlaga.PredajaGumb.Enabled = false;
+            KoncajIgro("IGRO STE PREDALI");
+            byte[] poslji;
+            poslji = new byte[] { (byte)0, (byte)0, (byte)0, (byte)0, (byte)5 };
             Socket.Send(poslji);
             MessageReceiver.RunWorkerAsync();
         }
@@ -164,22 +176,33 @@ namespace Sah_projekt
 
         private void ReceiveMove()
         {
+            
             byte[] buffer = new byte[5];
             Socket.Receive(buffer);
             int zacetnaX = obrniXY(int.Parse(buffer[0].ToString()));
             int zacetnaY = obrniXY(int.Parse(buffer[1].ToString()));
             int koncnaX = obrniXY(int.Parse(buffer[2].ToString()));
             int koncnaY = obrniXY(int.Parse(buffer[3].ToString()));
-            SprejmiPotezoPrestaviFiguro(new Celica(zacetnaX, zacetnaY), new Celica(koncnaX, koncnaY));
-            if (int.Parse(buffer[4].ToString()) < 4)
+            Podlaga.PredajaGumb.Enabled = true;
+            if (int.Parse(buffer[4].ToString()) == 5)//predaja
             {
-                int rezerva = int.Parse(buffer[4].ToString());
-                Celica rezervaGumb = this.PravaSahovnica.PravaRezerva.NasprotnaRezerva[rezerva];
-                NarediZamenjavo(rezervaGumb);
+                Podlaga.PredajaGumb.Enabled = false;
+                KoncajIgro("NASPROTNIK SE JE PEDAL");
             }
-            ZvokPremik.Play();
-            ZamenjajIgralca();
-            PreveriKonecIgre();
+            else
+            {
+                SprejmiPotezoPrestaviFiguro(new Celica(zacetnaX, zacetnaY), new Celica(koncnaX, koncnaY));
+                if (int.Parse(buffer[4].ToString()) < 4)
+                {
+                    int rezerva = int.Parse(buffer[4].ToString());
+                    Celica rezervaGumb = this.PravaSahovnica.PravaRezerva.NasprotnaRezerva[rezerva];
+                    NarediZamenjavo(rezervaGumb);
+                }
+                ZvokPremik.Play();
+                Igralec1.Timer.Start();
+                ZamenjajIgralca();
+                PreveriKonecIgre();
+            }
         }
         /// <summary>
         /// Funkcija prestavi ustrezne figure, ko igralec sprejme podatke od nasprotnika
