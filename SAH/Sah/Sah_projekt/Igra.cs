@@ -53,7 +53,7 @@ namespace Sah_projekt
                 this.TrenutniIgralec = Igralec2;
             }
         }
-
+        
         //gremo skozi vse gumbe
         //gumb.click += funckcija
         /// <summary>

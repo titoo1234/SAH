@@ -28,6 +28,7 @@ namespace Sah_projekt
         private string ipNaslov;
         private string tezavnost;
         private Boolean zacetek;
+        private Zacetek zacetekOkno;
         public Nastavitve(string nacinIgre,string ip = null)
         {
             InitializeComponent();
@@ -120,6 +121,7 @@ namespace Sah_projekt
             IzberiTezavnost.SelectedIndex = 9;
         }
 
+        public Zacetek ZacetekOkno { get; set; }
         public Socket Socket { get; set; }
         public BackgroundWorker MessageReceiver { get; set; }
         public TcpListener Server { get; set; }
@@ -213,7 +215,7 @@ namespace Sah_projekt
             if (!this.Game.IsDisposed)
                 this.Game.ShowDialog();
             //MessageReceiver.RunWorkerAsync();
-            this.Close();
+            //this.Close();
             
         }
         /// <summary>

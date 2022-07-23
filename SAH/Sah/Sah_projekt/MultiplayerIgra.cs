@@ -19,8 +19,10 @@ namespace Sah_projekt
         private TcpClient client;
         private NavideznaCelica prejsnaCelica;
         private Celica gumbPredRezervo;
+        private Zacetek zacetekOkno;
         public MultiplayerIgra(Nastavitve nastavitve)
-        { 
+        {
+            this.ZacetekOkno = nastavitve.ZacetekOkno;
             string nacinIgre = nastavitve.NacinIgre;
             string ipNaslov = nastavitve.IpNaslov;
             string barva = nastavitve.Barva;
@@ -54,12 +56,13 @@ namespace Sah_projekt
 
         private void ZapriOkno(object sender, FormClosingEventArgs e)
         {
+            ZacetekOkno.Visible = true;
             MessageReceiver.WorkerSupportsCancellation = true;
             MessageReceiver.CancelAsync();
             if (Server != null)
                 Server.Stop();
         }
-
+        public Zacetek ZacetekOkno { get; set; }
         public Socket Socket { get;  set; }
         public BackgroundWorker MessageReceiver { get;  set; }
         public TcpListener Server { get;  set; }
