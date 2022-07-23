@@ -98,7 +98,7 @@ namespace Sah_projekt
             string nastaviPozicijo = "position fen " + this.PravaSahovnica.NavideznaSahovnica.FENniz(TrenutniIgralec.Barva);
             Process.StandardInput.WriteLine(nastaviPozicijo);
             // zaženemo program (počaka 3 sekunde)
-            string narediPotezo = "go movetime 1000";
+            string narediPotezo = "go depth 20";
             Process.StandardInput.WriteLine(narediPotezo);
         }
 
@@ -114,8 +114,9 @@ namespace Sah_projekt
             Process.StartInfo.CreateNoWindow = true;
             Process.Start();
             Process.BeginOutputReadLine();
-            string nastaviTezavnost = "setoption name Skill Level value " + tezavnost;
-            Process.StandardInput.WriteLine(nastaviTezavnost);
+            Process.StandardInput.WriteLine("setoption name UCI_LimitStrength value true");
+            string nastaviTezavnost = "setoption name UCI_Elo value " + tezavnost;
+            Process.StandardInput.WriteLine("setoption name UCI_Elo value 400");
         }
 
         /// <summary>
