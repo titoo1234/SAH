@@ -77,6 +77,7 @@ namespace Sah_projekt
         public override void KlikNaCelico(object sender, EventArgs e)
         {
             Celica gumb = (Celica)sender;
+            Igralec1.Timer.Start();
             if (KliknemoNaRezervo(gumb))
             {
                 NarediZamenjavo(gumb);
@@ -123,6 +124,7 @@ namespace Sah_projekt
                     PrikaziMoznePotezeMultiplayer(gumb);
                 }
             }
+            Igralec1.Timer.Start();
         }
 
         private bool SemNaPotezi()

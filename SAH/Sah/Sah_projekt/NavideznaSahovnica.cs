@@ -199,7 +199,7 @@ namespace Sah_projekt
                 {
                     NavideznaCelica trenutnaCelica = this.Celice[i, j];
                     NavideznaFigura trenutnaFigura = trenutnaCelica.Figura;
-                    if (!(trenutnaFigura is null) && trenutnaFigura.Barva == VrniNasprotnoBarvo(this.PrejsnaCelica.Figura.Barva))  
+                    if (!(trenutnaFigura is null || PrejsnaCelica.Figura is null) &&  trenutnaFigura.Barva == VrniNasprotnoBarvo(this.PrejsnaCelica.Figura.Barva))  
                     {
                         foreach (NavideznaCelica celica in FiltrirajPoteze(trenutnaFigura.MoznePoteze(trenutnaCelica, this), trenutnaCelica))
                         {
@@ -309,7 +309,7 @@ namespace Sah_projekt
         /// <returns></returns>
         public bool jeEnPassant(NavideznaCelica celica)
         {
-            if (this.PrejsnaCelica.Figura.jeKmet() && celica.jeDiagonalna(this.PrejsnaCelica) && celica.Figura == null)
+            if (this.PrejsnaCelica.Figura.jeKmet() && celica.jeDiagonalna(this.PrejsnaCelica) && celica.Figura is null)
             {
                 return true;
             }

@@ -36,8 +36,8 @@ namespace Sah_projekt
         public SoundPlayer ZvokEvent { get; set; }
         public void NastaviCas(int cas)
         {
-            Igralec1.NastaviCas(cas, Podlaga.Igralec1_Cas, Podlaga);
-            Igralec2.NastaviCas(cas, Podlaga.Igralec2_Cas, Podlaga);
+            Igralec1.NastaviCas(cas, Podlaga.Igralec1_Cas, Podlaga, this);
+            Igralec2.NastaviCas(cas, Podlaga.Igralec2_Cas, Podlaga, this);
         }
         /// <summary>
         /// Funckija nastavi začetnega igralca glede na barvo
@@ -181,8 +181,8 @@ namespace Sah_projekt
         {
             if (NavideznaSahovnica.JeMat(TrenutniIgralec.Barva))
             {   
-                if (this.TrenutniIgralec.jeBel()) KoncajIgro("MAT, ZAMGAL JE ČRNI IGRALEC");
-                else KoncajIgro("MAT, ZAMGAL JE BELI IGRALEC");
+                if (this.TrenutniIgralec.jeBel()) KoncajIgro("MAT, ZMAGAL JE ČRNI IGRALEC");
+                else KoncajIgro("MAT, ZMAGAL JE BELI IGRALEC");
                
                 return true;
             }

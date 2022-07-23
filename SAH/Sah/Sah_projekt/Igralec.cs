@@ -13,7 +13,8 @@ namespace Sah_projekt
         private int cas;
         private Timer timer;
         private Label napis;
-        private Form podalga; 
+        private Form podlaga;
+        private Igra igra;
 
         public Igralec(string barva)
         {
@@ -22,6 +23,8 @@ namespace Sah_projekt
         }
         public string Barva { get;  set; }
         public int Vsota { get;  set; }
+        public Igra Igra { get;  set; }
+
         //public double Cas { get; set; }
         public int Cas { get; set; }
         public Timer Timer { get; set; }
@@ -38,14 +41,15 @@ namespace Sah_projekt
                 this.Vsota -= celica.Figura.Vrednost;
             }
         }
-        public void NastaviCas(int cas, Label napis, Form podlaga)
+        public void NastaviCas(int cas, Label napis, Form podlaga, Igra igra)
         {
+            this.Igra = igra;
             this.Cas = cas;
             this.Timer = new Timer();
             this.Napis = napis;
             this.Podlaga = podlaga;
             napis.Text = ZapisCasa(this.Cas);
-            Timer.Interval = 1000;
+            Timer.Interval = 100;
             Timer.Tick += TimerTick;    
         }
         /// <summary>
@@ -57,6 +61,10 @@ namespace Sah_projekt
         {
             int minute = (cas / 60);
             int sekunde = (cas % 60);
+            if (sekunde < 10)
+            {
+                return $"{minute}:0{sekunde}";
+            }
             return $"{minute}:{sekunde}";
         }
 
@@ -67,10 +75,8 @@ namespace Sah_projekt
             Napis.Text = ZapisCasa(this.Cas);
             if (this.Cas == 0)
             {
-                Timer.Stop();
-                if (this.jeBel()) MessageBox.Show("MAT, ZAMGAL JE ČRNI IGRALEC");
-                else MessageBox.Show("MAT, ZAMGAL JE BEL IGRALEC");
-                Podlaga.Close();
+                if (this.jeBel()) this.Igra.KoncajIgro("MAT, ZAMGAL JE ČRNI IGRALEC");
+                else this.Igra.KoncajIgro("MAT, ZAMGAL JE BEL IGRALEC");
             }
         }
         /// <summary>
