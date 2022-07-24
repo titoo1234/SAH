@@ -16,7 +16,6 @@ namespace Sah_projekt
         private Celica[,] celice;
         private Color[] tema;
         private PravaRezerva pravaRezerva;
-        
 
         public PravaSahovnica(NavideznaSahovnica navideznaSahovnica, Game podlaga, Color[] tema)
         {
@@ -119,9 +118,6 @@ namespace Sah_projekt
             Celica gumb = this.Celice[novaCelica.X, novaCelica.Y];
             this.NavideznaSahovnica.PrejsnaCelica = prejsnaCelica;
             PrestaviFiguro(gumb);
-
-            //this.Celice[poteza[1].X, poteza[1].Y].Image = this.Celice[poteza[0].X, poteza[0].Y].Image;
-            //this.Celice[poteza[0].X, poteza[0].Y].Image = null;
         }
 
         /// <summary>
@@ -160,8 +156,6 @@ namespace Sah_projekt
             Celica praviGumb = this.Celice[novaCelica.X, novaCelica.Y];
             NavideznaSahovnica.PrejsnaCelica = NavideznaSahovnica.Celice[prejsnaCelica.X, prejsnaCelica.Y];
             PrestaviFiguro(praviGumb);
-            //novaCelica.Image = prejsnaCelica.Image;
-            //prejsnaCelica.Image = null;
         }
 
         /// <summary>

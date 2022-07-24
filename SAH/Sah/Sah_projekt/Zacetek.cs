@@ -16,9 +16,7 @@ namespace Sah_projekt
         public Zacetek()
         {
             InitializeComponent();
-            CheckForIllegalCrossThreadCalls = false;
-            //IpText.Text = GetLocalIPAddress().ToString();
-            
+            CheckForIllegalCrossThreadCalls = false;  
         }
 
         public static IPAddress GetLocalIPAddress()
@@ -26,17 +24,13 @@ namespace Sah_projekt
             var host = Dns.GetHostEntry(Dns.GetHostName());
             foreach (var ip in host.AddressList)
             {
-                //return ip;
                 if (ip.AddressFamily == AddressFamily.InterNetwork)
                 {
                     return ip;
                 }
-                
             }
-           
             throw new Exception("No network adapters with an IPv4 address in the system!");
         }
-
 
         private void HostGumb_Click(object sender, EventArgs e)
         {
@@ -45,18 +39,15 @@ namespace Sah_projekt
             Visible = false;
             if (!nastavitve.IsDisposed)
                 nastavitve.ShowDialog();
-            //Visible = true;
         }
 
         private void IpGumb_Click(object sender, EventArgs e)
         {
-        
-            Nastavitve nastavitve = new Nastavitve("GOST", IpText.Text); // ,this.IpText.Text
+            Nastavitve nastavitve = new Nastavitve("GOST", IpText.Text);
             nastavitve.ZacetekOkno = this;
             Visible = false;
             if (!nastavitve.IsDisposed)
                 nastavitve.ShowDialog();
-            //Visible = true;
         }
 
         private void SoloGumb_Click(object sender, EventArgs e)
@@ -68,10 +59,8 @@ namespace Sah_projekt
                 nastavitve.ShowDialog();
             Visible = true;
         }
-
         private void RacunalnikGumb_Click(object sender, EventArgs e)
         {
-            //Game newGame = new Game(true,true, false);
             Nastavitve nastavitve = new Nastavitve("RACUNALNIK");
             nastavitve.ZacetekOkno = this;
             Visible = false;
@@ -79,18 +68,15 @@ namespace Sah_projekt
                 nastavitve.ShowDialog();
             Visible = true;
         }
-
         private void Zacetek_Load(object sender, EventArgs e)
         {
             
         }
-
         private void IpText_Click(object sender, EventArgs e)
         {
             if (IpText.Text == "Vpiši IP naslov")
             {
                 IpText.Text = "";
-
             }
         }
     }

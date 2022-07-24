@@ -20,7 +20,6 @@ namespace Sah_projekt
             this.BelaRezerva = NarediRezervo("W", Velikost);
             this.CrnaRezerva = NarediRezervo("B", Velikost);
         }
-
         public Size Velikost { get; set; }
         public string ZacetnaBarva { get; set; }
         public NavideznaCelica[] BelaRezerva { get; set; }

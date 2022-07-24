@@ -48,6 +48,19 @@ namespace Sah_projekt
                 label4.Visible = false;
             }
         }
+        public Zacetek ZacetekOkno { get; set; }
+        public Socket Socket { get; set; }
+        public BackgroundWorker MessageReceiver { get; set; }
+        public TcpListener Server { get; set; }
+        public TcpClient Client { get; set; }
+        public Game Game { get; set; }
+        public Color[] Tema { get; set; }
+        public Size Velikost { get; set; }
+        public string Barva { get; set; }
+        public int Cas { get; set; }
+        public string NacinIgre { get; set; }
+        public string IpNaslov { get; set; }
+        public string Tezavnost { get; set; }
         /// <summary>
         /// funkcija vzpostavi povezavo med igralcema
         /// </summary>
@@ -82,11 +95,15 @@ namespace Sah_projekt
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
-                    //this.Close();
                 }
             }
         }
-
+        /// <summary>
+        /// Funkcija sprejme signal, ki ga pošlje Host (nastavitve časa in barve). 
+        /// Nato omogoči gumb začetek igre.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SprejmiSignalGost(object sender, DoWorkEventArgs e)
         { 
             byte[] buffer = new byte[2];
@@ -96,17 +113,18 @@ namespace Sah_projekt
             else this.Barva = "B";
             this.Cas = int.Parse(buffer[1].ToString());
             ZacetekIgre.Enabled = true;
-            //MessageReceiver.DoWork -= SprejmiSignalGost;
-            
-            //sprejmemo podatke ... nastavimo temo....
         }
-
+        /// <summary>
+        /// Funkcija sprejme signal gosta, ko le-ta klikne gumb začetek igre.
+        /// Ustvari novo igro (za oba igralca).
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SprejmiSignalHost(object sender, DoWorkEventArgs e)
         {
             byte[] buffer = new byte[5];
             Socket.Receive(buffer);
             int x = int.Parse(buffer[0].ToString());
-            //MessageReceiver.DoWork -= SprejmiSignalHost;
             NastaviIgro();
             ZacniIgro();
         }
@@ -121,39 +139,34 @@ namespace Sah_projekt
             IzberiCas.SelectedIndex = 1;
             IzberiTezavnost.SelectedIndex = 9;
         }
-
-        public Zacetek ZacetekOkno { get; set; }
-        public Socket Socket { get; set; }
-        public BackgroundWorker MessageReceiver { get; set; }
-        public TcpListener Server { get; set; }
-        public TcpClient Client { get; set; }
-        public Game Game { get; set; }
-        public Color[] Tema { get; set; }
-        public Size Velikost { get; set; }
-        public string Barva { get; set; }
-        public int Cas { get; set; }
-        public string NacinIgre { get; set; }
-        public string IpNaslov { get; set; }
-
-        public string Tezavnost { get; set; }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
+        /// <summary>
+        /// Nastavimo barvo figure
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BelaBarva_Gumb_Click(object sender, EventArgs e)
         {
             BelaBarva_Gumb.Enabled = false;
             CrnaBarva_gumb.Enabled = true;
             IzbranaBarva.Image = BelaBarva_Gumb.BackgroundImage;
         }
+        /// <summary>
+        /// Nastavimo barvo figure
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CrnaBarva_Gumb_Click(object sender, EventArgs e)
         {
             CrnaBarva_gumb.Enabled = false;
             BelaBarva_Gumb.Enabled = true;
             IzbranaBarva.Image = CrnaBarva_gumb.BackgroundImage;
         }
-
+        /// <summary>
+        /// Funkcija se izvede, ko kliknemo na gumb začetek igre
+        /// Funkcija ustvari igro in ji nastavi njene izbrane nastavitve 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ZacetekIgre_Click(object sender, EventArgs e)
         {
             NastaviTemo();
@@ -165,13 +178,15 @@ namespace Sah_projekt
             }
             int pretovri = Int32.Parse(this.IzberiTezavnost.Text) * 1;
             this.Tezavnost = pretovri.ToString();
-            this.Game = new Game(true, false, false);
+            this.Game = new Game();
             if (NacinIgre != "GOST" && NacinIgre != "HOST") NastaviIgro(); 
             if (NacinIgre == "GOST") PosljiSignal(); 
             if (NacinIgre != "HOST") ZacniIgro();
             else PosljiNastavitveIgre();
         }
-
+        /// <summary>
+        /// Host pošlje gostu nastavitve igre 
+        /// </summary>
         private void PosljiNastavitveIgre()
         {
             byte[] num;
@@ -181,7 +196,9 @@ namespace Sah_projekt
             Socket.Send(num);
             MessageReceiver.RunWorkerAsync();
         }
-
+        /// <summary>
+        /// Gost pošlje hostu signal, da lahko ta začne igro.
+        /// </summary>
         private void PosljiSignal()
         {
             byte[] num = { (byte)1 };
@@ -215,9 +232,6 @@ namespace Sah_projekt
             //POŠLJEMO NASPORTONIKUs
             if (!this.Game.IsDisposed)
                 this.Game.ShowDialog();
-            //MessageReceiver.RunWorkerAsync();
-            //this.Close();
-            
         }
         /// <summary>
         /// Funkcija nastavi temo igre
@@ -258,7 +272,11 @@ namespace Sah_projekt
             temaSahovnicaGumb3.Enabled = true;
             IzbranaTema.Image = temaSahovnicaGumb1.Image;
         }
-
+        /// <summary>
+        /// Nastavimo temo igre
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void temaSahovnicaGumb2_Click(object sender, EventArgs e)
         {
             temaSahovnicaGumb2.Enabled = false;
@@ -267,6 +285,11 @@ namespace Sah_projekt
             temaSahovnicaGumb3.Enabled = true;
             IzbranaTema.Image = temaSahovnicaGumb2.Image;
         }
+        /// <summary>
+        /// Nastavimo temo igre
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void temaSahovnicaGumb3_Click(object sender, EventArgs e)
         {
             temaSahovnicaGumb3.Enabled = false;
@@ -275,6 +298,11 @@ namespace Sah_projekt
             temaSahovnicaGumb4.Enabled = true;
             IzbranaTema.Image = temaSahovnicaGumb3.Image;
         }
+        /// <summary>
+        /// Nastavimo temo igre
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void temaSahovnicaGumb4_Click(object sender, EventArgs e)
         {
             temaSahovnicaGumb4.Enabled = false;
@@ -282,20 +310,6 @@ namespace Sah_projekt
             temaSahovnicaGumb2.Enabled = true;
             temaSahovnicaGumb3.Enabled = true;
             IzbranaTema.Image = temaSahovnicaGumb4.Image;
-        }
-        private void Izbrano_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Nastavitve_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void IzbranaTema_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

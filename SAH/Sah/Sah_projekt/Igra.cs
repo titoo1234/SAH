@@ -11,29 +11,29 @@ namespace Sah_projekt
     {
         private static NavideznaSahovnica navideznaSahovnica;
         private PravaSahovnica pravaSahovnica;
-        private Sahovnica sahovnica;
         private Igralec igralec1;
         private Igralec igralec2;
         private Igralec trenutniIgralec;
         private Game podlaga;
         private int steviloPotez;
         private SoundPlayer zvokPremik;
-        private SoundPlayer zvokEvent;
 
-        public Igra() {
+        public Igra() 
+        {
             this.ZvokPremik = new SoundPlayer(Properties.Resources.zvokPoteza);
-            this.ZvokEvent = new SoundPlayer(Properties.Resources.zvokEvent);
         }
         public static NavideznaSahovnica NavideznaSahovnica { get; set; }
         public PravaSahovnica PravaSahovnica { get; set; }
-        public Sahovnica Sahovnica { get; set; }
         public Igralec Igralec1 { get; set; }
         public Igralec Igralec2 { get; set; }
         public Igralec TrenutniIgralec { get; set; }
         public Game Podlaga { get; set; }
         public int SteviloPotez { get; set; }
         public SoundPlayer ZvokPremik { get; set; }
-        public SoundPlayer ZvokEvent { get; set; }
+        /// <summary>
+        /// Funkcija nastavi čas prvemu in drugemu igralcu.
+        /// </summary>
+        /// <param name="cas"></param>
         public void NastaviCas(int cas)
         {
             Igralec1.NastaviCas(cas, Podlaga.Igralec1_Cas, Podlaga, this);
@@ -44,18 +44,10 @@ namespace Sah_projekt
         /// </summary>
         public void NastaviTrenutnegaIgralca()
         {
-            if (Igralec1.Barva == "W")
-            {
-                this.TrenutniIgralec = Igralec1;
-            }
-            else
-            {
-                this.TrenutniIgralec = Igralec2;
-            }
+            if (Igralec1.Barva == "W") this.TrenutniIgralec = Igralec1;
+            else this.TrenutniIgralec = Igralec2;
         }
         
-        //gremo skozi vse gumbe
-        //gumb.click += funckcija
         /// <summary>
         /// Funkcija nastavi lastnosti posameznemu polju(gumbu) na šahovnici
         /// </summary>
@@ -153,7 +145,6 @@ namespace Sah_projekt
         /// </summary>
         public void ZamenjajIgralca()
         {
-            //this.TrenutniIgralec.Timer.Stop();
             if (this.TrenutniIgralec == this.Igralec1)
             {
                 this.TrenutniIgralec = this.Igralec2;
@@ -162,7 +153,6 @@ namespace Sah_projekt
             {
                 this.TrenutniIgralec = this.Igralec1;
             }
-            //this.TrenutniIgralec.Timer.Start();
         }
 
         /// <summary>
@@ -181,25 +171,27 @@ namespace Sah_projekt
         {
             if (NavideznaSahovnica.JeMat(TrenutniIgralec.Barva))
             {   
-                if (this.TrenutniIgralec.jeBel()) KoncajIgro("MAT, ZMAGAL JE ČRNI IGRALEC");
-                else KoncajIgro("MAT, ZMAGAL JE BELI IGRALEC");
+                if (this.TrenutniIgralec.jeBel()) KoncajIgro("ZMAGAL JE ČRNI IGRALEC");
+                else KoncajIgro("ZMAGAL JE BELI IGRALEC");
                
                 return true;
             }
             if (NavideznaSahovnica.JePat())
             {
-                KoncajIgro("PAT, IGRA JE NEODLOČENA");
+                KoncajIgro("IGRA JE NEODLOČENA");
                 return true;
             }
             if (NavideznaSahovnica.JeRemi())
             {
-                KoncajIgro("REMI, IGRA JE NEODLOČENA");
+                KoncajIgro("IGRA JE NEODLOČENA");
                 return true;
             }
-            
             return false;
         }
-
+        /// <summary>
+        /// Zaključimo igro. Onemogočimo gumbe ter prekinemo timer.
+        /// </summary>
+        /// <param name="izpis"></param>
         public void KoncajIgro(String izpis)
         {
             this.Igralec1.Timer.Stop();

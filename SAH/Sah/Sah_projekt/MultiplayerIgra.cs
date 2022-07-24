@@ -36,7 +36,7 @@ namespace Sah_projekt
             this.Socket = nastavitve.Socket;
             this.Client = nastavitve.Client;
             this.Socket = nastavitve.Socket;
-            if (barva == "B")
+            if (barva == "B") // najprej sprejmemo signal
             {
                 MessageReceiver.RunWorkerAsync();
             }
@@ -57,7 +57,19 @@ namespace Sah_projekt
             Podlaga.Text = nacinIgre;
             Podlaga.FormClosing += ZapriOkno;
         }
+        public Zacetek ZacetekOkno { get; set; }
+        public Socket Socket { get; set; }
+        public BackgroundWorker MessageReceiver { get; set; }
+        public TcpListener Server { get; set; }
+        public TcpClient Client { get; set; }
+        public NavideznaCelica PrejsnaCelica { get; set; }
+        public Celica GumbPredRezervo { get; set; }
 
+        /// <summary>
+        /// Funkcija odpre začetno okno in prekine povezavo.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ZapriOkno(object sender, FormClosingEventArgs e)
         {
             ZacetekOkno.Visible = true;
@@ -66,13 +78,6 @@ namespace Sah_projekt
             if (Server != null)
                 Server.Stop();
         }
-        public Zacetek ZacetekOkno { get; set; }
-        public Socket Socket { get;  set; }
-        public BackgroundWorker MessageReceiver { get;  set; }
-        public TcpListener Server { get;  set; }
-        public TcpClient Client { get;  set; }
-        public NavideznaCelica PrejsnaCelica { get; set; }
-        public Celica GumbPredRezervo { get;  set; }
 
         /// <summary>
         /// Funkcija predstavlja delovanje igre. S klikom na celico lahko:
@@ -107,7 +112,6 @@ namespace Sah_projekt
                             if (TrenutniIgralec == Igralec1) PravaSahovnica.PravaRezerva.PrikaziNasoRezervo();
                             else PravaSahovnica.PravaRezerva.PrikaziNasprotnoRezervo();
                             ZamrzniSahovnico();
-
                         }
                         else
                         {
@@ -116,11 +120,6 @@ namespace Sah_projekt
                             PreveriKonecIgre();
                         }
                         Podlaga.PredajaGumb.Enabled = false;
-
-                    }
-                    else
-                    {
-                        MessageBox.Show("Nisi na potezi!");
                     }
                 }
                 else
@@ -129,10 +128,13 @@ namespace Sah_projekt
                 }
             }
         }
-
+        /// <summary>
+        /// Funkcija preveri, če sem trenutni igralec jaz.
+        /// </summary>
+        /// <returns></returns>
         private bool SemNaPotezi()
         {
-            if(TrenutniIgralec == Igralec1)
+            if (TrenutniIgralec == Igralec1)
             {
                 return true;
             }
@@ -151,6 +153,11 @@ namespace Sah_projekt
             Socket.Send(poslji);
             MessageReceiver.RunWorkerAsync();
         }
+        /// <summary>
+        /// Funkcija pošlje podatke nasprotniku + podatke o rezervi
+        /// </summary>
+        /// <param name="gumb"></param>
+        /// <param name="rezerva"></param>
         private void PosljiPotezo(Celica gumb, Celica rezerva)
         {  
             byte[] poslji;
@@ -158,23 +165,36 @@ namespace Sah_projekt
             Socket.Send(poslji);
             MessageReceiver.RunWorkerAsync();
         }
+        /// <summary>
+        /// Funkcija konča igro in pošlje signal o predaji nasprotniku.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void PredajIgro(object sender, EventArgs e)
         {
             Podlaga.PredajaGumb.Enabled = false;
-            KoncajIgro("IGRO STE PREDALI");
+            if (this.TrenutniIgralec.jeBel()) KoncajIgro("ZMAGAL JE ČRNI IGRALEC");
+            else KoncajIgro("ZMAGAL JE BELI IGRALEC");
             byte[] poslji;
             poslji = new byte[] { (byte)0, (byte)0, (byte)0, (byte)0, (byte)5 };
             Socket.Send(poslji);
             MessageReceiver.RunWorkerAsync();
         }
+        /// <summary>
+        /// Funkcija sprejme potezo.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SprejmiPotezo(object sender, DoWorkEventArgs e)
         {
             ReceiveMove();
         }
-
+        /// <summary>
+        /// Funkcija sprejme signal nasprotnika in ustrezno 
+        /// reagira (prestavi figuro na naši šahovnici, predaja, mat,...).
+        /// </summary>
         private void ReceiveMove()
         {
-            
             byte[] buffer = new byte[5];
             Socket.Receive(buffer);
             int zacetnaX = obrniXY(int.Parse(buffer[0].ToString()));
@@ -185,7 +205,8 @@ namespace Sah_projekt
             if (int.Parse(buffer[4].ToString()) == 5)//predaja
             {
                 Podlaga.PredajaGumb.Enabled = false;
-                KoncajIgro("NASPROTNIK SE JE PEDAL");
+                if (this.TrenutniIgralec.jeBel()) KoncajIgro("ZMAGAL JE ČRNI IGRALEC");
+                else KoncajIgro("ZMAGAL JE BELI IGRALEC");
             }
             else
             {
@@ -222,7 +243,10 @@ namespace Sah_projekt
         {
             return 7 - st;
         }
-
+        /// <summary>
+        /// Funkcija prikaže možne poteze.
+        /// </summary>
+        /// <param name="gumb"></param>
         public void PrikaziMoznePotezeMultiplayer(Celica gumb)
         {
             PravaSahovnica.PrikaziMoznePoteze(gumb, Igralec1);

@@ -26,8 +26,10 @@ namespace Sah_projekt
             NastaviCas(cas);
             NastaviTrenutnegaIgralca();
             SpremeniLastnostGumbov();
-         
-            ZvokPremik.Play();//ker sicer je treba počakati nekaj časa
+            Igralec1.Timer.Start();
+            Igralec2.Timer.Start();
+
+            ZvokPremik.Play(); //ker sicer je treba počakati nekaj časa
         }
             
        
@@ -53,15 +55,8 @@ namespace Sah_projekt
             {
                 if (jeObarvanoPolje(gumb))
                 {
-                    if (SteviloPotez == 0) // začnemo odštevati čas
-                    {
-                        Igralec1.Timer.Start();
-                        Igralec2.Timer.Start();
-                    } 
                     PrestaviFiguro(gumb);
-                    if (NavideznaSahovnica.JeSah(NavideznaSahovnica.VrniNasprotnoBarvo(TrenutniIgralec.Barva))) ZvokEvent.Play();//mogoče bolš da preverimo tam ko je preveri konec igre
-                    else ZvokPremik.Play();
-                    SteviloPotez++;
+                    ZvokPremik.Play();
                     if (PrikaziRezervo(gumb))
                     {
                         if (TrenutniIgralec == Igralec1) PravaSahovnica.PravaRezerva.PrikaziNasoRezervo();
@@ -78,7 +73,5 @@ namespace Sah_projekt
                 }
             }
         }
-        // OSTALE FUNKCIJE SO V RAZREDU IGRA
-
     }
 }

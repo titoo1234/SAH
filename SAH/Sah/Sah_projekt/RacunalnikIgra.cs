@@ -28,7 +28,6 @@ namespace Sah_projekt
         };
         public RacunalnikIgra(Nastavitve nastavitve)
         {
-            StringBuilder stockFishOutput;
             string barva = nastavitve.Barva;
             Size velikost = nastavitve.Velikost;
             this.Podlaga = nastavitve.Game;
@@ -51,7 +50,6 @@ namespace Sah_projekt
         }
 
         public Process Process { get; set; }
-        public StringBuilder StockFishOutput { get; set; }
 
         /// <summary>
         /// Funkcija predstavlja delovanje igre. S kllikom na celico lahko:
@@ -134,7 +132,6 @@ namespace Sah_projekt
             Process.StartInfo.UseShellExecute = false;
             Process.StartInfo.RedirectStandardInput = true;
             Process.StartInfo.RedirectStandardOutput = true;
-            StockFishOutput = new StringBuilder();
             Process.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);
             Process.StartInfo.CreateNoWindow = true;
             Process.Start();
@@ -258,7 +255,5 @@ namespace Sah_projekt
             }
             
         }
-
-        // OSTALE FUNKCIJE SO V RAZREDU IGRA
     }
 }

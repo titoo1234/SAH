@@ -24,12 +24,16 @@ namespace Sah_projekt
             this.Tema = tema;
 
         }
-
         public NavideznaRezerva NavideznaRezerva { get; set; }
         public Game Podlaga { get; set; }
         public Celica[] NasaRezerva { get; set; }
         public Celica[] NasprotnaRezerva { get; set; }
         public Color[] Tema { get; set; }
+        /// <summary>
+        /// Funkcija ustvari rezervo nad/pod šahovnico
+        /// </summary>
+        /// <param name="zacetnaBarva"></param>
+        /// <returns></returns>
         private Celica[] NarediRezervo(string zacetnaBarva)
         {
             Size velikost = NavideznaRezerva.Velikost;
@@ -83,10 +87,12 @@ namespace Sah_projekt
                     rezerva[i] = gumb;
                 }
             }
-
             return rezerva;
 
         }
+        /// <summary>
+        /// Funkcija prikaže naše možne figure za zamenjavo
+        /// </summary>
         public void PrikaziNasoRezervo()
         {
             for (int i = 0; i < 4; i++)
@@ -96,6 +102,9 @@ namespace Sah_projekt
             }
 
         }
+        /// <summary>
+        /// Funkcija skrije naše možne figure za zamenjavo
+        /// </summary>
         public void SkrijNasoRezervo()
         {
             for (int i = 0; i < 4; i++)
@@ -104,6 +113,9 @@ namespace Sah_projekt
                 gumb.Visible = false;
             }
         }
+        /// <summary>
+        /// Funkcija prikaže nasprotne možne figure za zamenjavo
+        /// </summary>
         public void PrikaziNasprotnoRezervo()
         {
             for (int i = 0; i < 4; i++)
@@ -112,6 +124,9 @@ namespace Sah_projekt
                 gumb.Visible = true;
             }
         }
+        /// <summary>
+        /// Funkcija skrije nasprotne možne figure za zamenjavo
+        /// </summary>
         public void SkrijNasprotnoRezervo()
         {
             for (int i = 0; i < 4; i++)

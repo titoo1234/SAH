@@ -25,11 +25,8 @@ namespace Sah_projekt
         /// </summary>
         public void NastaviSliko()
         {
-            if (this.Barva == "W") { this.Slika = new Bitmap(Properties.Resources.White_Pawn, Velikost); }
-            
-            else { this.Slika = new Bitmap(Properties.Resources.Black_Pawn, Velikost);
-               
-            }
+            if (this.Barva == "W") this.Slika = new Bitmap(Properties.Resources.White_Pawn, Velikost); 
+            else this.Slika = new Bitmap(Properties.Resources.Black_Pawn, Velikost);
         }
 
         /// <summary>

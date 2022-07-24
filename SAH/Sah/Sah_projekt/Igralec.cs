@@ -24,23 +24,11 @@ namespace Sah_projekt
         public string Barva { get;  set; }
         public int Vsota { get;  set; }
         public Igra Igra { get;  set; }
-
-        //public double Cas { get; set; }
         public int Cas { get; set; }
         public Timer Timer { get; set; }
         public Label Napis { get; set; }
         public Form Podlaga { get; set; }
-        public void  SpremeniStanje(Celica celica,bool rezerva)
-        {
-            if (rezerva)
-            {
-                this.Vsota += celica.Figura.Vrednost - 1;
-            }
-            else
-            {
-                this.Vsota -= celica.Figura.Vrednost;
-            }
-        }
+
         public void NastaviCas(int cas, Label napis, Form podlaga, Igra igra)
         {
             this.Igra = igra;
@@ -67,7 +55,11 @@ namespace Sah_projekt
             }
             return $"{minute}:{sekunde}";
         }
-
+        /// <summary>
+        /// Funkcija odšteva čas trenutnemu igralcu. Preveri tudi konec igre.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TimerTick(object sender, EventArgs e)
         {
             if (Igra.TrenutniIgralec == this)
@@ -76,23 +68,11 @@ namespace Sah_projekt
                 Napis.Text = ZapisCasa(this.Cas);
                 if (this.Cas == 0)
                 {
-                    if (this.jeBel()) this.Igra.KoncajIgro("MAT, ZAMGAL JE ČRNI IGRALEC");
-                    else this.Igra.KoncajIgro("MAT, ZAMGAL JE BEL IGRALEC");
+                    if (this.jeBel()) this.Igra.KoncajIgro("ZMAGAL JE ČRNI IGRALEC");
+                    else this.Igra.KoncajIgro("ZMAGAL JE BELI IGRALEC");
                 }
             }
         }
-
-        //private void TimerTick(object sender, EventArgs e)
-        //{
-        //    //this.Cas -= ((double)Timer.Interval / (double)1000);
-        //    this.Cas -= 1;
-        //    Napis.Text = ZapisCasa(this.Cas);
-        //    if (this.Cas == 0)
-        //    {
-        //        if (this.jeBel()) this.Igra.KoncajIgro("MAT, ZAMGAL JE ČRNI IGRALEC");
-        //        else this.Igra.KoncajIgro("MAT, ZAMGAL JE BEL IGRALEC");
-        //    }
-        //}
         /// <summary>
         /// Funkcija nam pove ali je igralec bel ali črn
         /// </summary>

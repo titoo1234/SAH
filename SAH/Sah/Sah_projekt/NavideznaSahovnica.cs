@@ -36,7 +36,6 @@ namespace Sah_projekt
             this.Random = new Random();
             this.IzvedenEnPassant = false;
         }
-
         public NavideznaCelica[,] Celice { get; set; }   
         public Random Random { get; set; }
         public Size Velikost { get; set; }
@@ -60,7 +59,6 @@ namespace Sah_projekt
             NavideznaCelica[,] celice = new NavideznaCelica[8, 8];
             string nasprotna_barva = VrniNasprotnoBarvo(barva);
 
-            // v sredini sahovnice so prazna polja, ki jih označimo z praznimi nizi ""
             for (int i = 2; i < 6; i++)
             {
                 for (int j = 0; j < 8; j++)
