@@ -146,5 +146,10 @@ namespace Sah_projekt
         {
 
         }
+
+        private void PredajaGumb_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
