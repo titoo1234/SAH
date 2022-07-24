@@ -70,15 +70,29 @@ namespace Sah_projekt
 
         private void TimerTick(object sender, EventArgs e)
         {
-            //this.Cas -= ((double)Timer.Interval / (double)1000);
-            this.Cas -= 1;
-            Napis.Text = ZapisCasa(this.Cas);
-            if (this.Cas == 0)
+            if (Igra.TrenutniIgralec == this)
             {
-                if (this.jeBel()) this.Igra.KoncajIgro("MAT, ZAMGAL JE ČRNI IGRALEC");
-                else this.Igra.KoncajIgro("MAT, ZAMGAL JE BEL IGRALEC");
+                this.Cas -= 1;
+                Napis.Text = ZapisCasa(this.Cas);
+                if (this.Cas == 0)
+                {
+                    if (this.jeBel()) this.Igra.KoncajIgro("MAT, ZAMGAL JE ČRNI IGRALEC");
+                    else this.Igra.KoncajIgro("MAT, ZAMGAL JE BEL IGRALEC");
+                }
             }
         }
+
+        //private void TimerTick(object sender, EventArgs e)
+        //{
+        //    //this.Cas -= ((double)Timer.Interval / (double)1000);
+        //    this.Cas -= 1;
+        //    Napis.Text = ZapisCasa(this.Cas);
+        //    if (this.Cas == 0)
+        //    {
+        //        if (this.jeBel()) this.Igra.KoncajIgro("MAT, ZAMGAL JE ČRNI IGRALEC");
+        //        else this.Igra.KoncajIgro("MAT, ZAMGAL JE BEL IGRALEC");
+        //    }
+        //}
         /// <summary>
         /// Funkcija nam pove ali je igralec bel ali črn
         /// </summary>

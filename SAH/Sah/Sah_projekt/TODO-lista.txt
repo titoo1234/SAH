@@ -5,9 +5,9 @@
 - rezerva ✓
 - igra proti računalniku :
 	--> naključno izbiranje ✓
-	--> umetna intelegenca
-	--> poteze iz interneta
-- multiplayer (laho dodamo navodila za nastavitev strežnika)
+	--> umetna intelegenca ✓
+	--> poteze iz interneta ✓
+- multiplayer (laho dodamo navodila za nastavitev strežnika) 
 - igra na čas?
 - možna izbira velikosti okna? 
 - končna oblika (dizajn)

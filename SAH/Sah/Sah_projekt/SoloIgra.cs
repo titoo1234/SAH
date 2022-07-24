@@ -53,7 +53,11 @@ namespace Sah_projekt
             {
                 if (jeObarvanoPolje(gumb))
                 {
-                    if (SteviloPotez == 0) TrenutniIgralec.Timer.Start(); // začnemo odštevati čas
+                    if (SteviloPotez == 0) // začnemo odštevati čas
+                    {
+                        Igralec1.Timer.Start();
+                        Igralec2.Timer.Start();
+                    } 
                     PrestaviFiguro(gumb);
                     if (NavideznaSahovnica.JeSah(NavideznaSahovnica.VrniNasprotnoBarvo(TrenutniIgralec.Barva))) ZvokEvent.Play();//mogoče bolš da preverimo tam ko je preveri konec igre
                     else ZvokPremik.Play();

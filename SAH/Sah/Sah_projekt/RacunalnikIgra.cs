@@ -78,8 +78,14 @@ namespace Sah_projekt
             {
                 if (jeObarvanoPolje(gumb))
                 {
+                    if (SteviloPotez == 0)
+                    {
+                        Igralec1.Timer.Start();
+                        Igralec2.Timer.Start();
+                    }
                     PrestaviFiguro(gumb);
                     ZvokPremik.Play();
+                    SteviloPotez++;
                     if (PrikaziRezervo(gumb))
                     {
                         if (TrenutniIgralec == Igralec1) PravaSahovnica.PravaRezerva.PrikaziNasoRezervo();

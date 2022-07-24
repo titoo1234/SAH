@@ -49,6 +49,8 @@ namespace Sah_projekt
             NastaviCas(cas);
             NastaviTrenutnegaIgralca();
             SpremeniLastnostGumbov();
+            Igralec1.Timer.Start();
+            Igralec2.Timer.Start();
             Podlaga.PredajaGumb.Visible = true;
             Podlaga.PredajaGumb.Enabled = false;
             Podlaga.PredajaGumb.Click += PredajIgro;
@@ -82,7 +84,6 @@ namespace Sah_projekt
         public override void KlikNaCelico(object sender, EventArgs e)
         {
             Celica gumb = (Celica)sender;
-            Igralec1.Timer.Start();
             if (KliknemoNaRezervo(gumb))
             {
                 NarediZamenjavo(gumb);
@@ -98,10 +99,8 @@ namespace Sah_projekt
                 {
                     if (SemNaPotezi())
                     {
-                        if (SteviloPotez == 0) TrenutniIgralec.Timer.Start(); // začnemo odštevati čas
                         PrestaviFiguro(gumb);
                         ZvokPremik.Play();
-                        SteviloPotez++;
                         if (PrikaziRezervo(gumb))
                         {
                             this.GumbPredRezervo = gumb;
@@ -129,7 +128,6 @@ namespace Sah_projekt
                     PrikaziMoznePotezeMultiplayer(gumb);
                 }
             }
-            Igralec1.Timer.Start();
         }
 
         private bool SemNaPotezi()
