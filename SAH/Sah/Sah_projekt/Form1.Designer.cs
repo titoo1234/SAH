@@ -38,7 +38,7 @@
             // 
             this.Igralec1_Cas.AutoSize = true;
             this.Igralec1_Cas.Font = new System.Drawing.Font("Times New Roman", 19.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.Igralec1_Cas.Location = new System.Drawing.Point(526, 322);
+            this.Igralec1_Cas.Location = new System.Drawing.Point(381, 340);
             this.Igralec1_Cas.Name = "Igralec1_Cas";
             this.Igralec1_Cas.Size = new System.Drawing.Size(51, 38);
             this.Igralec1_Cas.TabIndex = 1;
@@ -48,7 +48,7 @@
             // 
             this.Igralec2_Cas.AutoSize = true;
             this.Igralec2_Cas.Font = new System.Drawing.Font("Times New Roman", 19.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Igralec2_Cas.Location = new System.Drawing.Point(526, 65);
+            this.Igralec2_Cas.Location = new System.Drawing.Point(381, 44);
             this.Igralec2_Cas.Name = "Igralec2_Cas";
             this.Igralec2_Cas.Size = new System.Drawing.Size(51, 38);
             this.Igralec2_Cas.TabIndex = 2;
@@ -66,11 +66,12 @@
             // 
             // PredajaGumb
             // 
-            this.PredajaGumb.Location = new System.Drawing.Point(610, 79);
+            this.PredajaGumb.Font = new System.Drawing.Font("Impact", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.PredajaGumb.Location = new System.Drawing.Point(664, 352);
             this.PredajaGumb.Name = "PredajaGumb";
-            this.PredajaGumb.Size = new System.Drawing.Size(118, 28);
+            this.PredajaGumb.Size = new System.Drawing.Size(88, 58);
             this.PredajaGumb.TabIndex = 4;
-            this.PredajaGumb.Text = "PredajaGumb";
+            this.PredajaGumb.Text = "PREDAJ IGRO";
             this.PredajaGumb.UseVisualStyleBackColor = true;
             this.PredajaGumb.Visible = false;
             this.PredajaGumb.Click += new System.EventHandler(this.PredajaGumb_Click);
@@ -86,8 +87,10 @@
             this.Controls.Add(this.Igralec2_Cas);
             this.Controls.Add(this.Igralec1_Cas);
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.MaximumSize = new System.Drawing.Size(782, 469);
+            this.MinimumSize = new System.Drawing.Size(782, 469);
             this.Name = "Game";
-            this.Text = "ŠAH ;-)";
+            this.Text = "ŠAH ";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Game_FormClosing);
             this.Load += new System.EventHandler(this.Game_Load);
             this.ResumeLayout(false);

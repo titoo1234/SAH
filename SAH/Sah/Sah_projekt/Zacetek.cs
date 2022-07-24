@@ -17,7 +17,8 @@ namespace Sah_projekt
         {
             InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
-            IpText.Text = GetLocalIPAddress().ToString();
+            //IpText.Text = GetLocalIPAddress().ToString();
+            
         }
 
         public static IPAddress GetLocalIPAddress()
@@ -82,6 +83,15 @@ namespace Sah_projekt
         private void Zacetek_Load(object sender, EventArgs e)
         {
             
+        }
+
+        private void IpText_Click(object sender, EventArgs e)
+        {
+            if (IpText.Text == "Vpiši IP naslov")
+            {
+                IpText.Text = "";
+
+            }
         }
     }
 }

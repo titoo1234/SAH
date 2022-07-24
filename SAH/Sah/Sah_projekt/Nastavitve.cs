@@ -32,12 +32,11 @@ namespace Sah_projekt
         public Nastavitve(string nacinIgre,string ip = null)
         {
             InitializeComponent();
-
             PrivzeteNastavitve();
             this.zacetek = true;
             this.NacinIgre = nacinIgre;
             this.IpNaslov = ip;
-            if (ip == "")
+            if (ip == "" || ip == "Vpiši IP naslov")
             {
                 this.IpNaslov = "localhost";
             }
@@ -64,6 +63,8 @@ namespace Sah_projekt
             }
             if (NacinIgre == "GOST")
             {
+                IzbranaBarva.Visible = false;
+                Izbrano.Text = "Izbrana tema:";
                 label1.Visible = false;
                 label3.Visible = false;
                 BelaBarva_Gumb.Visible = false;
@@ -117,7 +118,7 @@ namespace Sah_projekt
         {
             BelaBarva_Gumb.Enabled = false;
             temaSahovnicaGumb2.Enabled = false;
-            IzberiCas.SelectedIndex = 2;
+            IzberiCas.SelectedIndex = 1;
             IzberiTezavnost.SelectedIndex = 9;
         }
 

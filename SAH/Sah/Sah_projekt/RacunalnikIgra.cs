@@ -42,6 +42,8 @@ namespace Sah_projekt
             NastaviTrenutnegaIgralca();
             ZazeniStockFish(nastavitve.Tezavnost);
             SpremeniLastnostGumbov();
+            Igralec1.Timer.Start();
+            Igralec2.Timer.Start();
             if (TrenutniIgralec != Igralec1)
             {
                 RacunalnikNarediPotezo();
@@ -78,14 +80,8 @@ namespace Sah_projekt
             {
                 if (jeObarvanoPolje(gumb))
                 {
-                    if (SteviloPotez == 0)
-                    {
-                        Igralec1.Timer.Start();
-                        Igralec2.Timer.Start();
-                    }
                     PrestaviFiguro(gumb);
                     ZvokPremik.Play();
-                    SteviloPotez++;
                     if (PrikaziRezervo(gumb))
                     {
                         if (TrenutniIgralec == Igralec1) PravaSahovnica.PravaRezerva.PrikaziNasoRezervo();
@@ -106,7 +102,7 @@ namespace Sah_projekt
                 }
                 else
                 {
-                    PrikaziMoznePoteze(gumb);
+                    if (TrenutniIgralec.Barva == NavideznaSahovnica.ZacetnaBarva) PrikaziMoznePoteze(gumb);
                 }
             }
         }
@@ -117,7 +113,7 @@ namespace Sah_projekt
             string nastaviPozicijo = "position fen " + this.PravaSahovnica.NavideznaSahovnica.FENniz(TrenutniIgralec.Barva);
             Process.StandardInput.WriteLine(nastaviPozicijo);
             // zaženemo program (počaka 3 sekunde)
-            int cas = MilisecRacunalnik();
+            int cas = (int)(MilisecRacunalnik() / 2);
             string narediPotezo = "go "  + this.Igralec2.Barva.ToLower() + "time " + cas;
             Process.StandardInput.WriteLine(narediPotezo);
         }
