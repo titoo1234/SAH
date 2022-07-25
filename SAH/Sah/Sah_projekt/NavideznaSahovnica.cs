@@ -731,7 +731,7 @@ namespace Sah_projekt
         }
 
         /// <summary>
-        /// Funkcija nam vrne opis postavitve figur f FEN formatu 
+        /// Funkcija nam vrne opis postavitve figur v FEN formatu 
         /// Začetna postavitev v FEN formatu : rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
         /// </summary>
         /// <param name="barva"></param>
@@ -744,7 +744,11 @@ namespace Sah_projekt
             }
             return FENnizCrni(barva);
         }
-
+        /// <summary>
+        /// Funkcija nam vrne opis postavitve figur v FEN formatu 
+        /// </summary>
+        /// <param name="barva"></param>
+        /// <returns></returns>
         public string FENnizCrni(string barva)
         {
             string vrni = "";
@@ -824,7 +828,11 @@ namespace Sah_projekt
             return vrni;
 
         }
-
+        /// <summary>
+        /// Funkcija nam vrne opis postavitve figur v FEN formatu 
+        /// </summary>
+        /// <param name="barva"></param>
+        /// <returns></returns>
         public string FENnizBeli(string barva)
         {
             string vrni = "";

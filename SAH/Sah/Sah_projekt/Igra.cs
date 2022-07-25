@@ -173,17 +173,19 @@ namespace Sah_projekt
             {   
                 if (this.TrenutniIgralec.jeBel()) KoncajIgro("ZMAGAL JE ČRNI IGRALEC");
                 else KoncajIgro("ZMAGAL JE BELI IGRALEC");
-               
+                podlaga.PredajaGumb.Enabled = false;
                 return true;
             }
             if (NavideznaSahovnica.JePat())
             {
                 KoncajIgro("IGRA JE NEODLOČENA");
+                podlaga.PredajaGumb.Enabled = false;
                 return true;
             }
             if (NavideznaSahovnica.JeRemi())
             {
                 KoncajIgro("IGRA JE NEODLOČENA");
+                podlaga.PredajaGumb.Enabled = false;
                 return true;
             }
             return false;

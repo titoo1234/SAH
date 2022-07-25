@@ -75,3 +75,16 @@ D:\SAH\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.csproj.CoreCompileInputs.cache
 D:\SAH\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.exe
 D:\SAH\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.pdb
 C:\Users\Uporabnik\Desktop\sah\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.Obvestilo.resources
+C:\Users\Uporabnik\Desktop\sah1\SAH\Sah\Sah_projekt\bin\Debug\Sah_projekt.exe.config
+C:\Users\Uporabnik\Desktop\sah1\SAH\Sah\Sah_projekt\bin\Debug\Sah_projekt.exe
+C:\Users\Uporabnik\Desktop\sah1\SAH\Sah\Sah_projekt\bin\Debug\Sah_projekt.pdb
+C:\Users\Uporabnik\Desktop\sah1\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.csproj.AssemblyReference.cache
+C:\Users\Uporabnik\Desktop\sah1\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.csproj.SuggestedBindingRedirects.cache
+C:\Users\Uporabnik\Desktop\sah1\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.Game.resources
+C:\Users\Uporabnik\Desktop\sah1\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.Nastavitve.resources
+C:\Users\Uporabnik\Desktop\sah1\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.Properties.Resources.resources
+C:\Users\Uporabnik\Desktop\sah1\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.Zacetek.resources
+C:\Users\Uporabnik\Desktop\sah1\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.csproj.GenerateResource.cache
+C:\Users\Uporabnik\Desktop\sah1\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.csproj.CoreCompileInputs.cache
+C:\Users\Uporabnik\Desktop\sah1\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.exe
+C:\Users\Uporabnik\Desktop\sah1\SAH\Sah\Sah_projekt\obj\Debug\Sah_projekt.pdb
