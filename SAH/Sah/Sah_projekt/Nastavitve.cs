@@ -32,6 +32,7 @@ namespace Sah_projekt
         public Nastavitve(string nacinIgre,string ip = null)
         {
             InitializeComponent();
+            this.ControlBox = false;
             PrivzeteNastavitve();
             this.zacetek = true;
             this.NacinIgre = nacinIgre;
@@ -47,6 +48,7 @@ namespace Sah_projekt
                 IzberiTezavnost.Visible = false;
                 label4.Visible = false;
             }
+            
         }
         public Zacetek ZacetekOkno { get; set; }
         public Socket Socket { get; set; }
