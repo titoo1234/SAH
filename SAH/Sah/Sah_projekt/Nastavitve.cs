@@ -98,7 +98,6 @@ namespace Sah_projekt
                 {
                     MessageBox.Show(ex.Message);
                     this.Close();
-                    ZacetekOkno.Visible = true;
                 }
             }
         }
