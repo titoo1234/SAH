@@ -176,8 +176,6 @@
     <None Include="Resources\sahovnica3.png" />
     <None Include="Resources\sahovnica4.png" />
     <None Include="Resources\zvokPoteza.wav" />
-    <None Include="Resources\zvokEvent.wav" />
-    <Content Include="TODO-lista.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

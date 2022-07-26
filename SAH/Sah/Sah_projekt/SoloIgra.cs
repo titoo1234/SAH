@@ -28,7 +28,6 @@ namespace Sah_projekt
             SpremeniLastnostGumbov();
             Igralec1.Timer.Start();
             Igralec2.Timer.Start();
-
             ZvokPremik.Play(); //ker sicer je treba počakati nekaj časa
         }
             
