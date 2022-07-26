@@ -97,6 +97,8 @@ namespace Sah_projekt
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
+                    this.Close();
+                    ZacetekOkno.Visible = true;
                 }
             }
         }

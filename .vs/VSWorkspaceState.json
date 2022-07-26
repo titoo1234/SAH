@@ -3,7 +3,9 @@
     "",
     "\\SAH",
     "\\SAH\\Sah",
-    "\\SAH\\Sah\\Sah_projekt"
+    "\\SAH\\Sah\\Sah_projekt",
+    "\\SAH\\Sah\\Sah_projekt\\obj\\Release"
   ],
+  "SelectedNode": "\\SAH\\Sah\\Sah.sln",
   "PreviewInSolutionExplorer": false
 }
